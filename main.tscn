@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://datvsni8i3og1"]
+
+[ext_resource type="PackedScene" uid="uid://dofbiwviub1xj" path="res://Scenes/player.tscn" id="1_ig7tw"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_ig7tw"]
+sky_material = SubResource("ProceduralSkyMaterial_7dm0k")
+
+[sub_resource type="Environment" id="Environment_0xm2m"]
+background_mode = 2
+sky = SubResource("Sky_ig7tw")
+tonemap_mode = 2
+glow_enabled = true
+
+[node name="Main" type="Node3D" unique_id=105238301]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2902083]
+environment = SubResource("Environment_0xm2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1262991444]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="House" type="CSGCombiner3D" parent="." unique_id=347818246]
+use_collision = true
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="House" unique_id=972825982]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.1778574, 2.9990845, -3.3802795)
+use_collision = true
+size = Vector3(1, 6.998169, 18.26178)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="House/CSGBox3D2" unique_id=782835412]
+transform = Transform3D(-0.044892162, -0.99899197, 0, 0.99899197, -0.044892162, 0, 0, 0, 1, 0, 0, 1.7859356)
+operation = 2
+radius = 1.8032227
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="House" unique_id=538693310]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.804526, 2.2271008, -5.418518)
+use_collision = true
+size = Vector3(1, 4.0230103, 15.577698)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="House" unique_id=1748430703]
+transform = Transform3D(0.9991439, 0, 0.04136995, 0, 1, 0, -0.04136995, 0, 0.9991439, 2.608472, 3.4416738, -8.488355)
+use_collision = true
+size = Vector3(1, 6.998169, 8.097824)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="House" unique_id=1035110681]
+transform = Transform3D(-0.50167674, 0, 0.8650552, 0, 1, 0, -0.8650552, 0, -0.50167674, -4.9096174, 3.0002708, -8.760427)
+use_collision = true
+size = Vector3(1, 6.998169, 18.26178)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="House" unique_id=51403829]
+transform = Transform3D(-0.22134414, 0, 0.97519577, 0, 1, 0, -0.97519577, 0, -0.22134414, 5.683497, 3.0002708, -9.296453)
+use_collision = true
+size = Vector3(1, 6.998169, 10.127457)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="House" unique_id=1567695485]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.890905, 0)
+use_collision = true
+radius = 0.35986328
+height = 8.384277
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="House" unique_id=1591982661]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0032783, 3.890905, 0)
+use_collision = true
+radius = 0.29296875
+height = 8.384277
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="House" unique_id=761092076]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.6984582, 3.890905, 4.9223013)
+use_collision = true
+radius = 0.37890625
+height = 8.384277
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="House" unique_id=686103499]
+transform = Transform3D(0.63843215, 0, 0.7696781, 0, 1, 0, -0.7696781, 0, 0.63843215, -4.5733547, 3.0002708, 7.5540724)
+use_collision = true
+size = Vector3(1, 6.998169, 14.318878)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="House" unique_id=816153509]
+transform = Transform3D(0.70343196, 0, -0.7107626, 0, 1, 0, 0.7107626, 0, 0.70343196, 5.708107, 2.7248507, 6.72917)
+use_collision = true
+size = Vector3(0.6875, 6.8324585, 15.829041)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="House/CSGBox3D8" unique_id=1210488564]
+transform = Transform3D(-0.0033245385, 0.9999627, -0.008005798, -0.9098149, -0.006347262, -0.41496587, -0.41500145, 0.0059042573, 0.9098023, 0, 0.07529831, 0)
+operation = 2
+radius = 2.0444336
+
+[node name="CSGBox3D" type="CSGBox3D" parent="House/CSGBox3D8" unique_id=1899914807]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.8659668, 0.04260063)
+operation = 2
+size = Vector3(1, 2.7319336, 4.152588)
+
+[node name="Floor" type="CSGBox3D" parent="." unique_id=1586978340]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.020184994)
+use_collision = true
+size = Vector3(25, 1, 25)
+
+[node name="Player" parent="." unique_id=1385081511 instance=ExtResource("1_ig7tw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.4894886, 1.1292502)
