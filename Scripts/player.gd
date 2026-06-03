@@ -11,11 +11,16 @@ extends CharacterBody3D
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var camera_selected = 2
 
+# Smooth rotation system
+var cam_pitch := 0.0
+var target_yaw := 0.0
+var current_yaw := 0.0
+
 # Camera
 @onready var camera_pivot = $CameraPivot
 @onready var camera_first_view = $"CameraPivot/First-View"
 @onready var camera_third_view = $"CameraPivot/SpringArm3D/Third-View"
-@onready var head_mesh = $"Skeleton3D/head-mesh"
+#@onready var head_mesh = $"Skeleton3D/head-mesh"
 
 # Animation
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -24,22 +29,18 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera_first_view.current = false
 	camera_third_view.current = true
-	head_mesh.visible = true
+	#head_mesh.visible = true
 
 func _input(event):
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
-		
-		# LEFT / RIGHT -> BODY rotate
-		rotate_y(deg_to_rad(-event.relative.x * mouse_sensitivity))
-	
-		# UP / DOWN -> Only Camera
-		camera_pivot.rotate_x(deg_to_rad(-event.relative.y * mouse_sensitivity))
-	
-		camera_pivot.rotation.x = clamp(
-			camera_pivot.rotation.x,
-			deg_to_rad(-80),
-			deg_to_rad(80)
-		)
+
+		target_yaw += deg_to_rad(-event.relative.x * mouse_sensitivity)
+
+		cam_pitch += deg_to_rad(-event.relative.y * mouse_sensitivity)
+		cam_pitch = clamp(cam_pitch, deg_to_rad(-80), deg_to_rad(80))
+
+	if event.is_action_pressed("ui_cancel"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	if event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -48,7 +49,7 @@ func _input(event):
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
 			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
-	#Camera Switch
+	# Camera Switch
 	if event.is_action_pressed("camera_1"):
 		camera_selected = 1
 	
@@ -57,6 +58,11 @@ func _input(event):
 
 func _physics_process(delta):
 	
+	# Smooth body rotation
+	camera_pivot.rotation.x = cam_pitch
+	current_yaw = lerp_angle(current_yaw, target_yaw, 0.2)
+	rotation.y = current_yaw
+	
 	# Gravitation
 	if not is_on_floor():
 		velocity.y -= gravity * delta
@@ -64,7 +70,7 @@ func _physics_process(delta):
 	# Jumping
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = jump_velocity
-		animation_player.play("jump")
+		animation_player.play("anmimationes/Root_Jump")
 	
 	# Input
 	var input_dir = Input.get_vector(
@@ -76,7 +82,7 @@ func _physics_process(delta):
 	
 	# Movement direction
 	var direction = (
-		transform.basis *
+		Basis(Vector3.UP, current_yaw) *
 		Vector3(input_dir.x, 0, input_dir.y)
 	).normalized()
 	
@@ -84,7 +90,10 @@ func _physics_process(delta):
 	var current_speed = walk_speed
 	
 	if Input.is_action_pressed("sprint"):
-		current_speed = sprint_speed
+		if not is_on_floor():
+			current_speed = walk_speed
+		else:
+			current_speed = sprint_speed
 	
 	# Motion
 	if direction:
@@ -93,15 +102,15 @@ func _physics_process(delta):
 	
 		if is_on_floor():
 			if current_speed == sprint_speed:
-				animation_player.play("sprint")
+				animation_player.play("anmimationes/Root_Run")
 			else:
-				animation_player.play("walk")
+				animation_player.play("anmimationes/Root_Run")
 	else:
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 	
 		if is_on_floor():
-			animation_player.play("idle")
+			animation_player.play("anmimationes/Root_Idle")
 	
 	move_and_slide()
 
@@ -113,19 +122,20 @@ func _process(_delta):
 	if dist < 2.0:
 		camera_first_view.current = true
 		camera_third_view.current = false
-		head_mesh.visible = false
+		#head_mesh.visible = false
 	else:
 		if camera_selected == 1:
 			camera_first_view.current = true
 			camera_third_view.current = false
-			head_mesh.visible = false
+			#head_mesh.visible = false
 		elif camera_selected == 2:
 			camera_first_view.current = false
 			camera_third_view.current = true
-			head_mesh.visible = true
+			#head_mesh.visible = true
 	
 	if global_position.y < respawn_depth_trigger:
 		respawn()
 	
 func respawn():
 	global_position = respawn_position
+	velocity = Vector3.ZERO

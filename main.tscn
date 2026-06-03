@@ -1,6 +1,36 @@
-[gd_scene format=3 uid="uid://datvsni8i3og1"]
+[gd_scene format=4 uid="uid://datvsni8i3og1"]
 
-[ext_resource type="PackedScene" uid="uid://dofbiwviub1xj" path="res://Scenes/player.tscn" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://dml1tn7u8o5p2" path="res://models/city/driveway-long.glb" id="2_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dcvfn8ryypqmj" path="res://models/cars/cone.glb" id="3_1u8w0"]
+[ext_resource type="PackedScene" uid="uid://v4hvfhxnwbsu" path="res://models/cars/taxi.glb" id="4_0odxb"]
+[ext_resource type="PackedScene" uid="uid://dryy0e3177gvj" path="res://models/cars/van.glb" id="5_lswn8"]
+[ext_resource type="PackedScene" uid="uid://b6gbe2ml8jgt2" path="res://models/cars/delivery-flat.glb" id="6_a6jrf"]
+[ext_resource type="PackedScene" uid="uid://be7yiy7yn02ay" path="res://models/cars/garbage-truck.glb" id="7_xuqvo"]
+[ext_resource type="PackedScene" uid="uid://dcp1lvmtmjpqk" path="res://models/cars/police.glb" id="8_qsp4k"]
+[ext_resource type="PackedScene" uid="uid://b3qv3onnn8rfd" path="res://models/cars/ambulance.glb" id="9_kq58d"]
+[ext_resource type="PackedScene" uid="uid://dsfexvd63xu14" path="res://models/cars/suv.glb" id="10_seu75"]
+[ext_resource type="PackedScene" uid="uid://bdwq6poagq2k6" path="res://models/cars/sedan-sports.glb" id="11_htxhm"]
+[ext_resource type="PackedScene" uid="uid://cyn20cp6ve4wa" path="res://models/trains/railroad-straight.glb" id="13_4k2k6"]
+[ext_resource type="PackedScene" uid="uid://b1hsie6f4kotv" path="res://models/trains/railroad-corner-large.glb" id="14_0rl1p"]
+[ext_resource type="PackedScene" uid="uid://bk7pa35ob5n4x" path="res://models/trains/train-diesel-b.glb" id="15_ok6jj"]
+[ext_resource type="PackedScene" uid="uid://bco6lto1fgmaw" path="res://models/city/building-type-u.glb" id="16_facbu"]
+[ext_resource type="PackedScene" uid="uid://dbhcittgek2oo" path="res://models/factory/warning-traffic.glb" id="17_b1qrp"]
+[ext_resource type="PackedScene" uid="uid://byxraucv8kbwg" path="res://models/factory/pipe-large.glb" id="18_come4"]
+[ext_resource type="PackedScene" uid="uid://c53gdcefwnecn" path="res://models/factory/indicator-special-area.glb" id="19_h8e4i"]
+[ext_resource type="PackedScene" uid="uid://bh1hjboccwu5c" path="res://models/factory/crane.glb" id="20_4lmeg"]
+[ext_resource type="PackedScene" uid="uid://bpovplr2pvniw" path="res://models/factory/crane-magnet.glb" id="21_0cp0l"]
+[ext_resource type="PackedScene" uid="uid://daq64hvvk8rlb" path="res://models/factory/indicator-special-arrow.glb" id="22_d2t1y"]
+[ext_resource type="PackedScene" uid="uid://dr02cog0gt3bx" path="res://models/factory/indicator-special-lines.glb" id="23_gngh3"]
+[ext_resource type="PackedScene" uid="uid://h3owrno56sgt" path="res://models/prototype-kit/stairs-diagonal.glb" id="24_0n3wm"]
+[ext_resource type="PackedScene" uid="uid://cnu8ycujp7t27" path="res://models/city/building-type-j.glb" id="24_lswn8"]
+[ext_resource type="PackedScene" uid="uid://byhdrk8rrrve4" path="res://models/prototype-kit/stairs-diagonal-small.glb" id="25_0odxb"]
+[ext_resource type="PackedScene" uid="uid://c2p4eqpam7sf4" path="res://Scenes/player.tscn" id="26_lswn8"]
+[ext_resource type="PackedScene" uid="uid://csnq7hav40hc8" path="res://models/city/driveway-long-wide.glb" id="27_seu75"]
+[ext_resource type="PackedScene" uid="uid://3ehjpo075mbp" path="res://models/city/building-type-k.glb" id="28_htxhm"]
+[ext_resource type="PackedScene" uid="uid://dbmtkmh3uaoc" path="res://models/city/building-type-d.glb" id="29_jq2sk"]
+[ext_resource type="PackedScene" uid="uid://duie1qr3s7kq7" path="res://models/city/fence-1x3.glb" id="30_4k2k6"]
+[ext_resource type="PackedScene" uid="uid://eicf7sv8l65a" path="res://models/city/path-stones-messy.glb" id="31_0rl1p"]
+[ext_resource type="Texture2D" uid="uid://die8kh6pu23tx" path="res://models/prototype-kit/Textures/colormap.png" id="32_htxhm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -15,6 +45,82 @@ sky = SubResource("Sky_ig7tw")
 tonemap_mode = 2
 glow_enabled = true
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_njtbj"]
+resource_name = "colormap"
+cull_mode = 2
+albedo_texture = ExtResource("32_htxhm")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_knm4e"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 2, 2),
+"format": 34896613377,
+"index_count": 120,
+"index_data": PackedByteArray("AAABAAIAAgABAAMAAwABAAAAAwAEAAIAAAAFAAMABQAGAAMABgAFAAAABwAEAAMAAwAGAAcACAACAAQABAAHAAgAAgAJAAAAAAAJAAYAAgAIAAkABgAJAAoACgALAAYACwAMAAYADAALAAoABgAMAAcADQAKAAkACgANAAwACAANAAkADAAOAAcADAANAA8ADwAOAAwACAAPAA0ADgAQAAcAEAAOAA8ACAARAA8ADwARABAACAASABEAEAARABIACAATABIAEgAUABAACAAHABUAFQATAAgAFQAHABAAEgATABUAEAAUABUAFQAUABIA"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 22,
+"vertex_data": PackedByteArray("AAD/PwAAAAAAAAAAAAAAAP8/AAAAAAAAAAAAAP//AAD/PwAA//8AAAAA/z///wAA/z//P///AAD///+///8AAP///78AAAAA/z//PwAAAAD/P/9/AAAAAP8//3///wAA/3//f///AAD/f/9/AAAAAP9//7///wAA/3//vwAAAAD/v/+///8AAP+//78AAAAA/7///wAAAAD/////AAAAAP+//////wAA////////AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_c0ny8"]
+resource_name = "stairs-diagonal_stairs-diagonal"
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("/3fL7P93mPn/d5j5/3fL7P93MtP/d//f/3f/3/93MtP/dzLT/3dlxv93Zcb/d5j5/3eY+f93y+z/d8vs/3eY+f93mPn/d5j5/3eY+f93Zcb/d2XG/3cy0/93MtP/d2XG/3dlxv93Zcb/d2XG/3cy0/93Zcb/d2XG/3cy0/93MtP/d//f/3fL7P93/9//d5j5/3fL7P93mPn/d8vs/3fL7P93y+z/d8vs/3fL7P93y+z/d//f/3f/3/93/9//d//f/3f/3/93/9//d//f/3f/3/93MtP/dzLT/3cy0/93MtP/dzLT/3cy0/93MtP/dzLT/3dlxv93Zcb/d5j5/3cy0/93MtP/d5j5"),
+"format": 34896613399,
+"index_count": 120,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAgAEAAMABQAGAAMABAAFAAMABAAHAAUABAAIAAcABAAJAAgABAAKAAkACwAMAA0ADQAOAAsADwAQABEAEQASAA8AEwAUABUAFQAWABMAFwAYABkAGQAaABcAGwAcAB0AHQAeABsAHwAbAB4AIAAfAB4AIQAgAB4AIgAgACEAIwAhAB4AJAAhACMAHgAlACMAJgAnACgAKAApACYAKgArACwALAAtACoALgAvADAAMAAxAC4AMgAzADQANAA1ADIANgA3ADgAOAA5ADYAOgA7ADwAPAA9ADoAPgA/AEAAQABBAD4A"),
+"material": SubResource("StandardMaterial3D_njtbj"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 66,
+"vertex_data": PackedByteArray("AAD/PwAA//8AAAAAAAD///8/AAAAAP///z//PwAA//////+/AAD///9//38AAP///z//fwAA////f/+/AAD///+//78AAP///7///wAA////////AAD//wAAAAD///+/AAAAAAAA/78AAP8/AAD/vwAA/z////+/AAAAAP///7//PwAA////v/8/AAAAAP+/AAAAAAAA/7//////////v/////8AAP+/////vwAA/7////+/////v/+///8AAP///////wAA//////////////+//////////7//v///AID/v/////8AgP///////wCA////v///AID/f/+///8AgP9//3///wCA/z//P///AID/P/9///8AgAAAAAD//wCAAAD/P///AID/PwAA//8AgAAA/z8AAP///z//PwAA////P/8//////wAA/z///////z//P////7//P/8/AAD/v/8//38AAP+//z//f////7//P/9/AAD///9//38AAP///3//f///////P/9///////9//3////+//3//fwAA/7//f/+/AAD/v/9//7////+//3//vwAA////v/+/AAD///+//7///////3//v///////v/+/////v/+//78AAP+//7///wAA/7//v///////v/8/AAD///zF////v////MX///+/AAD8xf8/AAAAAPzF/3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f///AAD/fwAA/38AAP9/AAD/f/9/AAD/fwAA/38AAP9/AAD/f/+//3//v/9//7//f/+//3////9/////f////3////9/////f////3////9/////f////3////9/////f/+//3//v/9//7//f/+//3////9/////f////3////9//7//f/+//3//v/9//7//f////3////9/////f////3//v/9//7//f/+//3//v/9/////f////3////9///8AY/45AGP+OQBj/jkAY/45")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_knm4e")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g6hiq"]
+resource_name = "colormap"
+cull_mode = 2
+albedo_texture = ExtResource("32_htxhm")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_a1mya"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 2, 2),
+"format": 34896613377,
+"index_count": 216,
+"index_data": PackedByteArray("AAABAAIAAwABAAAABAADAAAAAQADAAQAAAAFAAQAAQAGAAIABwAGAAEAAgAGAAcABAAIAAEAAQAIAAcABwAJAAIACQAHAAgACgAJAAgACgAIAAQAAgAJAAoACgAEAAUAAgALAAAACgALAAIADAAFAAAACgAFAAwAAAANAAwADQAAAAsADAANAA4ADgANAAsADgAPAAwACgAMAA8AEAAPAA4ADgARABAAEQAOABIAEAARABIAEgAOAAsADwAQABMAEgATABAACgAPABMAFAATABIAEgAVABQAFQASABYAFAAVABYAFgASAAsAEwAUABcAFgAXABQACgATABcAGAAXABYAFgAZABgAGQAWABoAGAAZABoAGgAWAAsAFwAYABsAGgAbABgACgAXABsAHAALAAoAHQAbABoAGgAeAB0AHgAaAB8AHQAeAB8AHwAaAAsAGwAdACAACgAbACAAHwAgAB0ACwAcACEAIQAfAAsACgAiABwAIgAKACAAIQAcACIAIgAjACEAIgAgACQAJAAjACIAJAAgAB8AIQAjACQAHwAlACQAJAAlACEAJQAfACEA"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 38,
+"vertex_data": PackedByteArray("/7//v///AAD/3//f//8AAP///////wAA/7//3///AAD/v//fAAAAAP+//78AAAAA/9//////AAD/3///AAAAAP/f/98AAAAA/////wAAAAD///+/AAAAAP///7///wAA/5//vwAAAAD/n/+///8AAP+f/5///wAA/5//nwAAAAD/f/+fAAAAAP9//5///wAA/3//f///AAD/f/9/AAAAAP9f/38AAAAA/1//f///AAD/X/9f//8AAP9f/18AAAAA/z//XwAAAAD/P/9f//8AAP8//z///wAA/z//PwAAAAD/PwAA//8AAP8f/z8AAAAA/x//P///AAD/H/8f//8AAP8f/x8AAAAAAAAAAP//AAD/PwAAAAAAAAAAAAAAAAAAAAD/HwAAAAAAAP8f//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_750yb"]
+resource_name = "stairs-diagonal-small_stairs-diagonal-small"
+_surfaces = [{
+"aabb": AABB(-1, 0, -1, 2, 2, 2),
+"attribute_data": PackedByteArray("/3cy0/93zMz/d2XG/3dl5v93Zeb/d//f/3f/3/93MvP/d5j5/3eY+f93MvP/dzLT/3fL7P93y+z/d2Xm/3dl5v93/9//d//f/3eY2f93mNn/dzLT/3cy0/93zMz/d8zM/3dlxv93Zcb/d5j5/3eY+f93MvP/dzLz/3eY+f93mPn/d5j5/3eY+f93mNn/d5jZ/3cy0/93MtP/d8zM/3fMzP93Zcb/d2XG/3cy0/93MtP/d8zM/3fMzP93MvP/dzLz/3fL7P93y+z/d2XG/3dlxv93Zcb/d2XG/3f/3/93/9//d5jZ/3eY2f93MtP/dzLT/3cy0/93MtP/dzLT/3eY+f93mPn/dzLz/3cy8/93y+z/d8vs/3dl5v93Zeb/d//f/3f/3/93mNn/d5jZ/3cy0/93MtP/d2XG/3fMzP93zMz/d2XG/3fMzP93zMz/d8zM/3fMzP93Zcb/d2XG/3cy0/93MtP/dzLz/3cy8/93MvP/dzLz/3f/3/93/9//d//f/3f/3/93mNn/d5jZ/3eY2f93mNn/d8vs/3fL7P93y+z/d8vs/3fL7P93y+z/d2Xm/3dl5v93Zeb/d2Xm/3dl5v93Zeb/d5j5/3cy0/93MtP/d5j5"),
+"format": 34896613399,
+"index_count": 216,
+"index_data": PackedByteArray("AAABAAIAAwAEAAUABQAGAAMABwAIAAkACQAKAAcACQALAAoADAANAAoACwAMAAoADgAPAAwACwAOAAwAEAARAA4ACwAQAA4AEgATABAACwASABAACwAUABIACwAVABQACwAWABUACwAXABYACwAYABcAGAAZABcAGgAbABwAHAAdABoAHgAfACAAIAAhAB4AIgAjACQAJAAlACIAJgAnACgAKAApACYAKgArACwALAAtACoALgAvADAAMAAxAC4AMgAzADQANAA1ADIANgA3ADgAOAA5ADYAOgA7ADwAPAA9ADoAPgA/AEAAQQBCAEAAQABCAD4AQwBEAEIAQgBEAD4ARQBGAEQARABGAD4ARwBIAEYARgBIAD4ASABJAD4ASgBJAEgASQBLAD4ASwBMAD4ATQA+AEwATgBPAEwATwBQAE0AUQBSAFMAUwBUAFEAVQBWAFcAVwBYAFUAWQBaAFsAWwBcAFkAXQBeAF8AXwBgAF0AYQBiAGMAYwBkAGEAZQBmAGcAZwBoAGUAaQBqAGsAawBsAGkAbQBuAG8AbwBwAG0AcQByAHMAcwB0AHEA"),
+"material": SubResource("StandardMaterial3D_g6hiq"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 117,
+"vertex_data": PackedByteArray("/7//v////n//3//f///+f/////////8//1//X////7//X/9fAAD/v/9f/38AAP+//1//f////78AAP8fAAD//wAAAAAAAP///z8AAAAA////H/8fAAD//////78AAP///z//PwAA////H/8/AAD///9f/18AAP///z//XwAA////f/9/AAD///9f/38AAP///5//nwAA////f/+fAAD///+f/78AAP///7//vwAA////v//fAAD////f/98AAP///////wAA////3///AAD//wAAAAD///+/AAAAAAAA/78AAP8fAAD/vwAA/x////+/AAAAAP///7//PwAA////v/8/AAAAAP+/AAAAAAAA/7//n/+f////v/+f/58AAP+//5//vwAA/7//n/+/////v//f/9////+//9//3wAA/7//3///AAD/v//f//////+//7//v////7//v/+/AAD/v/+//98AAP+//7//3////7//H/8f////v/8f/x8AAP+//x//PwAA/7//H/8/////v//f//8AAP///////wAA///////////////f/////////3//f////7//f/9/AAD/v/9//58AAP+//3//n////7//n/+/AAD///+//78AAP///7//v///////n/+//////////7///wCA/z8AAP//AIAAAAAA//8AgAAA/x///wCA/x//H///AID/H/8///8AgP8//z///wCA/z//X///AID/X/9f//8AgP9f/3///wCA/3//f///AID/n/+f//8AgP9//5///wCA/5//v///AID/v/+///8AgP///////wCA/7//3///AID/3//f//8AgP/f/////wCA/7//3wAA////3//fAAD////f/9///////7//3///////////////v/////8AAP+/////vwAA/7////+/////vwAA/x8AAP///x//HwAA////H/8f/////wAA/x///////1//fwAA////f/9/AAD///9//3///////1//f///////f/+fAAD///+f/58AAP///5//n///////f/+f//////8f/z8AAP///z//PwAA////P/8///////8f/z///////z//P////7//P/8/AAD/v/8//18AAP+//z//X////7//P/9fAAD///9f/18AAP///1//X///////P/9f//////8/AAD///zF////v////MX///+/AAD8xf8/AAAAAPzF/3////9//////////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f///AAD/fwAA/38AAP9/AAD/f/9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f/+//3//v/9//7//f/+//3////9/////f////3////9//7//f/+//3//v/9//7//f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3////9/////f////3//v/9//7//f/+//3//v/9/AAD/fwAA/38AAP9/AAD/f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3////9/////f////3////9//7//f/+//3//v/9//78AY/45AGP+OQBj/jkAY/45")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_a1mya")
+
 [node name="Main" type="Node3D" unique_id=105238301]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2902083]
@@ -25,6 +131,7 @@ transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545
 shadow_enabled = true
 
 [node name="House" type="CSGCombiner3D" parent="." unique_id=347818246]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -33.514137, 0, -69.45774)
 use_collision = true
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="House" unique_id=972825982]
@@ -97,8 +204,221 @@ size = Vector3(1, 2.7319336, 4.152588)
 
 [node name="Floor" type="CSGBox3D" parent="." unique_id=1586978340]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.020184994)
+visible = false
 use_collision = true
 size = Vector3(25, 1, 25)
 
-[node name="Player" parent="." unique_id=1385081511 instance=ExtResource("1_ig7tw")]
-transform = Transform3D(0.70710677, 0, 0.70710677, 0, 1, 0, -0.70710677, 0, 0.70710677, 11, 0.5, 11)
+[node name="Floor2" type="CSGBox3D" parent="." unique_id=992992754]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2774987, 0.022460938, 4.3176503)
+use_collision = true
+size = Vector3(100, 1, 100)
+
+[node name="driveway-long2" parent="." unique_id=2058779599 instance=ExtResource("2_lquwl")]
+transform = Transform3D(2.2, 0, 0, 0, 1, 0, 0, 0, 18.602, -21.138456, 0.5, 3.3719652)
+
+[node name="driveway-long3" parent="." unique_id=478475083 instance=ExtResource("2_lquwl")]
+transform = Transform3D(0.3420201, 0, 17.480556, 0, 1, 0, -0.9396926, 0, 6.3624005, 0, 0.5, 3.3719652)
+
+[node name="driveway-long4" parent="." unique_id=430984952 instance=ExtResource("2_lquwl")]
+transform = Transform3D(0.3420201, 0, 17.480556, 0, 1, 0, -0.9396926, 0, 6.3624005, 0, 0.5, -25.28997)
+
+[node name="driveway-long5" parent="." unique_id=1136922117 instance=ExtResource("2_lquwl")]
+transform = Transform3D(-2.9802322e-08, 0, 18.602419, 0, 1, 0, -0.99999994, 0, -1.4305115e-06, 0, 0.5, 39.65017)
+
+[node name="driveway-long6" parent="." unique_id=766230020 instance=ExtResource("2_lquwl")]
+transform = Transform3D(0.9999898, -0.0045129075, 0.004833708, 0.0045129056, 0.99998987, 0.00014110691, -0.00025987448, -6.4155074e-06, 18.602417, 14.785936, 0.5, 3.7796812)
+
+[node name="ambulance2" parent="." unique_id=1906010288 instance=ExtResource("9_kq58d")]
+transform = Transform3D(-1, 0, 8.940697e-08, 0, 1, 0, -8.940697e-08, 0, -1, -19.035534, 0.63567764, 51.71942)
+
+[node name="cone2" parent="." unique_id=1613698218 instance=ExtResource("3_1u8w0")]
+transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, 2.0717344, 0.6499958, 5.600527)
+
+[node name="cone3" parent="." unique_id=1989849431 instance=ExtResource("3_1u8w0")]
+transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, 2.4014208, 0.6499958, 4.1784663)
+
+[node name="cone4" parent="." unique_id=1208340855 instance=ExtResource("3_1u8w0")]
+transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, 2.8021765, 0.6499958, 2.657197)
+
+[node name="taxi" parent="." unique_id=321306344 instance=ExtResource("4_0odxb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.779787, 0.6500015, 7.72659)
+
+[node name="van" parent="." unique_id=1758067417 instance=ExtResource("5_lswn8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.144179, 0.6500006, 32.61837)
+
+[node name="delivery-flat" parent="." unique_id=312100938 instance=ExtResource("6_a6jrf")]
+transform = Transform3D(0.34202015, 0, 0.9396926, 0, 1, 0, -0.9396926, 0, 0.34202015, 6.190778, 0.6500006, 6.186367)
+
+[node name="garbage-truck" parent="." unique_id=1657195229 instance=ExtResource("7_xuqvo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.395878, 0.6500001, 0.9911585)
+
+[node name="police" parent="." unique_id=1783737468 instance=ExtResource("8_qsp4k")]
+transform = Transform3D(0.96637607, 0, 0.2571328, 0, 1, 0, -0.2571328, 0, 0.96637607, -22.394564, 0.6500001, -7.5150657)
+
+[node name="ambulance" parent="." unique_id=983120763 instance=ExtResource("9_kq58d")]
+transform = Transform3D(0.34202015, 0, 0.9396926, 0, 1, 0, -0.9396926, 0, 0.34202015, -36.00818, 0.6499996, -9.715996)
+
+[node name="suv" parent="." unique_id=294213453 instance=ExtResource("10_seu75")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.597445, 0.6499996, -26.488247)
+
+[node name="sedan-sports" parent="." unique_id=1491354803 instance=ExtResource("11_htxhm")]
+transform = Transform3D(-0.99833274, 0.057720844, -8.727702e-08, 0.057720844, 0.99833274, 5.0461164e-09, 8.742278e-08, 0, -1, 16.612099, 0.55873847, -23.596119)
+
+[node name="railroad-straight2" parent="." unique_id=1719785191 instance=ExtResource("13_4k2k6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.882111, 3.574623, 35.7141)
+
+[node name="railroad-straight3" parent="." unique_id=1719840783 instance=ExtResource("13_4k2k6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.882111, 3.574623, 43.654045)
+
+[node name="railroad-straight4" parent="." unique_id=1567400774 instance=ExtResource("13_4k2k6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.882111, 3.574623, 51.651157)
+
+[node name="railroad-corner-large2" parent="." unique_id=1456136628 instance=ExtResource("14_0rl1p")]
+transform = Transform3D(-1, 0, 5.9604645e-08, 0, 1, 0, -5.9604645e-08, 0, -1, -10.878893, 3.574624, 35.713818)
+
+[node name="railroad-straight5" parent="." unique_id=1614511002 instance=ExtResource("13_4k2k6")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 1.1276152, 3.574623, 23.703033)
+
+[node name="train-diesel-b2" parent="." unique_id=1084252139 instance=ExtResource("15_ok6jj")]
+transform = Transform3D(1.3113416e-07, 0, 1, 0, 1, 0, -1, 0, 1.3113416e-07, 9.494989, 0.8936579, 23.70132)
+
+[node name="train-diesel-b3" parent="." unique_id=1280249248 instance=ExtResource("15_ok6jj")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 2.287298, 0.8936579, 23.70132)
+
+[node name="warning-traffic2" parent="." unique_id=832516652 instance=ExtResource("17_b1qrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.406421, 0.50907004, 37.379364)
+
+[node name="warning-traffic3" parent="." unique_id=458526624 instance=ExtResource("17_b1qrp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.366342, 0.43985343, 41.982864)
+
+[node name="pipe-large2" parent="." unique_id=1875583869 instance=ExtResource("18_come4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2333918, 0.5000019, 51.406353)
+
+[node name="pipe-large3" parent="." unique_id=1390528220 instance=ExtResource("18_come4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2333918, 0.5000019, 49.42589)
+
+[node name="pipe-large4" parent="." unique_id=37338463 instance=ExtResource("18_come4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2333918, 1.98191, 50.447086)
+
+[node name="indicator-special-area2" parent="." unique_id=498583442 instance=ExtResource("19_h8e4i")]
+transform = Transform3D(1.8686415, 0, 0, 0, 1, 0, 0, 0, 4.1256337, -2.2833548, 0.55935895, 49.76278)
+
+[node name="pipe-large5" parent="." unique_id=636719244 instance=ExtResource("18_come4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2333918, 0.5000019, 47.522213)
+
+[node name="crane2" parent="." unique_id=826571519 instance=ExtResource("20_4lmeg")]
+transform = Transform3D(0.76320994, 0, 0.6461506, 0, 1, 0, -0.6461506, 0, 0.76320994, 1.6146159, 0.50000143, 51.971596)
+
+[node name="crane-magnet2" parent="." unique_id=1705209655 instance=ExtResource("21_0cp0l")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5291014, 4.978501, 48.23178)
+
+[node name="indicator-special-arrow2" parent="." unique_id=1429795547 instance=ExtResource("22_d2t1y")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6545963, 0.54608804, 48.84071)
+
+[node name="indicator-special-lines2" parent="." unique_id=1752074928 instance=ExtResource("23_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.776151, 0.5374986, 43.379387)
+
+[node name="indicator-special-lines3" parent="." unique_id=644943892 instance=ExtResource("23_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0806, 0.5374986, 43.379387)
+
+[node name="indicator-special-lines4" parent="." unique_id=1616368953 instance=ExtResource("23_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.776151, 0.5374986, 45.084476)
+
+[node name="indicator-special-lines5" parent="." unique_id=1955843314 instance=ExtResource("23_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0806, 0.5374986, 45.084476)
+
+[node name="indicator-special-lines6" parent="." unique_id=1879396757 instance=ExtResource("23_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.776151, 0.5374986, 46.78762)
+
+[node name="indicator-special-lines7" parent="." unique_id=478622876 instance=ExtResource("23_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0806, 0.5374986, 46.78762)
+
+[node name="indicator-special-lines8" parent="." unique_id=1119010107 instance=ExtResource("23_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.776151, 0.5374986, 48.49271)
+
+[node name="indicator-special-lines9" parent="." unique_id=1811166698 instance=ExtResource("23_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0806, 0.5374986, 48.49271)
+
+[node name="indicator-special-lines10" parent="." unique_id=2094629472 instance=ExtResource("23_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.776151, 0.5374986, 48.471714)
+
+[node name="indicator-special-lines11" parent="." unique_id=90299308 instance=ExtResource("23_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0806, 0.5374986, 48.471714)
+
+[node name="indicator-special-lines12" parent="." unique_id=1663675170 instance=ExtResource("23_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.776151, 0.5374986, 50.176804)
+
+[node name="indicator-special-lines13" parent="." unique_id=1023602645 instance=ExtResource("23_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0806, 0.5374986, 50.176804)
+
+[node name="indicator-special-lines14" parent="." unique_id=649492276 instance=ExtResource("23_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.776151, 0.5374986, 51.879948)
+
+[node name="indicator-special-lines15" parent="." unique_id=712296900 instance=ExtResource("23_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0806, 0.5374986, 51.879948)
+
+[node name="indicator-special-lines16" parent="." unique_id=1179666125 instance=ExtResource("23_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.776151, 0.5374986, 53.585037)
+
+[node name="indicator-special-lines17" parent="." unique_id=73751669 instance=ExtResource("23_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.0806, 0.5374986, 53.585037)
+
+[node name="stairs-diagonal2" parent="." unique_id=1180744949 instance=ExtResource("24_0n3wm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.50535, 0.50000143, 13.008618)
+
+[node name="stairs-diagonal3" type="Node3D" parent="." unique_id=938271436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.5042925, 2.5008497, 13.008618)
+
+[node name="stairs-diagonal-small2" parent="." unique_id=688503454 instance=ExtResource("25_0odxb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.491384, 0.50000143, 15.116795)
+
+[node name="stairs-diagonal-small3" type="Node3D" parent="." unique_id=629984530]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.493064, 2.4994097, 15.116795)
+
+[node name="building-type-j2" parent="." unique_id=561960320 instance=ExtResource("24_lswn8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27.44246, 0.5000019, 48.70738)
+
+[node name="building-type-u2" parent="." unique_id=528133544 instance=ExtResource("16_facbu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 28.831581, 0.5000019, 28.457016)
+
+[node name="Player" parent="." unique_id=2118549186 instance=ExtResource("26_lswn8")]
+transform = Transform3D(-0.8, 0, 1.2079664e-07, 0, 0.8, 0, -1.2079664e-07, 0, -0.8, 0.39263237, 0.50000167, -12.375431)
+
+[node name="driveway-long7" parent="." unique_id=646180670 instance=ExtResource("27_seu75")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 3, -34.4882, 0.50000095, 48.472477)
+
+[node name="garbage-truck2" parent="." unique_id=1975881018 instance=ExtResource("7_xuqvo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -23.136353, 0.6500001, 46.792606)
+
+[node name="building-type-k2" parent="." unique_id=172954877 instance=ExtResource("28_htxhm")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -35.467407, 0.5000019, 29.069397)
+
+[node name="building-type-d2" parent="." unique_id=1820549216 instance=ExtResource("29_jq2sk")]
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, -41.865303, 0.5000019, 8.819796)
+
+[node name="fence-1x32" parent="." unique_id=1274890708 instance=ExtResource("30_4k2k6")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, -33.61599, 0.6499977, 11.250872)
+
+[node name="path-stones-messy2" parent="." unique_id=1695458102 instance=ExtResource("31_0rl1p")]
+transform = Transform3D(0.22437279, 0, 0.9745034, 0, 1, 0, -0.9745034, 0, 0.22437279, -28.376139, 0.5000038, 12.159423)
+
+[node name="path-stones-messy3" parent="." unique_id=1987516034 instance=ExtResource("31_0rl1p")]
+transform = Transform3D(0.22437279, 0, 0.9745034, 0, 1, 0, -0.9745034, 0, 0.22437279, -33.995697, 0.5000038, 11.612031)
+
+[node name="path-stones-messy4" parent="." unique_id=1790504505 instance=ExtResource("31_0rl1p")]
+transform = Transform3D(0.22437279, 0, 0.9745034, 0, 1, 0, -0.9745034, 0, 0.22437279, -28.837511, 0.5000038, 26.569305)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="." unique_id=1615998168]
+transform = Transform3D(0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0, 1, -1.1954956, 3.277434, -1.4428711)
+use_collision = true
+size = Vector3(16.498657, 1, 3.8857422)
+
+[node name="stairs-diagonal" type="MeshInstance3D" parent="CSGBox3D" unique_id=1854167611]
+transform = Transform3D(-0.7071069, -0.7071069, 5.2683568e-08, -0.7071069, 0.7071069, 5.2683568e-08, -8.940697e-08, 1.7763568e-15, -1, 3.7217329, -0.2072401, 1.2176511)
+mesh = SubResource("ArrayMesh_c0ny8")
+skeleton = NodePath("")
+
+[node name="stairs-diagonal-small" type="MeshInstance3D" parent="CSGBox3D" unique_id=1000430249]
+transform = Transform3D(-0.7071069, -0.7071069, 5.2683568e-08, -0.7071069, 0.7071069, 5.2683568e-08, -8.940697e-08, 1.7763568e-15, -1, 3.6993854, -0.20399058, -0.7782669)
+mesh = SubResource("ArrayMesh_750yb")
+skeleton = NodePath("")
