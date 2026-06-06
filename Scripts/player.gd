@@ -9,7 +9,7 @@ extends CharacterBody3D
 
 @export var fall_damage_threshold := 10.0
 @export var fall_damage_multiplier := 2.0
-@export var max_health := 5.0
+@export var max_health := 100.0
 @export var respawn_delay := 3.0
 
 var health := 0.0
@@ -39,7 +39,8 @@ func _ready():
 	camera_third_view.current = true
 	#head_mesh.visible = true
 	health = max_health
-
+	call_deferred("_setup_collision_exceptions")
+	
 func _input(event):
 	
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
@@ -65,6 +66,7 @@ func _input(event):
 	
 	if event.is_action_pressed("camera_2"):
 		camera_selected = 2
+		$Root/Skeleton3D/PhysicalBoneSimulator3D.physical_bones_start_simulation()
 
 func _physics_process(delta):
 	
@@ -159,7 +161,7 @@ func _process(_delta):
 		respawn()
 
 func respawn():
-	global_position = respawn_position 
+	global_position = respawn_position
 	velocity = Vector3.ZERO
 	
 func take_damage(amount: float):
@@ -171,3 +173,9 @@ func take_damage(amount: float):
 
 func die():
 	print("DEAD")
+	
+func _setup_collision_exceptions():
+	$Root/Skeleton3D/PhysicalBoneSimulator3D.physical_bones_add_collision_exception(
+		self.get_rid()
+	)
+	
