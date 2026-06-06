@@ -214,7 +214,7 @@ use_collision = true
 size = Vector3(100, 1, 100)
 
 [node name="Player" parent="." unique_id=2118549186 instance=ExtResource("26_lswn8")]
-transform = Transform3D(-0.8, 0, 1.2079664e-07, 0, 0.8, 0, -1.2079664e-07, 0, -0.8, 0.39263237, 0.50000167, -12.375431)
+transform = Transform3D(-0.8, 0, 1.2079664e-07, 0, 0.8, 0, -1.2079664e-07, 0, -0.8, 5.8261504, 0.50000167, -10.133537)
 
 [node name="Map" type="Node3D" parent="." unique_id=902561762]
 

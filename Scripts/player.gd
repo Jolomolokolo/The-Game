@@ -48,7 +48,7 @@ func _input(event):
 		target_yaw += deg_to_rad(-event.relative.x * mouse_sensitivity)
 
 		cam_pitch += deg_to_rad(-event.relative.y * mouse_sensitivity)
-		cam_pitch = clamp(cam_pitch, deg_to_rad(-80), deg_to_rad(80))
+		cam_pitch = clamp(cam_pitch, deg_to_rad(-50), deg_to_rad(50))
 
 	if event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
@@ -63,16 +63,14 @@ func _input(event):
 	# Camera Switch
 	if event.is_action_pressed("camera_1"):
 		camera_selected = 1
-	
 	if event.is_action_pressed("camera_2"):
 		camera_selected = 2
-		$Root/Skeleton3D/PhysicalBoneSimulator3D.physical_bones_start_simulation()
 
 func _physics_process(delta):
 	
 	# Smooth body rotation
 	camera_pivot.rotation.x = cam_pitch
-	current_yaw = lerp_angle(current_yaw, target_yaw, 0.08)
+	current_yaw = lerp_angle(current_yaw, target_yaw, 10.0 * delta)
 	rotation.y = current_yaw
 	
 	# Fallspeed
@@ -94,6 +92,8 @@ func _physics_process(delta):
 	# Jumping
 	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
 		velocity.y = jump_velocity
+		velocity.x *= 0.45
+		velocity.z *= 0.45
 		animation_player.play("anmimationes/Root_Jump")
 	
 	# Input
@@ -120,21 +120,25 @@ func _physics_process(delta):
 			current_speed = sprint_speed
 	
 	# Motion
-	if direction:
+	if direction and is_on_floor() and not Input.is_action_just_pressed("ui_accept"):
 		velocity.x = direction.x * current_speed
 		velocity.z = direction.z * current_speed
 	
 		if is_on_floor():
 			if current_speed == sprint_speed:
-				animation_player.play("anmimationes/Root_Run")
+				if animation_player.current_animation != "anmimationes/Root_Run" and animation_player.current_animation != "anmimationes/Root_Jump":
+					animation_player.play("anmimationes/Root_Run")
 			else:
-				animation_player.play("anmimationes/Root_Run")
-	else:
+				if animation_player.current_animation != "anmimationes/Root_Run" and animation_player.current_animation != "anmimationes/Root_Jump":
+					animation_player.play("anmimationes/Root_Run")
+					
+	elif is_on_floor() and not Input.is_action_just_pressed("ui_accept"):
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 	
 		if is_on_floor():
-			animation_player.play("anmimationes/Root_Idle")
+			if animation_player.current_animation != "anmimationes/Root_Idle" and animation_player.current_animation != "anmimationes/Root_Jump":
+				animation_player.play("anmimationes/Root_Idle")
 	
 	move_and_slide()
 	
@@ -173,9 +177,9 @@ func take_damage(amount: float):
 
 func die():
 	print("DEAD")
+	$Root/Skeleton3D/PhysicalBoneSimulator3D.physical_bones_start_simulation()
 	
 func _setup_collision_exceptions():
 	$Root/Skeleton3D/PhysicalBoneSimulator3D.physical_bones_add_collision_exception(
 		self.get_rid()
 	)
-	
