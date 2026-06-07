@@ -1,15 +1,15 @@
 [remap]
 
-importer="scene"
+importer="animation_library"
 importer_version=1
-type="PackedScene"
+type="AnimationLibrary"
 uid="uid://deik6nus0aja4"
-path="res://.godot/imported/run.fbx-2bfd6b39f4994561702cdaed170e5e58.scn"
+path="res://.godot/imported/run.fbx-2bfd6b39f4994561702cdaed170e5e58.res"
 
 [deps]
 
 source_file="res://models/Characters/run.fbx"
-dest_files=["res://.godot/imported/run.fbx-2bfd6b39f4994561702cdaed170e5e58.scn"]
+dest_files=["res://.godot/imported/run.fbx-2bfd6b39f4994561702cdaed170e5e58.res"]
 
 [params]
 
@@ -2098,7 +2098,7 @@ _subresources={
 "Root|Run": {
 "save_to_file/enabled": true,
 "save_to_file/fallback_path": "res://models/Characters/animationes/Root_Run.res",
-"save_to_file/keep_custom_tracks": true,
+"save_to_file/keep_custom_tracks": false,
 "save_to_file/path": "uid://b8vio4q761x0n",
 "settings/loop_mode": 0,
 "slice_1/end_frame": 0,

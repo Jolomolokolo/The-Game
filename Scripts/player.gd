@@ -19,6 +19,9 @@ var fall_velocity := 0.0
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var camera_selected = 2
 
+var in_car := false
+var nearby_car : Node = null
+
 # Smooth rotation system
 var cam_pitch := 0.0
 var target_yaw := 0.0
@@ -29,30 +32,30 @@ var current_yaw := 0.0
 @onready var camera_first_view = $"CameraPivot/First-View"
 @onready var camera_third_view = $"CameraPivot/SpringArm3D/Third-View"
 #@onready var head_mesh = $"Skeleton3D/head-mesh"
+@onready var tooltip_label = $"CanvasLayer/Tooltip-Overlay"
 
 # Animation
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 func _ready():
+	add_to_group("player")
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera_first_view.current = false
 	camera_third_view.current = true
 	#head_mesh.visible = true
 	health = max_health
 	call_deferred("_setup_collision_exceptions")
+	tooltip_label.visible = false
 	
 func _input(event):
 	
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not in_car:
 
 		target_yaw += deg_to_rad(-event.relative.x * mouse_sensitivity)
 
 		cam_pitch += deg_to_rad(-event.relative.y * mouse_sensitivity)
 		cam_pitch = clamp(cam_pitch, deg_to_rad(-50), deg_to_rad(50))
 
-	if event.is_action_pressed("ui_cancel"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	
 	if event.is_action_pressed("ui_cancel"):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
@@ -65,8 +68,17 @@ func _input(event):
 		camera_selected = 1
 	if event.is_action_pressed("camera_2"):
 		camera_selected = 2
-
+	
+	if event.is_action_pressed("ui_interact") and nearby_car != null:
+		if not in_car:
+			in_car = true
+			set_process_unhandled_input(false)
+			nearby_car.enter_car(self)
+	
 func _physics_process(delta):
+	
+	if in_car:
+		return
 	
 	# Smooth body rotation
 	camera_pivot.rotation.x = cam_pitch
@@ -101,8 +113,7 @@ func _physics_process(delta):
 		"ui_left",
 		"ui_right",
 		"ui_up",
-		"ui_down"
-	)
+		"ui_down")
 	
 	# Movement direction
 	var direction = (
@@ -127,24 +138,33 @@ func _physics_process(delta):
 		if is_on_floor():
 			if current_speed == sprint_speed:
 				if animation_player.current_animation != "anmimationes/Root_Run" and animation_player.current_animation != "anmimationes/Root_Jump":
+					animation_player.speed_scale = 1.0
 					animation_player.play("anmimationes/Root_Run")
 			else:
 				if animation_player.current_animation != "anmimationes/Root_Run" and animation_player.current_animation != "anmimationes/Root_Jump":
+					animation_player.speed_scale = 0.6
 					animation_player.play("anmimationes/Root_Run")
-					
+	
 	elif is_on_floor() and not Input.is_action_just_pressed("ui_accept"):
 		velocity.x = move_toward(velocity.x, 0, current_speed)
 		velocity.z = move_toward(velocity.z, 0, current_speed)
 	
 		if is_on_floor():
 			if animation_player.current_animation != "anmimationes/Root_Idle" and animation_player.current_animation != "anmimationes/Root_Jump":
+				animation_player.speed_scale = 0.6
 				animation_player.play("anmimationes/Root_Idle")
 	
 	move_and_slide()
 	
 func _process(_delta):
 	
-	#Camera Controll/Retraction
+	if in_car:
+		tooltip_label.visible = false
+		return
+	
+	tooltip_label.visible = nearby_car != null
+	
+	# Camera Controll/Retraction
 	var dist = global_position.distance_to(camera_third_view.global_position)
 	
 	if dist < 2.0:
@@ -183,3 +203,8 @@ func _setup_collision_exceptions():
 	$Root/Skeleton3D/PhysicalBoneSimulator3D.physical_bones_add_collision_exception(
 		self.get_rid()
 	)
+	
+func notify_exit():
+	in_car = false
+	nearby_car = null
+	set_process_unhandled_input(true)
