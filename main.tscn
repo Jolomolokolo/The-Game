@@ -352,3 +352,4 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.876801, 0.6809069, -5.7079
 
 [node name="VehicleBody3D" parent="." unique_id=1383445128 instance=ExtResource("30_kq58d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.856, 0.61, -8.535)
+center_of_mass = Vector3(0, -1, 0)

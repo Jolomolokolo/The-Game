@@ -196,8 +196,9 @@ func take_damage(amount: float):
 		die()
 
 func die():
-	print("DEAD")
+	print("DEAD") # Adden von physic off
 	$Root/Skeleton3D/PhysicalBoneSimulator3D.physical_bones_start_simulation()
+	self.set_physics_process(false)
 	
 func _setup_collision_exceptions():
 	$Root/Skeleton3D/PhysicalBoneSimulator3D.physical_bones_add_collision_exception(

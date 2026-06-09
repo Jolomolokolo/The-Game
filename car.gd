@@ -1,3 +1,6 @@
+# IDEAS: Kaput Scren/Healt, Spiegel abfallen oder einzelene Teile
+# Drift - Bremese auf Spacebar, Blinker, Hupe, Licht, Scheibenwischer
+
 extends VehicleBody3D
 
 @export var max_engine_force := 1500.0

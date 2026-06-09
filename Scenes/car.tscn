@@ -343,5 +343,10 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.94
 [node name="Third-View" type="Camera3D" parent="." unique_id=856965176]
 transform = Transform3D(-1, -2.990035e-08, 8.2150535e-08, 0, 0.9396926, 0.34202012, -8.742278e-08, 0.34202012, -0.9396926, 0.4479905, 4.4445233, -5.3612742)
 
+[node name="SpotLight-left" type="SpotLight3D" parent="." unique_id=273394776]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+spot_range = 1.9542648
+spot_angle = 13.096071
+
 [connection signal="body_entered" from="EnterArea" to="." method="_on_enter_area_body_entered"]
 [connection signal="body_exited" from="EnterArea" to="." method="_on_enter_area_body_exited"]
