@@ -215,28 +215,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_3niyk")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_go66d"]
-emission_shape = 1
-emission_sphere_radius = 0.3
-direction = Vector3(0, 1, 0)
-spread = 30.0
-initial_velocity_min = 1.0
-initial_velocity_max = 3.0
-gravity = Vector3(0, 1, 0)
-scale_min = 0.5
-scale_max = 1.1999999
-color = Color(0.19263203, 0.19263186, 0.19263189, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_go66d"]
-transparency = 1
-cull_mode = 2
-shading_mode = 0
-albedo_color = Color(0.14767182, 0.14767179, 0.14767179, 1)
-
-[sub_resource type="QuadMesh" id="QuadMesh_1sfmx"]
-material = SubResource("StandardMaterial3D_go66d")
-size = Vector2(0.3, 0.3)
-
 [node name="VehicleBody3D" type="VehicleBody3D" unique_id=1383445128]
 mass = 1200.0
 center_of_mass_mode = 1
@@ -366,63 +344,16 @@ transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0.94
 transform = Transform3D(-1, -2.990035e-08, 8.2150535e-08, 0, 0.9396926, 0.34202012, -8.742278e-08, 0.34202012, -0.9396926, 0.4479905, 4.4445233, -5.3612742)
 
 [node name="SpotLight-left" type="SpotLight3D" parent="." unique_id=273394776]
-transform = Transform3D(-1, 1.5180806e-08, -8.609462e-08, 0, 0.9848077, 0.17364818, 8.742278e-08, 0.17364818, -0.9848077, 1.1407065, 1.2993395, 2.2286887)
-light_energy = 10.0
-light_indirect_energy = 5.0
-spot_range = 15.0
-spot_angle = 25.0
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.1407065, 1.2993395, 2.2286887)
+light_color = Color(1, 1, 0, 1)
+spot_angle = 20.0
 
 [node name="SpotLight-right" type="SpotLight3D" parent="." unique_id=569842698]
-transform = Transform3D(-1, 1.5180806e-08, -8.609462e-08, 0, 0.9848077, 0.17364818, 8.742278e-08, 0.17364818, -0.9848077, -0.5035929, 1.2993395, 2.2279997)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -0.5035929, 1.2993395, 2.2279997)
+light_color = Color(1, 1, 0, 1)
 light_energy = 10.0
 light_indirect_energy = 5.0
-spot_range = 15.0
-spot_angle = 25.0
-
-[node name="blinker-left-front" type="OmniLight3D" parent="." unique_id=1729612356]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3238493, 1.2965324, 2.5472112)
-light_color = Color(1, 0.5372549, 0, 1)
-light_energy = 5.0
-omni_range = 2.0
-
-[node name="bliner-right-front" type="OmniLight3D" parent="." unique_id=334916404]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.680026, 1.2965324, 2.5472112)
-light_color = Color(1, 0.5372549, 0, 1)
-light_energy = 5.0
-omni_range = 2.0
-
-[node name="blinker-left-back" type="OmniLight3D" parent="." unique_id=1650583349]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3238493, 1.0852202, -2.5837693)
-light_color = Color(1, 0.5372549, 0, 1)
-light_energy = 5.0
-omni_range = 2.0
-
-[node name="bliner-right-back" type="OmniLight3D" parent="." unique_id=309313013]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.680026, 1.0852202, -2.5837693)
-light_color = Color(1, 0.5372549, 0, 1)
-light_energy = 5.0
-omni_range = 2.0
-
-[node name="brakelight-left" type="OmniLight3D" parent="." unique_id=721931484]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3238493, 1.2242211, -2.5837693)
-light_color = Color(1, 0, 0, 1)
-light_energy = 5.0
-omni_range = 2.0
-
-[node name="brakelight-right" type="OmniLight3D" parent="." unique_id=1461497205]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.680026, 1.2242211, -2.5837693)
-light_color = Color(1, 0, 0, 1)
-light_energy = 5.0
-omni_range = 2.0
-
-[node name="SmokeParticles" type="GPUParticles3D" parent="." unique_id=932205488]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.36409038, 0.66006243, 1.4849854)
-emitting = false
-amount = 50
-lifetime = 2.0
-randomness = 0.5
-process_material = SubResource("ParticleProcessMaterial_go66d")
-draw_pass_1 = SubResource("QuadMesh_1sfmx")
+spot_angle = 20.0
 
 [connection signal="body_entered" from="EnterArea" to="." method="_on_enter_area_body_entered"]
 [connection signal="body_exited" from="EnterArea" to="." method="_on_enter_area_body_exited"]

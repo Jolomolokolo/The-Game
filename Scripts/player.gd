@@ -33,6 +33,7 @@ var current_yaw := 0.0
 @onready var camera_third_view = $"CameraPivot/SpringArm3D/Third-View"
 #@onready var head_mesh = $"Skeleton3D/head-mesh"
 @onready var tooltip_label = $"CanvasLayer/Tooltip-Overlay"
+@onready var tooltip_label_1 = $"CanvasLayer/Tooltip-Car"
 
 # Animation
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -46,6 +47,7 @@ func _ready():
 	health = max_health
 	call_deferred("_setup_collision_exceptions")
 	tooltip_label.visible = false
+	tooltip_label_1.visible = false
 	
 func _input(event):
 	
@@ -160,6 +162,7 @@ func _process(_delta):
 	
 	if in_car:
 		tooltip_label.visible = false
+		tooltip_label_1.visible = true
 		return
 	
 	tooltip_label.visible = nearby_car != null
@@ -209,3 +212,4 @@ func notify_exit():
 	in_car = false
 	nearby_car = null
 	set_process_unhandled_input(true)
+	tooltip_label_1.visible = false
