@@ -18,17 +18,23 @@ func _process(delta):
 	var sun_angle = (time / 24.0) * 360.0 + 90.0
 	rotation_degrees.x = sun_angle
 	
-	if time >= sunrise_hour and time <= sunset_hour:
-		var day_progress = (time - sunrise_hour) / (sunset_hour - sunrise_hour)
-		if day_progress < 0.1 or day_progress > 0.9:
-			light_color = sunset_color
-			light_energy = lerp(0.0, 1.5, day_progress * 10.0) if day_progress < 0.1 else lerp(1.5, 0.0, (day_progress - 0.9) * 10.0)
-		else:
-			light_color = day_color
-			light_energy = 1.5
-	else:
+	if time < 5.8:
 		light_color = night_color
-		light_energy = 0.1
+		light_energy = lerp(light_energy, 0.05, delta * 2.0)
+	elif time < 8.0:
+		var progress = (time - 6.0) / 2.0
+		light_color = sunset_color.lerp(day_color, progress)
+		light_energy = lerp(light_energy, 1.5, delta * 0.5)
+	elif time < 18.0:
+		light_color = light_color.lerp(day_color, delta * 2.0)
+		light_energy = lerp(light_energy, 1.5, delta * 2.0)
+	elif time < 20.0:
+		var progress = (time - 18.0) / 2.0
+		light_color = day_color.lerp(sunset_color, progress)
+		light_energy = lerp(light_energy, 0.8, delta * 0.5)
+	else:
+		light_color = light_color.lerp(night_color, delta * 0.5)
+		light_energy = lerp(light_energy, 0.05, delta * 0.5)
 	
 	_update_enviroment()
 
@@ -36,8 +42,13 @@ func _update_enviroment():
 	var env = get_viewport().get_camera_3d().get_environment() if get_viewport().get_camera_3d() else null
 	if env == null:
 		return
-	
-	if time >= sunrise_hour and time <= sunset_hour:
-		env.ambient_light_energy = lerp(0.1, 1.0, (time - sunrise_hour) / (sunset_hour / sunrise_hour))
+		
+	if time < 6.0 or time > 20.0:
+		env.ambient_light_energy = lerp(env.ambient_light_energy, 0.02, 0.05)
+		env.ambient_light_color = Color(0.05, 0.05, 0.15)
+	elif time < 8.0 or time > 18.0:
+		env.ambient_light_energy = lerp(env.ambient_light_energy, 0.3, 0.05)
+		env.ambient_light_color = Color(0.5, 0.3, 0.2)
 	else:
-		env.ambient_light_energy = 0.1
+		env.ambient_light_energy = lerp(env.ambient_light_energy, 1.0, 0.05)
+		env.ambient_light_color = Color(1.0, 1.0, 1.0)
