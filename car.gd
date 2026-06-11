@@ -1,6 +1,6 @@
 # IDEAS 1 (BARE MINIMUM): Screen/Health, Hupe, Sounds für Blinker, Hupe, etc
 # IDEAS 2: Bremse auf Spacebar oder so, abfallende Spiegel oder andere Teile, funktionierende Spiegel
-# IDEAS 3: Scheibenwische, haha, ausgestatteter Innenraum oder so ?!, automatisches Licht aktivierer, je nach Tageszeit
+# IDEAS 3: Scheibenwischer, haha, ausgestatteter Innenraum oder so ?!, automatisches Licht aktivierer, je nach Tageszeit
 
 # Less particel and particles while still moving
 
