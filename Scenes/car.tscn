@@ -370,14 +370,14 @@ transform = Transform3D(-1, 1.5180806e-08, -8.609462e-08, 0, 0.9848077, 0.173648
 light_energy = 10.0
 light_indirect_energy = 5.0
 spot_range = 15.0
-spot_angle = 25.0
+spot_angle = 35.0
 
 [node name="SpotLight-right" type="SpotLight3D" parent="." unique_id=569842698]
 transform = Transform3D(-1, 1.5180806e-08, -8.609462e-08, 0, 0.9848077, 0.17364818, 8.742278e-08, 0.17364818, -0.9848077, -0.5035929, 1.2993395, 2.2279997)
 light_energy = 10.0
 light_indirect_energy = 5.0
 spot_range = 15.0
-spot_angle = 25.0
+spot_angle = 35.0
 
 [node name="blinker-left-front" type="OmniLight3D" parent="." unique_id=1729612356]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.3238493, 1.2965324, 2.5472112)
