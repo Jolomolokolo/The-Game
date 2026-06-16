@@ -20,7 +20,7 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var camera_selected = 2
 
 var in_car := false
-var nearby_car : Node = null
+var nearby_vehicle : Node = null
 
 # Smooth rotation system
 var cam_pitch := 0.0
@@ -71,11 +71,11 @@ func _input(event):
 	if event.is_action_pressed("camera_2"):
 		camera_selected = 2
 	
-	if event.is_action_pressed("ui_interact") and nearby_car != null:
+	if event.is_action_pressed("ui_interact") and nearby_vehicle != null:
 		if not in_car:
 			in_car = true
 			set_process_unhandled_input(false)
-			nearby_car.enter_car(self)
+			nearby_vehicle.enter_vehicle(self)
 	
 func _physics_process(delta):
 	
@@ -165,7 +165,9 @@ func _process(_delta):
 		tooltip_label_1.visible = true
 		return
 	
-	tooltip_label.visible = nearby_car != null
+	# TOOLTIP muss angepasst werden, auf das jeweilige Fahrzeug
+	
+	tooltip_label.visible = nearby_vehicle != null
 	
 	# Camera Controll/Retraction
 	var dist = global_position.distance_to(camera_third_view.global_position)
@@ -210,6 +212,6 @@ func _setup_collision_exceptions():
 	
 func notify_exit():
 	in_car = false
-	nearby_car = null
+	nearby_vehicle = null
 	set_process_unhandled_input(true)
 	tooltip_label_1.visible = false

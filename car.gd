@@ -147,7 +147,7 @@ func _physics_process(delta):
 	var steer_target = Input.get_axis("ui_right", "ui_left") * max_steering
 	steering = lerp(steering, steer_target, delta * 8.0)
 	
-func enter_car(player):
+func enter_vehicle(player):
 	player_ref = player
 	player_inside = true
 	just_entered = true
@@ -185,12 +185,12 @@ func exit_car():
 func _on_enter_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		player_ref = body
-		body.nearby_car = self
+		body.nearby_vehicle = self
 	
 func _on_enter_area_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player") and not player_inside:
 		player_ref = null
-		body.nearby_car = null
+		body.nearby_vehicle = null
 	
 func _reset_blinkers():
 	blinker_timer = 0.0
