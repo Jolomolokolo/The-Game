@@ -112,7 +112,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_k7ut6")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mcim7"]
-size = Vector3(3, 4.4, 7.2000003)
+size = Vector3(3, 4.424768, 7.2000003)
 
 [node name="Train" type="Node3D" unique_id=1626068840]
 script = ExtResource("1_nxpru")
@@ -139,8 +139,28 @@ fov = 108.80602
 [node name="Area3D" type="Area3D" parent="." unique_id=1595468425]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1991920895]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.2534983, 0)
+transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 3.3190155, 0)
 shape = SubResource("BoxShape3D_mcim7")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1323783232]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=526334256]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.225061, 0)
+shape = SubResource("BoxShape3D_mcim7")
+
+[node name="SpotLight - right" type="SpotLight3D" parent="." unique_id=2022275256]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0525413, 1.5254929, -3.47644)
+light_energy = 25.0
+light_indirect_energy = 15.0
+spot_range = 25.0
+spot_angle = 35.0
+
+[node name="SpotLight - left" type="SpotLight3D" parent="." unique_id=2092869033]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0473456, 1.5254929, -3.47644)
+light_energy = 25.0
+light_indirect_energy = 15.0
+spot_range = 25.0
+spot_angle = 35.0
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

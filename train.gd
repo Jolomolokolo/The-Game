@@ -11,12 +11,16 @@ var just_entered := false
 
 @onready var path_follow : PathFollow3D = get_parent()
 @onready var train_camera = $DriveCamera
+@onready var collision_body = $StaticBody3D
 
 func _ready():
 	add_to_group("car")
 	train_camera.current = false
 	
 func _physics_process(delta):
+	collision_body.global_position = global_position
+	collision_body.global_rotation = global_rotation
+	
 	if not player_inside:
 		return
 	
@@ -46,7 +50,7 @@ func _physics_process(delta):
 	
 	_update_brake_light(back > 0 and speed > 0)
 	
-func _update_brake_light(braking: bool):
+func _update_brake_light(_braking: bool):
 	pass
 	
 func enter_vehicle(player):
