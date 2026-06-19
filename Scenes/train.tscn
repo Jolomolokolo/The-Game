@@ -148,19 +148,67 @@ shape = SubResource("BoxShape3D_mcim7")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.225061, 0)
 shape = SubResource("BoxShape3D_mcim7")
 
-[node name="SpotLight - right" type="SpotLight3D" parent="." unique_id=2022275256]
+[node name="SpotLight - front - right" type="SpotLight3D" parent="." unique_id=2022275256]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0525413, 1.5254929, -3.47644)
+light_color = Color(1, 0.95686275, 0.8392157, 1)
 light_energy = 25.0
 light_indirect_energy = 15.0
 spot_range = 25.0
 spot_angle = 35.0
 
-[node name="SpotLight - left" type="SpotLight3D" parent="." unique_id=2092869033]
+[node name="SpotLight - front - left" type="SpotLight3D" parent="." unique_id=2092869033]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0473456, 1.5254929, -3.47644)
+light_color = Color(1, 0.95686275, 0.8392157, 1)
 light_energy = 25.0
 light_indirect_energy = 15.0
 spot_range = 25.0
 spot_angle = 35.0
+
+[node name="SpotLight - back - right" type="SpotLight3D" parent="." unique_id=1445791155]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0525419, 1.5254929, 3.4591494)
+light_color = Color(1, 0.95686275, 0.8392157, 1)
+light_energy = 25.0
+light_indirect_energy = 15.0
+spot_range = 25.0
+spot_angle = 35.0
+
+[node name="SpotLight - back - left" type="SpotLight3D" parent="." unique_id=1452227993]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1.047345, 1.5254929, 3.4591494)
+light_color = Color(1, 0.95686275, 0.8392157, 1)
+light_energy = 25.0
+light_indirect_energy = 15.0
+spot_range = 25.0
+spot_angle = 35.0
+
+[node name="BackLight - front - right" type="OmniLight3D" parent="." unique_id=830469578]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0525413, 1.5254929, -3.47644)
+light_color = Color(0.80784315, 0, 0, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+omni_range = 0.4
+
+[node name="BackLight - front - left" type="OmniLight3D" parent="." unique_id=1659446127]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0473456, 1.5254929, -3.47644)
+light_color = Color(0.80784315, 0, 0, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+omni_range = 0.4
+
+[node name="BackLight - back - right" type="OmniLight3D" parent="." unique_id=1126273315]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0525419, 1.5254929, 3.5287921)
+light_color = Color(0.80784315, 0, 0, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+omni_range = 0.4
+omni_attenuation = 0.5
+
+[node name="BackLight - back - left" type="OmniLight3D" parent="." unique_id=1258734620]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1.047345, 1.5254929, 3.5287921)
+light_color = Color(0.80784315, 0, 0, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+omni_range = 0.4
+omni_attenuation = 0.5
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
