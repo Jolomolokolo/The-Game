@@ -2,6 +2,8 @@
 
 [ext_resource type="Script" uid="uid://smu625keqm73" path="res://train.gd" id="1_nxpru"]
 [ext_resource type="Texture2D" uid="uid://dx7xwudj0tglm" path="res://models/trains/Textures/colormap.png" id="2_0hk28"]
+[ext_resource type="PackedScene" uid="uid://bgu6x3rc2htxg" path="res://models/trains/train-carriage-container-red.glb" id="3_0hk28"]
+[ext_resource type="PackedScene" uid="uid://ddrfnugrl1gcv" path="res://models/trains/train-carriage-tank.glb" id="4_mcim7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vju5p"]
 resource_name = "colormap"
@@ -136,6 +138,10 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 6.183826e-07, 3.5271323, -1.6038458)
 fov = 108.80602
 
+[node name="DriveCameraBackward" type="Camera3D" parent="." unique_id=1763021493]
+transform = Transform3D(-1, 0, 2.6226832e-07, 0, 1, 0, -2.6226832e-07, 0, -1, 6.183826e-07, 3.8195803, 0.5589738)
+fov = 108.80602
+
 [node name="Area3D" type="Area3D" parent="." unique_id=1595468425]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1991920895]
@@ -150,6 +156,7 @@ shape = SubResource("BoxShape3D_mcim7")
 
 [node name="SpotLight - front - right" type="SpotLight3D" parent="." unique_id=2022275256]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0525413, 1.5254929, -3.47644)
+visible = false
 light_color = Color(1, 0.95686275, 0.8392157, 1)
 light_energy = 25.0
 light_indirect_energy = 15.0
@@ -158,6 +165,7 @@ spot_angle = 35.0
 
 [node name="SpotLight - front - left" type="SpotLight3D" parent="." unique_id=2092869033]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0473456, 1.5254929, -3.47644)
+visible = false
 light_color = Color(1, 0.95686275, 0.8392157, 1)
 light_energy = 25.0
 light_indirect_energy = 15.0
@@ -166,6 +174,7 @@ spot_angle = 35.0
 
 [node name="SpotLight - back - right" type="SpotLight3D" parent="." unique_id=1445791155]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0525419, 1.5254929, 3.4591494)
+visible = false
 light_color = Color(1, 0.95686275, 0.8392157, 1)
 light_energy = 25.0
 light_indirect_energy = 15.0
@@ -174,6 +183,7 @@ spot_angle = 35.0
 
 [node name="SpotLight - back - left" type="SpotLight3D" parent="." unique_id=1452227993]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1.047345, 1.5254929, 3.4591494)
+visible = false
 light_color = Color(1, 0.95686275, 0.8392157, 1)
 light_energy = 25.0
 light_indirect_energy = 15.0
@@ -182,6 +192,7 @@ spot_angle = 35.0
 
 [node name="BackLight - front - right" type="OmniLight3D" parent="." unique_id=830469578]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0525413, 1.5254929, -3.47644)
+visible = false
 light_color = Color(0.80784315, 0, 0, 1)
 light_energy = 3.0
 light_indirect_energy = 2.0
@@ -189,6 +200,7 @@ omni_range = 0.4
 
 [node name="BackLight - front - left" type="OmniLight3D" parent="." unique_id=1659446127]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0473456, 1.5254929, -3.47644)
+visible = false
 light_color = Color(0.80784315, 0, 0, 1)
 light_energy = 3.0
 light_indirect_energy = 2.0
@@ -196,6 +208,7 @@ omni_range = 0.4
 
 [node name="BackLight - back - right" type="OmniLight3D" parent="." unique_id=1126273315]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0525419, 1.5254929, 3.5287921)
+visible = false
 light_color = Color(0.80784315, 0, 0, 1)
 light_energy = 3.0
 light_indirect_energy = 2.0
@@ -204,11 +217,18 @@ omni_attenuation = 0.5
 
 [node name="BackLight - back - left" type="OmniLight3D" parent="." unique_id=1258734620]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1.047345, 1.5254929, 3.5287921)
+visible = false
 light_color = Color(0.80784315, 0, 0, 1)
 light_energy = 3.0
 light_indirect_energy = 2.0
 omni_range = 0.4
 omni_attenuation = 0.5
+
+[node name="train-carriage-container-red2" parent="." unique_id=1834791927 instance=ExtResource("3_0hk28")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0058715343, 4.7683716e-07, 7.663516)
+
+[node name="train-carriage-tank2" parent="." unique_id=1612362043 instance=ExtResource("4_mcim7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0016379356, -0.0010125637, 15.771015)
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

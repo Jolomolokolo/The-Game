@@ -10,10 +10,12 @@ var player_ref : Node = null
 var just_entered := false
 var headlights_on := false
 var gear := 0
-var gear_names := {-1: "Reverse", 0: "Neutral", 1: "Forward"}
+#var gear_names := {-1: "Reverse", 0: "Neutral", 1: "Forward"}
+var current_camera = 1
 
 @onready var path_follow : PathFollow3D = get_parent()
 @onready var train_camera = $DriveCamera
+@onready var train_camera_backward = $DriveCameraBackward
 @onready var collision_body = $StaticBody3D
 
 @onready var spot_front_right = $"SpotLight - front - right"
@@ -31,6 +33,7 @@ var brake_lights : Array
 func _ready():
 	add_to_group("car")
 	train_camera.current = false
+	train_camera_backward.current = false
 	spot_front_right.visible = false
 	spot_front_left.visible = false
 	spot_back_right.visible = false
@@ -76,8 +79,21 @@ func _physics_process(delta):
 	
 	path_follow.progress += speed * delta
 	
+	_update_camera()
+	
 	_update_headlights()
 	_update_brake_light(back > 0 and speed > 0)
+
+func _update_camera():
+	if gear == 0:
+		train_camera.current = true
+		train_camera_backward.current = false
+	elif gear == 1:
+		train_camera.current = true
+		train_camera_backward.current = false
+	elif gear == -1:
+		train_camera.current = false
+		train_camera_backward.current = true
 
 func _update_headlights():
 	if not player_inside:
@@ -120,7 +136,10 @@ func enter_vehicle(player):
 	player_ref.set_physics_process(false)
 	player_ref.set_collision_layer_value(1, false)
 	player_ref.set_collision_mask_value(1, false)
-	train_camera.current = true
+	if current_camera == 1:
+		train_camera.current = true
+	elif current_camera == 2:
+		train_camera_backward = true
 	
 func exit_train():
 	if player_ref == null:
