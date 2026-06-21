@@ -17,6 +17,8 @@ var current_camera = 1
 @onready var train_camera = $DriveCamera
 @onready var train_camera_backward = $DriveCameraBackward
 @onready var collision_body = $StaticBody3D
+@onready var tooltip_layer = $"CanvasLayer/Tooltip-Train"
+@onready var tooltip_layer_enter = $"CanvasLayer/Tooltip-Overlay"
 
 @onready var spot_front_right = $"SpotLight - front - right"
 @onready var spot_front_left = $"SpotLight - front - left"
@@ -31,9 +33,11 @@ var headlights : Array
 var brake_lights : Array
 
 func _ready():
-	add_to_group("car")
+	add_to_group("train")
 	train_camera.current = false
 	train_camera_backward.current = false
+	tooltip_layer.visible = false
+	tooltip_layer_enter.visible = false
 	spot_front_right.visible = false
 	spot_front_left.visible = false
 	spot_back_right.visible = false
@@ -140,11 +144,15 @@ func enter_vehicle(player):
 		train_camera.current = true
 	elif current_camera == 2:
 		train_camera_backward = true
+	tooltip_layer.visible = true
+	tooltip_layer_enter.visible = false
 	
 func exit_train():
 	if player_ref == null:
 		return
+	tooltip_layer.visible = false
 	player_inside = false
+	tooltip_layer.visible = false
 	speed = move_toward(speed, 0.0, brake_force)
 	player_ref.global_position = global_position + global_transform.basis.x * 3.0
 	player_ref.show()
@@ -161,8 +169,10 @@ func _on_area_3d_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		player_ref = body
 		body.nearby_vehicle = self
+		tooltip_layer_enter.visible = true
 	
 func _on_area_3d_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player") and not player_inside:
 		player_ref = null
 		body.nearby_vehicle = null
+		tooltip_layer_enter.visible = false

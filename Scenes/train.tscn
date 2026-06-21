@@ -2,8 +2,6 @@
 
 [ext_resource type="Script" uid="uid://smu625keqm73" path="res://train.gd" id="1_nxpru"]
 [ext_resource type="Texture2D" uid="uid://dx7xwudj0tglm" path="res://models/trains/Textures/colormap.png" id="2_0hk28"]
-[ext_resource type="PackedScene" uid="uid://bgu6x3rc2htxg" path="res://models/trains/train-carriage-container-red.glb" id="3_0hk28"]
-[ext_resource type="PackedScene" uid="uid://ddrfnugrl1gcv" path="res://models/trains/train-carriage-tank.glb" id="4_mcim7"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vju5p"]
 resource_name = "colormap"
@@ -116,6 +114,12 @@ shadow_mesh = SubResource("ArrayMesh_k7ut6")
 [sub_resource type="BoxShape3D" id="BoxShape3D_mcim7"]
 size = Vector3(3, 4.424768, 7.2000003)
 
+[sub_resource type="LabelSettings" id="LabelSettings_akv0e"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_mcim7"]
+font_size = 24
+
 [node name="Train" type="Node3D" unique_id=1626068840]
 script = ExtResource("1_nxpru")
 
@@ -224,11 +228,31 @@ light_indirect_energy = 2.0
 omni_range = 0.4
 omni_attenuation = 0.5
 
-[node name="train-carriage-container-red2" parent="." unique_id=1834791927 instance=ExtResource("3_0hk28")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0058715343, 4.7683716e-07, 7.663516)
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1370055555]
 
-[node name="train-carriage-tank2" parent="." unique_id=1612362043 instance=ExtResource("4_mcim7")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0016379356, -0.0010125637, 15.771015)
+[node name="Tooltip-Overlay" type="Label" parent="CanvasLayer" unique_id=2126078778]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 185.0
+offset_bottom = 58.0
+text = "E - Enter Train"
+label_settings = SubResource("LabelSettings_akv0e")
+uppercase = true
+
+[node name="Tooltip-Train" type="Label" parent="CanvasLayer" unique_id=2083078937]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 221.0
+offset_bottom = 243.0
+text = "E - Exit Train
+T/G - Direction of Travel
+W - Speed
+B - Brake
+L - Lights
+//1/2 - Camera"
+label_settings = SubResource("LabelSettings_mcim7")
+uppercase = true
+metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

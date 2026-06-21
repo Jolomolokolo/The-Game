@@ -22,6 +22,9 @@ var just_entered := false
 @onready var reverse_viewport_container = $SubViewportContainer
 @onready var reverse_camera = $SubViewportContainer/SubViewport/Camera3D
 
+@onready var tooltip_layer = $"CanvasLayer/Tooltip-Car"
+@onready var tooltip_layer_enter = $"CanvasLayer/Tooltip-Overlay"
+
 # Lights
 @onready var headlights = [$"SpotLight-left", $"SpotLight-right"]
 @onready var blinker_left = [$"blinker-left-front", $"blinker-left-back"]
@@ -47,6 +50,8 @@ func _ready():
 	add_to_group("car")
 	car_camera_first_view.current = false
 	reverse_viewport_container.visible = false
+	tooltip_layer.visible = false
+	tooltip_layer_enter.visible = false
 	for lights in headlights:
 		lights.visible = headlights_on
 	for light in blinker_warn:
@@ -160,10 +165,13 @@ func enter_vehicle(player):
 	for light in brake_lights:
 		light.visible = true
 		light.light_energy = 0.3
+	tooltip_layer_enter.visible = false
+	tooltip_layer.visible = true
 	
 func exit_car():
 	if player_ref == null:
 		return
+	tooltip_layer.visible = false
 	player_inside = false
 	car_camera_first_view.current = false
 	engine_force = 0.0
@@ -186,11 +194,13 @@ func _on_enter_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("player"):
 		player_ref = body
 		body.nearby_vehicle = self
+		tooltip_layer_enter.visible = true
 	
 func _on_enter_area_body_exited(body: Node3D) -> void:
 	if body.is_in_group("player") and not player_inside:
 		player_ref = null
 		body.nearby_vehicle = null
+		tooltip_layer_enter.visible = false
 	
 func _reset_blinkers():
 	blinker_timer = 0.0
@@ -206,7 +216,7 @@ func taken_car_damage(amount: float):
 		car_destroyed()
 	
 func car_destroyed():
-	print("Car broken!")
+	print("Car broken!") # ANIMATIONEN HIERRRRRR und SCHADEN
 	engine_force = 0.0
 	brake = max_brake_force
 	if player_inside:

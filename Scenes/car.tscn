@@ -237,6 +237,9 @@ albedo_color = Color(0.14767182, 0.14767179, 0.14767179, 1)
 material = SubResource("StandardMaterial3D_go66d")
 size = Vector2(0.3, 0.3)
 
+[sub_resource type="LabelSettings" id="LabelSettings_go66d"]
+font_size = 24
+
 [node name="VehicleBody3D" type="VehicleBody3D" unique_id=1383445128]
 mass = 1200.0
 center_of_mass_mode = 1
@@ -423,6 +426,32 @@ lifetime = 2.0
 randomness = 0.5
 process_material = SubResource("ParticleProcessMaterial_go66d")
 draw_pass_1 = SubResource("QuadMesh_1sfmx")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=683186551]
+
+[node name="Tooltip-Overlay" type="Label" parent="CanvasLayer" unique_id=998295080]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 185.0
+offset_bottom = 58.0
+text = "E - Enter Car"
+label_settings = SubResource("LabelSettings_go66d")
+uppercase = true
+
+[node name="Tooltip-Car" type="Label" parent="CanvasLayer" unique_id=1569316950]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 221.0
+offset_bottom = 243.0
+text = "E - Exit Car
+W/A/S/D - Steer
+Q/R - Blinker
+L - Lights
+K - Warn Lights
+1/2 - Camera"
+label_settings = SubResource("LabelSettings_go66d")
+uppercase = true
+metadata/_edit_use_anchors_ = true
 
 [connection signal="body_entered" from="EnterArea" to="." method="_on_enter_area_body_entered"]
 [connection signal="body_exited" from="EnterArea" to="." method="_on_enter_area_body_exited"]

@@ -32,8 +32,6 @@ var current_yaw := 0.0
 @onready var camera_first_view = $"CameraPivot/First-View"
 @onready var camera_third_view = $"CameraPivot/SpringArm3D/Third-View"
 #@onready var head_mesh = $"Skeleton3D/head-mesh"
-@onready var tooltip_label = $"CanvasLayer/Tooltip-Overlay"
-@onready var tooltip_label_1 = $"CanvasLayer/Tooltip-Car"
 
 # Animation
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -46,8 +44,6 @@ func _ready():
 	#head_mesh.visible = true
 	health = max_health
 	call_deferred("_setup_collision_exceptions")
-	tooltip_label.visible = false
-	tooltip_label_1.visible = false
 	
 func _input(event):
 	
@@ -161,13 +157,7 @@ func _physics_process(delta):
 func _process(_delta):
 	
 	if in_car:
-		tooltip_label.visible = false
-		tooltip_label_1.visible = true
 		return
-	
-	# TOOLTIP muss angepasst werden, auf das jeweilige Fahrzeug
-	
-	tooltip_label.visible = nearby_vehicle != null
 	
 	# Camera Controll/Retraction
 	var dist = global_position.distance_to(camera_third_view.global_position)
@@ -214,4 +204,3 @@ func notify_exit():
 	in_car = false
 	nearby_vehicle = null
 	set_process_unhandled_input(true)
-	tooltip_label_1.visible = false

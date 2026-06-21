@@ -33,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://eicf7sv8l65a" path="res://models/city/path-stones-messy.glb" id="31_0rl1p"]
 [ext_resource type="Texture2D" uid="uid://die8kh6pu23tx" path="res://models/prototype-kit/Textures/colormap.png" id="32_htxhm"]
 [ext_resource type="PackedScene" uid="uid://c4pj4j4ga3wj" path="res://Scenes/train.tscn" id="33_jq2sk"]
+[ext_resource type="PackedScene" uid="uid://6g7fuwbhqts4" path="res://Scenes/Train-Carriages/train_carriage_container_red_2.tscn" id="34_4k2k6"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -374,4 +375,9 @@ curve = SubResource("Curve3D_4k2k6")
 transform = Transform3D(0.9942303, 0, -0.10715678, 0, 0.9999809, 0, 0.10715657, 0, 0.9942323, -3.607, 0.522, -5)
 
 [node name="Train" parent="Train/PathFollow3D" unique_id=1626068840 instance=ExtResource("33_jq2sk")]
-transform = Transform3D(1.0000001, 0, -7.450581e-09, 0, 0.9999992, 0, -7.450581e-09, 0, 1.0000001, 0, -0.018009305, 0)
+transform = Transform3D(1, 0, 7.4505793e-09, 0, 1, 0, -7.4505793e-09, 0, 1, 0, -0.018009305, 0)
+
+[node name="PathFollow3D2" type="PathFollow3D" parent="Train" unique_id=1073890114]
+transform = Transform3D(0.99424154, 0, -0.10715778, 0, 1, 0, 0.10715778, 0, 0.99424154, -3.607, 0.522, -5)
+
+[node name="Train-Carriage-Container-Red2" parent="Train/PathFollow3D2" unique_id=2139554087 instance=ExtResource("34_4k2k6")]
