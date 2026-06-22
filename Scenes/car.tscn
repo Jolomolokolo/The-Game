@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://bkj3lhft3u0i7"]
 
-[ext_resource type="Script" uid="uid://b52i2sj2bp7tc" path="res://car.gd" id="1_go66d"]
+[ext_resource type="Script" uid="uid://b52i2sj2bp7tc" path="res://Scripts/car.gd" id="1_go66d"]
 [ext_resource type="Texture2D" uid="uid://csuic5cvbr4ds" path="res://models/cars/Textures/colormap.png" id="2_1sfmx"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_yi23e"]

@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://6g7fuwbhqts4"]
 
-[ext_resource type="Script" uid="uid://c1i0fxgtqr8aq" path="res://train_carriage.gd" id="1_ghqww"]
+[ext_resource type="Script" uid="uid://c1i0fxgtqr8aq" path="res://Scripts/train_carriage.gd" id="1_ghqww"]
 [ext_resource type="Texture2D" uid="uid://dx7xwudj0tglm" path="res://models/trains/Textures/colormap.png" id="2_d0lel"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pknns"]

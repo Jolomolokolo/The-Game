@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://datvsni8i3og1"]
 
-[ext_resource type="Script" uid="uid://b1fbvqw01lary" path="res://directional_light_3d.gd" id="1_htxhm"]
+[ext_resource type="Script" uid="uid://b1fbvqw01lary" path="res://Scripts/directional_light_3d.gd" id="1_htxhm"]
 [ext_resource type="PackedScene" uid="uid://dml1tn7u8o5p2" path="res://models/city/driveway-long.glb" id="2_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dcvfn8ryypqmj" path="res://models/cars/cone.glb" id="3_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://v4hvfhxnwbsu" path="res://models/cars/taxi.glb" id="4_0odxb"]
@@ -34,6 +34,8 @@
 [ext_resource type="Texture2D" uid="uid://die8kh6pu23tx" path="res://models/prototype-kit/Textures/colormap.png" id="32_htxhm"]
 [ext_resource type="PackedScene" uid="uid://c4pj4j4ga3wj" path="res://Scenes/train.tscn" id="33_jq2sk"]
 [ext_resource type="PackedScene" uid="uid://6g7fuwbhqts4" path="res://Scenes/Train-Carriages/train_carriage_container_red_2.tscn" id="34_4k2k6"]
+[ext_resource type="PackedScene" uid="uid://b4k4dmedtvp51" path="res://Scenes/Tools/rail_placer.tscn" id="35_ok6jj"]
+[ext_resource type="PackedScene" uid="uid://b2vcqwuw24emk" path="res://models/trains/track-single.glb" id="36_facbu"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -128,10 +130,10 @@ shadow_mesh = SubResource("ArrayMesh_a1mya")
 [sub_resource type="Curve3D" id="Curve3D_4k2k6"]
 closed = true
 _data = {
-"points": PackedVector3Array(0, 0, 0, 0, 0, 0, -3.607, 0.522, -5, -4.996, 0, 3.528, 4.996, 0, -3.528, 4.393, 0.522, -36.4, -6.287, 0, 2.164, 6.287, 0, -2.164, 14.498, 0.522, -39.869, -3.4, -0.2, -6.7000003, 3.4, 0.2, 6.7000003, 24.46, 0.522, -9.586, 2.032, 0, -2.217, -2.032, 0, 2.217, 20.275, 0.522, 5.191, 2.924, 0, -2.112, -2.924, 0, 2.112, 8.458, 0.522, 13.48, 3.52, 0, -1.88, -3.52, 0, 1.88, -0.19, 0.522, 17.752, 0, 0, 0, 0, 0, 0, -7.307, 0.522, 17.5, 5.813, 0, -2.573, -5.813, 0, 2.573, -22.395, 0.522, 15.68, 0, 0, 0, 0, 0, 0, -31.607, 0.522, 1, -5.131, 0, 3.058, 5.131, 0.522, -3.058, -30.524, 0.522, -13.176, -6.24, 0, 2.773, 6.24, 0, -2.773, -8.607, 0.522, 1),
-"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+"points": PackedVector3Array(-4.996, 0, 3.528, 4.996, 0, -3.528, 4.393, 0.522, -36.4, -6.287, 0, 2.164, 6.287, 0, -2.164, 14.498, 0.522, -39.869, -3.4, 0, -6.7, 3.4, 0, 6.7, 24.46, 0.522, -9.586, 2.032, 0, -2.217, -2.032, 0, 2.217, 20.275, 0.522, 5.191, 2.924, 0, -2.112, -2.924, 0, 2.112, 8.458, 0.522, 13.48, 3.52, 0, -1.88, -3.52, 0, 1.88, -0.19, 0.522, 17.752, 8.857, 0, 0.062, -8.857, 0, -0.062, -22.64, 0.522, 16.82, 0.203, 0, 3.993, -0.203, 0, -3.993, -42.384, 0.522, 2.663, -8.515, 0, 1.81, 8.515, 0, -1.81, -30.524, 0.522, -13.176, -11.335, 0, 11.824, 11.335, 0, -11.824, -8.607, 0.522, 1, -0.073, 0, 5.758, 0.073, 0, -5.758, -0.612, 0.522, -19.01),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
-point_count = 12
+point_count = 11
 
 [node name="Main" type="Node3D" unique_id=105238301]
 
@@ -146,7 +148,7 @@ script = ExtResource("1_htxhm")
 [node name="Floor" type="CSGBox3D" parent="." unique_id=992992754]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2774987, 0.022460938, 4.3176503)
 use_collision = true
-size = Vector3(100, 1, 100)
+size = Vector3(250, 1, 250)
 
 [node name="Player" parent="." unique_id=2118549186 instance=ExtResource("26_lswn8")]
 transform = Transform3D(-0.8, 0, 1.2079664e-07, 0, 0.8, 0, -1.2079664e-07, 0, -0.8, 5.8261504, 0.50000167, -10.133537)
@@ -367,17 +369,411 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.876801, 0.6809069, -5.7079
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.856, 0.61, -8.535)
 center_of_mass = Vector3(0, -1, 0)
 
-[node name="Train" type="Path3D" parent="." unique_id=695629073]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.606781, 0.018030643, 0)
+[node name="Traintrack-Main" type="Path3D" parent="." unique_id=695629073]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.606781, 0.018030643, -76.17903)
 curve = SubResource("Curve3D_4k2k6")
 
-[node name="PathFollow3D" type="PathFollow3D" parent="Train" unique_id=405916537]
-transform = Transform3D(0.9942303, 0, -0.10715678, 0, 0.9999809, 0, 0.10715657, 0, 0.9942323, -3.607, 0.522, -5)
+[node name="PathFollow3D" type="PathFollow3D" parent="Traintrack-Main" unique_id=405916537]
+transform = Transform3D(0.9952228, 0, -0.09743481, 0, 0.9999727, 0, 0.09743479, 0, 0.995223, -0.3476588, 0.5220001, -25.780165)
+progress = 215.10272
 
-[node name="Train" parent="Train/PathFollow3D" unique_id=1626068840 instance=ExtResource("33_jq2sk")]
+[node name="Train" parent="Traintrack-Main/PathFollow3D" unique_id=1626068840 instance=ExtResource("33_jq2sk")]
 transform = Transform3D(1, 0, 7.4505793e-09, 0, 1, 0, -7.4505793e-09, 0, 1, 0, -0.018009305, 0)
 
-[node name="PathFollow3D2" type="PathFollow3D" parent="Train" unique_id=1073890114]
-transform = Transform3D(0.99424154, 0, -0.10715778, 0, 1, 0, 0.10715778, 0, 0.99424154, -3.607, 0.522, -5)
+[node name="PathFollow3D2" type="PathFollow3D" parent="Traintrack-Main" unique_id=1073890114]
+transform = Transform3D(0.9979567, 0, 0.063760534, 0, 0.9999882, 0, -0.06376051, 0, 0.99795705, -0.57877564, 0.522, -17.788265)
+progress = 207.10272
 
-[node name="Train-Carriage-Container-Red2" parent="Train/PathFollow3D2" unique_id=2139554087 instance=ExtResource("34_4k2k6")]
+[node name="Train-Carriage-Container-Red2" parent="Traintrack-Main/PathFollow3D2" unique_id=2139554087 instance=ExtResource("34_4k2k6")]
+
+[node name="Node3D" parent="Traintrack-Main" unique_id=951830831 node_paths=PackedStringArray("path") instance=ExtResource("35_ok6jj")]
+path = NodePath("..")
+rail_scene = ExtResource("36_facbu")
+segment_length = 1.75
+
+[node name="track-single2" parent="Traintrack-Main/Node3D" unique_id=815569347 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.57683736, 0, -0.81685907, 0, 1, 0, 0.81685907, 0, 0.57683736, 4.3929996, 0.522, -36.4)
+
+[node name="@Node3D@41679" parent="Traintrack-Main/Node3D" unique_id=812728112 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.53089434, 0, -0.8474381, 0, 1, 0, 0.8474381, 0, 0.53089434, 5.845936, 0.522, -37.375378)
+
+[node name="@Node3D@41680" parent="Traintrack-Main/Node3D" unique_id=1504041591 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.3970738, 0, -0.9177867, 0, 1, 0, 0.9177867, 0, 0.3970738, 7.382633, 0.5220001, -38.210217)
+
+[node name="@Node3D@41681" parent="Traintrack-Main/Node3D" unique_id=514048475 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.12869263, 0, -0.99168456, 0, 1, 0, 0.99168456, 0, 0.12869263, 9.066479, 0.522, -38.660137)
+
+[node name="@Node3D@41682" parent="Traintrack-Main/Node3D" unique_id=630096870 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.16417992, 0, -0.98643047, 0, 1, 0, 0.98643047, 0, 0.16417992, 10.802013, 0.52199996, -38.881393)
+
+[node name="@Node3D@41683" parent="Traintrack-Main/Node3D" unique_id=1920985102 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.25779346, 0, -0.96620005, 0, 1, 0, 0.96620005, 0, 0.25779346, 12.510696, 0.522, -39.255833)
+
+[node name="@Node3D@41684" parent="Traintrack-Main/Node3D" unique_id=2056514803 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.31703243, 0, -0.9484147, 0, 1, 0, 0.94841474, 0, 0.31703243, 14.185413, 0.522, -39.762943)
+
+[node name="@Node3D@41685" parent="Traintrack-Main/Node3D" unique_id=2045627260 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.34497392, 0, -0.9386123, 0, 1, 0, 0.9386123, 0, -0.34497392, 15.889477, 0.522, -39.87897)
+
+[node name="@Node3D@41686" parent="Traintrack-Main/Node3D" unique_id=1221315093 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.7975036, 0, -0.6033142, 0, 1, 0, 0.6033142, 0, -0.7975036, 17.225891, 0.522, -38.786274)
+
+[node name="@Node3D@41687" parent="Traintrack-Main/Node3D" unique_id=1363301510 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.9075124, 0, -0.4200253, 0, 1, 0, 0.4200253, 0, -0.9075124, 18.102123, 0.522, -37.27477)
+
+[node name="@Node3D@41688" parent="Traintrack-Main/Node3D" unique_id=1975092263 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.9458535, 0, -0.32459393, 0, 1, 0, 0.32459393, 0, -0.9458535, 18.745804, 0.5219999, -35.648155)
+
+[node name="@Node3D@41689" parent="Traintrack-Main/Node3D" unique_id=1408611311 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.9635839, 0, -0.26740637, 0, 1, 0, 0.26740637, 0, -0.9635838, 19.26001, 0.5220001, -33.975677)
+
+[node name="@Node3D@41690" parent="Traintrack-Main/Node3D" unique_id=1875686010 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.9732045, 0, -0.22994155, 0, 1, 0, 0.22994155, 0, -0.9732045, 19.693054, 0.522, -32.28021)
+
+[node name="@Node3D@41691" parent="Traintrack-Main/Node3D" unique_id=1637800957 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.97893244, 0, -0.20418446, 0, 1, 0, 0.20418446, 0, -0.97893244, 20.071548, 0.52199996, -30.57174)
+
+[node name="@Node3D@41692" parent="Traintrack-Main/Node3D" unique_id=2079063175 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.98252165, 0, -0.18614839, 0, 1, 0, 0.18614839, 0, -0.98252165, 20.412155, 0.522, -28.85518)
+
+[node name="@Node3D@41693" parent="Traintrack-Main/Node3D" unique_id=1181030296 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.98479533, 0, -0.17371841, 0, 1, 0, 0.1737184, 0, -0.98479533, 20.726318, 0.522, -27.133642)
+
+[node name="@Node3D@41694" parent="Traintrack-Main/Node3D" unique_id=1144755824 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.9861766, 0, -0.1656977, 0, 1, 0, 0.1656977, 0, -0.9861766, 21.022717, 0.522, -25.408905)
+
+[node name="@Node3D@41695" parent="Traintrack-Main/Node3D" unique_id=1450571247 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.98687637, 0, -0.16147757, 0, 1, 0, 0.16147757, 0, -0.98687637, 21.308468, 0.522, -23.682384)
+
+[node name="@Node3D@41696" parent="Traintrack-Main/Node3D" unique_id=633989855 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.98698, 0, -0.16084293, 0, 1, 0, 0.16084293, 0, -0.98698, 21.589973, 0.522, -21.955153)
+
+[node name="@Node3D@41697" parent="Traintrack-Main/Node3D" unique_id=1797724115 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.9864726, 0, -0.16392635, 0, 1, 0, 0.16392633, 0, -0.9864726, 21.873577, 0.5220001, -20.228271)
+
+[node name="@Node3D@41698" parent="Traintrack-Main/Node3D" unique_id=621032287 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.98522216, 0, -0.17128156, 0, 1, 0, 0.17128156, 0, -0.98522216, 22.166191, 0.522, -18.502886)
+
+[node name="@Node3D@41699" parent="Traintrack-Main/Node3D" unique_id=1444566867 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.98291343, 0, -0.18406847, 0, 1, 0, 0.18406847, 0, -0.98291343, 22.476196, 0.522, -16.78056)
+
+[node name="@Node3D@41700" parent="Traintrack-Main/Node3D" unique_id=1906496966 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.9788592, 0, -0.20453545, 0, 1, 0, 0.20453545, 0, -0.9788592, 22.814842, 0.5219999, -15.063725)
+
+[node name="@Node3D@41701" parent="Traintrack-Main/Node3D" unique_id=198678930 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.9714394, 0, -0.23728785, 0, 1, 0, 0.23728785, 0, -0.9714394, 23.199135, 0.522, -13.356417)
+
+[node name="@Node3D@41702" parent="Traintrack-Main/Node3D" unique_id=915585007 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.9561528, 0, -0.29286823, 0, 1, 0, 0.2928682, 0, -0.9561528, 23.658344, 0.522, -11.667971)
+
+[node name="@Node3D@41703" parent="Traintrack-Main/Node3D" unique_id=826703869 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.915627, 0, -0.40202883, 0, 1, 0, 0.40202883, 0, -0.915627, 24.254173, 0.522, -10.022994)
+
+[node name="@Node3D@41704" parent="Traintrack-Main/Node3D" unique_id=669366123 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.939662, 0, -0.34210455, 0, 1, 0, 0.34210455, 0, -0.939662, 24.96505, 0.522, -8.425463)
+
+[node name="@Node3D@41705" parent="Traintrack-Main/Node3D" unique_id=921825584 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.9863471, 0, -0.1646797, 0, 1, 0, 0.16467969, 0, -0.9863471, 25.411812, 0.522, -6.736045)
+
+[node name="@Node3D@41706" parent="Traintrack-Main/Node3D" unique_id=882900713 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.99970895, 0, 0.024126828, 0, 1, 0, -0.024126828, 0, -0.99970895, 25.534622, 0.522, -4.993028)
+
+[node name="@Node3D@41707" parent="Traintrack-Main/Node3D" unique_id=847903216 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.9797795, 0, 0.20008063, 0, 1, 0, -0.20008063, 0, -0.9797795, 25.335014, 0.522, -3.2567816)
+
+[node name="@Node3D@41708" parent="Traintrack-Main/Node3D" unique_id=1361447421 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.9377396, 0, 0.34733906, 0, 1, 0, -0.34733906, 0, -0.9377396, 24.851288, 0.522, -1.5767316)
+
+[node name="@Node3D@41709" parent="Traintrack-Main/Node3D" unique_id=1127301481 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.88640416, 0, 0.46291226, 0, 1, 0, -0.46291226, 0, -0.88640416, 24.137863, 0.522, 0.019992478)
+
+[node name="@Node3D@41710" parent="Traintrack-Main/Node3D" unique_id=831230232 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.8344692, 0, 0.55105454, 0, 1, 0, -0.55105454, 0, -0.8344692, 23.247063, 0.522, 1.5253826)
+
+[node name="@Node3D@41711" parent="Traintrack-Main/Node3D" unique_id=1213022707 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.78681463, 0, 0.6171894, 0, 1, 0, -0.6171894, 0, -0.78681463, 22.221886, 0.522, 2.943183)
+
+[node name="@Node3D@41712" parent="Traintrack-Main/Node3D" unique_id=837232960 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.74817646, 0, 0.66349983, 0, 1, 0, -0.66349983, 0, -0.74817646, 21.097752, 0.522, 4.2847476)
+
+[node name="@Node3D@41713" parent="Traintrack-Main/Node3D" unique_id=956967682 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.68799573, 0, 0.7257147, 0, 1, 0, -0.7257147, 0, -0.68799573, 19.906082, 0.522, 5.563764)
+
+[node name="@Node3D@41714" parent="Traintrack-Main/Node3D" unique_id=1471554604 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.6091581, 0, 0.79304886, 0, 1, 0, -0.79304886, 0, -0.6091581, 18.564758, 0.522, 6.687577)
+
+[node name="@Node3D@41715" parent="Traintrack-Main/Node3D" unique_id=316852565 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.5748328, 0, 0.8182709, 0, 1, 0, -0.8182709, 0, -0.5748328, 17.15203, 0.5219999, 7.7202663)
+
+[node name="@Node3D@41716" parent="Traintrack-Main/Node3D" unique_id=541781984 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.55620897, 0, 0.83104247, 0, 1, 0, -0.83104247, 0, -0.55620897, 15.707703, 0.522, 8.7084)
+
+[node name="@Node3D@41717" parent="Traintrack-Main/Node3D" unique_id=1733223535 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.5458852, 0, 0.83786005, 0, 1, 0, -0.83786005, 0, -0.5458852, 14.246712, 0.522, 9.671785)
+
+[node name="@Node3D@41718" parent="Traintrack-Main/Node3D" unique_id=1814797259 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.5415117, 0, 0.84069324, 0, 1, 0, -0.84069324, 0, -0.5415117, 12.777428, 0.522, 10.622451)
+
+[node name="@Node3D@41719" parent="Traintrack-Main/Node3D" unique_id=1346429567 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.5431043, 0, 0.83966535, 0, 1, 0, -0.83966535, 0, -0.5431043, 11.306442, 0.522, 11.570527)
+
+[node name="@Node3D@41720" parent="Traintrack-Main/Node3D" unique_id=636084952 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.5537342, 0, 0.8326936, 0, 1, 0, -0.8326936, 0, -0.5537342, 9.841881, 0.522, 12.528462)
+
+[node name="@Node3D@41721" parent="Traintrack-Main/Node3D" unique_id=101962090 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.58239, 0, 0.8129095, 0, 1, 0, -0.8129095, 0, -0.58239, 8.400513, 0.522, 13.521236)
+
+[node name="@Node3D@41722" parent="Traintrack-Main/Node3D" unique_id=1369288105 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.49646544, 0, 0.8680565, 0, 1, 0, -0.8680565, 0, -0.49646544, 6.929287, 0.52199996, 14.466924)
+
+[node name="@Node3D@41723" parent="Traintrack-Main/Node3D" unique_id=350992217 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.41598034, 0, 0.9093736, 0, 1, 0, -0.9093736, 0, -0.41598034, 5.3708725, 0.52199996, 15.261373)
+
+[node name="@Node3D@41724" parent="Traintrack-Main/Node3D" unique_id=2086338306 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.3807655, 0, 0.92467165, 0, 1, 0, -0.92467165, 0, -0.38076553, 3.7622166, 0.522, 15.949882)
+
+[node name="@Node3D@41725" parent="Traintrack-Main/Node3D" unique_id=989871450 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.39942634, 0, 0.9167653, 0, 1, 0, -0.9167653, 0, -0.39942634, 2.148283, 0.522, 16.626066)
+
+[node name="@Node3D@41726" parent="Traintrack-Main/Node3D" unique_id=4704213 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.44618696, 0, 0.8949397, 0, 1, 0, -0.8949397, 0, -0.44618696, 0.5617714, 0.522, 17.36396)
+
+[node name="@Node3D@41727" parent="Traintrack-Main/Node3D" unique_id=37085036 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.27568388, 0, 0.9612484, 0, 1, 0, -0.9612484, 0, -0.27568388, -1.0296326, 0.52199996, 18.083195)
+
+[node name="@Node3D@41728" parent="Traintrack-Main/Node3D" unique_id=1665823710 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.07438076, 0, 0.99722993, 0, 1, 0, -0.99722993, 0, -0.07438076, -2.7535286, 0.52199996, 18.365335)
+
+[node name="@Node3D@41729" parent="Traintrack-Main/Node3D" unique_id=1785602201 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.020528493, 0, 0.99978924, 0, 1, 0, -0.99978924, 0, 0.020528493, -4.502537, 0.522, 18.40318)
+
+[node name="@Node3D@41730" parent="Traintrack-Main/Node3D" unique_id=2144373058 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.07125926, 0, 0.9974579, 0, 1, 0, -0.9974579, 0, 0.07125926, -6.250284, 0.522, 18.318499)
+
+[node name="@Node3D@41731" parent="Traintrack-Main/Node3D" unique_id=1951945149 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.09956474, 0, 0.9950311, 0, 1, 0, -0.9950311, 0, 0.09956474, -7.993643, 0.522, 18.166567)
+
+[node name="@Node3D@41732" parent="Traintrack-Main/Node3D" unique_id=1718641942 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.11444014, 0, 0.99343014, 0, 1, 0, -0.99343014, 0, 0.11444014, -9.733444, 0.522, 17.977718)
+
+[node name="@Node3D@41733" parent="Traintrack-Main/Node3D" unique_id=979454053 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.120141625, 0, 0.99275684, 0, 1, 0, -0.99275684, 0, 0.120141625, -11.471337, 0.522, 17.771286)
+
+[node name="@Node3D@41734" parent="Traintrack-Main/Node3D" unique_id=64503108 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.1187827, 0, 0.9929203, 0, 1, 0, -0.9929203, 0, 0.1187827, -13.208683, 0.52199996, 17.561296)
+
+[node name="@Node3D@41735" parent="Traintrack-Main/Node3D" unique_id=2092354287 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.11141658, 0, 0.9937738, 0, 1, 0, -0.9937738, 0, 0.11141658, -14.94697, 0.522, 17.359034)
+
+[node name="@Node3D@41736" parent="Traintrack-Main/Node3D" unique_id=541316012 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.098412104, 0, 0.9951458, 0, 1, 0, -0.9951458, 0, 0.098412104, -16.687222, 0.522, 17.174612)
+
+[node name="@Node3D@41737" parent="Traintrack-Main/Node3D" unique_id=1833592762 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.07967955, 0, 0.99682057, 0, 1, 0, -0.99682057, 0, 0.07967955, -18.430162, 0.522, 17.017918)
+
+[node name="@Node3D@41738" parent="Traintrack-Main/Node3D" unique_id=1746403265 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.054695964, 0, 0.998503, 0, 1, 0, -0.998503, 0, 0.054695964, -20.176105, 0.522, 16.899368)
+
+[node name="@Node3D@41739" parent="Traintrack-Main/Node3D" unique_id=1767898882 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.02253026, 0, 0.9997462, 0, 1, 0, -0.9997462, 0, 0.02253026, -21.924679, 0.522, 16.830652)
+
+[node name="@Node3D@41740" parent="Traintrack-Main/Node3D" unique_id=537753016 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.090160795, 0, 0.9959273, 0, 1, 0, -0.9959273, 0, 0.0901608, -23.673016, 0.52199996, 16.768879)
+
+[node name="@Node3D@41741" parent="Traintrack-Main/Node3D" unique_id=938748048 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.209144, 0, 0.9778849, 0, 1, 0, -0.9778849, 0, 0.209144, -25.401648, 0.522, 16.503208)
+
+[node name="@Node3D@41742" parent="Traintrack-Main/Node3D" unique_id=1612632866 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.304871, 0, 0.9523937, 0, 1, 0, -0.9523937, 0, 0.304871, -27.091333, 0.52199996, 16.050444)
+
+[node name="@Node3D@41743" parent="Traintrack-Main/Node3D" unique_id=70288758 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.382685, 0, 0.92387897, 0, 1, 0, -0.92387897, 0, 0.382685, -28.733305, 0.522, 15.446585)
+
+[node name="@Node3D@41744" parent="Traintrack-Main/Node3D" unique_id=1136115235 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.44727838, 0, 0.8943949, 0, 1, 0, -0.8943949, 0, 0.44727838, -30.324356, 0.522, 14.7187195)
+
+[node name="@Node3D@41745" parent="Traintrack-Main/Node3D" unique_id=169016136 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.5023089, 0, 0.8646882, 0, 1, 0, -0.8646882, 0, 0.5023089, -31.863567, 0.52199996, 13.886658)
+
+[node name="@Node3D@41746" parent="Traintrack-Main/Node3D" unique_id=377165257 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.55059487, 0, 0.83477265, 0, 1, 0, -0.83477265, 0, 0.55059487, -33.350662, 0.522, 12.964545)
+
+[node name="@Node3D@41747" parent="Traintrack-Main/Node3D" unique_id=1994359732 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.5943717, 0, 0.80419046, 0, 1, 0, -0.80419046, 0, 0.5943717, -34.784912, 0.522, 11.962176)
+
+[node name="@Node3D@41748" parent="Traintrack-Main/Node3D" unique_id=495017194 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.63555825, 0, 0.77205294, 0, 1, 0, -0.77205294, 0, 0.63555825, -36.164448, 0.52199996, 10.885739)
+
+[node name="@Node3D@41749" parent="Traintrack-Main/Node3D" unique_id=183311688 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.6760298, 0, 0.73687434, 0, 1, 0, -0.73687434, 0, 0.6760298, -37.48537, 0.5220001, 9.738127)
+
+[node name="@Node3D@41750" parent="Traintrack-Main/Node3D" unique_id=1643553272 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.7179737, 0, 0.6960702, 0, 1, 0, -0.6960702, 0, 0.7179737, -38.740288, 0.52199996, 8.518778)
+
+[node name="@Node3D@41751" parent="Traintrack-Main/Node3D" unique_id=30244609 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.764551, 0, 0.64456326, 0, 1, 0, -0.64456326, 0, 0.764551, -39.91563, 0.5220001, 7.2224092)
+
+[node name="@Node3D@41752" parent="Traintrack-Main/Node3D" unique_id=255606912 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.82125473, 0, 0.57056177, 0, 1, 0, -0.57056177, 0, 0.82125473, -40.98364, 0.522, 5.83699)
+
+[node name="@Node3D@41753" parent="Traintrack-Main/Node3D" unique_id=1354052732 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.8994252, 0, 0.43707475, 0, 1, 0, -0.43707475, 0, 0.8994252, -41.87983, 0.522, 4.3356247)
+
+[node name="@Node3D@41754" parent="Traintrack-Main/Node3D" unique_id=1831611349 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.9985387, 0, 0.054041646, 0, 1, 0, -0.054041646, 0, 0.9985387, -42.383457, 0.522, 2.6714737)
+
+[node name="@Node3D@41755" parent="Traintrack-Main/Node3D" unique_id=194194481 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.99015015, 0, -0.14000975, 0, 1, 0, 0.14000975, 0, 0.99015015, -42.28429, 0.52200013, 0.9269475)
+
+[node name="@Node3D@41756" parent="Traintrack-Main/Node3D" unique_id=948004175 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.9682522, 0, -0.24997562, 0, 1, 0, 0.24997562, 0, 0.9682522, -41.937508, 0.522, -0.7874343)
+
+[node name="@Node3D@41757" parent="Traintrack-Main/Node3D" unique_id=522235770 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.9417768, 0, -0.3362387, 0, 1, 0, 0.3362387, 0, 0.9417768, -41.42263, 0.522, -2.4593692)
+
+[node name="@Node3D@41758" parent="Traintrack-Main/Node3D" unique_id=1323732355 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.9102081, 0, -0.41415116, 0, 1, 0, 0.41415116, 0, 0.9102081, -40.765366, 0.522, -4.080798)
+
+[node name="@Node3D@41759" parent="Traintrack-Main/Node3D" unique_id=935749669 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.87178665, 0, -0.48988572, 0, 1, 0, 0.48988572, 0, 0.87178665, -39.974297, 0.522, -5.6411753)
+
+[node name="@Node3D@41760" parent="Traintrack-Main/Node3D" unique_id=508411301 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.82416296, 0, -0.5663528, 0, 1, 0, 0.5663528, 0, 0.82416296, -39.050316, 0.522, -7.126689)
+
+[node name="@Node3D@41761" parent="Traintrack-Main/Node3D" unique_id=429791962 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.76449317, 0, -0.6446319, 0, 1, 0, 0.6446319, 0, 0.76449317, -37.990986, 0.522, -8.518733)
+
+[node name="@Node3D@41762" parent="Traintrack-Main/Node3D" unique_id=1855053233 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.68974376, 0, -0.72405356, 0, 1, 0, 0.72405356, 0, 0.68974376, -36.79344, 0.522, -9.793621)
+
+[node name="@Node3D@41763" parent="Traintrack-Main/Node3D" unique_id=1067120589 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.59735507, 0, -0.8019769, 0, 1, 0, 0.8019769, 0, 0.59735507, -35.457664, 0.522, -10.922547)
+
+[node name="@Node3D@41764" parent="Traintrack-Main/Node3D" unique_id=844096703 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.48662013, 0, -0.8736137, 0, 1, 0, 0.8736137, 0, 0.48662013, -33.990143, 0.522, -11.873655)
+
+[node name="@Node3D@41765" parent="Traintrack-Main/Node3D" unique_id=1913824202 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.36020875, 0, -0.9328717, 0, 1, 0, 0.9328717, 0, 0.36020875, -32.40725, 0.522, -12.616516)
+
+[node name="@Node3D@41766" parent="Traintrack-Main/Node3D" unique_id=1463195878 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.22485489, 0, -0.9743923, 0, 1, 0, 0.9743923, 0, 0.22485489, -30.735523, 0.522, -13.129118)
+
+[node name="@Node3D@41767" parent="Traintrack-Main/Node3D" unique_id=817224105 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.2036406, 0, -0.9790457, 0, 1, 0, 0.9790457, 0, -0.2036406, -29.001675, 0.52199996, -13.185698)
+
+[node name="@Node3D@41768" parent="Traintrack-Main/Node3D" unique_id=933448898 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.56778914, 0, -0.82317406, 0, 1, 0, 0.82317406, 0, -0.56778914, -27.408268, 0.522, -12.473416)
+
+[node name="@Node3D@41769" parent="Traintrack-Main/Node3D" unique_id=1964438823 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.7376616, 0, -0.67517066, 0, 1, 0, 0.67517066, 0, -0.7376616, -26.111208, 0.522, -11.314619)
+
+[node name="@Node3D@41770" parent="Traintrack-Main/Node3D" unique_id=2006122735 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.81450826, 0, -0.580152, 0, 1, 0, 0.580152, 0, -0.81450826, -25.019556, 0.522, -9.948114)
+
+[node name="@Node3D@41771" parent="Traintrack-Main/Node3D" unique_id=1768482355 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.8523296, 0, -0.5230049, 0, 1, 0, 0.5230049, 0, -0.8523296, -24.058733, 0.522, -8.485938)
+
+[node name="@Node3D@41772" parent="Traintrack-Main/Node3D" unique_id=851015333 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.8712516, 0, -0.49083668, 0, 1, 0, 0.49083668, 0, -0.8712516, -23.17462, 0.522, -6.9757104)
+
+[node name="@Node3D@41773" parent="Traintrack-Main/Node3D" unique_id=1370039515 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.87894124, 0, -0.47693008, 0, 1, 0, 0.47693008, 0, -0.87894124, -22.3302, 0.52199996, -5.442915)
+
+[node name="@Node3D@41774" parent="Traintrack-Main/Node3D" unique_id=665631383 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.87812114, 0, -0.47843853, 0, 1, 0, 0.47843853, 0, -0.87812114, -21.49643, 0.522, -3.9042506)
+
+[node name="@Node3D@41775" parent="Traintrack-Main/Node3D" unique_id=2082939013 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.86870503, 0, -0.49532974, 0, 1, 0, 0.49532974, 0, -0.86870503, -20.646753, 0.52199996, -2.374369)
+
+[node name="@Node3D@41776" parent="Traintrack-Main/Node3D" unique_id=1650814225 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.8478352, 0, -0.5302598, 0, 1, 0, 0.5302598, 0, -0.8478352, -19.75234, 0.522, -0.870314)
+
+[node name="@Node3D@41777" parent="Traintrack-Main/Node3D" unique_id=1858627736 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.8078267, 0, -0.5894201, 0, 1, 0, 0.5894201, 0, -0.8078267, -18.776825, 0.522, 0.58216906)
+
+[node name="@Node3D@41778" parent="Traintrack-Main/Node3D" unique_id=574141430 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.72973466, 0, -0.68373054, 0, 1, 0, 0.68373054, 0, -0.72973466, -17.668982, 0.52199996, 1.9354694)
+
+[node name="@Node3D@41779" parent="Traintrack-Main/Node3D" unique_id=778010756 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.56674576, 0, -0.8238927, 0, 1, 0, 0.8238927, 0, -0.56674576, -16.356436, 0.522, 3.087824)
+
+[node name="@Node3D@41780" parent="Traintrack-Main/Node3D" unique_id=1373151368 instance=ExtResource("36_facbu")]
+transform = Transform3D(-0.23951924, 0, -0.9708917, 0, 1, 0, 0.9708917, 0, -0.23951924, -14.778029, 0.522, 3.8212392)
+
+[node name="@Node3D@41781" parent="Traintrack-Main/Node3D" unique_id=999793910 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.18600112, 0, -0.98254955, 0, 1, 0, 0.98254955, 0, 0.18600112, -13.042221, 0.522, 3.862647)
+
+[node name="@Node3D@41782" parent="Traintrack-Main/Node3D" unique_id=682300885 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.47867346, 0, -0.87799305, 0, 1, 0, 0.87799305, 0, 0.47867346, -11.4086, 0.522, 3.2554772)
+
+[node name="@Node3D@41783" parent="Traintrack-Main/Node3D" unique_id=68003191 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.6330137, 0, -0.77414066, 0, 1, 0, 0.77414066, 0, 0.6330137, -9.966719, 0.522, 2.2683947)
+
+[node name="@Node3D@41784" parent="Traintrack-Main/Node3D" unique_id=379187026 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.71784633, 0, -0.6962017, 0, 1, 0, 0.6962017, 0, 0.71784633, -8.6837435, 0.522, 1.0795375)
+
+[node name="@Node3D@41785" parent="Traintrack-Main/Node3D" unique_id=651471050 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.73454225, 0, -0.678563, 0, 1, 0, 0.678563, 0, 0.73454225, -7.4828587, 0.52199996, -0.19387569)
+
+[node name="@Node3D@41786" parent="Traintrack-Main/Node3D" unique_id=1579142810 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.7506105, 0, -0.660745, 0, 1, 0, 0.660745, 0, 0.7506105, -6.3103714, 0.52199996, -1.4929318)
+
+[node name="@Node3D@41787" parent="Traintrack-Main/Node3D" unique_id=1325537270 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.7700957, 0, -0.6379284, 0, 1, 0, 0.6379284, 0, 0.7700957, -5.1730957, 0.52199996, -2.8230574)
+
+[node name="@Node3D@41788" parent="Traintrack-Main/Node3D" unique_id=660085665 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.7940647, 0, -0.6078332, 0, 1, 0, 0.6078332, 0, 0.7940647, -4.0817623, 0.522, -4.1909494)
+
+[node name="@Node3D@41789" parent="Traintrack-Main/Node3D" unique_id=1379383549 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.82390696, 0, -0.5667251, 0, 1, 0, 0.5667251, 0, 0.82390696, -3.0520344, 0.522, -5.6057105)
+
+[node name="@Node3D@41790" parent="Traintrack-Main/Node3D" unique_id=1646575778 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.8611212, 0, -0.5083998, 0, 1, 0, 0.5083998, 0, 0.8611212, -2.1081867, 0.522, -7.07891)
+
+[node name="@Node3D@41791" parent="Traintrack-Main/Node3D" unique_id=1999213510 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.9061985, 0, -0.42285252, 0, 1, 0, 0.42285252, 0, 0.9061985, -1.2883072, 0.522, -8.624494)
+
+[node name="@Node3D@41792" parent="Traintrack-Main/Node3D" unique_id=1471621803 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.95473087, 0, -0.29747102, 0, 1, 0, 0.29747102, 0, 0.95473087, -0.6514244, 0.522, -10.252993)
+
+[node name="@Node3D@41793" parent="Traintrack-Main/Node3D" unique_id=257902071 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.991354, 0, -0.13121466, 0, 1, 0, 0.13121466, 0, 0.991354, -0.27199745, 0.522, -11.959036)
+
+[node name="@Node3D@41794" parent="Traintrack-Main/Node3D" unique_id=302571579 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.99950033, 0, 0.031608235, 0, 1, 0, -0.031608235, 0, 0.99950033, -0.19116592, 0.5220001, -13.705111)
+
+[node name="@Node3D@41795" parent="Traintrack-Main/Node3D" unique_id=1965504735 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.9933203, 0, 0.11538992, 0, 1, 0, -0.11538992, 0, 0.9933203, -0.335392, 0.522, -15.448563)
+
+[node name="@Node3D@41796" parent="Traintrack-Main/Node3D" unique_id=2022663331 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.9957571, 0, 0.09202074, 0, 1, 0, -0.09202074, 0, 0.9957571, -0.53139687, 0.522, -17.187449)
+
+[node name="@Node3D@41797" parent="Traintrack-Main/Node3D" unique_id=1302381166 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.9999718, 0, -0.0075148563, 0, 1, 0, 0.0075148563, 0, 0.9999718, -0.6127224, 0.522, -18.934761)
+
+[node name="@Node3D@41798" parent="Traintrack-Main/Node3D" unique_id=1307709500 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.9998853, 0, -0.015145873, 0, 1, 0, 0.015145873, 0, 0.9998853, -0.5908108, 0.522, -20.684755)
+
+[node name="@Node3D@41799" parent="Traintrack-Main/Node3D" unique_id=821885717 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.9994965, 0, -0.0317288, 0, 1, 0, 0.0317288, 0, 0.9994965, -0.5516529, 0.5219999, -22.434261)
+
+[node name="@Node3D@41800" parent="Traintrack-Main/Node3D" unique_id=1251397829 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.9981714, 0, -0.06044754, 0, 1, 0, 0.06044754, 0, 0.9981714, -0.47274208, 0.522, -24.182407)
+
+[node name="@Node3D@41801" parent="Traintrack-Main/Node3D" unique_id=2046794966 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.99484724, 0, -0.10138585, 0, 1, 0, 0.10138584, 0, 0.99484724, -0.33301926, 0.52199996, -25.926722)
+
+[node name="@Node3D@41802" parent="Traintrack-Main/Node3D" unique_id=1799243623 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.98773235, 0, -0.15615653, 0, 1, 0, 0.15615653, 0, 0.98773235, -0.10987282, 0.522, -27.662237)
+
+[node name="@Node3D@41803" parent="Traintrack-Main/Node3D" unique_id=2039121054 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.97376126, 0, -0.22757202, 0, 1, 0, 0.22757202, 0, 0.97376126, 0.22319412, 0.522, -29.379883)
+
+[node name="@Node3D@41804" parent="Traintrack-Main/Node3D" unique_id=705026516 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.94768333, 0, -0.31921202, 0, 1, 0, 0.31921202, 0, 0.94768333, 0.69839096, 0.522, -31.063478)
+
+[node name="@Node3D@41805" parent="Traintrack-Main/Node3D" unique_id=216422250 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.90091115, 0, -0.43400353, 0, 1, 0, 0.43400353, 0, 0.90091115, 1.35396, 0.522, -32.68484)
+
+[node name="@Node3D@41806" parent="Traintrack-Main/Node3D" unique_id=1064566467 instance=ExtResource("36_facbu")]
+transform = Transform3D(0.8214889, 0, -0.57022446, 0, 1, 0, 0.57022446, 0, 0.8214889, 2.2300587, 0.52199996, -34.197643)

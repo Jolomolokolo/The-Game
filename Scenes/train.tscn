@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://c4pj4j4ga3wj"]
 
-[ext_resource type="Script" uid="uid://smu625keqm73" path="res://train.gd" id="1_nxpru"]
+[ext_resource type="Script" uid="uid://smu625keqm73" path="res://Scripts/train.gd" id="1_nxpru"]
 [ext_resource type="Texture2D" uid="uid://dx7xwudj0tglm" path="res://models/trains/Textures/colormap.png" id="2_0hk28"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vju5p"]

@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://d033mk3wuqr8a"]
+
+[ext_resource type="Script" uid="uid://dmaoa53be37i1" path="res://Scripts/rail_network.gd" id="1_ij3df"]
+
+[node name="Node3D" type="Node3D" unique_id=1466125844]
+script = ExtResource("1_ij3df")
