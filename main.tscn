@@ -1,5 +1,6 @@
 [gd_scene format=4 uid="uid://datvsni8i3og1"]
 
+[ext_resource type="Script" uid="uid://dmlsduudk1c5a" path="res://main.gd" id="1_facbu"]
 [ext_resource type="Script" uid="uid://b1fbvqw01lary" path="res://Scripts/directional_light_3d.gd" id="1_htxhm"]
 [ext_resource type="PackedScene" uid="uid://dml1tn7u8o5p2" path="res://models/city/driveway-long.glb" id="2_lquwl"]
 [ext_resource type="PackedScene" uid="uid://dcvfn8ryypqmj" path="res://models/cars/cone.glb" id="3_1u8w0"]
@@ -32,10 +33,12 @@
 [ext_resource type="PackedScene" uid="uid://u6mdbu17gfc2" path="res://Scenes/cone.tscn" id="30_seu75"]
 [ext_resource type="PackedScene" uid="uid://eicf7sv8l65a" path="res://models/city/path-stones-messy.glb" id="31_0rl1p"]
 [ext_resource type="Texture2D" uid="uid://die8kh6pu23tx" path="res://models/prototype-kit/Textures/colormap.png" id="32_htxhm"]
-[ext_resource type="PackedScene" uid="uid://c4pj4j4ga3wj" path="res://Scenes/train.tscn" id="33_jq2sk"]
-[ext_resource type="PackedScene" uid="uid://6g7fuwbhqts4" path="res://Scenes/Train-Carriages/train_carriage_container_red_2.tscn" id="34_4k2k6"]
+[ext_resource type="PackedScene" uid="uid://c4pj4j4ga3wj" path="res://Scenes/Trains/train.tscn" id="33_jq2sk"]
+[ext_resource type="PackedScene" uid="uid://6g7fuwbhqts4" path="res://Scenes/Trains/Train-Carriages/train_carriage_container_red_2.tscn" id="34_4k2k6"]
 [ext_resource type="PackedScene" uid="uid://b4k4dmedtvp51" path="res://Scenes/Tools/rail_placer.tscn" id="35_ok6jj"]
 [ext_resource type="PackedScene" uid="uid://b2vcqwuw24emk" path="res://models/trains/track-single.glb" id="36_facbu"]
+[ext_resource type="PackedScene" uid="uid://d033mk3wuqr8a" path="res://Scenes/Trains/rail_network.tscn" id="38_b1qrp"]
+[ext_resource type="PackedScene" uid="uid://cmpnjjk50oevm" path="res://Scenes/Trains/rail_switch.tscn" id="39_come4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -130,12 +133,21 @@ shadow_mesh = SubResource("ArrayMesh_a1mya")
 [sub_resource type="Curve3D" id="Curve3D_4k2k6"]
 closed = true
 _data = {
-"points": PackedVector3Array(-4.996, 0, 3.528, 4.996, 0, -3.528, 4.393, 0.522, -36.4, -6.287, 0, 2.164, 6.287, 0, -2.164, 14.498, 0.522, -39.869, -3.4, 0, -6.7, 3.4, 0, 6.7, 24.46, 0.522, -9.586, 2.032, 0, -2.217, -2.032, 0, 2.217, 20.275, 0.522, 5.191, 2.924, 0, -2.112, -2.924, 0, 2.112, 8.458, 0.522, 13.48, 3.52, 0, -1.88, -3.52, 0, 1.88, -0.19, 0.522, 17.752, 8.857, 0, 0.062, -8.857, 0, -0.062, -22.64, 0.522, 16.82, 0.203, 0, 3.993, -0.203, 0, -3.993, -42.384, 0.522, 2.663, -8.515, 0, 1.81, 8.515, 0, -1.81, -30.524, 0.522, -13.176, -11.335, 0, 11.824, 11.335, 0, -11.824, -8.607, 0.522, 1, -0.073, 0, 5.758, 0.073, 0, -5.758, -0.612, 0.522, -19.01),
+"points": PackedVector3Array(-4.996, 0, 3.528, 4.996, 0, -3.528, 4.393, 0.522, -36.4, -6.287, 0, 2.164, 6.287, 0, -2.164, 14.498, 0.522, -39.869, -3.4, 0, -6.7, 3.4, 0, 6.7, 24.46, 0.522, -9.586, 2.032, 0, -2.217, -2.032, 0, 2.217, 20.275, 0.522, 5.191, 2.924, 0, -2.112, -2.924, 0, 2.112, 8.458, 0.522, 13.48, 3.52, 0, -1.88, -3.52, 0, 1.88, -0.19, 0.522, 17.752, 8.857, 0, 0.062, -8.857, 0, -0.062, -22.64, 0.522, 16.82, 0.203, 0, 3.993, -0.203, 0, -3.993, -42.384, 0.522, 2.663, -8.515, 0, 1.81, 8.515, 0, -1.81, -30.524, 0.522, -13.176, -11.335, 0, 11.824, 11.335, 0, -11.824, -8.607, 0.522, 1, -0.073, 0, 5.758, 0, 0, 0, -0.612, 0.522, -19.01),
 "tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
 }
 point_count = 11
 
+[sub_resource type="Curve3D" id="Curve3D_b1qrp"]
+closed = true
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 20.275, 0.522, 5.191, 0, 0, 0, 0, 0, 0, 38.834724, 0.52239233, -28.606865, 0, 0, 0, 0, 0, 0, 82.748405, 0.522461, -29.69606, 0, 0, 0, 0, 0, 0, 94.04916, 0.00046092272, 11.876564, 0, 0, 0, 0, 0, 0, 61.546944, 0.0004761815, 32.22325, 0, 0, 0, 0, 0, 0, 35.225616, 0.00046092272, 22.246418),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0, 0)
+}
+point_count = 6
+
 [node name="Main" type="Node3D" unique_id=105238301]
+script = ExtResource("1_facbu")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2902083]
 environment = SubResource("Environment_0xm2m")
@@ -374,14 +386,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.606781, 0.018030643, -76.1
 curve = SubResource("Curve3D_4k2k6")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="Traintrack-Main" unique_id=405916537]
-transform = Transform3D(0.9952228, 0, -0.09743481, 0, 0.9999727, 0, 0.09743479, 0, 0.995223, -0.3476588, 0.5220001, -25.780165)
+transform = Transform3D(0.98949623, 0, -0.14440726, 0, 0.99997115, 0, 0.1444072, 0, 0.98949665, -0.07796835, 0.522, -25.76171)
 progress = 215.10272
 
 [node name="Train" parent="Traintrack-Main/PathFollow3D" unique_id=1626068840 instance=ExtResource("33_jq2sk")]
 transform = Transform3D(1, 0, 7.4505793e-09, 0, 1, 0, -7.4505793e-09, 0, 1, 0, -0.018009305, 0)
 
 [node name="PathFollow3D2" type="PathFollow3D" parent="Traintrack-Main" unique_id=1073890114]
-transform = Transform3D(0.9979567, 0, 0.063760534, 0, 0.9999882, 0, -0.06376051, 0, 0.99795705, -0.57877564, 0.522, -17.788265)
+transform = Transform3D(0.99795425, 0, 0.063760415, 0, 0.9999868, 0, -0.063760355, 0, 0.9979552, -0.57877564, 0.522, -17.788265)
 progress = 207.10272
 
 [node name="Train-Carriage-Container-Red2" parent="Traintrack-Main/PathFollow3D2" unique_id=2139554087 instance=ExtResource("34_4k2k6")]
@@ -777,3 +789,16 @@ transform = Transform3D(0.90091115, 0, -0.43400353, 0, 1, 0, 0.43400353, 0, 0.90
 
 [node name="@Node3D@41806" parent="Traintrack-Main/Node3D" unique_id=1064566467 instance=ExtResource("36_facbu")]
 transform = Transform3D(0.8214889, 0, -0.57022446, 0, 1, 0, 0.57022446, 0, 0.8214889, 2.2300587, 0.52199996, -34.197643)
+
+[node name="RailNetwork" parent="." unique_id=1466125844 instance=ExtResource("38_b1qrp")]
+
+[node name="Track_A" type="Path3D" parent="RailNetwork" unique_id=2144675320]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.606781, 0.018030643, -76.17903)
+curve = SubResource("Curve3D_4k2k6")
+
+[node name="Track_B" type="Path3D" parent="RailNetwork" unique_id=143948739]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.657, 0.522, -76.179)
+curve = SubResource("Curve3D_b1qrp")
+
+[node name="RailSwitch_1" parent="RailNetwork" unique_id=1446784710 instance=ExtResource("39_come4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22.657, 0.522, -76.179)

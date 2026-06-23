@@ -32,6 +32,10 @@ var current_camera = 1
 var headlights : Array
 var brake_lights : Array
 
+var current_track_name : String = "Track_A"
+var network : Node = null
+var nearest_junction : Node = null
+
 func _ready():
 	add_to_group("train")
 	train_camera.current = false
@@ -46,6 +50,9 @@ func _ready():
 	back_front_left.visible = false
 	back_back_right.visible = false
 	back_back_left.visible = false
+	
+	await get_tree().process_frame
+	network = get_tree().get_first_node_in_group("rail_network")
 	
 func _physics_process(delta):
 	collision_body.global_position = global_position
@@ -87,7 +94,53 @@ func _physics_process(delta):
 	
 	_update_headlights()
 	_update_brake_light(back > 0 and speed > 0)
-
+	
+	_check_nearest_junction()
+	
+	if nearest_junction != null:
+		if Input.is_action_just_pressed("ui_left"):
+			nearest_junction.switch_left(current_track_name)
+		if Input.is_action_just_pressed("ui_right"):
+			nearest_junction.switch_right(current_track_name)
+	
+	_check_track_end()
+	
+func _check_nearest_junction():
+	nearest_junction = null
+	for junction in get_tree().get_first_node_in_group("rail_switch"):
+		if junction.is_near(path_follow.progress, current_track_name):
+			nearest_junction = junction
+			return
+	
+func _check_track_end():
+	if network == null:
+		return
+	var track_length = path_follow.get_parent().curve.get_baked_length()
+	if path_follow.progress >= track_length - 1.0:
+		if nearest_junction != null:
+			var next_name = nearest_junction.get_next_track(current_track_name)
+			if next_name != "":
+				_switch_to_track(next_name)
+	
+func _switch_to_track(new_track_name: String):
+	var new_path = network.get_track(new_track_name)
+	if new_path == null:
+		return
+	
+	var new_follow = PathFollow3D.new()
+	new_follow.rotation_mode = PathFollow3D.ROTATION_XYZ
+	new_follow.loop = false
+	new_path.add_children(new_follow)
+	
+	var old_follow = path_follow
+	reparent(new_follow)
+	path_follow = new_follow
+	path_follow.progress = 0.0
+	
+	old_follow.queue_free()
+	current_track_name = new_track_name
+	print("Switched to: ", current_track_name)
+	
 func _update_camera():
 	if gear == 0:
 		train_camera.current = true

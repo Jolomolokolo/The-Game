@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://bgmwjd1hdpwpc" path="res://Scripts/rail_switch.gd" id="1_6m0np"]
 
-[node name="Node3D" type="Node3D" unique_id=1446784710]
+[node name="RailSwitch" type="Node3D" unique_id=1446784710]
 script = ExtResource("1_6m0np")
