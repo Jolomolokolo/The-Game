@@ -107,20 +107,33 @@ func _physics_process(delta):
 	
 func _check_nearest_junction():
 	nearest_junction = null
-	for junction in get_tree().get_first_node_in_group("rail_switch"):
-		if junction.is_near(path_follow.progress, current_track_name):
+	var track_length = path_follow.get_parent().curve.get_baked_length()
+	var normalized_progress = fmod(path_follow.progress, track_length)
+	
+	print("Normalized progress: ", normalized_progress, " / ", track_length)
+	
+	for junction in get_tree().get_nodes_in_group("rail_switch"):
+		if junction.is_near(normalized_progress, current_track_name):
 			nearest_junction = junction
+			print("Weiche gefunden!")
 			return
 	
 func _check_track_end():
-	if network == null:
+	if nearest_junction == null or network == null:
 		return
+	
 	var track_length = path_follow.get_parent().curve.get_baked_length()
-	if path_follow.progress >= track_length - 1.0:
-		if nearest_junction != null:
-			var next_name = nearest_junction.get_next_track(current_track_name)
-			if next_name != "":
-				_switch_to_track(next_name)
+	var normalized_progress = fmod(path_follow.progress, track_length)
+	
+	# Weichenposition auf dem Track
+	var junction_progress = nearest_junction.switch_progress
+	
+	# Zug passiert die Weiche
+	if abs(normalized_progress - junction_progress) < 2.0:
+		var next_name = nearest_junction.get_next_track(current_track_name)
+		if next_name != "" and next_name != current_track_name:
+			print("Switch to: ", next_name)
+			_switch_to_track(next_name)
 	
 func _switch_to_track(new_track_name: String):
 	var new_path = network.get_track(new_track_name)
@@ -130,7 +143,7 @@ func _switch_to_track(new_track_name: String):
 	var new_follow = PathFollow3D.new()
 	new_follow.rotation_mode = PathFollow3D.ROTATION_XYZ
 	new_follow.loop = false
-	new_path.add_children(new_follow)
+	new_path.add_child(new_follow)
 	
 	var old_follow = path_follow
 	reparent(new_follow)

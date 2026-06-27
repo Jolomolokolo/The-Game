@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://bealjbqs1f24a" path="res://Scripts/rail_placer.gd" id="1_tfgp3"]
 
-[node name="Node3D" type="Node3D" unique_id=951830831]
+[node name="RailPlacer" type="Node3D" unique_id=951830831]
 script = ExtResource("1_tfgp3")
