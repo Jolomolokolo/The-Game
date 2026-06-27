@@ -8,15 +8,16 @@ var speed := 0.0
 var player_inside := false
 var player_ref : Node = null
 var just_entered := false
-var headlights_on := false
 var gear := 0
-#var gear_names := {-1: "Reverse", 0: "Neutral", 1: "Forward"}
 var current_camera = 1
+var current_track_name : String = "Track_A"
+var network : Node = null
+var current_junction : Node = null
 
 @onready var path_follow : PathFollow3D = get_parent()
 @onready var train_camera = $DriveCamera
 @onready var train_camera_backward = $DriveCameraBackward
-@onready var collision_body = $StaticBody3D
+@onready var collision_body = $AnimatableBody3D
 @onready var tooltip_layer = $"CanvasLayer/Tooltip-Train"
 @onready var tooltip_layer_enter = $"CanvasLayer/Tooltip-Overlay"
 
@@ -29,15 +30,9 @@ var current_camera = 1
 @onready var back_back_right = $"BackLight - back - right"
 @onready var back_back_left = $"BackLight - back - left"
 
-var headlights : Array
-var brake_lights : Array
-
-var current_track_name : String = "Track_A"
-var network : Node = null
-var nearest_junction : Node = null
-
 func _ready():
 	add_to_group("train")
+	$AnimatableBody3D.add_to_group("train_collision")
 	train_camera.current = false
 	train_camera_backward.current = false
 	tooltip_layer.visible = false
@@ -50,13 +45,16 @@ func _ready():
 	back_front_left.visible = false
 	back_back_right.visible = false
 	back_back_left.visible = false
-	
 	await get_tree().process_frame
 	network = get_tree().get_first_node_in_group("rail_network")
 	
 func _physics_process(delta):
-	collision_body.global_position = global_position
-	collision_body.global_rotation = global_rotation
+	if path_follow != null:
+		path_follow.progress += speed * delta
+		global_position = path_follow.global_position
+		global_rotation = path_follow.global_rotation
+	
+	collision_body.global_transform = global_transform
 	
 	if not player_inside:
 		_update_headlights()
@@ -65,16 +63,21 @@ func _physics_process(delta):
 	if just_entered:
 		just_entered = false
 		return
-		
+	
 	if Input.is_action_just_pressed("ui_interact"):
 		exit_train()
 		return
 	
 	if Input.is_action_just_pressed("train_up") and abs(speed) < 1.0:
 		gear = min(gear + 1, 1)
-	
 	if Input.is_action_just_pressed("train_down") and abs(speed) < 1.0:
-		gear = max(gear -1, -1)
+		gear = max(gear - 1, -1)
+	
+	if current_junction != null:
+		if Input.is_action_just_pressed("ui_left"):
+			current_junction.switch_left(current_track_name)
+		if Input.is_action_just_pressed("ui_right"):
+			current_junction.switch_right(current_track_name)
 	
 	var forward = Input.get_action_strength("ui_up")
 	var back = Input.get_action_strength("ui_down")
@@ -91,80 +94,45 @@ func _physics_process(delta):
 	path_follow.progress += speed * delta
 	
 	_update_camera()
-	
 	_update_headlights()
 	_update_brake_light(back > 0 and speed > 0)
 	
-	_check_nearest_junction()
-	
-	if nearest_junction != null:
-		if Input.is_action_just_pressed("ui_left"):
-			nearest_junction.switch_left(current_track_name)
-		if Input.is_action_just_pressed("ui_right"):
-			nearest_junction.switch_right(current_track_name)
-	
-	_check_track_end()
-	
-func _check_nearest_junction():
-	nearest_junction = null
-	var track_length = path_follow.get_parent().curve.get_baked_length()
-	var normalized_progress = fmod(path_follow.progress, track_length)
-	
-	print("Normalized progress: ", normalized_progress, " / ", track_length)
-	
-	for junction in get_tree().get_nodes_in_group("rail_switch"):
-		if junction.is_near(normalized_progress, current_track_name):
-			nearest_junction = junction
-			print("Weiche gefunden!")
-			return
-	
-func _check_track_end():
-	if nearest_junction == null or network == null:
-		return
-	
-	var track_length = path_follow.get_parent().curve.get_baked_length()
-	var normalized_progress = fmod(path_follow.progress, track_length)
-	
-	# Weichenposition auf dem Track
-	var junction_progress = nearest_junction.switch_progress
-	
-	# Zug passiert die Weiche
-	if abs(normalized_progress - junction_progress) < 2.0:
-		var next_name = nearest_junction.get_next_track(current_track_name)
-		if next_name != "" and next_name != current_track_name:
-			print("Switch to: ", next_name)
-			_switch_to_track(next_name)
-	
 func _switch_to_track(new_track_name: String):
+	if new_track_name == "" or new_track_name == current_track_name:
+		return
 	var new_path = network.get_track(new_track_name)
 	if new_path == null:
 		return
 	
+	# Neuen PathFollow erstellen
 	var new_follow = PathFollow3D.new()
 	new_follow.rotation_mode = PathFollow3D.ROTATION_XYZ
 	new_follow.loop = false
 	new_path.add_child(new_follow)
+	new_follow.progress = 0.0
 	
 	var old_follow = path_follow
-	reparent(new_follow)
-	path_follow = new_follow
-	path_follow.progress = 0.0
 	
-	old_follow.queue_free()
+	# Zug NICHT umhängen — nur path_follow wechseln
+	path_follow = new_follow
 	current_track_name = new_track_name
+	
+	# Position manuell dem neuen PathFollow folgen
+	global_position = new_follow.global_position
+	global_rotation = new_follow.global_rotation
+	
+	await get_tree().process_frame
+	old_follow.queue_free()
 	print("Switched to: ", current_track_name)
 	
 func _update_camera():
-	if gear == 0:
+	if gear >= 0:
 		train_camera.current = true
 		train_camera_backward.current = false
-	elif gear == 1:
-		train_camera.current = true
-		train_camera_backward.current = false
-	elif gear == -1:
+	else:
 		train_camera.current = false
 		train_camera_backward.current = true
-
+	
 func _update_headlights():
 	if not player_inside:
 		spot_front_right.visible = false
@@ -172,17 +140,14 @@ func _update_headlights():
 		spot_back_right.visible = false
 		spot_back_left.visible = false
 		return
-	
 	spot_front_right.visible = gear == 1
 	spot_front_left.visible = gear == 1
-	
 	spot_back_right.visible = gear == -1
 	spot_back_left.visible = gear == -1
 	
 func _update_brake_light(is_braking: bool):
 	var energy_normal := 3.0
 	var energy_braking := 6.0
-	
 	if gear >= 0:
 		back_back_right.visible = true
 		back_back_left.visible = true
@@ -209,7 +174,7 @@ func enter_vehicle(player):
 	if current_camera == 1:
 		train_camera.current = true
 	elif current_camera == 2:
-		train_camera_backward = true
+		train_camera_backward.current = true
 	tooltip_layer.visible = true
 	tooltip_layer_enter.visible = false
 	
@@ -218,7 +183,6 @@ func exit_train():
 		return
 	tooltip_layer.visible = false
 	player_inside = false
-	tooltip_layer.visible = false
 	speed = move_toward(speed, 0.0, brake_force)
 	player_ref.global_position = global_position + global_transform.basis.x * 3.0
 	player_ref.show()
@@ -242,3 +206,4 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 		player_ref = null
 		body.nearby_vehicle = null
 		tooltip_layer_enter.visible = false
+	

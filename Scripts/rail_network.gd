@@ -12,7 +12,7 @@ func _build_network():
 	for child in get_children():
 		if child is Path3D:
 			tracks[child.name] = child
-		print("Tracks registered: ", tracks.keys())
+	print("Tracks registered: ", tracks.keys())
 	
 func register_junctions(junction):
 	junctions.append(junction)

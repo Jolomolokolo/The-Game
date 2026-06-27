@@ -121,6 +121,7 @@ font_size = 24
 font_size = 24
 
 [node name="Train" type="Node3D" unique_id=1626068840]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 script = ExtResource("1_nxpru")
 
 [node name="train-diesel-b" type="MeshInstance3D" parent="." unique_id=145539025]
@@ -152,9 +153,9 @@ fov = 108.80602
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 3.3190155, 0)
 shape = SubResource("BoxShape3D_mcim7")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1323783232]
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="." unique_id=1047394737]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=526334256]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D" unique_id=526334256]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.225061, 0)
 shape = SubResource("BoxShape3D_mcim7")
 
