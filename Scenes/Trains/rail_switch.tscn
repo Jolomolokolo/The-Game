@@ -8,12 +8,14 @@ size = Vector3(2, 3, 1)
 [node name="RailSwitch" type="Node3D" unique_id=1446784710]
 script = ExtResource("1_6m0np")
 
-[node name="Area3D" type="Area3D" parent="." unique_id=956143478]
+[node name="SwitchPoint" type="Marker3D" parent="." unique_id=1944419819]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1953234398]
+[node name="SwitchArea" type="Area3D" parent="." unique_id=956143478]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SwitchArea" unique_id=1953234398]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
 shape = SubResource("BoxShape3D_6m0np")
 debug_color = Color(0.9329974, 0.19649163, 0.43556076, 0.41960785)
 
-[connection signal="body_entered" from="Area3D" to="." method="_on_body_entered"]
-[connection signal="body_exited" from="Area3D" to="." method="_on_body_exited"]
+[connection signal="body_entered" from="SwitchArea" to="." method="_on_switch_area_body_entered"]
+[connection signal="body_exited" from="SwitchArea" to="." method="_on_switch_area_body_exited"]

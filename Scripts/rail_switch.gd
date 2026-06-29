@@ -1,60 +1,46 @@
 extends Node3D
 
-# Defining connections
-# Format: { "Track_A": ["Track_B", "Track_C"] }
-# Means: train comes from Track_A, possible to go to Track_B or Track_C
+signal direction_changed(new_direction: String)
 
-var connections : Dictionary = {}
-var switch_states : Dictionary = {}
-var train_inside := false
-var switch_cooldown := false
+@export var track_incoming : NodePath
+@export var track_main : NodePath
+@export var track_branch : NodePath
 
-func setup(conn: Dictionary):
-	connections = conn
-	for from_track in connections.keys():
-		switch_states[from_track] = 0
+var current_direction := "main"
+
+var _track_in : Path3D
+var _track_main : Path3D
+var _track_branch : Path3D
+
+func _ready() -> void:
+	_track_in = get_node(track_incoming)#
+	_track_main = get_node(track_main)
+	_track_branch = get_node(track_branch)
 	
-func get_next_track(from_track: String) -> String:
-	if not connections.has(from_track):
-		return ""
-	var options = connections[from_track]
-	if options.is_empty():
-		return ""
-	var index = switch_states.get(from_track, 0)
-	return options[index]
+func switch_left(_from_track: String):
+	set_direction("branch")
 	
-func switch_left(from_track: String):
-	if not connections.has(from_track):
+func switch_right(_from_track: String):
+	set_direction("main")
+	
+func set_direction(dir: String):
+	if current_direction == dir:
 		return
-	var current = switch_states.get(from_track, 0)
-	switch_states[from_track] = max(current - 1, 0)
-	print("Switch left: ", connections[from_track][switch_states[from_track]])
+	current_direction = dir
+	emit_signal("direction_changed", dir)
+	print("Switch: %s -> %s" % [name, dir.to_upper()])
 	
-func switch_right(from_track: String):
-	if not connections.has(from_track):
-		return
-	var options = connections[from_track]
-	var current = switch_states.get(from_track, 0)
-	switch_states[from_track] = min(current + 1, options.size() - 1)
-	print("Switch right: ", connections[from_track][switch_states[from_track]])
+func get_next_track_for(incoming: Path3D) -> Path3D:
+	if incoming == _track_in:
+		return _track_main if current_direction == "main" else _track_branch
+	if incoming == _track_main or incoming == _track_branch:
+		return _track_in
+	return null
 	
-func _on_body_entered(body: Node3D):
-	if body.is_in_group("train_collision") and not switch_cooldown:
-		train_inside = true
-		var train = get_tree().get_first_node_in_group("train")
-		if train:
-			train.current_junction = self
-			var next = get_next_track(train.current_track_name)
-			if next != "":
-				switch_cooldown = true
-				train._switch_to_track(next)
-				await get_tree().create_timer(1.0).timeout
-				switch_cooldown = false
+func _on_switch_area_body_entered(body: Node3D) -> void:
+	if body.is_in_group("train"):
+		body.notify_junction_exit(self)
 	
-func _on_body_exited(body: Node3D):
-	if body.is_in_group("train_collision"):
-		train_inside = false
-		var train = get_tree().get_first_node_in_group("train")
-		if train:
-			train.current_junction = null
-	
+func _on_switch_area_body_exited(body: Node3D) -> void:
+	if body.is_in_group("train"):
+		body.notify_junction_exit(self)
