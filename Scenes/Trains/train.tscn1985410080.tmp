@@ -147,14 +147,6 @@ fov = 108.80602
 transform = Transform3D(-1, 0, 2.6226832e-07, 0, 1, 0, -2.6226832e-07, 0, -1, 6.183826e-07, 3.8195803, 0.5589738)
 fov = 108.80602
 
-[node name="DriveCameraTop" type="Camera3D" parent="." unique_id=434864067]
-transform = Transform3D(1, 4.5253362e-08, -1.6888782e-07, 0, 0.9659258, 0.25881904, 1.7484555e-07, -0.25881904, 0.9659258, -1.8617324e-07, 6.139519, 2.9976773)
-fov = 90.0
-
-[node name="DriveCameraBackwardTop" type="Camera3D" parent="." unique_id=1413642320]
-transform = Transform3D(-1, -1.1083938e-07, 2.3769582e-07, 0, 0.90630776, 0.42261827, -2.6226832e-07, 0.42261827, -0.90630776, 1.7670552e-06, 6.3308597, -3.8207877)
-fov = 90.0
-
 [node name="Area3D" type="Area3D" parent="." unique_id=1595468425]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1991920895]

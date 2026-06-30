@@ -1,21 +1,22 @@
 extends Node3D
 
-var tracks : Dictionary = {}
-var junctions : Array = []
+var _switches : Array[Node] = []
 
 func _ready():
-	add_to_group("rail_network")
-	await get_tree().process_frame
-	_build_network()
-	
-func _build_network():
 	for child in get_children():
-		if child is Path3D:
-			tracks[child.name] = child
-	print("Tracks registered: ", tracks.keys())
+		if child.has_method("get_next_track_for"):
+			_switches.append(child)
+	print("RailNetwork: %d Switches registered" % _switches.size())
 	
-func register_junctions(junction):
-	junctions.append(junction)
+func get_next_track(current: Path3D, direction: int) -> Path3D:
+	for sw in _switches:
+		var result = sw.get_next_track_for(current)
+		if result != null:
+			return result
+	return null
 	
-func get_track(name: String) -> Path3D:
-	return tracks.get(name, null)
+func get_next_switch_for(current_track: Path3D) -> Node:
+	for sw in _switches:
+		if sw.get_from_track() == current_track:
+			return sw
+	return null

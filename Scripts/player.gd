@@ -74,7 +74,6 @@ func _input(event):
 			nearby_vehicle.enter_vehicle(self)
 	
 func _physics_process(delta):
-	
 	if in_car:
 		return
 	

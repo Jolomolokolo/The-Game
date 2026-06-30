@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" uid="uid://bgmwjd1hdpwpc" path="res://Scripts/rail_switch.gd" id="1_6m0np"]
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_6m0np"]
-size = Vector3(2, 3, 1)
+[sub_resource type="SphereShape3D" id="SphereShape3D_6m0np"]
+radius = 3.0
 
 [node name="RailSwitch" type="Node3D" unique_id=1446784710]
 script = ExtResource("1_6m0np")
@@ -13,8 +13,8 @@ script = ExtResource("1_6m0np")
 [node name="SwitchArea" type="Area3D" parent="." unique_id=956143478]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="SwitchArea" unique_id=1953234398]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-shape = SubResource("BoxShape3D_6m0np")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_6m0np")
 debug_color = Color(0.9329974, 0.19649163, 0.43556076, 0.41960785)
 
 [connection signal="body_entered" from="SwitchArea" to="." method="_on_switch_area_body_entered"]

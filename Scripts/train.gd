@@ -21,9 +21,12 @@ var current_progress : float = 0.0
 
 @onready var train_camera = $DriveCamera
 @onready var train_camera_backward = $DriveCameraBackward
+@onready var train_camera_top = $DriveCameraTop
+@onready var train_camera_backward_top = $DriveCameraBackwardTop
 @onready var collision_body = $AnimatableBody3D
 @onready var tooltip_layer = $"CanvasLayer/Tooltip-Train"
 @onready var tooltip_layer_enter = $"CanvasLayer/Tooltip-Overlay"
+@onready var switch_hud = $CanvasLayer/Rail_Switch_HUD
 
 @onready var spot_front_right = $"SpotLight - front - right"
 @onready var spot_front_left = $"SpotLight - front - left"
@@ -36,11 +39,15 @@ var current_progress : float = 0.0
 
 func _ready():
 	add_to_group("train")
+	$AnimatableBody3D.add_to_group("train")
 	$AnimatableBody3D.add_to_group("train_collision")
 	train_camera.current = false
 	train_camera_backward.current = false
+	train_camera_top.current = false
+	train_camera_backward_top.current = false
 	tooltip_layer.visible = false
 	tooltip_layer_enter.visible = false
+	switch_hud.visible = false
 	spot_front_right.visible = false
 	spot_front_left.visible = false
 	spot_back_right.visible = false
@@ -75,6 +82,13 @@ func _physics_process(delta):
 		just_entered = false
 		return
 	
+	if Input.is_action_just_pressed("camera_1"):
+		current_camera = 1
+		_update_camera()
+	if Input.is_action_just_pressed("camera_2"):
+		current_camera = 2
+		_update_camera()
+	
 	if Input.is_action_just_pressed("ui_interact"):
 		exit_train()
 		return
@@ -86,9 +100,11 @@ func _physics_process(delta):
 	
 	if current_junction != null:
 		if Input.is_action_just_pressed("ui_left"):
-			current_junction.switch_left(current_track_name)
-		if Input.is_action_just_pressed("ui_right"):
 			current_junction.switch_right(current_track_name)
+			_update_switch_hud()
+		if Input.is_action_just_pressed("ui_right"):
+			current_junction.switch_left(current_track_name)
+			_update_switch_hud()
 	
 	var forward = Input.get_action_strength("ui_up")
 	var back = Input.get_action_strength("ui_down")
@@ -113,7 +129,10 @@ func _physics_process(delta):
 	_update_headlights()
 	_update_brake_light(back > 0 and speed > 0)
 	
-func _check_track_bounds() -> void:
+	if player_inside:
+		_update_next_junction()
+	
+func _check_track_bounds():
 	if current_track == null or current_path_follow == null:
 		return
 	
@@ -133,7 +152,7 @@ func _check_track_bounds() -> void:
 		if _rail_network:
 			var prev = _rail_network.get_next_track(current_track, -1)
 			if prev:
-				var prev_length = prev.curve.get_baked_lenght()
+				var prev_length = prev.curve.get_baked_length()
 				var overshoot = abs(current_progress)
 				_switch_to_track(prev, prev_length - overshoot, false)
 			else:
@@ -154,10 +173,10 @@ func _switch_to_track(new_track: Path3D, start_progress: float, forwards: bool) 
 		push_error("Train: No PathFollow3D in Track found: %s" % new_track.name)
 		return
 	
-	var saved_transform = global_transform
 	current_path_follow.remove_child(self)
 	new_path_follow.add_child(self)
-	global_transform = saved_transform
+	
+	transform = Transform3D.IDENTITY
 	
 	current_track = new_track
 	current_track_name = new_track.name
@@ -165,13 +184,16 @@ func _switch_to_track(new_track: Path3D, start_progress: float, forwards: bool) 
 	current_progress = clampf(start_progress, 0.0, new_track.curve.get_baked_length())
 	current_path_follow.progress = current_progress
 	
-func notify_junction_enter(junction) -> void:
+func notify_junction_enter(junction):
 	current_junction = junction
 	print("Train: Junction in reach: %s" % junction.name)
+	_update_switch_hud()
 	
-func notify_junction_exit(junction) -> void:
+func notify_junction_exit(junction):
 	if current_junction == junction:
 		current_junction = null
+		if switch_hud:
+			switch_hud.visible = false
 	
 func _find_rail_network() -> Node:
 	var node = get_parent()
@@ -182,12 +204,17 @@ func _find_rail_network() -> Node:
 	return null
 	
 func _update_camera():
-	if gear >= 0:
-		train_camera.current = true
-		train_camera_backward.current = false
-	else:
-		train_camera.current = false
-		train_camera_backward.current = true
+	train_camera.current = false
+	train_camera_backward.current = false
+	train_camera_top.current = false
+	train_camera_backward_top.current = false
+	
+	if current_camera == 1:
+		train_camera.current = gear >= 0
+		train_camera_backward.current = gear < 0
+	elif current_camera == 2:
+		train_camera_top.current = gear >= 0
+		train_camera_backward_top.current = gear < 0
 	
 func _update_headlights():
 	if not player_inside:
@@ -233,6 +260,7 @@ func enter_vehicle(player):
 		train_camera_backward.current = true
 	tooltip_layer.visible = true
 	tooltip_layer_enter.visible = false
+	_update_switch_hud()
 	
 func exit_train():
 	if player_ref == null:
@@ -242,6 +270,7 @@ func exit_train():
 	speed = move_toward(speed, 0.0, brake_force)
 	player_ref.global_position = global_position + global_transform.basis.x * 3.0
 	player_ref.show()
+	switch_hud.visible = false
 	player_ref.set_physics_process(true)
 	player_ref.notify_exit()
 	var ref = player_ref
@@ -263,3 +292,26 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 		body.nearby_vehicle = null
 		tooltip_layer_enter.visible = false
 	
+func _update_switch_hud():
+	if not switch_hud:
+		return
+	if not player_inside:
+		switch_hud.visible = false
+		return
+	if current_junction == null:
+		switch_hud.text = "No Junction"
+		switch_hud.visible = true
+		return
+	
+	var dir = current_junction.current_direction
+	var dir_text = "MAIN\n                         <-" if dir == "main" else "BRANCH\n                         ->"
+	switch_hud.text = "%s: %s\n[A] Main              [D] Branch" % [current_junction.name, dir_text]
+	switch_hud.visible = true
+	
+func _update_next_junction():
+	if _rail_network == null:
+		return
+	var next_sw = _rail_network.get_next_switch_for(current_track)
+	if next_sw != current_junction:
+		current_junction = next_sw
+	_update_switch_hud()

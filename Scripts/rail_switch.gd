@@ -12,10 +12,17 @@ var _track_in : Path3D
 var _track_main : Path3D
 var _track_branch : Path3D
 
-func _ready() -> void:
-	_track_in = get_node(track_incoming)#
-	_track_main = get_node(track_main)
-	_track_branch = get_node(track_branch)
+func _ready():
+	if track_incoming:
+		_track_in = get_node(track_incoming)
+	if track_main:
+		_track_main = get_node(track_main)
+	if track_branch:
+		_track_branch = get_node(track_branch)
+	
+		if not _track_in or not _track_main or not _track_branch:
+			push_error("Switch: %s: Not all tracks assigned" % name)
+			return
 	
 func switch_left(_from_track: String):
 	set_direction("branch")
@@ -37,10 +44,13 @@ func get_next_track_for(incoming: Path3D) -> Path3D:
 		return _track_in
 	return null
 	
+func get_from_track():
+	return _track_in
+	
 func _on_switch_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("train"):
-		body.notify_junction_exit(self)
+		body.get_parent().notify_junction_enter(self)
 	
 func _on_switch_area_body_exited(body: Node3D) -> void:
 	if body.is_in_group("train"):
-		body.notify_junction_exit(self)
+		body.get_parent().notify_junction_exit(self)
