@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://smu625keqm73" path="res://Scripts/train.gd" id="1_nxpru"]
 [ext_resource type="Texture2D" uid="uid://dx7xwudj0tglm" path="res://models/trains/Textures/colormap.png" id="2_0hk28"]
+[ext_resource type="Script" uid="uid://cpvaeoefjojug" path="res://Scripts/map_hud.gd" id="3_kpsx5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vju5p"]
 resource_name = "colormap"
@@ -272,6 +273,13 @@ offset_right = 72.5
 offset_bottom = 105.0
 grow_horizontal = 2
 size_flags_vertical = 0
+
+[node name="Map_HUD" type="Control" parent="CanvasLayer" unique_id=324476168]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("3_kpsx5")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

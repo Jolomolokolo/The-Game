@@ -35,13 +35,15 @@ func set_direction(dir: String):
 		return
 	current_direction = dir
 	emit_signal("direction_changed", dir)
-	print("Switch: %s -> %s" % [name, dir.to_upper()])
+	#print("Switch: %s -> %s" % [name, dir.to_upper()])
 	
-func get_next_track_for(incoming: Path3D) -> Path3D:
-	if incoming == _track_in:
-		return _track_main if current_direction == "main" else _track_branch
-	if incoming == _track_main or incoming == _track_branch:
-		return _track_in
+func get_next_track_for(incoming: Path3D, direction: int) -> Path3D:
+	if direction == 1:
+		if incoming == _track_in:
+			return _track_main if current_direction == "main" else _track_branch
+	elif direction == -1:
+		if incoming == _track_main or incoming == _track_branch:
+			return _track_in
 	return null
 	
 func get_from_track():

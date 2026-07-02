@@ -161,7 +161,7 @@ func _check_track_bounds():
 				speed = 0.0
 	
 func _switch_to_track(new_track: Path3D, start_progress: float, forwards: bool) -> void:
-	print("Train switches to Track: %s (at %.1f)" % [new_track.name, start_progress])
+	#print("Train switches to Track: %s (at %.1f)" % [new_track.name, start_progress])
 	
 	var new_path_follow : PathFollow3D = null
 	for child in new_track.get_children():
@@ -298,7 +298,7 @@ func _update_switch_hud():
 	if not player_inside:
 		switch_hud.visible = false
 		return
-	if current_junction == null:
+	if current_junction == null or gear == -1:
 		switch_hud.text = "No Junction"
 		switch_hud.visible = true
 		return

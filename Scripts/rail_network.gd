@@ -10,7 +10,7 @@ func _ready():
 	
 func get_next_track(current: Path3D, direction: int) -> Path3D:
 	for sw in _switches:
-		var result = sw.get_next_track_for(current)
+		var result = sw.get_next_track_for(current, direction)
 		if result != null:
 			return result
 	return null
