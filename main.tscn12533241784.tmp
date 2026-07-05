@@ -1245,7 +1245,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52246094, -82.828636)
 curve = SubResource("Curve3D_come4")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="RailNetwork/Track_A" unique_id=1926029712]
-transform = Transform3D(-0.1604332, 0, -0.9870164, 0, 0.99995387, 0, 0.9870088, 0, -0.16043442, -20.22619, 0, 41.26555)
+transform = Transform3D(-0.1604332, 0, -0.98701656, 0, 0.99995387, 0, 0.9870088, 0, -0.16043445, -20.22619, 0, 41.26555)
 progress = 132.84035
 
 [node name="Train" parent="RailNetwork/Track_A/PathFollow3D" unique_id=695677159 instance=ExtResource("33_jq2sk")]
@@ -1257,6 +1257,11 @@ progress = 124.84
 
 [node name="Train-Carriage-Container-Red2" parent="RailNetwork/Track_A/PathFollow3DCarriage" unique_id=2139554087 instance=ExtResource("38_come4")]
 transform = Transform3D(1.0000657, 0, 0, 0, 1.0000923, 0, 0, 0, 1.0000654, 0, 0, 0)
+spacing = null
+spacing_carriage = null
+wobble_amount = null
+wobble_speed = null
+friction = null
 
 [node name="PathFollow3DCarriage2" type="PathFollow3D" parent="RailNetwork/Track_A" unique_id=93563890]
 transform = Transform3D(-0.2070385, 0, -0.9783026, 0, 0.99995387, 0, 0.97829473, 0, -0.20704018, -35.94493, 0, 38.284798)
@@ -1264,6 +1269,11 @@ progress = 116.84
 
 [node name="Train-Carriage-Container-Red2" parent="RailNetwork/Track_A/PathFollow3DCarriage2" unique_id=1907320805 instance=ExtResource("38_come4")]
 transform = Transform3D(1.0000657, 0, 0, 0, 1.0000923, 0, 0, 0, 1.0000654, 0, 0, 0)
+spacing = null
+spacing_carriage = null
+wobble_amount = null
+wobble_speed = null
+friction = null
 
 [node name="Track_B" type="Path3D" parent="RailNetwork" unique_id=410127138]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.522, 0)

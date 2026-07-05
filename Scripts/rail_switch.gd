@@ -56,3 +56,8 @@ func _on_switch_area_body_entered(body: Node3D) -> void:
 func _on_switch_area_body_exited(body: Node3D) -> void:
 	if body.is_in_group("train"):
 		body.get_parent().notify_junction_exit(self)
+	
+func get_world_position() -> Vector3:
+	if has_node("SwitchPoint"):
+		return $SwitchPoint.global_position
+	return global_position

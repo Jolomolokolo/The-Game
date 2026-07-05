@@ -20,3 +20,6 @@ func get_next_switch_for(current_track: Path3D) -> Node:
 		if sw.get_from_track() == current_track:
 			return sw
 	return null
+	
+func get_switches() -> Array:
+	return _switches

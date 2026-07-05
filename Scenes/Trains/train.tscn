@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://smu625keqm73" path="res://Scripts/train.gd" id="1_nxpru"]
 [ext_resource type="Texture2D" uid="uid://dx7xwudj0tglm" path="res://models/trains/Textures/colormap.png" id="2_0hk28"]
 [ext_resource type="Script" uid="uid://cpvaeoefjojug" path="res://Scripts/map_hud.gd" id="3_kpsx5"]
+[ext_resource type="Script" uid="uid://b757dm0e1o1ql" path="res://Scenes/Trains/carriage_hud.gd" id="4_t7e8y"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vju5p"]
 resource_name = "colormap"
@@ -163,6 +164,7 @@ transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 3.3190155, 0)
 shape = SubResource("BoxShape3D_mcim7")
 
 [node name="AnimatableBody3D" type="AnimatableBody3D" parent="." unique_id=1047394737]
+sync_to_physics = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D" unique_id=526334256]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.225061, 0)
@@ -238,6 +240,40 @@ light_indirect_energy = 2.0
 omni_range = 0.4
 omni_attenuation = 0.5
 
+[node name="BulbLight - front - right" type="OmniLight3D" parent="." unique_id=520408484]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0525413, 1.5254929, -3.47644)
+visible = false
+light_color = Color(1, 0.95686275, 0.8392157, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+omni_range = 0.4
+
+[node name="BulbLight - front - left" type="OmniLight3D" parent="." unique_id=806105882]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0473456, 1.5254929, -3.47644)
+visible = false
+light_color = Color(1, 0.95686275, 0.8392157, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+omni_range = 0.4
+
+[node name="BulbLight - back - right" type="OmniLight3D" parent="." unique_id=2143480242]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 1.0525419, 1.5254929, 3.5287921)
+visible = false
+light_color = Color(1, 0.95686275, 0.8392157, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+omni_range = 0.4
+omni_attenuation = 0.5
+
+[node name="BulbLight - back - left" type="OmniLight3D" parent="." unique_id=465754577]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, -1.047345, 1.5254929, 3.5287921)
+visible = false
+light_color = Color(1, 0.95686275, 0.8392157, 1)
+light_energy = 3.0
+light_indirect_energy = 2.0
+omni_range = 0.4
+omni_attenuation = 0.5
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1370055555]
 
 [node name="Tooltip-Overlay" type="Label" parent="CanvasLayer" unique_id=2126078778]
@@ -276,10 +312,30 @@ size_flags_vertical = 0
 
 [node name="Map_HUD" type="Control" parent="CanvasLayer" unique_id=324476168]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -275.0
+offset_top = -275.0
+offset_right = -25.0
+offset_bottom = -25.0
+grow_horizontal = 0
+grow_vertical = 0
 script = ExtResource("3_kpsx5")
+
+[node name="Carriage_HUD" type="Control" parent="CanvasLayer" unique_id=715472881]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -80.0
+offset_right = 60.0
+offset_bottom = -20.0
+grow_vertical = 0
+script = ExtResource("4_t7e8y")
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]
