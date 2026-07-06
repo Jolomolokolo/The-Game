@@ -5,6 +5,7 @@ extends Node3D
 @export var wobble_amount := 0.05
 @export var wobble_speed := 5.0
 @export var friction := 3.0
+@export var weight := 10.0 # Change at loading condition
 
 var current_track : Path3D = null
 var current_path_follow : PathFollow3D = null
@@ -37,12 +38,14 @@ func _process(delta: float) -> void:
 		rotation.z = wobble
 	
 	if not is_coupled:
-		if abs(velocity) > 0.01:
+		if abs(velocity) > 1.1:
 			current_progress += velocity * delta
 			current_progress = clampf(current_progress, 0.0, current_track.curve.get_baked_length() if current_track else 0.0)
 			if current_path_follow:
 				current_path_follow.progress = current_progress
 			velocity = move_toward(velocity, 0.0, friction * delta)
+		else:
+			velocity = 0.0
 		_check_carriage_collision()
 	
 func update_coupled_position(leader_progress: float, leader_track: Path3D, leader_follow: PathFollow3D, spd: float) -> void:
@@ -141,7 +144,7 @@ func decouple():
 	_next_follow = null
 	_wobble_time = 0.0
 	rotation.z = 0.0
-	print("Carriage %s decoupled at progress: %.1f on %s" % [name, current_progress, current_track.name if current_track else "?"])
+	#print("Carriage %s decoupled at progress: %.1f on %s" % [name, current_progress, current_track.name if current_track else "?"])
 	
 func get_couple_position() -> Vector3:
 	return global_position

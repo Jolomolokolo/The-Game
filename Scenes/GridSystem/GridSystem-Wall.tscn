@@ -1,0 +1,75 @@
+[gd_scene format=4 uid="uid://bkxy2eh0x4n75"]
+
+[ext_resource type="Script" uid="uid://42gt351buvum" path="res://Scenes/GridSystem/grid_system_object.gd" id="1_n252i"]
+[ext_resource type="Texture2D" uid="uid://d0nb7hwqsl82r" path="res://models/city/Textures/colormap.png" id="2_tq0g3"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_canjv"]
+resource_name = "colormap"
+cull_mode = 2
+albedo_texture = ExtResource("2_tq0g3")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_b2ttv"]
+_surfaces = [{
+"aabb": AABB(-2.6999998, 0, -1.5, 5.3999996, 0.14999999, 3),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAwACAAEAAgAEAAAAAQAFAAMABQABAAAAAgADAAYABgADAAUABgAEAAIAAAAHAAUABQAHAAYABwAAAAQABAAGAAcA"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("jiP//wAAAABw3P//AAAAAHDc/////wAA//8AAP//AACOI/////8AAP//AAAAAAAAAAAAAP//AAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kkycc"]
+resource_name = "driveway-short_driveway-short"
+_surfaces = [{
+"aabb": AABB(-2.6999998, 0, -1.5, 5.3999996, 0.14999999, 3),
+"attribute_data": PackedByteArray("/zcyk/83MpP/NzKT/zcyk/83MpP/N8ys/zfMrP83MpP/NzKT/zfMrP83zKz/NzKT/zfMrP83zKz/N8ys/zfMrP8XMpP/F8ys/xfMrP8XMpP/F8ys/xcyk/8XMpP/F8ys"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABgAHAAQACAAJAAoACgALAAgADAANAA4ADgAPAAwAEAARABIAEgATABAAFAAVABYAFgAXABQA"),
+"material": SubResource("StandardMaterial3D_canjv"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("jiP//wAA//9w3P//AAD//3Dc////////jiP///////+OI///AAD//wAAAAAAAP////8AAAAA//9w3P//AAD//3Dc/////wCA//8AAP//AIAAAAAA//8AgI4j/////wCAAAAAAP///7///wAA////v///AAAAAP+/AAAAAAAA/79w3P//AADZ0P//AAAAANnQ//8AAP//2dBw3P/////Z0AAAAAAAANnQjiP//wAA2dCOI//////Z0AAAAAD//9nQ/3//v/9//7//f/+//3//v/9/////f////3////9/////f////3////9/////f///AAD/fwAA/38AAP9/AAD/f4HPwCeBz8Angc/AJ4HPwCfAp32wwKd9sMCnfbDAp32w")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_b2ttv")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ock71"]
+size = Vector3(5.3999996, 0.14999999, 3)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_n252i"]
+size = Vector3(4.4, 0.053899903, 2.5)
+
+[node name="Wall" type="StaticBody3D" unique_id=2077608611 groups=["Object"]]
+script = ExtResource("1_n252i")
+
+[node name="Model" type="MeshInstance3D" parent="." unique_id=1710095973]
+transform = Transform3D(0.6, 0, 0, 0, -2.6226834e-08, -0.6, 0, 0.6, -2.6226834e-08, 0, 0.91999996, 4.0214474e-08)
+mesh = SubResource("ArrayMesh_kkycc")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1862697074]
+transform = Transform3D(0.34883773, 0, 0, 0, -4.371139e-08, -0.6, 0, 1, -2.6226834e-08, 0, 0.91999996, 0.07500003)
+shape = SubResource("BoxShape3D_ock71")
+disabled = true
+
+[node name="ClippingHitbox" type="Area3D" parent="." unique_id=642424373]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClippingHitbox" unique_id=906826046]
+transform = Transform3D(0.34883773, 0, 0, 0, -4.371139e-08, -0.6, 0, 1, -2.6226834e-08, -0.034883656, 0.9499999, 0.04569366)
+shape = SubResource("BoxShape3D_n252i")
+disabled = true
+
+[node name="FloatingHitbox" type="Area3D" parent="." unique_id=913317091]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloatingHitbox" unique_id=1429567704]
+transform = Transform3D(0.34883773, 0, 0, 0, -4.371139e-08, -0.6, 0, 1, -2.6226834e-08, 0, 0.91999996, 0.07500003)
+shape = SubResource("BoxShape3D_ock71")
+disabled = true

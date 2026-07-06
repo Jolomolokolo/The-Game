@@ -61,9 +61,9 @@ func _draw():
 	
 	if train_node and is_instance_valid(train_node):
 		var train_pos = _world_to_map(train_node.global_position)
-		var train_speed = train_node.get("speed") if train_node.get("speed") != null else 0.0
 		var train_angle = train_node.global_rotation.y
-		if train_speed < 0:
+		var gear = train_node.get("gear") if train_node.get("gear") != null else 0
+		if gear < 0:
 			train_angle += PI
 		_draw_train_arrow(train_pos, train_angle)
 		

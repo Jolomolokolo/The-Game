@@ -16,7 +16,7 @@ func _ready() -> void:
 func initialize(train: Node):
 	train_node = train
 	
-func _process(delta: float):
+func _process(_delta: float):
 	queue_redraw()
 	
 func _draw() -> void:

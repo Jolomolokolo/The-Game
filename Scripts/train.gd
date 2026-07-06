@@ -3,6 +3,8 @@ extends Node3D
 @export var max_speed := 20.0
 @export var acceleration := 3.0
 @export var brake_force := 6.0
+@export var weight := 20.0
+@export var tractive_force := 60.0
 
 var speed := 0.0
 var player_inside := false
@@ -136,14 +138,20 @@ func _physics_process(delta):
 	var forward = Input.get_action_strength("ui_up")
 	var back = Input.get_action_strength("ui_down")
 	
+	var total_weight = _get_total_weight()
+	var total_force = _get_total_tractive_force()
+	
+	var effective_acceleration = acceleration * (total_force / total_weight)
+	var effective_brake = brake_force * (total_force / total_weight)
+	
 	if gear == 0:
-		speed = move_toward(speed, 0.0, brake_force * delta)
+		speed = move_toward(speed, 0.0, effective_brake * delta)
 	elif forward > 0:
-		speed = move_toward(speed, max_speed * gear, acceleration * delta)
+		speed = move_toward(speed, max_speed * gear, effective_acceleration * delta)
 	elif back > 0:
-		speed = move_toward(speed, 0.0, brake_force * delta)
+		speed = move_toward(speed, 0.0, effective_brake * delta)
 	else:
-		speed = move_toward(speed, 0.0, brake_force * 0.5 * delta)
+		speed = move_toward(speed, 0.0, effective_brake * 0.5 * delta)
 	
 	current_progress += speed * delta
 	
@@ -380,13 +388,24 @@ func _check_nearby_carriage() -> void:
 			_nearby_carriage = carriage
 			break
 	
-func _try_couple_or_decouple():
-	if _nearby_carriage == null:
-		if _coupled_carriages.size() > 0:
-			_decouple_last()
-		return
+	if _nearby_carriage == null and _coupled_carriages.size() > 0:
+		var last = _coupled_carriages.back()
+		if is_instance_valid(last):
+			for carriage in carriages:
+				if _coupled_carriages.has(carriage):
+					continue
+				if not is_instance_valid(carriage):
+					continue
+				var dist = last.global_position.distance_to(carriage.global_position)
+				if dist <= couple_distance + 2.0:
+					_nearby_carriage = carriage
+					break
 	
-	_couple_carriage(_nearby_carriage)
+func _try_couple_or_decouple():
+	if _nearby_carriage != null:
+		_couple_carriage(_nearby_carriage)
+	elif _coupled_carriages.size() > 0:
+		_decouple_last()
 	
 func _couple_carriage(carriage: Node):
 	_coupled_carriages.append(carriage)
@@ -445,17 +464,30 @@ func _check_carriage_collision():
 		var moving_toward = sign(speed) != push_dir and speed != 0.0
 		
 		if moving_toward:
-			if abs(speed) > abs(carriage.velocity):
+			if abs(carriage.velocity) < 1.0:
 				carriage.velocity = speed * 0.7
-			speed = move_toward(speed, 0.0, abs(speed) * 0.05)
+			speed = move_toward(speed, 0.0, abs(speed) * 0.02)
 			if abs(speed) < 0.3:
 				speed = 0.0
-		else:
-			speed = 0.0
 		
-		current_progress = carriage.current_progress + min_dist * push_dir
-		current_progress = clampf(current_progress, 0.0, current_track.curve.get_baked_length())
-		if current_path_follow:
-			current_path_follow.progress = current_progress
+		if abs(carriage.velocity) < abs(speed):
+			current_progress = carriage.current_progress + min_dist * push_dir
+			current_progress = clampf(current_progress, 0.0, current_track.curve.get_baked_length())
+			if current_path_follow:
+				current_path_follow.progress = current_progress
 		
 		return
+	
+func _get_total_weight() -> float:
+	var total = weight
+	for carriage in _coupled_carriages:
+		if is_instance_valid(carriage) and carriage.has_method("get_coupled_position"):
+			total += carriage.get("weight") if carriage.get("weight") != null else 10.0
+	return total
+	
+func _get_total_tractive_force() -> float:
+	var total = tractive_force
+	for carriage in _coupled_carriages:
+		if is_instance_valid(carriage) and carriage.get("tractive_force") != null:
+			total += carriage.get("tractive_force")
+	return total

@@ -27,6 +27,13 @@ var cam_pitch := 0.0
 var target_yaw := 0.0
 var current_yaw := 0.0
 
+# Grid System
+var grid_size = 0.25
+var ghost_block: Node3D = null
+var objects = []
+var current_object_index = 0
+@onready var hand_target = $CameraPivot/HandTarget
+
 # Camera
 @onready var camera_pivot = $CameraPivot
 @onready var camera_first_view = $"CameraPivot/First-View"
@@ -44,6 +51,10 @@ func _ready():
 	#head_mesh.visible = true
 	health = max_health
 	call_deferred("_setup_collision_exceptions")
+	
+	objects.append(preload("res://Scenes/GridSystem/GridSystem-Floor.tscn"))
+	objects.append(preload("res://Scenes/GridSystem/GridSystem-Wall.tscn"))
+	objects.append(preload("res://Scenes/GridSystem/GridSystem-Object.tscn"))
 	
 func _input(event):
 	
@@ -153,8 +164,20 @@ func _physics_process(delta):
 	
 	move_and_slide()
 	
-func _process(_delta):
+	if Input.is_action_just_pressed("build"):
+		if ghost_block:
+			ghost_block.destroy()
+		else:
+			spawn_ghost_block()
 	
+	if ghost_block:
+		_building(delta)
+		if Input.is_action_just_pressed("next_item"):
+			object_change(1)
+		if Input.is_action_just_pressed("previous_item"):
+			object_change(-1)
+	
+func _process(_delta):
 	if in_car:
 		return
 	
@@ -203,3 +226,39 @@ func notify_exit():
 	in_car = false
 	nearby_vehicle = null
 	set_process_unhandled_input(true)
+	
+func _building(_delta):
+	var snap_pos: Vector3 = _snap_to_grid(hand_target.global_position, grid_size)
+	ghost_block.global_position = lerp(ghost_block.global_position, snap_pos, 0.1)
+	
+	if Input.is_action_just_pressed("rotate"):
+		ghost_block.rotation.y += deg_to_rad(90)
+	
+	if Input.is_action_just_pressed("left_click") and ghost_block.can_place:
+		var block_instance = objects[current_object_index].instantiate()
+		get_parent().add_child(block_instance)
+		block_instance.place()
+		block_instance.global_transform.origin = _snap_to_grid(ghost_block.global_transform.origin, grid_size)
+		block_instance.global_rotation = ghost_block.global_rotation
+	
+func _snap_to_grid(position: Vector3, grid_snap: float) -> Vector3:
+	var x = round(position.x / grid_snap) * grid_snap
+	var y = round(position.y / grid_snap) * grid_snap
+	var z = round(position.z / grid_snap) * grid_snap
+	return Vector3(x, y, z)
+	
+func spawn_ghost_block():
+	ghost_block = objects[current_object_index].instantiate()
+	get_parent().add_child(ghost_block)
+	ghost_block.global_position = self.global_position
+	ghost_block.global_position.y -= 1.0
+	
+func object_change(direction):
+	if ghost_block:
+		ghost_block.queue_free()
+		current_object_index += direction
+		if current_object_index < 0:
+			current_object_index += objects.size()
+		elif current_object_index >= objects.size():
+			current_object_index -= objects.size()
+		spawn_ghost_block()

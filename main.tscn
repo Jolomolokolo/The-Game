@@ -166,6 +166,7 @@ _data = {
 point_count = 3
 
 [node name="Main" type="Node3D" unique_id=105238301]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.522, 0)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=2902083]
 environment = SubResource("Environment_0xm2m")
@@ -394,6 +395,38 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.06406, 0.6862656, -5.60604
 
 [node name="Cone3" parent="Map" unique_id=1370644110 instance=ExtResource("30_seu75")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.876801, 0.6809069, -5.707911)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Map" unique_id=2005626818]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map/CSGCombiner3D" unique_id=1992626882]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.007162, 92.381996)
+size = Vector3(25, 1, 15)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Map/CSGCombiner3D" unique_id=2064809129]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0056152344, 5.522461, 99.37854)
+size = Vector3(25.030762, 10, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Map/CSGCombiner3D" unique_id=803635394]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0056152344, 5.522461, 85.36542)
+size = Vector3(25.030762, 10, 1)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Map/CSGCombiner3D/CSGBox3D3" unique_id=1180745165]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+operation = 2
+radius = 2.3857422
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Map/CSGCombiner3D/CSGBox3D3" unique_id=1071477622]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.011100769, -2.505188, 0)
+operation = 2
+size = Vector3(4.7389374, 4.989624, 1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Map/CSGCombiner3D" unique_id=11282328]
+transform = Transform3D(7.54979e-08, 0, -1, 0, 1, 0, 1, 0, 7.54979e-08, -12.01356, 5.522461, 92.37815)
+size = Vector3(15.010956, 10, 1)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Map/CSGCombiner3D" unique_id=727764475]
+transform = Transform3D(7.54979e-08, 0, -1, 0, 1, 0, 1, 0, 7.54979e-08, 12.005156, 5.522461, 92.37815)
+size = Vector3(15.010956, 10, 1)
 
 [node name="VehicleBody3D" parent="." unique_id=1383445128 instance=ExtResource("30_kq58d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.856, 0.61, -8.535)
@@ -1245,7 +1278,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52246094, -82.828636)
 curve = SubResource("Curve3D_come4")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="RailNetwork/Track_A" unique_id=1926029712]
-transform = Transform3D(-0.1604332, 0, -0.9870164, 0, 0.99995387, 0, 0.9870088, 0, -0.16043442, -20.22619, 0, 41.26555)
+transform = Transform3D(-0.1604332, 0, -0.9870162, 0, 0.99995387, 0, 0.9870088, 0, -0.1604344, -20.22619, 0, 41.26555)
 progress = 132.84035
 
 [node name="Train" parent="RailNetwork/Track_A/PathFollow3D" unique_id=695677159 instance=ExtResource("33_jq2sk")]

@@ -1,0 +1,46 @@
+[gd_scene format=4 uid="uid://bt5poivlns0im"]
+
+[ext_resource type="Script" uid="uid://42gt351buvum" path="res://Scenes/GridSystem/grid_system_object.gd" id="1_gsjl6"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_pd74d"]
+_surfaces = [{
+"aabb": AABB(-1.25, -1.25, -1.25, 2.5, 2.5, 2.5),
+"attribute_data": PackedByteArray("AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/AACAPwAAgD8AAIA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAPwAAgD8AAIA/"),
+"format": 34359738391,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AACgvwAAoL8AAKA/AACgvwAAoL8AAKC/AACgvwAAoD8AAKC/AACgPwAAoL8AAKC/AACgvwAAoL8AAKC/AACgvwAAoL8AAKA/AACgvwAAoD8AAKC/AACgvwAAoL8AAKC/AACgPwAAoL8AAKC/AACgvwAAoD8AAKC/AACgvwAAoD8AAKA/AACgvwAAoL8AAKA/AACgvwAAoL8AAKA/AACgvwAAoD8AAKA/AACgPwAAoD8AAKA/AACgPwAAoD8AAKA/AACgvwAAoD8AAKA/AACgvwAAoD8AAKC/AACgvwAAoL8AAKA/AACgPwAAoL8AAKA/AACgPwAAoL8AAKC/AACgPwAAoD8AAKA/AACgPwAAoL8AAKA/AACgvwAAoL8AAKA/AACgPwAAoL8AAKC/AACgPwAAoL8AAKA/AACgPwAAoD8AAKA/AACgPwAAoL8AAKC/AACgPwAAoD8AAKC/AACgvwAAoD8AAKC/AACgvwAAoD8AAKC/AACgPwAAoD8AAKC/AACgPwAAoD8AAKA/AACgPwAAoD8AAKA/AACgPwAAoD8AAKC/AACgPwAAoL8AAKC/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//38AAP//AAD/fwAA//8AAP9/AAD//wAA/////wAA/z//////AAD/P/////8AAP8/AAD/f/9//n8AAP9//3/+fwAA/3//f/5//3//fwAA/z//f/9/AAD/P/9//38AAP8//3//////AAD/f/////8AAP9//////wAA/38AAP//AAD/fwAA//8AAP9/AAD//wAA/3//fwAA/z//f/9/AAD/P/9//38AAP8/////f/9//n////9//3/+f////3//f/5//////wAA/z//////AAD/P/////8AAP8//3//////AAD/f/////8AAP9//////wAA////f/9//n////9//3/+f////3//f/5/")
+}]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pd74d"]
+size = Vector3(2.5, 2.5, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gsjl6"]
+size = Vector3(2.25, 2.25, 2.25)
+
+[node name="Block" type="StaticBody3D" unique_id=1371991593 groups=["Objects"]]
+script = ExtResource("1_gsjl6")
+
+[node name="Model" type="MeshInstance3D" parent="." unique_id=1746968105]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+mesh = SubResource("ArrayMesh_pd74d")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=346378664]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+shape = SubResource("BoxShape3D_pd74d")
+disabled = true
+
+[node name="ClippingHitbox" type="Area3D" parent="." unique_id=89403053]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClippingHitbox" unique_id=2135135574]
+shape = SubResource("BoxShape3D_gsjl6")
+
+[node name="FloatingHitbox" type="Area3D" parent="." unique_id=1498030961]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloatingHitbox" unique_id=1888231672]
+shape = SubResource("BoxShape3D_pd74d")
+disabled = true
