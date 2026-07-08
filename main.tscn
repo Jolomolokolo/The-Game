@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://bkj3lhft3u0i7" path="res://Scenes/car.tscn" id="30_kq58d"]
 [ext_resource type="PackedScene" uid="uid://u6mdbu17gfc2" path="res://Scenes/cone.tscn" id="30_seu75"]
 [ext_resource type="PackedScene" uid="uid://eicf7sv8l65a" path="res://models/city/path-stones-messy.glb" id="31_0rl1p"]
+[ext_resource type="PackedScene" uid="uid://b8aa8dlm4h0xq" path="res://shop.tscn" id="32_come4"]
 [ext_resource type="Texture2D" uid="uid://die8kh6pu23tx" path="res://models/prototype-kit/Textures/colormap.png" id="32_htxhm"]
 [ext_resource type="PackedScene" uid="uid://c4pj4j4ga3wj" path="res://Scenes/Trains/train.tscn" id="33_jq2sk"]
 [ext_resource type="PackedScene" uid="uid://b4k4dmedtvp51" path="res://Scenes/Tools/rail_placer.tscn" id="35_ok6jj"]
@@ -177,12 +178,12 @@ shadow_enabled = true
 script = ExtResource("1_htxhm")
 
 [node name="Floor" type="CSGBox3D" parent="." unique_id=992992754]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.2774987, 0.022460938, 4.3176503)
 use_collision = true
+collision_layer = 5
 size = Vector3(250, 1, 250)
 
 [node name="Player" parent="." unique_id=2118549186 instance=ExtResource("26_lswn8")]
-transform = Transform3D(-0.8, 0, 1.2079664e-07, 0, 0.8, 0, -1.2079664e-07, 0, -0.8, 5.8261504, 0.50000167, -10.133537)
+transform = Transform3D(-0.8, 0, 1.2079664e-07, 0, 0.8, 0, -1.2079664e-07, 0, -0.8, -8.139599, 0.50000167, -17.99078)
 
 [node name="Map" type="Node3D" parent="." unique_id=902561762]
 
@@ -428,6 +429,9 @@ size = Vector3(15.010956, 10, 1)
 transform = Transform3D(7.54979e-08, 0, -1, 0, 1, 0, 1, 0, 7.54979e-08, 12.005156, 5.522461, 92.37815)
 size = Vector3(15.010956, 10, 1)
 
+[node name="Shop" parent="." unique_id=392201601 instance=ExtResource("32_come4")]
+transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, 23.966, 0.4999997, -6.33)
+
 [node name="VehicleBody3D" parent="." unique_id=1383445128 instance=ExtResource("30_kq58d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.856, 0.61, -8.535)
 center_of_mass = Vector3(0, -1, 0)
@@ -449,7 +453,6 @@ track_branch = NodePath("../Track_E")
 [node name="RailPlacer" parent="RailNetwork" unique_id=951830831 node_paths=PackedStringArray("path") instance=ExtResource("35_ok6jj")]
 path = NodePath("../Track_E")
 rail_scene = ExtResource("36_facbu")
-track_id = "Track_E"
 
 [node name="Track_A_0" parent="RailNetwork/RailPlacer" unique_id=240892392 instance=ExtResource("36_facbu")]
 transform = Transform3D(0.32831025, 0, 0.94456995, 0, 1, 0, -0.94456995, 0, 0.32831025, 0, 0.52246094, -82.828636)

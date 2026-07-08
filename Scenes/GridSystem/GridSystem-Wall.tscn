@@ -41,35 +41,30 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_b2ttv")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ock71"]
-size = Vector3(5.3999996, 0.14999999, 3)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_n252i"]
-size = Vector3(4.4, 0.053899903, 2.5)
+size = Vector3(5.3999996, 0.14999999, 3)
 
 [node name="Wall" type="StaticBody3D" unique_id=2077608611 groups=["Object"]]
 script = ExtResource("1_n252i")
 
 [node name="Model" type="MeshInstance3D" parent="." unique_id=1710095973]
-transform = Transform3D(0.6, 0, 0, 0, -2.6226834e-08, -0.6, 0, 0.6, -2.6226834e-08, 0, 0.91999996, 4.0214474e-08)
+transform = Transform3D(0.6, 0, 0, 0, -2.6226834e-08, -0.6, 0, 0.6, -2.6226834e-08, 0, 0.9, 0)
 mesh = SubResource("ArrayMesh_kkycc")
 skeleton = NodePath("")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1862697074]
-transform = Transform3D(0.34883773, 0, 0, 0, -4.371139e-08, -0.6, 0, 1, -2.6226834e-08, 0, 0.91999996, 0.07500003)
-shape = SubResource("BoxShape3D_ock71")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=913242838]
+transform = Transform3D(0.6, 0, 0, 0, -2.6226834e-08, -0.6, 0, 0.6, -2.6226834e-08, 0, 0.9, 0.044999998)
+shape = SubResource("BoxShape3D_n252i")
 disabled = true
 
 [node name="ClippingHitbox" type="Area3D" parent="." unique_id=642424373]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="ClippingHitbox" unique_id=906826046]
-transform = Transform3D(0.34883773, 0, 0, 0, -4.371139e-08, -0.6, 0, 1, -2.6226834e-08, -0.034883656, 0.9499999, 0.04569366)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ClippingHitbox" unique_id=1977175085]
+transform = Transform3D(0.58, 0, 0, 0, -2.5352605e-08, -0.58, 0, 0.58, -2.5352605e-08, 0, 0.9, 0.044999998)
 shape = SubResource("BoxShape3D_n252i")
-disabled = true
 
 [node name="FloatingHitbox" type="Area3D" parent="." unique_id=913317091]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="FloatingHitbox" unique_id=1429567704]
-transform = Transform3D(0.34883773, 0, 0, 0, -4.371139e-08, -0.6, 0, 1, -2.6226834e-08, 0, 0.91999996, 0.07500003)
-shape = SubResource("BoxShape3D_ock71")
-disabled = true
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloatingHitbox" unique_id=460646494]
+transform = Transform3D(0.6, 0, 0, 0, -2.6226834e-08, -0.6, 0, 0.6, -2.6226834e-08, 0, 0.9, 0.044999998)
+shape = SubResource("BoxShape3D_n252i")

@@ -1,5 +1,8 @@
 extends StaticBody3D
 
+@export var size : Vector3 = Vector3(1, 1, 1)
+@export var pivot_at_bottom : bool = true
+
 @onready var model : MeshInstance3D = $Model
 @onready var collision_shape : CollisionShape3D = $CollisionShape3D
 @onready var clipping_hitbox : Area3D = $ClippingHitbox
@@ -25,8 +28,6 @@ func place():
 	model.material_override = null
 	model.transparency = 0.0
 	collision_shape.disabled = false
-	
-	
 	
 func destroy():
 	queue_free()
