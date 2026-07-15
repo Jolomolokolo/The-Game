@@ -5,6 +5,7 @@ extends StaticBody3D
 
 @onready var model : MeshInstance3D = $Model
 @onready var collision_shape : CollisionShape3D = $CollisionShape3D
+#@onready var collision_shape1 : CollisionShape3D = $CollisionShape3D2
 @onready var clipping_hitbox : Area3D = $ClippingHitbox
 @onready var floating_hitbox : Area3D = $FloatingHitbox
 
@@ -28,6 +29,7 @@ func place():
 	model.material_override = null
 	model.transparency = 0.0
 	collision_shape.disabled = false
+	#collision_shape1.disabled = false
 	
 func destroy():
 	queue_free()

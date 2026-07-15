@@ -16,6 +16,8 @@ dest_files=["res://.godot/imported/warning-traffic.glb-e4b0840221a265b66900c3d4d
 nodes/root_type=""
 nodes/root_name=""
 nodes/root_script=null
+mesh_library/use_node_names_as_mesh_names=false
+array_mesh/deduplicate_surfaces=true
 nodes/apply_root_scale=true
 nodes/root_scale=2.0
 nodes/import_as_skeleton_bones=false
@@ -37,6 +39,15 @@ import_script/path=""
 materials/extract=0
 materials/extract_format=0
 materials/extract_path=""
-_subresources={}
+_subresources={
+"materials": {
+"colormap": {
+"use_external/enabled": true,
+"use_external/fallback_path": "res://Scenes/Test/colormap.tres",
+"use_external/path": "uid://b4uuhjym4n3gu"
+}
+}
+}
 gltf/naming_version=2
 gltf/embedded_image_handling=1
+gltf/texture_map_mode=0

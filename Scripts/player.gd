@@ -11,12 +11,16 @@ extends CharacterBody3D
 @export var fall_damage_multiplier := 2.0
 @export var max_health := 100.0
 @export var respawn_ragedoll_time := 3.0
+@export var cash := 100
 
 var health := 0.0
 var player_dead := false
 var game_paused := false
+var shop_open := false
 var was_on_floor := false
 var fall_velocity := 0.0
+var displayed_cash := 100
+var cash_count_tween : Tween
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var camera_selected = 2
@@ -44,7 +48,11 @@ var ghost_rotation_y := 0.0
 
 # Control/HUD
 @onready var respawn_screen = $Control/RespawnScreen
-@onready var pause_screen = $Control/PauseScreen
+@onready var pause_screen = $PauseScreen
+
+@onready var health_bar = $CanvasLayer/HealthBar
+@onready var cash_label : Label = $CanvasLayer/CashLabel
+@onready var cash_popup_container : Control = $CanvasLayer/CashPopupContainer
 
 # Animation
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -56,13 +64,19 @@ func _ready():
 	camera_third_view.current = true
 	#head_mesh.visible = true
 	health = max_health
+	health_bar.value = health
 	respawn_screen.visible = false
 	pause_screen.visible = false
 	call_deferred("_setup_collision_exceptions")
 	
-	objects.append(preload("res://Scenes/GridSystem/GridSystem-Floor.tscn"))
+	objects.append(preload("res://Scenes/GridSystem/GridSystem-TrainTracks.tscn"))
 	objects.append(preload("res://Scenes/GridSystem/GridSystem-Wall.tscn"))
 	objects.append(preload("res://Scenes/GridSystem/GridSystem-Object.tscn"))
+	
+	call_deferred("_connect_to_shop")
+	
+	displayed_cash = cash
+	cash_label.text = str(cash) + " Cash"
 	
 func _input(event):
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not in_car:
@@ -77,7 +91,10 @@ func _input(event):
 	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+			if shop_open:
+				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+			else:
+				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	
 	# Camera Switch
 	if event.is_action_pressed("camera_1"):
@@ -91,6 +108,14 @@ func _input(event):
 			set_process_unhandled_input(false)
 			nearby_vehicle.enter_vehicle(self)
 	
+	
+	# Intern - DELETE for Release
+	
+	if event.is_action_pressed("0"):
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	if event.is_action_pressed("9"):
+		add_cash(100)
 func _physics_process(delta):
 	if in_car:
 		return
@@ -209,6 +234,8 @@ func _process(_delta):
 	
 	if global_position.y < respawn_depth_trigger:
 		respawn()
+	
+	cash_label.text = str(cash) + " Cash"
 
 func respawn():
 	get_tree().paused = false
@@ -218,13 +245,17 @@ func respawn():
 	self.set_physics_process(true)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	respawn_screen.visible = false
+	health_bar.max_value = max_health
+	health_bar.value = max_health
 	player_dead = false
 	
 func take_damage(amount: float):
 	health -= amount
 	health = max(health, 0.0)
+	health_bar.value = health
 	print("Fall Damage: -%.1f  |  HP: %.1f / %.1f" % [amount, health, max_health])
 	if health <= 0.0:
+		health_bar.value = 0.0
 		die()
 
 func die():
@@ -351,8 +382,55 @@ func game_pause_return():
 	get_tree().paused = false
 	game_paused = false
 	pause_screen.visible = false
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	if shop_open:
+		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	else:
+		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	
-func _on_return_pause_button_pressed() -> void:
+func _on_return_button_pressed() -> void:
 	game_pause_return()
+	
+func _on_shop_state_changed(is_open: bool):
+	shop_open = is_open
+	
+func _connect_to_shop():
+	var shop = get_tree().get_first_node_in_group("shop")
+	if shop:
+		shop.shop_state_changed.connect(_on_shop_state_changed)
+	
+func add_cash(amount: int):
+	var old_cash = cash
+	cash += amount
+	_spawn_cash_popup(cash - old_cash)
+	_animate_cash_count_to(cash)
+	
+func _spawn_cash_popup(difference: int):
+	if difference == 0:
+		return
+	
+	var popup = Label.new()
+	var sign_str = "+" if difference > 0 else ""
+	popup.text = sign_str + str(difference)
+	popup.modulate = Color(1, 0.3, 0.3) if difference < 0 else Color(0.3, 1, 0.3)
+	popup.add_theme_font_size_override("font_size", 20)
+	
+	cash_popup_container.add_child(popup)
+	popup.position = Vector2(randf_range(-10, 10), 0)
+	
+	var popup_tween = create_tween()
+	popup_tween.tween_property(popup, "position:y", popup.position.y - 30, 0.6)
+	popup_tween.parallel().tween_property(popup, "modulate:a", 0.0, 0.6).set_delay(0.3)
+	popup_tween.tween_callback(popup.queue_free)
+	
+func _animate_cash_count_to(target_cash: int):
+	if cash_count_tween:
+		cash_count_tween.kill()
+	
+	cash_count_tween = create_tween()
+	cash_count_tween.tween_method(_update_cash_label, displayed_cash, target_cash, 0.5)
+	cash_count_tween.finished.connect(func(): displayed_cash = target_cash)
+	
+func _update_cash_label(value: float):
+	displayed_cash = int(round(value))
+	cash_label.text = str(displayed_cash) + " Cash"
 	

@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://bm6o155u6h5c3"]
+
+[node name="LightComparision" type="Node3D" unique_id=2075192454]
+
+[node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=1763736850]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.398136, 0, 0)
+light_energy = 5.0
+light_indirect_energy = 3.0
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1844792140]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.347666, 0, 0)
+light_energy = 5.0
+light_indirect_energy = 3.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=1649806402]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4133406, 0, 0)
+light_energy = 5.0
+light_indirect_energy = 3.0
+
+[node name="SpotLight3D" type="SpotLight3D" parent="." unique_id=2105268257]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.744017, 0, 0)
+light_energy = 5.0
+light_indirect_energy = 3.0

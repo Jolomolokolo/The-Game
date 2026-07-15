@@ -1,5 +1,8 @@
 extends Node3D
 
+# COUPLING WITH AREA3D - maybe better
+# COMPLETE TRAIN OVERALL, WITH REAL PHYSICS AND WITH VEHICLEBODY
+
 @export var max_speed := 20.0
 @export var acceleration := 3.0
 @export var brake_force := 6.0
@@ -21,8 +24,10 @@ var _rail_network : Node = null
 
 var current_progress : float = 0.0
 
-var _coupled_carriages : Array[Node] = []
 var _nearby_carriage : Node = null
+var _couple_area_front : Area3D = null
+var _couple_area_back : Area3D = null
+var _coupled_carriages : Array[Node] = []
 @export var couple_distance := 4.0
 
 @onready var train_camera = $DriveCamera
@@ -35,19 +40,24 @@ var _nearby_carriage : Node = null
 @onready var switch_hud = $CanvasLayer/Rail_Switch_HUD
 @onready var map_hud = $CanvasLayer/Map_HUD
 @onready var carriage_hud = $CanvasLayer/Carriage_HUD
+@onready var couple_menu = $CanvasLayer/CoupleMenu
 
 @onready var spot_front_right = $"SpotLight - front - right"
 @onready var spot_front_left = $"SpotLight - front - left"
 @onready var spot_back_right = $"SpotLight - back - right"
 @onready var spot_back_left = $"SpotLight - back - left"
-@onready var bulb_front_right = $"BulbLight - front - right"
-@onready var bulb_front_left = $"BulbLight - front - left"
-@onready var bulb_back_right = $"BulbLight - back - right"
-@onready var bulb_back_left = $"BulbLight - back - left"
 @onready var back_front_right = $"BackLight - front - right"
 @onready var back_front_left = $"BackLight - front - left"
 @onready var back_back_right = $"BackLight - back - right"
 @onready var back_back_left = $"BackLight - back - left"
+
+@onready var front_front_left = $"FrontLight - front - left"
+@onready var front_front_right = $"FrontLight - front - right"
+@onready var front_back_left = $"FrontLight - back - left"
+@onready var front_back_right = $"FrontLight - back - right"
+
+var off_material : StandardMaterial3D
+var mat_yellow : StandardMaterial3D
 
 func _ready():
 	add_to_group("train")
@@ -65,18 +75,18 @@ func _ready():
 	spot_front_left.visible = false
 	spot_back_right.visible = false
 	spot_back_left.visible = false
-	bulb_front_right.visible = false
-	bulb_front_left.visible = false
-	bulb_back_right.visible = false
-	bulb_back_left.visible = false
 	back_front_right.visible = false
 	back_front_left.visible = false
 	back_back_right.visible = false
 	back_back_left.visible = false
+	_build_materials()
 	
 	_rail_network = _find_rail_network()
 	
 	_init_track_from_parent()
+	
+	_couple_area_front = get_node_or_null("CoupleAreaFront")
+	_couple_area_back = get_node_or_null("CoupleAreaBack")
 	
 	var map = get_node_or_null("CanvasLayer/Map_HUD")
 	if map and map.has_method("initialize"):
@@ -85,6 +95,10 @@ func _ready():
 	carriage_hud.visible = false
 	if carriage_hud and carriage_hud.has_method("initialize"):
 		carriage_hud.initialize(self)
+	
+	couple_menu.visible = false
+	if couple_menu.has_method("initialize"):
+		couple_menu.initialize(self)
 	
 func _init_track_from_parent() -> void:
 	var parent = get_parent()
@@ -156,6 +170,7 @@ func _physics_process(delta):
 	current_progress += speed * delta
 	
 	_check_carriage_collision()
+	_check_coupled_carriage_collision()
 	
 	if current_path_follow:
 		current_path_follow.progress = current_progress
@@ -259,19 +274,26 @@ func _update_headlights():
 		spot_front_left.visible = false
 		spot_back_right.visible = false
 		spot_back_left.visible = false
-		bulb_front_right.visible = false
-		bulb_front_left.visible = false
-		bulb_back_right.visible = false
-		bulb_back_left.visible = false
+		front_front_left.material_override = off_material
+		front_front_right.material_override = off_material
+		front_back_left.material_override = off_material
+		front_back_right.material_override = off_material
 		return
 	spot_front_right.visible = gear == 1
 	spot_front_left.visible = gear == 1
-	bulb_front_right.visible = gear == 1
-	bulb_front_left.visible = gear == 1
 	spot_back_right.visible = gear == -1
 	spot_back_left.visible = gear == -1
-	bulb_back_right.visible = gear == -1
-	bulb_back_left.visible = gear == -1
+	
+	if gear == 1:
+		front_front_left.material_override = mat_yellow
+		front_front_right.material_override = mat_yellow
+		front_back_left.material_override = off_material
+		front_back_right.material_override = off_material
+	if gear == -1:
+		front_front_left.material_override = off_material
+		front_front_right.material_override = off_material
+		front_back_left.material_override = mat_yellow
+		front_back_right.material_override = mat_yellow
 	
 func _update_brake_light(is_braking: bool):
 	var energy_normal := 3.0
@@ -307,6 +329,7 @@ func enter_vehicle(player):
 	tooltip_layer_enter.visible = false
 	map_hud.visible = true
 	carriage_hud.visible = true
+	couple_menu.visible = false
 	_update_switch_hud()
 	
 func exit_train():
@@ -320,6 +343,7 @@ func exit_train():
 	switch_hud.visible = false
 	map_hud.visible = false
 	carriage_hud.visible = false
+	couple_menu.hide_menu()
 	player_ref.set_physics_process(true)
 	player_ref.notify_exit()
 	var ref = player_ref
@@ -367,45 +391,47 @@ func _update_next_junction():
 	
 func _check_nearby_carriage() -> void:
 	if not player_inside:
+		_nearby_carriage = null
 		return
 	
-	var train_back  = global_position - global_transform.basis.z * 4.0
-	var train_front = global_position + global_transform.basis.z * 4.0
-	
-	var carriages = get_tree().get_nodes_in_group("train_carriage")
 	_nearby_carriage = null
 	
-	for carriage in carriages:
-		if _coupled_carriages.has(carriage):
+	for area in [_couple_area_front, _couple_area_back]:
+		if area == null:
 			continue
-		if not is_instance_valid(carriage):
-			continue
-	
-		var dist_back  = train_back.distance_to(carriage.global_position)
-		var dist_front = train_front.distance_to(carriage.global_position)
-	
-		if dist_back <= couple_distance or dist_front <= couple_distance:
-			_nearby_carriage = carriage
-			break
+		for body in area.get_overlapping_bodies():
+			if body.is_in_group("train_carriage") and not _coupled_carriages.has(body):
+				_nearby_carriage = body
+				return
+			var parent = body.get_parent()
+			if parent and parent.is_in_group("train_carriage") and not _coupled_carriages.has(parent):
+				_nearby_carriage = parent
+				return
 	
 	if _nearby_carriage == null and _coupled_carriages.size() > 0:
 		var last = _coupled_carriages.back()
-		if is_instance_valid(last):
-			for carriage in carriages:
-				if _coupled_carriages.has(carriage):
-					continue
-				if not is_instance_valid(carriage):
-					continue
-				var dist = last.global_position.distance_to(carriage.global_position)
-				if dist <= couple_distance + 2.0:
-					_nearby_carriage = carriage
-					break
+		if not is_instance_valid(last):
+			return
+		var last_front = last.get_node_or_null("CoupleAreaFront")
+		var last_back = last.get_node_or_null("CoupleAreaBack")
+		for area in [last_front, last_back]:
+			if area == null:
+				continue
+			for body in area.get_overlapping_bodies():
+				if body.is_in_group("train_carriage") and not _coupled_carriages.has(body):
+					_nearby_carriage = body
+					return
+				var parent = body.get_parent()
+				if parent.is_in_group("train_carriage") and not _coupled_carriages.has(parent):
+					_nearby_carriage = parent
+					return
 	
 func _try_couple_or_decouple():
-	if _nearby_carriage != null:
-		_couple_carriage(_nearby_carriage)
-	elif _coupled_carriages.size() > 0:
-		_decouple_last()
+	if _nearby_carriage != null or _coupled_carriages.size() > 0:
+		if couple_menu.visible:
+			couple_menu.hide_menu()
+		else:
+			couple_menu.show_menu()
 	
 func _couple_carriage(carriage: Node):
 	_coupled_carriages.append(carriage)
@@ -478,6 +504,40 @@ func _check_carriage_collision():
 		
 		return
 	
+func _check_coupled_carriage_collision() -> void:
+	if _coupled_carriages.is_empty():
+		return
+	
+	var first = _coupled_carriages[0]
+	if not is_instance_valid(first):
+		return
+	if not first.current_track or not current_track:
+		return
+	if first.current_track.name != current_track.name:
+		return
+	
+	var dist = current_progress - first.current_progress
+	var abs_dist = abs(dist)
+	var min_dist = 7.6
+	
+	if abs_dist >= min_dist:
+		return
+	
+	var push_dir = sign(dist)
+	if push_dir == 0:
+		push_dir = 1
+	
+	var moving_toward = (speed > 0 and push_dir > 0) or (speed < 0 and push_dir < 0)
+	
+	if not moving_toward:
+		return
+	
+	speed = 0.0
+	current_progress = first.current_progress + min_dist * push_dir
+	current_progress = clampf(current_progress, 0.0, current_track.curve.get_baked_length())
+	if current_path_follow:
+		current_path_follow.progress = current_progress
+	
 func _get_total_weight() -> float:
 	var total = weight
 	for carriage in _coupled_carriages:
@@ -491,3 +551,17 @@ func _get_total_tractive_force() -> float:
 		if is_instance_valid(carriage) and carriage.get("tractive_force") != null:
 			total += carriage.get("tractive_force")
 	return total
+	
+func _build_materials():
+	off_material = StandardMaterial3D.new()
+	off_material.albedo_color = Color(1, 0.6, 0)
+	mat_yellow = _make_glow_material(Color(1, 0.6, 0))
+	
+func _make_glow_material(color: Color):
+	var mat = StandardMaterial3D.new()
+	mat.albedo_color = color
+	mat.emission_enabled = true
+	mat.emission = color
+	mat.emission_energy_multiplier = 4.0
+	return mat
+	

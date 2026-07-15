@@ -1,6 +1,6 @@
 [gd_scene format=4 uid="uid://bauh6p0lli28v"]
 
-[ext_resource type="Script" uid="uid://42gt351buvum" path="res://Scenes/GridSystem/grid_system_object.gd" id="1_xfaoe"]
+[ext_resource type="Script" uid="uid://42gt351buvum" path="res://Scripts/grid_system_object.gd" id="1_xfaoe"]
 [ext_resource type="Texture2D" uid="uid://d0nb7hwqsl82r" path="res://models/city/Textures/colormap.png" id="2_xfaoe"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ak3y"]

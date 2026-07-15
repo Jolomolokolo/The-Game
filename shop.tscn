@@ -1,7 +1,10 @@
 [gd_scene format=4 uid="uid://b8aa8dlm4h0xq"]
 
-[ext_resource type="Script" uid="uid://drd2tht02dkr" path="res://shop.gd" id="1_e7rdd"]
+[ext_resource type="Script" uid="uid://drd2tht02dkr" path="res://Scripts/shop.gd" id="1_e7rdd"]
 [ext_resource type="Texture2D" uid="uid://cj1c3mba8ehw5" path="res://models/factory/Textures/colormap.png" id="1_viryw"]
+[ext_resource type="Resource" uid="uid://x2e0dm8ysnmh" path="res://Scenes/Shop/Items/Item_Test.tres" id="2_blqjs"]
+[ext_resource type="PackedScene" uid="uid://d0v60lgu546t2" path="res://Scenes/Shop/ShopSlot.tscn" id="2_fgaav"]
+[ext_resource type="Script" uid="uid://ddltjmbciw2yc" path="res://Scripts/ShopItem.gd" id="3_6lah5"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ity5u"]
 resource_name = "colormap"
@@ -42,41 +45,41 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_2bor3")
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_fgaav"]
+points = PackedVector3Array(-0.53797966, 0.70835656, -0.82056975, -0.53797966, 0.5634754, -0.78189653, -1.0501176, 0.7416223, -0.5108708, -1.2000002, 0.8247867, -0.3859266, -1.2000002, 1.4072294, 0.4875871, -1.0501176, 1.4903939, 0.6125314, 0.537745, 0.70835656, -0.82056975, -0.90023506, 0, -0.21119255, 0.537745, 0.5634754, -0.78189653, -1.2000002, 0.57514757, -0.21964741, -1.2000002, 1.1575903, 0.65402293, -1.0501176, 1.2409006, 0.77896714, 1.049883, 1.4903939, 0.6125314, 1.2000004, 1.4072294, 0.4875871, 1.2000004, 0.8247867, -0.3859266, 1.049883, 0.7416223, -0.5108708, -0.90023506, 0, 0.68878186, 0.8997654, 0, -0.21119255, 1.049883, 1.2409006, 0.77896714, 1.2000004, 1.1575903, 0.65402293, 1.2000004, 0.57514757, -0.21964741, 0.8997654, 0, 0.68878186)
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_m1hyp"]
 size = Vector3(4, 3, 3)
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_gmb2m"]
-frequency = 0.325
+[sub_resource type="LabelSettings" id="LabelSettings_m1hyp"]
+font_size = 48
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6lah5"]
-width = 128
-height = 128
-noise = SubResource("FastNoiseLite_gmb2m")
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_blqjs"]
-width = 128
-height = 128
-
-[sub_resource type="Gradient" id="Gradient_e7rdd"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_gmb2m"]
-gradient = SubResource("Gradient_e7rdd")
-width = 128
-height = 128
-fill_from = Vector2(0.75213677, 0.17521368)
-fill_to = Vector2(0.74786323, 0.21367522)
-repeat = 2
-
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_8kdgp"]
-size = Vector2(128, 128)
+[sub_resource type="LabelSettings" id="LabelSettings_e7rdd"]
+font_size = 24
 
 [node name="Shop" type="Node3D" unique_id=392201601]
 script = ExtResource("1_e7rdd")
+shop_slot_scene = ExtResource("2_fgaav")
+available_items = Array[ExtResource("3_6lah5")]([ExtResource("2_blqjs")])
 
 [node name="screen-panel-flat" type="MeshInstance3D" parent="." unique_id=227039293]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3688171)
 mesh = SubResource("ArrayMesh_bnp4g")
 skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=311306202]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=830582716]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.3688171)
+shape = SubResource("ConvexPolygonShape3D_fgaav")
+
+[node name="AreaLight3D" type="AreaLight3D" parent="." unique_id=1739695095]
+transform = Transform3D(1, 0, 0, 0, -0.56200147, 0.82713634, 0, -0.82713634, -0.56200147, 0, 1.1557822, 0.38692808)
+light_color = Color(0.9884407, 0.9111107, 0.98323435, 1)
+light_energy = 12.0
+light_indirect_energy = 8.0
+area_range = 0.15
+area_size = Vector2(2.0630493, 1.0373778)
 
 [node name="ShopEnterArea" type="Area3D" parent="." unique_id=1411284431]
 
@@ -85,52 +88,60 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, -0.25)
 shape = SubResource("BoxShape3D_m1hyp")
 
 [node name="Control" type="Control" parent="." unique_id=340261205]
+custom_minimum_size = Vector2(600, 400)
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="GridContainer" type="GridContainer" parent="Control" unique_id=786607106]
+[node name="PanelContainer" type="PanelContainer" parent="Control" unique_id=1322391031]
+custom_minimum_size = Vector2(600, 400)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control/PanelContainer" unique_id=821776235]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Label" type="Label" parent="Control/PanelContainer/VBoxContainer" unique_id=2095440772]
+layout_mode = 2
+text = "SHOP"
+label_settings = SubResource("LabelSettings_m1hyp")
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control/PanelContainer/VBoxContainer" unique_id=1986398240]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="Control/PanelContainer/VBoxContainer/ScrollContainer" unique_id=786607106]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
 layout_direction = 2
+theme_override_constants/h_separation = 10
+theme_override_constants/v_separation = 10
 columns = 4
 
-[node name="Button" type="Button" parent="Control/GridContainer" unique_id=1080583746]
-layout_mode = 2
-text = "TEST 1
-"
-icon = SubResource("NoiseTexture2D_6lah5")
-icon_alignment = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1111843378]
 
-[node name="Button2" type="Button" parent="Control/GridContainer" unique_id=802268261]
-layout_mode = 2
-text = "TEST 2
-
-"
-icon = SubResource("NoiseTexture2D_blqjs")
-icon_alignment = 1
-
-[node name="Button3" type="Button" parent="Control/GridContainer" unique_id=1317575407]
-layout_mode = 2
-text = "TEST 3
-
-"
-icon = SubResource("GradientTexture2D_gmb2m")
-icon_alignment = 1
-
-[node name="Button4" type="Button" parent="Control/GridContainer" unique_id=331949366]
-layout_mode = 2
-text = "TEST 4
-"
-icon = SubResource("PlaceholderTexture2D_8kdgp")
-icon_alignment = 1
+[node name="Tooltip-Overlay" type="Label" parent="CanvasLayer" unique_id=2047683172]
+offset_left = 24.0
+offset_top = 24.0
+offset_right = 185.0
+offset_bottom = 58.0
+text = "E - Open Shop"
+label_settings = SubResource("LabelSettings_e7rdd")
+uppercase = true
 
 [connection signal="body_entered" from="ShopEnterArea" to="." method="_on_shop_enter_area_body_entered"]
 [connection signal="body_exited" from="ShopEnterArea" to="." method="_on_shop_enter_area_body_exited"]

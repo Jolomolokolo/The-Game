@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ShopItem" format=3 uid="uid://x2e0dm8ysnmh"]
+
+[ext_resource type="PackedScene" uid="uid://dpcgyof26u28t" path="res://models/food/orange.glb" id="1_etoub"]
+[ext_resource type="Script" uid="uid://ddltjmbciw2yc" path="res://Scripts/ShopItem.gd" id="2_45a4p"]
+
+[sub_resource type="Gradient" id="Gradient_7xl6x"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_45a4p"]
+gradient = SubResource("Gradient_7xl6x")
+fill_from = Vector2(0.525641, 0.62393165)
+
+[resource]
+script = ExtResource("2_45a4p")
+item_name = "Test"
+icon = SubResource("GradientTexture2D_45a4p")
+price = 50
+scene = ExtResource("1_etoub")
+metadata/_custom_type_script = "uid://ddltjmbciw2yc"

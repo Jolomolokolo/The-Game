@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://d0v60lgu546t2"]
+
+[ext_resource type="Script" uid="uid://c0uwsjsq2i6qb" path="res://Scripts/ShopSlot.gd" id="1_5mkma"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=1070272225]
+custom_minimum_size = Vector2(140, 180)
+offset_right = 120.0
+offset_bottom = 160.0
+script = ExtResource("1_5mkma")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=353053157]
+layout_mode = 2
+
+[node name="Icon" type="TextureRect" parent="VBoxContainer" unique_id=1934034986]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+expand_mode = 1
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="VBoxContainer" unique_id=1126799972]
+layout_mode = 2
+
+[node name="PriceLabel" type="Label" parent="VBoxContainer" unique_id=816512840]
+layout_mode = 2
+
+[node name="BuyButton" type="Button" parent="VBoxContainer" unique_id=1407257910]
+custom_minimum_size = Vector2(32, 38)
+layout_mode = 2
+text = "Buy"
+
+[connection signal="pressed" from="VBoxContainer/BuyButton" to="." method="_on_buy_button_pressed"]
