@@ -1,0 +1,104 @@
+[gd_scene format=3 uid="uid://berook58wdjwr"]
+
+[ext_resource type="Script" uid="uid://dbjq0s8uxo1yc" path="res://Scenes/HUDs/custom_preset.gd" id="1_y8fl7"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u0fcn"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_y8fl7"]
+font_size = 24
+
+[node name="CustomPreset" type="Control" unique_id=447495867]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_y8fl7")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1893149887]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Cash" type="SpinBox" parent="." unique_id=24122109]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -43.25
+offset_top = -15.5
+offset_right = 43.25
+offset_bottom = 15.5
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1e+17
+
+[node name="Health" type="SpinBox" parent="." unique_id=1063885286]
+layout_mode = 0
+offset_right = 86.5
+offset_bottom = 31.0
+value = 100.0
+
+[node name="ReturnButton" type="Button" parent="." unique_id=1776930379]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -100.0
+offset_right = -40.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ReturnButtonDescription" type="Label" parent="ReturnButton" unique_id=1411792473]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Return"
+label_settings = SubResource("LabelSettings_u0fcn")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CustomizeButton" type="Button" parent="." unique_id=847880893]
+z_index = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -100.0
+offset_right = 170.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CustomizeButtonDescription" type="Label" parent="CustomizeButton" unique_id=1484257275]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start Custom Mode"
+label_settings = SubResource("LabelSettings_y8fl7")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="pressed" from="CustomizeButton" to="." method="_on_customize_button_pressed"]

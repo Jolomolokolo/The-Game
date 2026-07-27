@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://ceal8hxsnnwr6"]
+
+[ext_resource type="Script" uid="uid://c367a0ikq52kd" path="res://Scenes/HUDs/start_page.gd" id="1_cctj5"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_rhltp"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_hjl0w"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_22jae"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_hklf8"]
+font_size = 128
+
+[node name="StartPage" type="Control" unique_id=628497593]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_cctj5")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=517078489]
+z_index = -2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="StartButton" type="Button" parent="." unique_id=1501063419]
+layout_mode = 0
+offset_left = 426.0
+offset_top = 508.0
+offset_right = 726.0
+offset_bottom = 608.0
+
+[node name="Label" type="Label" parent="StartButton" unique_id=1031946966]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start New Game"
+label_settings = SubResource("LabelSettings_rhltp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SaveButton" type="Button" parent="." unique_id=1213080667]
+layout_mode = 0
+offset_left = 451.0
+offset_top = 358.0
+offset_right = 701.0
+offset_bottom = 458.0
+
+[node name="Label" type="Label" parent="SaveButton" unique_id=1590509020]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Saves"
+label_settings = SubResource("LabelSettings_hjl0w")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SettingsButton" type="Button" parent="." unique_id=2058039451]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -222.0
+offset_top = -127.0
+offset_right = -30.0
+offset_bottom = -30.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="SettingsButton" unique_id=590674351]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Settings"
+label_settings = SubResource("LabelSettings_22jae")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VersionLabel" type="Label" parent="." unique_id=524139928]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -33.0
+offset_right = 69.0
+offset_bottom = -10.0
+grow_vertical = 0
+text = "Version: 1.0"
+
+[node name="GameName" type="Label" parent="." unique_id=1284663781]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -385.0
+offset_top = 20.0
+offset_right = 385.0
+offset_bottom = 195.0
+grow_horizontal = 2
+text = "tHE gAAAmE"
+label_settings = SubResource("LabelSettings_hklf8")
+
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]

@@ -1,0 +1,398 @@
+[gd_scene format=3 uid="uid://dd1b71pljpcmn"]
+
+[ext_resource type="Script" uid="uid://62mpypavwxbr" path="res://Scenes/HUDs/game_creation.gd" id="1_ad3wo"]
+[ext_resource type="ButtonGroup" uid="uid://bcjm1yea6akqh" path="res://Other/preset_button_group.tres" id="2_dun67"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ibu1b"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_m1hyp"]
+font_size = 32
+
+[sub_resource type="LabelSettings" id="LabelSettings_22jae"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_phl0j"]
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_hklf8"]
+font_size = 40
+
+[node name="GameCreation" type="Control" unique_id=1116424148]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ad3wo")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1952000604]
+z_index = -3
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Preset1" type="Control" parent="." unique_id=1461079081]
+layout_mode = 1
+anchors_preset = 0
+offset_left = 30.0
+offset_top = 80.0
+offset_right = 330.0
+offset_bottom = 420.0
+
+[node name="PresetBG1" type="ColorRect" parent="Preset1" unique_id=715411497]
+z_index = -2
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 340.0
+color = Color(0.24780053, 0.24780053, 0.24780053, 0.85)
+
+[node name="Preset1" type="Button" parent="Preset1" unique_id=359573138]
+z_index = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -39.0
+offset_top = -51.0
+offset_right = 39.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+toggle_mode = true
+button_group = ExtResource("2_dun67")
+text = "PRESET 1"
+
+[node name="PresetName1" type="Label" parent="Preset1" unique_id=786323380]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -38.0
+offset_top = -115.0
+offset_right = 38.0
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "EASY"
+label_settings = SubResource("LabelSettings_ibu1b")
+horizontal_alignment = 1
+
+[node name="PresetDescription1" type="RichTextLabel" parent="Preset1" unique_id=1676013512]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 20.0
+offset_top = 30.0
+offset_right = -20.0
+offset_bottom = 210.0
+grow_horizontal = 2
+text = "Good for first time Players:
+- Lots of Cash
+- Starter Equipment
+- Easy Gamemode
+- Easier Settings"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PresetDescriptionBG1" type="ColorRect" parent="Preset1/PresetDescription1" unique_id=522760054]
+z_index = -1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -90.0
+offset_right = 130.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2716998, 0.2716998, 0.2716998, 0.75000006)
+
+[node name="Preset2" type="Control" parent="." unique_id=1066784186]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -150.0
+offset_top = 80.0
+offset_right = 150.0
+offset_bottom = 420.0
+grow_horizontal = 2
+
+[node name="PresetBG2" type="ColorRect" parent="Preset2" unique_id=776977660]
+z_index = -2
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 340.0
+color = Color(0.24780053, 0.24780053, 0.24780053, 0.85)
+
+[node name="Preset2" type="Button" parent="Preset2" unique_id=1074487378]
+z_index = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -39.0
+offset_top = -51.0
+offset_right = 39.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("2_dun67")
+text = "PRESET 2"
+
+[node name="PresetName2" type="Label" parent="Preset2" unique_id=79676786]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -69.5
+offset_top = -115.0
+offset_right = 69.5
+offset_bottom = -70.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "NORMAL"
+label_settings = SubResource("LabelSettings_ibu1b")
+horizontal_alignment = 1
+
+[node name="PresetDescription2" type="RichTextLabel" parent="Preset2" unique_id=145507267]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 20.0
+offset_top = 30.0
+offset_right = -20.0
+offset_bottom = 210.0
+grow_horizontal = 2
+text = "For normal Players:
+- Normal amount of Cash
+- No starter Equipment
+- Normal Gamemode
+- Normal Settings"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PresetDescriptionBG2" type="ColorRect" parent="Preset2/PresetDescription2" unique_id=13720238]
+z_index = -1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -90.0
+offset_right = 130.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2716998, 0.2716998, 0.2716998, 0.749)
+
+[node name="Preset3" type="Control" parent="." unique_id=885876801]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -330.0
+offset_top = 80.0
+offset_right = -30.0
+offset_bottom = 420.0
+grow_horizontal = 0
+
+[node name="PresetBG3" type="ColorRect" parent="Preset3" unique_id=1407152560]
+z_index = -2
+layout_mode = 0
+offset_right = 300.0
+offset_bottom = 340.0
+color = Color(0.24780053, 0.24780053, 0.24780053, 0.75000006)
+
+[node name="Preset3" type="Button" parent="Preset3" unique_id=1109216617]
+z_index = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -39.0
+offset_top = -51.0
+offset_right = 39.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+toggle_mode = true
+button_group = ExtResource("2_dun67")
+text = "PRESET 3"
+
+[node name="PresetName3" type="Label" parent="Preset3" unique_id=205857252]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -44.5
+offset_top = -105.0
+offset_right = 44.5
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+text = "HARD"
+label_settings = SubResource("LabelSettings_ibu1b")
+horizontal_alignment = 1
+
+[node name="PresetDescription3" type="RichTextLabel" parent="Preset3" unique_id=62017403]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 20.0
+offset_top = 30.0
+offset_right = -20.0
+offset_bottom = 210.0
+grow_horizontal = 2
+text = "For very Advanced Players:
+- Almost no Cash
+- No starter Equipment
+- Hardcore Gamemode
+- Hard Settings"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="PresetDescriptionBG3" type="ColorRect" parent="Preset3/PresetDescription3" unique_id=662368727]
+z_index = -1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -130.0
+offset_top = -90.0
+offset_right = 130.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.2716998, 0.2716998, 0.2716998, 0.75000006)
+
+[node name="StartButton" type="Button" parent="." unique_id=906763692]
+z_index = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -80.0
+offset_top = -200.0
+offset_right = 80.0
+offset_bottom = -120.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="StartButtonDescription" type="Label" parent="StartButton" unique_id=833233333]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Start"
+label_settings = SubResource("LabelSettings_m1hyp")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CustomizeButton" type="Button" parent="." unique_id=352551431]
+z_index = 1
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -170.0
+offset_top = -100.0
+offset_right = 170.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="CustomizeButtonDescription" type="Label" parent="CustomizeButton" unique_id=1193791841]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Customize it your self !"
+label_settings = SubResource("LabelSettings_22jae")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ReturnButton" type="Button" parent="." unique_id=1221564948]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -160.0
+offset_top = -100.0
+offset_right = -40.0
+offset_bottom = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="ReturnButtonDescription" type="Label" parent="ReturnButton" unique_id=1031781156]
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "Return"
+label_settings = SubResource("LabelSettings_phl0j")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Title" type="Label" parent="." unique_id=1574144544]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 75.0
+grow_horizontal = 2
+text = "Choose your Difficulty:"
+label_settings = SubResource("LabelSettings_hklf8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="Preset1/Preset1" to="." method="_on_preset_1_pressed"]
+[connection signal="pressed" from="Preset2/Preset2" to="." method="_on_preset_2_pressed"]
+[connection signal="pressed" from="Preset3/Preset3" to="." method="_on_preset_3_pressed"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="CustomizeButton" to="." method="_on_customize_button_pressed"]
+[connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]

@@ -40,7 +40,9 @@
 [ext_resource type="PackedScene" uid="uid://d033mk3wuqr8a" path="res://Scenes/Trains/rail_network.tscn" id="38_b1qrp"]
 [ext_resource type="PackedScene" uid="uid://6g7fuwbhqts4" path="res://Scenes/Trains/Train-Carriages/train_carriage_container_red_2.tscn" id="38_come4"]
 [ext_resource type="PackedScene" uid="uid://cmpnjjk50oevm" path="res://Scenes/Trains/rail_switch.tscn" id="39_come4"]
+[ext_resource type="PackedScene" uid="uid://b8oquho43w1px" path="res://Scenes/Trains/Train-Carriages/train_carriage_tank_large_2.tscn" id="41_0cp0l"]
 [ext_resource type="PackedScene" uid="uid://y18u16sa26ny" path="res://Scenes/Cars/police_car_with_light.tscn" id="43_d2t1y"]
+[ext_resource type="PackedScene" uid="uid://cs8pybtss5ekx" path="res://Scenes/PCScreen/pc_screen_access.tscn" id="43_gngh3"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -1509,9 +1511,6 @@ curve = SubResource("Curve3D_come4")
 transform = Transform3D(-0.1604332, 0, -0.9870162, 0, 0.99995387, 0, 0.9870088, 0, -0.1604344, -20.22619, 0, 41.26555)
 progress = 132.84035
 
-[node name="Train" parent="RailNetwork/Track_A/PathFollow3D" unique_id=695677159 instance=ExtResource("33_jq2sk")]
-transform = Transform3D(1, 0, 1.4901161e-08, 0, 1, 0, -1.4901161e-08, 0, 1, 0, -0.018009305, 0)
-
 [node name="PathFollow3DCarriage" type="PathFollow3D" parent="RailNetwork/Track_A" unique_id=303975943]
 transform = Transform3D(-0.18753335, 0, -0.9822282, 0, 0.99995387, 0, 0.9822203, 0, -0.18753485, -28.103125, 0, 39.86721)
 progress = 124.84
@@ -1527,14 +1526,14 @@ progress = 116.84
 transform = Transform3D(1.0000657, 0, 0, 0, 1.0000923, 0, 0, 0, 1.0000654, 0, 0, 0)
 
 [node name="PathFollow3DCarriage3" type="PathFollow3D" parent="RailNetwork/Track_A" unique_id=1479181287]
-transform = Transform3D(-0.22075057, 0, -0.97529995, 0, 0.99995387, 0, 0.9752921, 0, -0.22075234, -43.758827, 0, 36.569504)
+transform = Transform3D(-0.22075053, 0, -0.97529995, 0, 0.99995387, 0, 0.9752919, 0, -0.22075234, -43.758827, 0, 36.569504)
 progress = 108.84
 
 [node name="Train-Carriage-Container-Red2" parent="RailNetwork/Track_A/PathFollow3DCarriage3" unique_id=468522331 instance=ExtResource("38_come4")]
 transform = Transform3D(1.0000657, 0, 0, 0, 1.0000923, 0, 0, 0, 1.0000654, 0, 0, 0)
 
 [node name="PathFollow3DCarriage4" type="PathFollow3D" parent="RailNetwork/Track_A" unique_id=369317529]
-transform = Transform3D(-0.22311229, 0, -0.9747624, 0, 0.99995387, 0, 0.9747546, 0, -0.22311409, -51.557014, 0, 34.784058)
+transform = Transform3D(-0.22311233, 0, -0.9747624, 0, 0.99995387, 0, 0.97475475, 0, -0.22311409, -51.557014, 0, 34.784058)
 progress = 100.84
 
 [node name="Train-Carriage-Container-Red2" parent="RailNetwork/Track_A/PathFollow3DCarriage4" unique_id=1325205962 instance=ExtResource("38_come4")]
@@ -1548,11 +1547,10 @@ progress = 92.84
 transform = Transform3D(1.0000657, 0, 0, 0, 1.0000923, 0, 0, 0, 1.0000654, 0, 0, 0)
 
 [node name="PathFollow3DCarriage6" type="PathFollow3D" parent="RailNetwork/Track_A" unique_id=1503768986]
-transform = Transform3D(-0.95927185, 0, -0.28235474, 0, 0.99995387, 0, 0.28235248, 0, -0.9592796, -64.48727, 0, 26.831812)
+transform = Transform3D(-0.9592718, 0, -0.28235453, 0, 0.99995387, 0, 0.28235245, 0, -0.9592788, -64.48727, 0, 26.831812)
 progress = 84.84
 
-[node name="Train-Carriage-Container-Red2" parent="RailNetwork/Track_A/PathFollow3DCarriage6" unique_id=1486769851 instance=ExtResource("38_come4")]
-transform = Transform3D(1.0000657, 0, 0, 0, 1.0000923, 0, 0, 0, 1.0000654, 0, 0, 0)
+[node name="train-carriage-tank-large2" parent="RailNetwork/Track_A/PathFollow3DCarriage6" unique_id=744761036 instance=ExtResource("41_0cp0l")]
 
 [node name="Track_B" type="Path3D" parent="RailNetwork" unique_id=410127138]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.522, 0)
@@ -1585,3 +1583,15 @@ transform = Transform3D(0.99508995, 3.590138e-06, -0.09892003, 0, 0.9999931, 3.6
 [node name="RailSignalLight" parent="RailNetwork" unique_id=1737780711 instance=ExtResource("3_0cp0l")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5439841, -36.292015)
 monitored_track = NodePath("../../RailNetwork/Track_A")
+
+[node name="Train" parent="RailNetwork" unique_id=1995327968 instance=ExtResource("33_jq2sk")]
+transform = Transform3D(1, 0, 1.4901161e-08, 0, 1, 0, -1.4901161e-08, 0, 1, 0, -0.018009305, 0)
+
+[node name="Label3D" type="Label3D" parent="." unique_id=150371383]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1281567, 9.562088)
+billboard = 1
+text = "Hello"
+font_size = 128
+
+[node name="PCScreenAccess" parent="." unique_id=785069297 instance=ExtResource("43_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4668474, 0, 10.561045)

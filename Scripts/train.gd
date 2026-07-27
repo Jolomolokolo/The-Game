@@ -1,6 +1,5 @@
 extends Node3D
 
-# COUPLING WITH AREA3D - maybe better
 # COMPLETE TRAIN OVERALL, WITH REAL PHYSICS AND WITH VEHICLEBODY
 
 @export var max_speed := 20.0
@@ -24,6 +23,7 @@ var _rail_network : Node = null
 
 var current_progress : float = 0.0
 
+var _nearby_carriages : Array = []
 var _nearby_carriage : Node = null
 var _couple_area_front : Area3D = null
 var _couple_area_back : Area3D = null
@@ -391,43 +391,43 @@ func _update_next_junction():
 	
 func _check_nearby_carriage() -> void:
 	if not player_inside:
+		_nearby_carriages.clear()
 		_nearby_carriage = null
 		return
 	
-	_nearby_carriage = null
+	_nearby_carriages.clear()
 	
-	for area in [_couple_area_front, _couple_area_back]:
-		if area == null:
+	var areas_to_eheck : Array = []
+	
+	if _couple_area_front:
+		areas_to_eheck.append(_couple_area_front)
+	if _couple_area_back:
+		areas_to_eheck.append(_couple_area_back)
+	
+	for coupled in _coupled_carriages:
+		if not is_instance_valid(coupled):
 			continue
-		for body in area.get_overlapping_bodies():
-			if body.is_in_group("train_carriage") and not _coupled_carriages.has(body):
-				_nearby_carriage = body
-				return
-			var parent = body.get_parent()
-			if parent and parent.is_in_group("train_carriage") and not _coupled_carriages.has(parent):
-				_nearby_carriage = parent
-				return
+		var cf = coupled.get_node_or_null("CoupleAreaFront")
+		var cb = coupled.get_node_or_null("CoupleAreaBack")
+		if cf: areas_to_eheck.append(cf)
+		if cb: areas_to_eheck.append(cb)
 	
-	if _nearby_carriage == null and _coupled_carriages.size() > 0:
-		var last = _coupled_carriages.back()
-		if not is_instance_valid(last):
-			return
-		var last_front = last.get_node_or_null("CoupleAreaFront")
-		var last_back = last.get_node_or_null("CoupleAreaBack")
-		for area in [last_front, last_back]:
-			if area == null:
-				continue
-			for body in area.get_overlapping_bodies():
-				if body.is_in_group("train_carriage") and not _coupled_carriages.has(body):
-					_nearby_carriage = body
-					return
-				var parent = body.get_parent()
-				if parent.is_in_group("train_carriage") and not _coupled_carriages.has(parent):
-					_nearby_carriage = parent
-					return
+	for area in areas_to_eheck:
+		for body in area.get_overlapping_areas():
+			var target : Node = null
+			if body.is_in_group("train_carriage"):
+				target = body
+			elif body.get_parent() and body.get_parent().is_in_group("train_carriage"):
+				target = body.get_parent()
+				
+			if target and not _coupled_carriages.has(target) and not _nearby_carriages.has(target):
+				_nearby_carriages.append(target)
+	
+	_nearby_carriage= _nearby_carriages[0] if _nearby_carriages.size() > 0 else null
+	print("Nearby: %d" % _nearby_carriages.size())
 	
 func _try_couple_or_decouple():
-	if _nearby_carriage != null or _coupled_carriages.size() > 0:
+	if _nearby_carriages.size() > 0 or _coupled_carriages.size() > 0:
 		if couple_menu.visible:
 			couple_menu.hide_menu()
 		else:
@@ -565,3 +565,8 @@ func _make_glow_material(color: Color):
 	mat.emission_energy_multiplier = 4.0
 	return mat
 	
+func get_nearby_carriages() -> Array:
+	return _nearby_carriages
+	
+func get_coupled_carriages() -> Array:
+	return _coupled_carriages

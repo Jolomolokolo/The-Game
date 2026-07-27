@@ -9,11 +9,10 @@ extends CharacterBody3D
 
 @export var fall_damage_threshold := 10.0
 @export var fall_damage_multiplier := 2.0
-@export var max_health := 100.0
 @export var respawn_ragedoll_time := 3.0
-@export var cash := 100
 
 var health := 0.0
+var max_health := 100.0
 var player_dead := false
 var game_paused := false
 var shop_open := false
@@ -21,6 +20,7 @@ var was_on_floor := false
 var fall_velocity := 0.0
 var displayed_cash := 100
 var cash_count_tween : Tween
+var cash := 50
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var camera_selected = 2
@@ -62,7 +62,7 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 	camera_first_view.current = false
 	camera_third_view.current = true
-	#head_mesh.visible = true
+	max_health = GameData.start_health
 	health = max_health
 	health_bar.value = health
 	respawn_screen.visible = false
@@ -75,6 +75,7 @@ func _ready():
 	
 	call_deferred("_connect_to_shop")
 	
+	cash = GameData.start_cash
 	displayed_cash = cash
 	cash_label.text = str(cash) + " Cash"
 	
@@ -117,6 +118,8 @@ func _input(event):
 	if event.is_action_pressed("9"):
 		add_cash(100)
 func _physics_process(delta):
+	if not GameState.can_player_move():
+		return
 	if in_car:
 		return
 	
@@ -376,6 +379,7 @@ func game_pause(): #  SHORTCUT adden, aber ESC braucht Delay, da sonst direkt Pa
 	pause_screen.visible = true
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	game_paused = true
+	GameState.current = GameState.State.PAUSED
 	get_tree().paused = true
 	
 func game_pause_return():
@@ -386,6 +390,7 @@ func game_pause_return():
 		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	else:
 		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	GameState.current = GameState.State.PLAYING
 	
 func _on_return_button_pressed() -> void:
 	game_pause_return()

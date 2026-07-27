@@ -22,6 +22,9 @@ config/icon="res://icon.svg"
 [autoload]
 
 PhantomCameraManager="*uid://duq6jhf6unyis"
+SceneManager="*uid://b0euxif1an631"
+GameState="*uid://cko6fi4qxd5ft"
+GameData="*uid://ca0a7cmv3d8ka"
 
 [editor_plugins]
 

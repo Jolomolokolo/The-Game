@@ -1,10 +1,13 @@
 [gd_scene format=4 uid="uid://c4pj4j4ga3wj"]
 
-[ext_resource type="Script" uid="uid://smu625keqm73" path="res://Scripts/train.gd" id="1_nxpru"]
+[ext_resource type="Script" uid="uid://bspqbjysg64fk" path="res://Scenes/Trains/train_rigidbody.gd" id="1_syv0r"]
 [ext_resource type="Texture2D" uid="uid://dx7xwudj0tglm" path="res://models/trains/Textures/colormap.png" id="2_0hk28"]
 [ext_resource type="Script" uid="uid://cpvaeoefjojug" path="res://Scripts/map_hud.gd" id="3_kpsx5"]
 [ext_resource type="Script" uid="uid://b757dm0e1o1ql" path="res://Scripts/carriage_hud.gd" id="4_t7e8y"]
 [ext_resource type="Script" uid="uid://dwtshwutp77xf" path="res://Scenes/Trains/couple_menu.gd" id="5_syv0r"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mcim7"]
+size = Vector3(3, 4.424768, 7.2000003)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vju5p"]
 resource_name = "colormap"
@@ -114,9 +117,6 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_k7ut6")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_mcim7"]
-size = Vector3(3, 4.424768, 7.2000003)
-
 [sub_resource type="LabelSettings" id="LabelSettings_akv0e"]
 font_size = 24
 
@@ -156,27 +156,32 @@ size = Vector2(1.8, 0.6)
 [sub_resource type="BoxShape3D" id="BoxShape3D_m1hyp"]
 size = Vector3(2.8564453, 0.6513672, 0.48876953)
 
-[node name="Train" type="Node3D" unique_id=1626068840]
+[node name="Train" type="RigidBody3D" unique_id=1995327968]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-script = ExtResource("1_nxpru")
+script = ExtResource("1_syv0r")
 
-[node name="train-diesel-b" type="MeshInstance3D" parent="." unique_id=145539025]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=804658473]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.225061, 0)
+shape = SubResource("BoxShape3D_mcim7")
+
+[node name="train-diesel-b" type="MeshInstance3D" parent="." unique_id=1391006156]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 mesh = SubResource("ArrayMesh_fy6wy")
 skeleton = NodePath("")
 
-[node name="wheels-back" type="MeshInstance3D" parent="train-diesel-b" unique_id=76845616]
+[node name="wheels-back" type="MeshInstance3D" parent="train-diesel-b" unique_id=1660676535]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.3817385e-12, 1.0784981, -1.3499999)
 mesh = SubResource("ArrayMesh_djbj0")
 skeleton = NodePath("")
 
-[node name="wheels-front" type="MeshInstance3D" parent="train-diesel-b" unique_id=1513216582]
+[node name="wheels-front" type="MeshInstance3D" parent="train-diesel-b" unique_id=1424309042]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.38607e-12, 1.0784981, 1.3499999)
 mesh = SubResource("ArrayMesh_ta3yw")
 skeleton = NodePath("")
 
 [node name="DriveCamera" type="Camera3D" parent="." unique_id=1043592458]
 transform = Transform3D(1, 0, -1.7484555e-07, 0, 1, 0, 1.7484555e-07, 0, 1, 6.183826e-07, 3.5271323, -1.6038458)
+current = true
 fov = 108.80602
 
 [node name="DriveCameraBackward" type="Camera3D" parent="." unique_id=1763021493]
@@ -196,14 +201,6 @@ visible = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D" unique_id=1991920895]
 transform = Transform3D(1.5, 0, 0, 0, 1.5, 0, 0, 0, 1.5, 0, 3.3190155, 0)
-shape = SubResource("BoxShape3D_mcim7")
-
-[node name="AnimatableBody3D" type="AnimatableBody3D" parent="." unique_id=1047394737]
-visible = false
-sync_to_physics = false
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="AnimatableBody3D" unique_id=526334256]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.225061, 0)
 shape = SubResource("BoxShape3D_mcim7")
 
 [node name="SpotLight - front - right" type="SpotLight3D" parent="." unique_id=2022275256]
