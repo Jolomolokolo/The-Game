@@ -8,8 +8,8 @@ extends RigidBody3D
 
 @export var spring_strenght := 800.0
 @export var spring_damping := 120.0
-@export var derail_distance := 1.2
-@export var derail_speed_curve := 25.0
+@export var derail_distance := 5.0
+@export var derail_speed_curve := 120.0
 
 var speed := 0.0
 var player_inside := false
@@ -32,6 +32,8 @@ var _nearby_carriage : Node = null
 @export var couple_distance := 5.0
 
 var _anchor : Node3D = null
+var _derail_grace_time := 2.0
+var _time_alive := 0.0
 
 @onready var train_camera = $DriveCamera
 @onready var train_camera_backward = $DriveCameraBackward
@@ -83,10 +85,14 @@ func _ready() -> void:
 	var map = get_node_or_null("CanvasLayer/Map_HUD")
 	if map and map.has_method("initialize"):
 		map.initialize(_rail_network, self)
+	carriage_hud.visible = false
 	if carriage_hud and carriage_hud.has_method("initialize"):
 		carriage_hud.initialize(self)
+	couple_menu.visible = false
 	if couple_menu and couple_menu.has_method("initialize"):
 		couple_menu.initialize(self)
+	
+	_build_materials()
 	
 func _init_track_from_parent() -> void:
 	_rail_network = _find_rail_network()
@@ -119,13 +125,16 @@ func _physics_process(delta: float) -> void:
 		_update_derailed(delta)
 		return
 	
+	_time_alive += delta
+	
+	if _time_alive > _derail_grace_time:
+		_check_derailment()
+	
 	if current_path_follow:
 		current_path_follow.progress = current_progress
 	
 	if _anchor and not is_derailed:
 		_apply_spring_force(delta)
-	
-	_check_derailment()
 	
 	if not player_inside:
 		_update_headlights()
@@ -253,6 +262,10 @@ func _derail():
 	
 func _update_derailed(_delta: float) -> void:
 	_update_headlights()
+	
+	if player_inside and Input.is_action_just_pressed("e") and not just_entered:
+		just_entered = false
+		exit_train()
 	
 func _check_track_bounds() -> void:
 	if current_track == null or current_path_follow == null:
@@ -496,6 +509,7 @@ func enter_vehicle(player) -> void:
 	tooltip_layer_enter.visible = false
 	map_hud.visible = true
 	carriage_hud.visible = true
+	couple_menu.visible = false
 	_update_switch_hud()
 	
 func exit_train() -> void:

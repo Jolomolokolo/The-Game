@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://c1i0fxgtqr8aq" path="res://Scripts/train_carriage.gd" id="1_ghqww"]
 [ext_resource type="Texture2D" uid="uid://dx7xwudj0tglm" path="res://models/trains/Textures/colormap.png" id="2_d0lel"]
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_ghqww"]
+size = Vector3(3, 4.0851564, 8.1)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pknns"]
 resource_name = "colormap"
 cull_mode = 2
@@ -145,14 +148,15 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_67pmx")
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_ghqww"]
-size = Vector3(3, 4.0851564, 8.1)
-
 [sub_resource type="BoxShape3D" id="BoxShape3D_bbdhk"]
 size = Vector3(2.8564453, 0.6513672, 0.48876953)
 
-[node name="Train-Carriage-Container-Red2" type="Node3D" unique_id=2139554087]
+[node name="Train-Carriage-Container-Red2" type="RigidBody3D" unique_id=159485132]
 script = ExtResource("1_ghqww")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=2090053667]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0456855, 0)
+shape = SubResource("BoxShape3D_ghqww")
 
 [node name="train-carriage-container-red" type="MeshInstance3D" parent="." unique_id=871490920]
 mesh = SubResource("ArrayMesh_08ry7")
@@ -172,12 +176,6 @@ skeleton = NodePath("")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1375796e-12, 1.0784981, 1.8000001)
 mesh = SubResource("ArrayMesh_c10nh")
 skeleton = NodePath("")
-
-[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=1542186310]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=505558474]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.0456855, 0)
-shape = SubResource("BoxShape3D_ghqww")
 
 [node name="CoupleAreaBack" type="Area3D" parent="." unique_id=1287521568]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.46817827)
