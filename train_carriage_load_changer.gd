@@ -1,12 +1,12 @@
-# Betankungsanlage für die Loks
+# Betankungsanlage für die Loks, eventuell mit Wasser für alte Loks - Dampfloks
 
 extends Node3D
 
 @export var hook_point : Node
 @export var lift_speed := 2.0
 
-@onready var crane_arm = $"Crane/crane/arm"
-@onready var crane_arm_magnet = $"Crane/crane/arm/CraneMagnet"
+@onready var crane_arm = $"Crane/crane/CraneArm"
+@onready var crane_arm_magnet = $"Crane/crane/CraneArm/arm/CraneMagnet"
 
 var carriages_touching_fence_front : Array[Node3D] = []
 var carriages_touching_fence_back : Array[Node3D] = []
@@ -16,6 +16,15 @@ var held_container : RigidBody3D = null
 var _nearby_containers : Array[RigidBody3D] = []
 
 func _process(_delta: float) -> void:
+	
+	# TEST SETUP - DELETE FOR RELEASE
+	if Input.is_action_just_pressed("0"):
+		crane_arm_magnet.position.y = crane_arm_magnet.position.y - 5
+		crane_arm.rotate_y(180)
+		await get_tree().create_timer(5).timeout
+		crane_arm_magnet.position.y = crane_arm_magnet.position.y + 5
+		crane_arm.rotate_y(-180)
+		
 	if not Input.is_action_just_pressed("e"):
 		return
 	
@@ -82,7 +91,6 @@ func _on_fence_discharge_area_back_body_exited(body: Node3D) -> void:
 		carriages_touching_fence_back.erase(body)
 	
 func start_discharge(carriage: Node3D) -> void:
-	crane_arm.rotate(0, 180, 0)
 	print("Now Discharge: ", carriage.name)
 	# Need to lower something EXACT on the height of the cargo
 	

@@ -760,11 +760,11 @@ shape = SubResource("CapsuleShape3D_l6n3p")
 debug_fill = false
 
 [node name="Physical Bone Chest" type="PhysicalBone3D" parent="Root/Skeleton3D/PhysicalBoneSimulator3D" unique_id=635117030]
-transform = Transform3D(0.009996852, 5.0280392e-05, 0.00024580717, -4.165731e-06, -0.009762522, 0.0021663632, 0.0002508624, -0.0021657837, -0.009759427, -0.00015797581, -0.0010976441, 0.019052038)
+transform = Transform3D(0.009996851, 5.0271905e-05, 0.00024580912, -4.1744306e-06, -0.009762522, 0.0021663632, 0.00025086242, -0.0021657837, -0.009759428, -0.00015797581, -0.0010976441, 0.019052038)
 collision_layer = 2
 joint_type = 2
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9074832e-05, 0.0027353447, 0.15080166)
-body_offset = Transform3D(0.00999996, -4.0701925e-06, 8.878702e-07, 8.8740234e-07, -1.3022218e-06, -0.009999999, 4.0703053e-06, 0.010000001, -1.3038516e-06, -3.1350646e-07, 0.0015080199, -2.71569e-05)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9047748e-05, 0.002735341, 0.15080161)
+body_offset = Transform3D(0.00999996, -4.0786763e-06, 8.8982017e-07, 8.89316e-07, -1.301989e-06, -0.010000001, 4.0787922e-06, 0.010000001, -1.3036188e-06, -3.1350646e-07, 0.0015080199, -2.71569e-05)
 bone_name = "Chest"
 joint_constraints/swing_span = 34.999996
 joint_constraints/twist_span = 15.0
@@ -778,11 +778,11 @@ shape = SubResource("CapsuleShape3D_olqyp")
 debug_fill = false
 
 [node name="Physical Bone Head" type="PhysicalBone3D" parent="Root/Skeleton3D/PhysicalBoneSimulator3D" unique_id=305435971]
-transform = Transform3D(0.009999999, -7.5223575e-08, 1.596149e-08, -7.530201e-08, -0.009999876, 4.9715305e-05, 1.5587318e-08, -4.97153e-05, -0.009999876, -0.0003269678, -0.0031211115, 0.03081959)
+transform = Transform3D(0.009999999, -7.5223575e-08, 1.596149e-08, -7.530201e-08, -0.009999876, 4.9715305e-05, 1.5587318e-08, -4.97153e-05, -0.009999876, -0.0003269678, -0.0031197662, 0.03081959)
 collision_layer = 2
 joint_type = 2
-joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.4586898e-06, 0.056439657, 0.50159657)
-body_offset = Transform3D(0.009999958, -7.55306e-08, 1.599402e-08, 1.4100803e-08, 3.4320692e-08, -0.01, 7.556809e-08, 0.0100000035, 3.4895493e-08, 6.0827006e-08, 0.0050159637, -0.0005644143)
+joint_offset = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.457673e-06, 0.05657419, 0.501596)
+body_offset = Transform3D(0.009999958, -7.55306e-08, 1.599402e-08, 1.4100803e-08, 3.4320692e-08, -0.01, 7.556809e-08, 0.0100000035, 3.4895493e-08, 6.0827006e-08, 0.005015958, -0.0005657596)
 bone_name = "Head"
 joint_constraints/swing_span = 34.999996
 joint_constraints/twist_span = 24.999996

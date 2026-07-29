@@ -20,7 +20,7 @@ var was_on_floor := false
 var fall_velocity := 0.0
 var displayed_cash := 100
 var cash_count_tween : Tween
-var cash := 50
+var cash := 250
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var camera_selected = 2

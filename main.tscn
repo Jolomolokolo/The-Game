@@ -41,6 +41,7 @@
 [ext_resource type="PackedScene" uid="uid://6g7fuwbhqts4" path="res://Scenes/Trains/Train-Carriages/train_carriage_container_red_2.tscn" id="38_come4"]
 [ext_resource type="PackedScene" uid="uid://cmpnjjk50oevm" path="res://Scenes/Trains/rail_switch.tscn" id="39_come4"]
 [ext_resource type="PackedScene" uid="uid://b8oquho43w1px" path="res://Scenes/Trains/Train-Carriages/train_carriage_tank_large_2.tscn" id="41_0cp0l"]
+[ext_resource type="PackedScene" uid="uid://dqxe4qmkmja8k" path="res://Scenes/Trains/CargoAddons/train_carriage_load_changer.tscn" id="43_0n3wm"]
 [ext_resource type="PackedScene" uid="uid://y18u16sa26ny" path="res://Scenes/Cars/police_car_with_light.tscn" id="43_d2t1y"]
 [ext_resource type="PackedScene" uid="uid://cs8pybtss5ekx" path="res://Scenes/PCScreen/pc_screen_access.tscn" id="43_gngh3"]
 
@@ -1547,7 +1548,7 @@ progress = 92.84
 transform = Transform3D(1.0000657, 0, 0, 0, 1.0000923, 0, 0, 0, 1.0000654, 0, 0, 0)
 
 [node name="PathFollow3DCarriage6" type="PathFollow3D" parent="RailNetwork/Track_A" unique_id=1503768986]
-transform = Transform3D(-0.9592718, 0, -0.28235453, 0, 0.99995387, 0, 0.28235245, 0, -0.9592788, -64.48727, 0, 26.831812)
+transform = Transform3D(-0.9592718, 0, -0.2823545, 0, 0.99995387, 0, 0.28235245, 0, -0.9592788, -64.48727, 0, 26.831812)
 progress = 84.84
 
 [node name="train-carriage-tank-large2" parent="RailNetwork/Track_A/PathFollow3DCarriage6" unique_id=744761036 instance=ExtResource("41_0cp0l")]
@@ -1585,7 +1586,10 @@ transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0
 monitored_track = NodePath("../../RailNetwork/Track_A")
 
 [node name="Train" parent="RailNetwork" unique_id=1995327968 instance=ExtResource("33_jq2sk")]
-transform = Transform3D(1, 0, 1.4901161e-08, 0, 1, 0, -1.4901161e-08, 0, 1, 0, -0.018009305, 0)
+transform = Transform3D(0.16083667, 0, 0.98698103, 0, 1, 0, -0.98698103, 0, 0.16083667, -20.534958, -0.018009305, -41.64534)
+
+[node name="TrainCarriageLoadChanger" parent="RailNetwork" unique_id=807806039 instance=ExtResource("43_0n3wm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.269089, 2.9999053, -87.53841)
 
 [node name="Label3D" type="Label3D" parent="." unique_id=150371383]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1281567, 9.562088)
