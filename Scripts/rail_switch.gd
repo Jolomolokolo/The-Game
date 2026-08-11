@@ -49,11 +49,11 @@ func get_next_track_for(incoming: Path3D, direction: int) -> Path3D:
 func get_from_track():
 	return _track_in
 	
-func _on_switch_area_body_entered(body: Node3D) -> void:
+func _on_switch_area_body_entered(body: RigidBody3D) -> void:
 	if body.is_in_group("train"):
 		body.get_parent().notify_junction_enter(self)
 	
-func _on_switch_area_body_exited(body: Node3D) -> void:
+func _on_switch_area_body_exited(body: RigidBody3D) -> void:
 	if body.is_in_group("train"):
 		body.get_parent().notify_junction_exit(self)
 	

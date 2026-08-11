@@ -1534,7 +1534,7 @@ progress = 30.0
 transform = Transform3D(1.0000283, 0, 0, 0, 1.0000461, 0, 0, 0, 1.0000362, 0, 0, 0)
 
 [node name="TrainCarriage_4" type="PathFollow3D" parent="RailNetwork/Track_A" unique_id=211214699]
-transform = Transform3D(0.10225446, 0, 0.994758, 0, 1, 0, -0.994758, 0, 0.10225446, -19.540672, 0, -4.0900893)
+transform = Transform3D(0.102254435, 0, 0.99475783, 0, 1, 0, -0.99475783, 0, 0.102254435, -19.540672, 0, -4.0900893)
 progress = 20.0
 
 [node name="Train-Carriage-Container-Red5" parent="RailNetwork/Track_A/TrainCarriage_4" unique_id=323266113 instance=ExtResource("38_come4")]

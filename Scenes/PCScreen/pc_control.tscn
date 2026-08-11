@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://baksou5k7a8fl"]
+
+[node name="PCControl" type="Control" unique_id=740745565]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BG" type="TextureRect" parent="." unique_id=1373593515]
+custom_minimum_size = Vector2(600, 400)
+layout_mode = 0
+offset_right = 600.0
+offset_bottom = 400.0

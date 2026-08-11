@@ -1,0 +1,243 @@
+[gd_scene format=3 uid="uid://q10niop0b130"]
+
+[ext_resource type="Theme" uid="uid://d0fdma2upnxkw" path="res://Scenes/PCScreen/main_theme.tres" id="1_2hs35"]
+[ext_resource type="Texture2D" uid="uid://diw4xyhhwlv36" path="res://icons/game_icons_white/cross.png" id="1_ad7f8"]
+[ext_resource type="Texture2D" uid="uid://btxktcwgg0rcx" path="res://icons/game_icons_white/home.png" id="2_2hs35"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2hs35"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+corner_radius_top_left = 12
+corner_radius_top_right = 12
+corner_radius_bottom_right = 12
+corner_radius_bottom_left = 12
+shadow_color = Color(0, 0, 0, 0.23529412)
+shadow_size = 6
+
+[sub_resource type="LabelSettings" id="LabelSettings_xvnu6"]
+font_size = 32
+font_color = Color(0.91764706, 0.93333334, 0.95686275, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_0in4i"]
+font_size = 24
+font_color = Color(0.5411765, 0.58431375, 0.64705884, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2hs35"]
+font_size = 48
+font_color = Color(0.9607843, 0.77254903, 0.25882354, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4recf"]
+font_size = 48
+font_color = Color(0.2901961, 0.87058824, 0.5019608, 1)
+
+[node name="BankApp" type="Control" unique_id=2067482276]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_2hs35")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1877027765]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.043137256, 0.05882353, 0.09019608, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=759665436]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Spacer" type="PanelContainer" parent="VBoxContainer" unique_id=1084454093]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2hs35")
+
+[node name="TopBar" type="PanelContainer" parent="VBoxContainer" unique_id=1521986195]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar" unique_id=439917726]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 300
+
+[node name="HomeButton" type="TextureRect" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1412433889]
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+texture = ExtResource("2_2hs35")
+
+[node name="CompanyName" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=725916849]
+layout_mode = 2
+text = "The Jolomolokolo Company"
+label_settings = SubResource("LabelSettings_xvnu6")
+
+[node name="CloseButton" type="TextureButton" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1416587370]
+custom_minimum_size = Vector2(100, 100)
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = ExtResource("1_ad7f8")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="StatusBar" type="PanelContainer" parent="VBoxContainer" unique_id=1862009316]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/StatusBar" unique_id=693738076]
+layout_mode = 2
+
+[node name="TabBar" type="HBoxContainer" parent="VBoxContainer" unique_id=210746233]
+layout_mode = 2
+
+[node name="Content" type="HBoxContainer" parent="VBoxContainer" unique_id=1717560882]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="ContentRow" type="HBoxContainer" parent="VBoxContainer/Content" unique_id=1055101784]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="LeftColumn" type="VBoxContainer" parent="VBoxContainer/Content/ContentRow" unique_id=86527842]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/separation = 16
+
+[node name="SummaryRow" type="HBoxContainer" parent="VBoxContainer/Content/ContentRow/LeftColumn" unique_id=1151082568]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 64
+
+[node name="NetWorth" type="Control" parent="VBoxContainer/Content/ContentRow/LeftColumn/SummaryRow" unique_id=1955174693]
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Content/ContentRow/LeftColumn/SummaryRow/NetWorth" unique_id=669387655]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NetWorth" type="Label" parent="VBoxContainer/Content/ContentRow/LeftColumn/SummaryRow/NetWorth" unique_id=635457758]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 54.0
+grow_horizontal = 2
+text = "Net Worth"
+label_settings = SubResource("LabelSettings_0in4i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NetWorthLabel" type="Label" parent="VBoxContainer/Content/ContentRow/LeftColumn/SummaryRow/NetWorth" unique_id=1340173744]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.5
+offset_top = -13.5
+offset_right = 68.5
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "50065 €"
+label_settings = SubResource("LabelSettings_2hs35")
+
+[node name="Cash" type="Control" parent="VBoxContainer/Content/ContentRow/LeftColumn/SummaryRow" unique_id=1980656493]
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Content/ContentRow/LeftColumn/SummaryRow/Cash" unique_id=593096373]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Cash" type="Label" parent="VBoxContainer/Content/ContentRow/LeftColumn/SummaryRow/Cash" unique_id=1454051615]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 54.0
+grow_horizontal = 2
+text = "Cash"
+label_settings = SubResource("LabelSettings_0in4i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CashLabel" type="Label" parent="VBoxContainer/Content/ContentRow/LeftColumn/SummaryRow/Cash" unique_id=389911039]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.5
+offset_top = -13.5
+offset_right = 68.5
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "50065 €"
+label_settings = SubResource("LabelSettings_4recf")
+
+[node name="MonthlyFlow" type="Control" parent="VBoxContainer/Content/ContentRow/LeftColumn/SummaryRow" unique_id=1016703018]
+custom_minimum_size = Vector2(300, 150)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Content/ContentRow/LeftColumn/SummaryRow/MonthlyFlow" unique_id=47049409]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MonthlyFlow" type="Label" parent="VBoxContainer/Content/ContentRow/LeftColumn/SummaryRow/MonthlyFlow" unique_id=1913530915]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 54.0
+grow_horizontal = 2
+text = "Monthly Flow"
+label_settings = SubResource("LabelSettings_0in4i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MonthlyFlowLabel" type="Label" parent="VBoxContainer/Content/ContentRow/LeftColumn/SummaryRow/MonthlyFlow" unique_id=1438110557]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.5
+offset_top = -13.5
+offset_right = 68.5
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "+50065 €"
+label_settings = SubResource("LabelSettings_4recf")
