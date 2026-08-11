@@ -1,10 +1,11 @@
 [gd_scene format=4 uid="uid://c4pj4j4ga3wj"]
 
-[ext_resource type="Script" uid="uid://bspqbjysg64fk" path="res://Scenes/Trains/train_rigidbody.gd" id="1_syv0r"]
+[ext_resource type="Script" uid="uid://bspqbjysg64fk" path="res://Scripts/train_rigidbody.gd" id="1_syv0r"]
 [ext_resource type="Texture2D" uid="uid://dx7xwudj0tglm" path="res://models/trains/Textures/colormap.png" id="2_0hk28"]
 [ext_resource type="Script" uid="uid://cpvaeoefjojug" path="res://Scripts/map_hud.gd" id="3_kpsx5"]
 [ext_resource type="Script" uid="uid://b757dm0e1o1ql" path="res://Scripts/carriage_hud.gd" id="4_t7e8y"]
 [ext_resource type="Script" uid="uid://dwtshwutp77xf" path="res://Scenes/Trains/couple_menu.gd" id="5_syv0r"]
+[ext_resource type="PackedScene" uid="uid://bjgotl5u4cl8l" path="res://Scenes/Persistence.tscn" id="6_a86h1"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_mcim7"]
 size = Vector3(3, 4.424768, 7.2000003)
@@ -395,6 +396,8 @@ shape = SubResource("BoxShape3D_m1hyp")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CoupleAreaBack" unique_id=415310003]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.3897166e-07, 0.77454054, 3.7536044)
 shape = SubResource("BoxShape3D_m1hyp")
+
+[node name="Persistence" parent="." unique_id=959415864 groups=["Persist"] instance=ExtResource("6_a86h1")]
 
 [connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

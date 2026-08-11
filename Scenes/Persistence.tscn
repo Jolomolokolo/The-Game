@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bjgotl5u4cl8l"]
+
+[ext_resource type="Script" uid="uid://ihluastaxdcb" path="res://persistence_component.gd" id="1_i1osl"]
+
+[node name="Persistence" type="Node" unique_id=959415864]
+script = ExtResource("1_i1osl")

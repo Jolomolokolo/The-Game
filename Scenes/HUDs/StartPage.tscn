@@ -24,6 +24,7 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_cctj5")
+version = "Alpha"
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=517078489]
 z_index = -2
@@ -124,4 +125,5 @@ text = "tHE gAAAmE"
 label_settings = SubResource("LabelSettings_hklf8")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="SaveButton" to="." method="_on_save_button_pressed"]
 [connection signal="pressed" from="SettingsButton" to="." method="_on_settings_button_pressed"]

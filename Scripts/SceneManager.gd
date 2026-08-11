@@ -8,6 +8,8 @@ var _progress_bar : ProgressBar
 var _loading_label : Label
 var _is_transitioning := false
 
+signal scene_changed
+
 func _ready() -> void:
 	layer = 128
 	
@@ -69,7 +71,7 @@ func _change_scene_async(path: String) -> void:
 		if status == ResourceLoader.THREAD_LOAD_LOADED:
 			break
 		elif status == ResourceLoader.THREAD_LOAD_FAILED or status == ResourceLoader.THREAD_LOAD_INVALID_RESOURCE:
-			push_error("Couln NOT Load Scene...")
+			push_error("Could NOT Load Scene...")
 			_is_transitioning = false
 			await _fade(1.0, 0.0)
 			return
@@ -78,6 +80,8 @@ func _change_scene_async(path: String) -> void:
 	
 	var new_scene: PackedScene = ResourceLoader.load_threaded_get(path)
 	get_tree().change_scene_to_packed(new_scene)
+	await get_tree().process_frame
+	scene_changed.emit()
 	
 	_progress_bar.visible = false
 	_loading_label.visible = false

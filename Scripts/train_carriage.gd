@@ -33,6 +33,7 @@ func _ready():
 	gravity_scale = 0.3
 	mass = weight
 	_init_from_parent()
+	call_deferred("_create_anchor")
 	
 func _init_from_parent():
 	var parent = get_parent()
@@ -42,15 +43,12 @@ func _init_from_parent():
 		if grandparent is Path3D:
 			current_track = grandparent
 			current_progress = current_path_follow.progress
-	_create_anchor()
 	
 func _create_anchor() -> void:
 	_anchor = Marker3D.new()
 	_anchor.name = "CarriageAnchor_" + name
 	if current_path_follow:
-		current_path_follow.add_child.call_deferred(_anchor)
-	if _anchor:
-		global_position = _anchor.global_position
+		current_path_follow.add_child(_anchor)
 	
 func _physics_process(delta: float) -> void:
 	_time_alive += delta
@@ -123,6 +121,9 @@ func _process(delta: float) -> void:
 	_check_carriage_collision()
 	
 func update_coupled_position(leader_progress: float, leader_track: Path3D, leader_follow: PathFollow3D, spd: float) -> void:
+	if is_derailed:
+		return
+	
 	_current_speed = spd
 	var going_forward = spd > 0.0
 	var delta = get_process_delta_time()
@@ -198,13 +199,14 @@ func _move_to_track(new_track: Path3D, reference_follow: PathFollow3D) -> void:
 	new_follow.loop = reference_follow.loop
 	new_track.add_child(new_follow)
 	
+	if _anchor and current_path_follow:
+		current_path_follow.remove_child(_anchor)
+		new_follow.add_child(_anchor)
+	
 	if current_path_follow:
-		current_path_follow.remove_child(self)
 		if current_path_follow.name.begins_with("CarriageFollow_"):
 			current_path_follow.queue_free()
 	
-	new_follow.add_child(self)
-	transform = Transform3D.IDENTITY
 	current_track = new_track
 	current_path_follow = new_follow
 	
@@ -229,6 +231,8 @@ func _check_carriage_collision():
 		if other == self:
 			continue
 		if not is_instance_valid(other):
+			continue
+		if not other.current_track or not current_track:
 			continue
 		if other.current_track.name != current_track.name:
 			continue

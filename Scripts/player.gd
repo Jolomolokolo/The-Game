@@ -439,3 +439,6 @@ func _update_cash_label(value: float):
 	displayed_cash = int(round(value))
 	cash_label.text = str(displayed_cash) + " Cash"
 	
+func _on_return_main_button_pressed() -> void:
+	SceneManager.change_scene("res://Scenes/HUDs/StartPage.tscn")
+	

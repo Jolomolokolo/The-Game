@@ -8,7 +8,6 @@ extends Control
 var selected_preset: GameData.Preset = GameData.Preset.NORMAL
 
 var start := false
-var Return := false
 
 func _process(_delta: float) -> void:
 	if start:

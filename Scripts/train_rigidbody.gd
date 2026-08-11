@@ -1,5 +1,7 @@
 extends RigidBody3D
+class_name Train
 
+@export var entity_id: String = ""
 @export var max_speed := 20.0
 @export var acceleration := 3.0
 @export var brake_force := 6.0
@@ -12,28 +14,28 @@ extends RigidBody3D
 @export var derail_speed_curve := 120.0
 
 var speed := 0.0
-var player_inside := false
+@export var player_inside := false # Player wieder automatisch in den Zug setzen
 var player_ref : Node3D = null
 var just_entered := false
-var gear := 0
-var current_camera := 1
-var is_derailed := false
+@export var gear := 0
+@export var current_camera := 1
+@export var is_derailed := false
 
 var current_track : Path3D = null
 var current_path_follow : PathFollow3D = null
-var current_progress : float = 0.0
-var current_track_name := ""
+@export var current_progress : float = 0.0
+@export var current_track_name := ""
 var _rail_network : Node = null
-var current_junction = null
+var current_junction = null # @export ???
 
-var _coupled_carriages : Array[Node] = []
+@export var _coupled_carriages : Array[Node] = []
 var _nearby_carriages : Array = []
 var _nearby_carriage : Node = null
 @export var couple_distance := 5.0
 
 var _anchor : Node3D = null
-var _derail_grace_time := 2.0
-var _time_alive := 0.0
+@export var _derail_grace_time := 2.0
+@export var _time_alive := 0.0
 
 @onready var train_camera = $DriveCamera
 @onready var train_camera_backward = $DriveCameraBackward
@@ -96,6 +98,10 @@ func _ready() -> void:
 	
 func _init_track_from_parent() -> void:
 	_rail_network = _find_rail_network()
+	print("_rail_network gefunden: ", _rail_network)
+	if _rail_network:
+		print("_rail_network Pfad: ", _rail_network.get_path())
+		print("_rail_network Kinder: ", _rail_network.get_children())
 	if not _rail_network:
 		return
 	
@@ -110,9 +116,15 @@ func _init_track_from_parent() -> void:
 					break
 			break
 	
+	#
+	print("current_track: ", current_track)
+	print("current_path_follow: ", current_path_follow)
+	#
+	
 	print("Train started on Track: %s" % current_track_name)
 	
 func _create_anchor() -> void:
+	# Maybe Progress ?
 	_anchor = Marker3D.new()
 	_anchor.name = "TrainAnchor"
 	if current_path_follow:
@@ -557,3 +569,36 @@ func _on_area_3d_body_exited(body: Node3D) -> void:
 		body.nearby_vehicle = null
 		tooltip_layer_enter.visible = false
 	
+func _on_save_loaded() -> void:
+	
+	# Not WORKING: Progress not correct !
+	
+	print(">>> _on_save_loaded() AUFGERUFEN <<<")  # DEBUG
+	_rail_network = _find_rail_network()
+	current_track = null
+	current_path_follow = null
+	
+	if _rail_network and current_track_name != "":
+		for child in _rail_network.get_children():
+			if child is Path3D and child.name == current_track_name:
+				current_track = child
+				for sub in child.get_children():
+					if sub is PathFollow3D:
+						current_path_follow = sub
+						break
+				break
+	
+	if is_derailed:
+		gravity_scale = 1.0
+		_anchor = null
+	else:
+		gravity_scale = 0.3
+		if current_path_follow:
+			current_path_follow.progress = current_progress
+		_create_anchor()
+	
+	print("After Loading - current_track: ", current_track, " | current_progress ", current_progress)
+	
+	for carriage in _coupled_carriages:
+		if is_instance_valid(carriage) and carriage.has_method("couple"):
+			carriage.couple()
