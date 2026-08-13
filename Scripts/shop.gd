@@ -72,11 +72,11 @@ func _on_item_selected(item: ShopItem):
 	if not player:
 		return
 	
-	if player.cash >= item.price:
-		player.add_cash(-item.price)
+	if GameData.cash >= item.price:
+		GameData.add_cash(-item.price)
 		if player.has_method("add_buildable_object"):
 			player.add_buildable_object(item.scene)
-		print("Bought: ", item.item_name, " " ,item.price)
+		print("Bought: ", item.item_name, " " , item.price)
 	else:
 		print("Not enough Cash")
 	

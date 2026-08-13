@@ -45,17 +45,25 @@ func _process(delta: float) -> void:
 func save_game(slot: int = current_slot, silent: bool = false) -> void:
 	current_slot = slot
 	
-	
 	var entities_data : Array = []
 	for component in get_tree().get_nodes_in_group("Persist"):
 		entities_data.append(component.save())
 	
 	var player = get_player()
-	if player == null:
-		push_warning("SaveManager can NOT find Player !")
 	var save_data : Dictionary = {
 		"name": current_save_name if current_save_name != "" else "Save %d" % slot,
-		"cash": player.cash if player else  0,
+		"cash": GameData.cash,
+		"stocks_value": GameData.stocks_value,
+		"real_estate_value": GameData.real_estate_value,
+		"company_value": GameData.company_value,
+		"company_monthly_profit": GameData.company_monthly_profit,
+		"debt": GameData.debt,
+		"current_month": GameData.current_month,
+		"current_year": GameData.current_year,
+		"net_worth_history": GameData.net_worth_hitstory,
+		"cash_history": GameData.cash_history,
+		"debt_history": GameData.debt_history,
+		"transactions": GameData.transactions,
 		"player_position": var_to_str(player.global_position) if player else "",
 		"player_rotation": var_to_str(player.global_rotation) if player else "",
 		"playtime": roundi(total_playtime),
@@ -118,9 +126,21 @@ func load_game(slot: int, silent: bool = false) -> bool:
 	current_save_name = save_data.get("name", "Save %d" % slot)
 	total_playtime = save_data.get("playtime", 0.0)
 	
+	GameData.cash = save_data.get("cash", GameData.start_cash)
+	GameData.stocks_value = save_data.get("stocks_value", 0.0)
+	GameData.real_estate_value = save_data.get("real_estate_value", 0.0)
+	GameData.company_value = save_data.get("company_value", 0.0)
+	GameData.company_monthly_profit = save_data.get("company_monthly_profit", 0.0)
+	GameData.debt = save_data.get("debt", 0.0)
+	GameData.current_month = save_data.get("current_month", 1)
+	GameData.current_year = save_data.get("current_year", 1)
+	GameData.net_worth_history.assign(save_data.get("net_worth_history", []))
+	GameData.cash_history.assign(save_data.get("cash_history", []))
+	GameData.debt_history.assign(save_data.get("debt_history", []))
+	GameData.transactions.assign(save_data.get("transactions", []))
+	
 	var player = get_player()
 	if player:
-		player.cash = save_data.get("cash", 0)
 		if save_data.get("player_position", "") != "":
 			player.global_position = str_to_var(save_data["player_position"])
 		if save_data.get("player_rotation", "") != "":

@@ -20,7 +20,6 @@ var was_on_floor := false
 var fall_velocity := 0.0
 var displayed_cash := 100
 var cash_count_tween : Tween
-var cash := 250
 
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 var camera_selected = 2
@@ -75,9 +74,9 @@ func _ready():
 	
 	call_deferred("_connect_to_shop")
 	
-	cash = GameData.start_cash
-	displayed_cash = cash
-	cash_label.text = str(cash) + " Cash"
+	GameData.cash_changed.connect(_on_cash_changed)
+	displayed_cash = GameData.cash
+	_update_cash_label(displayed_cash)
 	
 func _input(event):
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not in_car:
@@ -116,7 +115,8 @@ func _input(event):
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	
 	if event.is_action_pressed("9"):
-		add_cash(100)
+		GameData.add_cash(100, "Button 9")
+		
 func _physics_process(delta):
 	if not GameState.can_player_move():
 		return
@@ -238,7 +238,7 @@ func _process(_delta):
 	if global_position.y < respawn_depth_trigger:
 		respawn()
 	
-	cash_label.text = str(cash) + " Cash"
+	cash_label.text = str(GameData.cash) + " Cash"
 
 func respawn():
 	get_tree().paused = false
@@ -403,11 +403,9 @@ func _connect_to_shop():
 	if shop:
 		shop.shop_state_changed.connect(_on_shop_state_changed)
 	
-func add_cash(amount: int):
-	var old_cash = cash
-	cash += amount
-	_spawn_cash_popup(cash - old_cash)
-	_animate_cash_count_to(cash)
+func _on_cash_changed(new_value: int, difference: int) -> void:
+	_spawn_cash_popup(difference)
+	_animate_cash_count_to(new_value)
 	
 func _spawn_cash_popup(difference: int):
 	if difference == 0:

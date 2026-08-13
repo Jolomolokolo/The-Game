@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://cmxs22a7xoxl0"]
+
+[ext_resource type="Script" uid="uid://sjov5jhbhb5k" path="res://Scenes/PCScreen/Apps/financial_chart.gd" id="1_l1gsr"]
+
+[node name="FinancialChart" type="Control" unique_id=768827471]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=471206903]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpacerStart" type="Control" parent="VBoxContainer" unique_id=478865887]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=1978823730]
+layout_mode = 2
+
+[node name="SpacerStart" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=234533844]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="FinancialHistory" type="Label" parent="VBoxContainer/HBoxContainer" unique_id=164134399]
+layout_mode = 2
+text = "Financial History"
+
+[node name="Spacer" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=102845191]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="6MonthsButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=566807097]
+layout_mode = 2
+text = "6M"
+
+[node name="12MonthsButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=979260697]
+layout_mode = 2
+text = "12M"
+
+[node name="MAXMonthsButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=1665741589]
+layout_mode = 2
+text = "MAX"
+
+[node name="SpacerEnd" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=935454827]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+
+[node name="SpacerMiddle" type="Control" parent="VBoxContainer" unique_id=1473605267]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="GraphArea" type="Control" parent="VBoxContainer" unique_id=1276214019]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("1_l1gsr")
+
+[node name="SpacerLegend" type="Control" parent="VBoxContainer" unique_id=3872251]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+
+[node name="Legend" type="HBoxContainer" parent="VBoxContainer" unique_id=508217740]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 32
+
+[node name="NetWorth" type="Label" parent="VBoxContainer/Legend" unique_id=1994798058]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.9607843, 0.77254903, 0.25882354, 1)
+text = "•   Net Worth"
+
+[node name="Cash" type="Label" parent="VBoxContainer/Legend" unique_id=1965768033]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.2901961, 0.87058824, 0.5019608, 1)
+text = "⎯   Cash"
+
+[node name="Debt" type="Label" parent="VBoxContainer/Legend" unique_id=1401588170]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.972549, 0.44313726, 0.44313726, 1)
+text = "⎯   Debt"
+
+[node name="SpacerEnd" type="Control" parent="VBoxContainer" unique_id=483848316]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
