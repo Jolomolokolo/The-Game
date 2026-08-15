@@ -1,10 +1,46 @@
 extends Control
 
-@onready var chart = $VBoxContainer/Content/ContentRow/LeftColumn/HBoxContainer/ChartPanel/FinancialChart/VBoxContainer/GraphArea
+# ABkürzungen für Millionen, Milliarden und eventuell tausend, damit nicht so clustered
+
+@onready var tab_buttons : Array[Button] = [
+	$VBoxContainer/TabBar/TabDashboard,
+	$VBoxContainer/TabBar/TabTransactions,
+	$VBoxContainer/TabBar/TabLoans,
+	$VBoxContainer/TabBar/TabRealEstates
+]
+
+@onready var tab_pages : Array[HBoxContainer] = [
+	$VBoxContainer/Content/Dashboard,
+	$VBoxContainer/Content/Transactions,
+	$VBoxContainer/Content/Loans,
+	$VBoxContainer/Content/RealEstates
+]
+
+@onready var chart = $VBoxContainer/Content/Dashboard/LeftColumn/HBoxContainer/ChartPanel/FinancialChart/VBoxContainer/GraphArea
+@onready var transaction_list_container = $VBoxContainer/Content/Transactions/VBoxContainer
 
 func _ready() -> void:
 	GameData.finances_updated.connect(_on_gamedata_finances_updated)
+	GameData.transaction_added.connect(_on_transaction_added)
+	
+	for i in tab_buttons.size():
+		tab_buttons[i].pressed.connect(_on_tab_pressed.bind(i))
+	_on_tab_pressed(0)
+	
+func _on_tab_pressed(index: int) -> void:
+	for i in tab_buttons.size():
+		tab_buttons[i].button_pressed = (i == index)
+		tab_pages[i].visible = (i == index)
+		print(tab_pages)
 	
 func _on_gamedata_finances_updated() -> void:
 	# NETWORTH LABEL UND ALLE ANDEREN LABELS HIER DANN AKTUALISIEREN
 	chart.set_data(GameData.net_worth_history, GameData.cash_history, GameData.debt_history)
+	
+func _on_transaction_added(transaction: Dictionary) -> void:
+	var entry := Label.new()
+	var sign_str = "+" if transaction["amount"] > 0 else ""
+	entry.text = "%s%d € - %s" % [sign_str, transaction["amount"], transaction["reason"]]
+	entry.modulate = Color(0.3, 1, 0.3) if transaction["amount"] > 0 else Color(1, 0.3, 0.3)
+	#transaction_list_container.add_child(entry)
+	#transaction_list_container.move_child(entry, 0)

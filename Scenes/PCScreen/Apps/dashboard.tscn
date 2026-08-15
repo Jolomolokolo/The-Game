@@ -1,0 +1,263 @@
+[gd_scene format=3 uid="uid://cwviglpbllmyo"]
+
+[ext_resource type="PackedScene" uid="uid://cmxs22a7xoxl0" path="res://Scenes/PCScreen/Apps/financial_chart.tscn" id="1_a0ye3"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_0in4i"]
+font_size = 24
+font_color = Color(0.5411765, 0.58431375, 0.64705884, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_2hs35"]
+font_size = 48
+font_color = Color(0.9607843, 0.77254903, 0.25882354, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_4recf"]
+font_size = 48
+font_color = Color(0.2901961, 0.87058824, 0.5019608, 1)
+
+[node name="Dashboard" type="HBoxContainer" unique_id=2115363927]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 395.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+
+[node name="LeftColumn" type="VBoxContainer" parent="." unique_id=872854984]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/separation = 16
+
+[node name="SummaryRow" type="HBoxContainer" parent="LeftColumn" unique_id=355325688]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 64
+
+[node name="NetWorth" type="Control" parent="LeftColumn/SummaryRow" unique_id=873847258]
+custom_minimum_size = Vector2(300, 130)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="LeftColumn/SummaryRow/NetWorth" unique_id=854158166]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NetWorth" type="Label" parent="LeftColumn/SummaryRow/NetWorth" unique_id=973998141]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 54.0
+grow_horizontal = 2
+text = "Net Worth"
+label_settings = SubResource("LabelSettings_0in4i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="NetWorthLabel" type="Label" parent="LeftColumn/SummaryRow/NetWorth" unique_id=869318103]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.5
+offset_top = -13.5
+offset_right = 68.5
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "50065 €"
+label_settings = SubResource("LabelSettings_2hs35")
+
+[node name="Cash" type="Control" parent="LeftColumn/SummaryRow" unique_id=1111298547]
+custom_minimum_size = Vector2(300, 130)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="LeftColumn/SummaryRow/Cash" unique_id=886699591]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Cash" type="Label" parent="LeftColumn/SummaryRow/Cash" unique_id=670500298]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 54.0
+grow_horizontal = 2
+text = "Cash"
+label_settings = SubResource("LabelSettings_0in4i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CashLabel" type="Label" parent="LeftColumn/SummaryRow/Cash" unique_id=1086425999]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.5
+offset_top = -13.5
+offset_right = 68.5
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "50065 €"
+label_settings = SubResource("LabelSettings_4recf")
+
+[node name="MonthlyFlow" type="Control" parent="LeftColumn/SummaryRow" unique_id=1990712733]
+custom_minimum_size = Vector2(300, 130)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="LeftColumn/SummaryRow/MonthlyFlow" unique_id=463243997]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MonthlyFlow" type="Label" parent="LeftColumn/SummaryRow/MonthlyFlow" unique_id=279664911]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 54.0
+grow_horizontal = 2
+text = "Monthly Flow"
+label_settings = SubResource("LabelSettings_0in4i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MonthlyFlowLabel" type="Label" parent="LeftColumn/SummaryRow/MonthlyFlow" unique_id=1050866504]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.5
+offset_top = -13.5
+offset_right = 68.5
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "+50065 €"
+label_settings = SubResource("LabelSettings_4recf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="LeftColumn" unique_id=867324583]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 2.0
+
+[node name="Spacer" type="Control" parent="LeftColumn/HBoxContainer" unique_id=1407365450]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="ChartPanel" type="PanelContainer" parent="LeftColumn/HBoxContainer" unique_id=2064938530]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="FinancialChart" parent="LeftColumn/HBoxContainer/ChartPanel" unique_id=768827471 instance=ExtResource("1_a0ye3")]
+layout_mode = 2
+
+[node name="SpacerMiddle" type="Control" parent="LeftColumn/HBoxContainer" unique_id=1496263216]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="LeftColumn/HBoxContainer" unique_id=996674546]
+layout_mode = 2
+
+[node name="AssetBreakdown" type="PanelContainer" parent="LeftColumn/HBoxContainer/VBoxContainer" unique_id=1349373833]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="AssetBreakdown" type="Label" parent="LeftColumn/HBoxContainer/VBoxContainer/AssetBreakdown" unique_id=1647647456]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Asset Breakdown"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="LeftColumn/HBoxContainer/VBoxContainer/AssetBreakdown" unique_id=2065691757]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+columns = 4
+
+[node name="Spacer1" type="Control" parent="LeftColumn/HBoxContainer/VBoxContainer/AssetBreakdown/GridContainer" unique_id=1038414082]
+layout_mode = 2
+
+[node name="CashContainer" type="PanelContainer" parent="LeftColumn/HBoxContainer/VBoxContainer/AssetBreakdown/GridContainer" unique_id=511049750]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="CashName" type="Label" parent="LeftColumn/HBoxContainer/VBoxContainer/AssetBreakdown/GridContainer/CashContainer" unique_id=185458281]
+layout_mode = 2
+text = "Cash"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label" type="Label" parent="LeftColumn/HBoxContainer/VBoxContainer/AssetBreakdown/GridContainer/CashContainer" unique_id=1629109458]
+layout_mode = 2
+
+[node name="StocksContainer" type="PanelContainer" parent="LeftColumn/HBoxContainer/VBoxContainer/AssetBreakdown/GridContainer" unique_id=685866901]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="StocksName" type="Label" parent="LeftColumn/HBoxContainer/VBoxContainer/AssetBreakdown/GridContainer/StocksContainer" unique_id=1930838852]
+layout_mode = 2
+text = "Stocks"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer2" type="Control" parent="LeftColumn/HBoxContainer/VBoxContainer/AssetBreakdown/GridContainer" unique_id=774148721]
+layout_mode = 2
+
+[node name="Spacer3" type="Control" parent="LeftColumn/HBoxContainer/VBoxContainer/AssetBreakdown/GridContainer" unique_id=1933483684]
+layout_mode = 2
+
+[node name="RealEstateContainer+" type="PanelContainer" parent="LeftColumn/HBoxContainer/VBoxContainer/AssetBreakdown/GridContainer" unique_id=853827779]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="RealEstateName" type="Label" parent="LeftColumn/HBoxContainer/VBoxContainer/AssetBreakdown/GridContainer/RealEstateContainer+" unique_id=1361078760]
+layout_mode = 2
+text = "Real Estate"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DebtContainer" type="PanelContainer" parent="LeftColumn/HBoxContainer/VBoxContainer/AssetBreakdown/GridContainer" unique_id=1155036305]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="DebtName" type="Label" parent="LeftColumn/HBoxContainer/VBoxContainer/AssetBreakdown/GridContainer/DebtContainer" unique_id=1800471147]
+layout_mode = 2
+text = "Debt
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Spacer4" type="Control" parent="LeftColumn/HBoxContainer/VBoxContainer/AssetBreakdown/GridContainer" unique_id=501501486]
+layout_mode = 2
+
+[node name="SpacerEnd" type="Control" parent="LeftColumn/HBoxContainer" unique_id=1343955452]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="LeftColumn" unique_id=657419757]
+layout_mode = 2
