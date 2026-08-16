@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://btxktcwgg0rcx" path="res://icons/game_icons_white/home.png" id="2_2hs35"]
 [ext_resource type="Script" uid="uid://c48vpqvuutk58" path="res://Scenes/PCScreen/Apps/bank_app.gd" id="2_n48kc"]
 [ext_resource type="PackedScene" uid="uid://cwviglpbllmyo" path="res://Scenes/PCScreen/Apps/dashboard.tscn" id="5_n48kc"]
+[ext_resource type="PackedScene" uid="uid://eo8tfc76t6le" path="res://Scenes/PCScreen/Apps/transactions.tscn" id="6_034o3"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xvnu6"]
 font_size = 32
@@ -143,43 +144,56 @@ offset_transform_enabled = true
 text = "Real Estates
 "
 
+[node name="SpacerMiddle" type="Control" parent="VBoxContainer/TabBar" unique_id=1301512313]
+custom_minimum_size = Vector2(140, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TabClose" type="Button" parent="VBoxContainer/TabBar" unique_id=1572199453]
+layout_mode = 2
+size_flags_stretch_ratio = 0.0
+offset_transform_enabled = true
+text = "Close"
+
+[node name="SpacerEnd" type="Control" parent="VBoxContainer/TabBar" unique_id=209651831]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
 [node name="Content" type="HBoxContainer" parent="VBoxContainer" unique_id=1717560882]
 layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Dashboard" parent="VBoxContainer/Content" unique_id=2115363927 instance=ExtResource("5_n48kc")]
-layout_mode = 2
-
-[node name="Transactions" type="HBoxContainer" parent="VBoxContainer/Content" unique_id=1255849308]
 visible = false
 layout_mode = 2
-size_flags_horizontal = 3
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content/Transactions" unique_id=1693727121]
+[node name="Transactions" parent="VBoxContainer/Content" unique_id=1867948936 instance=ExtResource("6_034o3")]
+visible = false
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="VBoxContainer/Content/Transactions/VBoxContainer" unique_id=859536683]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-text = "TRANSACTIONSSSSSSS
-"
 
 [node name="Loans" type="HBoxContainer" parent="VBoxContainer/Content" unique_id=1154037494]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+
+[node name="Spacer" type="Control" parent="VBoxContainer/Content/Loans" unique_id=1416313425]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content/Loans" unique_id=1000001946]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/Content/Loans/VBoxContainer" unique_id=388979647]
+[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Loans/VBoxContainer" unique_id=1774459764]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-text = "Ohhhh ohhhh, DEBT..."
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Loans" unique_id=1480263859]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
 
 [node name="RealEstates" type="HBoxContainer" parent="VBoxContainer/Content" unique_id=2140171858]
 visible = false
@@ -195,3 +209,5 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 text = "REALLLLL ESTATESSSS"
+
+[connection signal="pressed" from="VBoxContainer/TabBar/TabClose" to="." method="_on_tab_close_pressed"]

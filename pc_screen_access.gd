@@ -23,16 +23,14 @@ func _process(_delta: float) -> void:
 func open_pc_screen():
 	pc_screen_open = true
 	tooltip_layer_open.visible = false
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	pc_screen.visible = true
-	GameState.current = GameState.State.PC_SCREEN
+	GameState.set_state(GameState.State.UI)
 	
 func close_pc_screen():
-	GameState.current = GameState.State.PLAYING
+	GameState.set_state(GameState.State.PLAYING)
 	pc_screen_open = false
 	if pc_screen_area_inside:
 		tooltip_layer_open.visible = true
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	pc_screen.visible = false
 	
 func _on_shop_enter_area_body_entered(body: Node3D) -> void:

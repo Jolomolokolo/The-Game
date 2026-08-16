@@ -1,0 +1,80 @@
+[gd_scene format=3 uid="uid://eo8tfc76t6le"]
+
+[ext_resource type="Script" uid="uid://cn2jocbql5edx" path="res://Scenes/PCScreen/Apps/transactions.gd" id="1_ot2vr"]
+
+[node name="Transactions" type="VBoxContainer" unique_id=1867948936]
+size_flags_horizontal = 3
+script = ExtResource("1_ot2vr")
+
+[node name="FilterBar" type="HBoxContainer" parent="." unique_id=269347402]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="SpacerStart" type="Control" parent="FilterBar" unique_id=403178695]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="TypeAllButton" type="Button" parent="FilterBar" unique_id=1772234754]
+layout_mode = 2
+toggle_mode = true
+text = "All"
+
+[node name="TypeIncomeButton" type="Button" parent="FilterBar" unique_id=811932786]
+layout_mode = 2
+toggle_mode = true
+text = "Income"
+
+[node name="TypeExpenseButton" type="Button" parent="FilterBar" unique_id=1654281131]
+layout_mode = 2
+toggle_mode = true
+text = "Expenses"
+
+[node name="SpacerMiddle" type="Control" parent="FilterBar" unique_id=1980631200]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Range6MButton" type="Button" parent="FilterBar" unique_id=89179787]
+layout_mode = 2
+toggle_mode = true
+text = "6M"
+
+[node name="Range2YButton" type="Button" parent="FilterBar" unique_id=1416610654]
+layout_mode = 2
+toggle_mode = true
+text = "2Y"
+
+[node name="RangeMAXButton" type="Button" parent="FilterBar" unique_id=1625737876]
+layout_mode = 2
+toggle_mode = true
+text = "MAX"
+
+[node name="SpacerEnd" type="Control" parent="FilterBar" unique_id=1284471215]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1686533749]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer" unique_id=823943149]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Spacer" type="Control" parent="ScrollContainer/HBoxContainer" unique_id=481705792]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="TransactionList" type="VBoxContainer" parent="ScrollContainer/HBoxContainer" unique_id=880663001]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 6
+
+[node name="SpacerEnd" type="Control" parent="ScrollContainer/HBoxContainer" unique_id=1963064534]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05

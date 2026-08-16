@@ -60,7 +60,7 @@ func save_game(slot: int = current_slot, silent: bool = false) -> void:
 		"debt": GameData.debt,
 		"current_month": GameData.current_month,
 		"current_year": GameData.current_year,
-		"net_worth_history": GameData.net_worth_hitstory,
+		"net_worth_history": GameData.net_worth_history,
 		"cash_history": GameData.cash_history,
 		"debt_history": GameData.debt_history,
 		"transactions": GameData.transactions,

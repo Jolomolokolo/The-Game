@@ -17,16 +17,6 @@ const PRESETS := {
 	}
 }
 
-func apply_preset(preset: Preset) -> void:
-	if preset == Preset.CUSTOM:
-		return
-	var data: Dictionary = PRESETS[preset]
-	start_cash = data["start_cash"]
-	
-func apply_custom_preset(cash: int, health: int) -> void:
-	start_cash = cash
-	start_health = health
-	
 signal cash_changed(new_value: int, difference: int)
 signal transaction_added(transaction: Dictionary)
 signal finances_updated
@@ -48,6 +38,16 @@ var debt : float = 0.0
 var transactions : Array[Dictionary] = []
 const MAX_TRANSACTIONS := 500
 
+func apply_preset(preset: Preset) -> void:
+	if preset == Preset.CUSTOM:
+		return
+	var data: Dictionary = PRESETS[preset]
+	start_cash = data["start_cash"]
+	
+func apply_custom_preset(cash: int, health: int) -> void:
+	start_cash = cash
+	start_health = health
+	
 func _ready() -> void:
 	cash = start_cash
 	
@@ -73,7 +73,12 @@ func add_cash(amount: int, reason: String = "") -> void:
 	cash_changed.emit(cash, amount)
 	transaction_added.emit(transaction)
 	
-	# TRANSACTION CODES HERE
+func get_recent_transactions(count: int) -> Array:
+	var start_index = max(0, transactions.size() - count)
+	return transactions.slice(start_index)
+	
+func get_transactions_for_month(month: int, year: int) -> Array:
+	return transactions.filter(func(t): return t["month"] == month and t["year"] == year)
 	
 func get_net_worth() -> float:
 	return cash + stocks_value + real_estate_value + company_value - debt

@@ -167,6 +167,7 @@ func enter_vehicle(player):
 		light.light_energy = 0.3
 	tooltip_layer_enter.visible = false
 	tooltip_layer.visible = true
+	GameState.set_vehicle(GameState.VehicleType.CAR)
 	
 func exit_car():
 	if player_ref == null:
@@ -181,6 +182,7 @@ func exit_car():
 	player_ref.show()
 	player_ref.set_physics_process(true)
 	player_ref.notify_exit()
+	GameState.set_vehicle(GameState.VehicleType.NONE)
 	var ref = player_ref
 	player_ref = null
 	await get_tree().create_timer(0.05).timeout

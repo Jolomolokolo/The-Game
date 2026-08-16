@@ -54,14 +54,14 @@ func _on_shop_enter_area_body_exited(body: Node3D) -> void:
 func open_shop():
 	shop_open = true
 	shop_just_opened = true
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	GameState.set_state(GameState.State.UI)
 	tooltip_layer_open.visible = false
 	shop_screen.visible = true
 	shop_state_changed.emit(true)
 	
 func close_shop():
 	shop_screen.visible = false
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	GameState.set_state(GameState.State.PLAYING)
 	shop_open = false
 	if shop_area_inside:
 		tooltip_layer_open.visible = true
@@ -80,5 +80,3 @@ func _on_item_selected(item: ShopItem):
 	else:
 		print("Not enough Cash")
 	
-# After Button Press, MOUSE_MODE_VISIBLE machen... eventuell per Inspektor sogar möglich
-# Buttons im GridContainer gleichmäßig verteilen -> Rechere, wie man GridContainer richtig einsetzt

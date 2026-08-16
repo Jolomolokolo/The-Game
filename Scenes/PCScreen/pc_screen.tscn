@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://b4hemiyxlckqq"]
 
 [ext_resource type="Script" uid="uid://cib5so1p1205k" path="res://Scenes/PCScreen/pc_screen.gd" id="1_btyii"]
-
-[sub_resource type="LabelSettings" id="LabelSettings_m1hyp"]
-font_size = 64
+[ext_resource type="PackedScene" uid="uid://q10niop0b130" path="res://Scenes/PCScreen/Apps/bank_app.tscn" id="2_gev3q"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_btjug"]
 font_size = 24
@@ -13,14 +11,10 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 50.0
-offset_top = 50.0
-offset_right = -50.0
-offset_bottom = -50.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+size_flags_horizontal = 3
+size_flags_vertical = 3
 script = ExtResource("1_btyii")
 
 [node name="PanelContainer" type="PanelContainer" parent="." unique_id=514591363]
@@ -31,33 +25,35 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Label" type="Label" parent="." unique_id=819915458]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "PC SCREEN"
-label_settings = SubResource("LabelSettings_m1hyp")
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Desktop" type="VBoxContainer" parent="PanelContainer" unique_id=262965594]
+layout_mode = 2
 
-[node name="ReturnButton" type="Button" parent="." unique_id=449131706]
-layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -160.0
-offset_top = -100.0
-offset_right = -40.0
-offset_bottom = -40.0
-grow_horizontal = 0
-grow_vertical = 0
+[node name="Spacer" type="Control" parent="PanelContainer/Desktop" unique_id=780815399]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
 
-[node name="ReturnButtonDescription" type="Label" parent="ReturnButton" unique_id=931699562]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Desktop" unique_id=991263977]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer" type="Control" parent="PanelContainer/Desktop/HBoxContainer" unique_id=2023053858]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="BankApp" type="Button" parent="PanelContainer/Desktop/HBoxContainer" unique_id=711978678]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "BANK"
+
+[node name="ReturnButton" type="Button" parent="PanelContainer/Desktop/HBoxContainer" unique_id=449131706]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="ReturnButtonDescription" type="Label" parent="PanelContainer/Desktop/HBoxContainer/ReturnButton" unique_id=931699562]
 z_index = 1
 layout_mode = 1
 anchors_preset = 15
@@ -70,4 +66,14 @@ label_settings = SubResource("LabelSettings_btjug")
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="ReturnButton" to="." method="_on_return_button_pressed"]
+[node name="SpacerEnd" type="Control" parent="PanelContainer/Desktop/HBoxContainer" unique_id=667311034]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="BankApp" parent="PanelContainer" unique_id=2067482276 instance=ExtResource("2_gev3q")]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="PanelContainer/Desktop/HBoxContainer/BankApp" to="." method="_on_bank_app_pressed"]
+[connection signal="pressed" from="PanelContainer/Desktop/HBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
+[connection signal="_return_desktop" from="PanelContainer/BankApp" to="." method="_on_bank_app_return_desktop"]

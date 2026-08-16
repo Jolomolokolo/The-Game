@@ -15,7 +15,6 @@ var health := 0.0
 var max_health := 100.0
 var player_dead := false
 var game_paused := false
-var shop_open := false
 var was_on_floor := false
 var fall_velocity := 0.0
 var displayed_cash := 100
@@ -52,6 +51,7 @@ var ghost_rotation_y := 0.0
 @onready var health_bar = $CanvasLayer/HealthBar
 @onready var cash_label : Label = $CanvasLayer/CashLabel
 @onready var cash_popup_container : Control = $CanvasLayer/CashPopupContainer
+@onready var ui_overlay_all = $CanvasLayer
 
 # Animation
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
@@ -72,29 +72,24 @@ func _ready():
 	objects.append(preload("res://Scenes/GridSystem/GridSystem-Wall.tscn"))
 	objects.append(preload("res://Scenes/GridSystem/GridSystem-Object.tscn"))
 	
-	call_deferred("_connect_to_shop")
-	
 	GameData.cash_changed.connect(_on_cash_changed)
 	displayed_cash = GameData.cash
 	_update_cash_label(displayed_cash)
 	
 func _input(event):
-	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED and not in_car:
-
-		target_yaw += deg_to_rad(-event.relative.x * mouse_sensitivity)
-
-		cam_pitch += deg_to_rad(-event.relative.y * mouse_sensitivity)
-		cam_pitch = clamp(cam_pitch, deg_to_rad(-50), deg_to_rad(50))
-	
 	if event.is_action_pressed("ui_cancel"):
 		game_pause()
+		return
 	
-	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-			if shop_open:
-				Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-			else:
-				Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	if not GameState.can_player_move() or GameState.current_vehicle_type != GameState.VehicleType.NONE:
+		return
+	
+	if event is InputEventMouseMotion:
+		
+		target_yaw += deg_to_rad(-event.relative.x * mouse_sensitivity)
+		
+		cam_pitch += deg_to_rad(-event.relative.y * mouse_sensitivity)
+		cam_pitch = clamp(cam_pitch, deg_to_rad(-50), deg_to_rad(50))
 	
 	# Camera Switch
 	if event.is_action_pressed("camera_1"):
@@ -103,24 +98,23 @@ func _input(event):
 		camera_selected = 2
 	
 	if event.is_action_pressed("e") and nearby_vehicle != null:
-		if not in_car:
-			in_car = true
+		if GameState.current_vehicle_type == GameState.VehicleType.NONE:
 			set_process_unhandled_input(false)
 			nearby_vehicle.enter_vehicle(self)
-	
 	
 	# Intern - DELETE for Release
 	
 	if event.is_action_pressed("0"):
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		GameState.set_state(GameState.State.UI)
+	
+	if event.is_action_pressed("8"):
+		GameState.set_state(GameState.State.PLAYING)
 	
 	if event.is_action_pressed("9"):
 		GameData.add_cash(100, "Button 9")
-		
+	
 func _physics_process(delta):
-	if not GameState.can_player_move():
-		return
-	if in_car:
+	if not GameState.can_player_move() or GameState.current_vehicle_type != GameState.VehicleType.NONE:
 		return
 	
 	# Smooth body rotation
@@ -145,7 +139,6 @@ func _physics_process(delta):
 		fall_velocity = 0.0
 	
 	# Jumping
-	# Jump nach Button-Bestätigung deaktivieren/verhindern
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_velocity
 		velocity.x *= 0.45
@@ -215,8 +208,15 @@ func _physics_process(delta):
 			object_change(-1)
 	
 func _process(_delta):
-	if in_car:
+	if not GameState.can_player_move():
+		ui_overlay_all.visible = false
 		return
+	
+	if GameState.current_vehicle_type != GameState.VehicleType.NONE:
+		ui_overlay_all.visible = false
+		return
+	
+	ui_overlay_all.visible = true
 	
 	# Camera Controll/Retraction
 	var dist = global_position.distance_to(camera_third_view.global_position)
@@ -244,9 +244,9 @@ func respawn():
 	get_tree().paused = false
 	global_position = respawn_position
 	velocity = Vector3.ZERO
+	GameState.set_state(GameState.State.PLAYING)
 	$Root/Skeleton3D/PhysicalBoneSimulator3D.physical_bones_stop_simulation()
 	self.set_physics_process(true)
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	respawn_screen.visible = false
 	health_bar.max_value = max_health
 	health_bar.value = max_health
@@ -266,7 +266,7 @@ func die():
 	self.set_physics_process(false)
 	await get_tree().create_timer(respawn_ragedoll_time).timeout
 	player_dead = true
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	GameState.set_state(GameState.State.UI)
 	respawn_screen.visible = true
 	get_tree().paused = true
 	
@@ -276,7 +276,6 @@ func _setup_collision_exceptions():
 	)
 	
 func notify_exit():
-	in_car = false
 	nearby_vehicle = null
 	set_process_unhandled_input(true)
 	
@@ -377,31 +376,19 @@ func _on_respawn_button_pressed() -> void:
 	
 func game_pause(): #  SHORTCUT adden, aber ESC braucht Delay, da sonst direkt Pause rückgänig gemacht
 	pause_screen.visible = true
-	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	game_paused = true
-	GameState.current = GameState.State.PAUSED
+	GameState.set_state(GameState.State.PAUSED)
 	get_tree().paused = true
 	
 func game_pause_return():
 	get_tree().paused = false
 	game_paused = false
 	pause_screen.visible = false
-	if shop_open:
-		Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
-	else:
-		Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
-	GameState.current = GameState.State.PLAYING
+	GameState.set_state(GameState.State.PLAYING)
+	ui_overlay_all.visible = false
 	
 func _on_return_button_pressed() -> void:
 	game_pause_return()
-	
-func _on_shop_state_changed(is_open: bool):
-	shop_open = is_open
-	
-func _connect_to_shop():
-	var shop = get_tree().get_first_node_in_group("shop")
-	if shop:
-		shop.shop_state_changed.connect(_on_shop_state_changed)
 	
 func _on_cash_changed(new_value: int, difference: int) -> void:
 	_spawn_cash_popup(difference)

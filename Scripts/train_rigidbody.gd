@@ -26,7 +26,7 @@ var current_path_follow : PathFollow3D = null
 @export var current_progress : float = 0.0
 @export var current_track_name := ""
 var _rail_network : Node = null
-var current_junction = null # @export ???
+var current_junction = null
 
 @export var _coupled_carriages : Array[Node] = []
 var _nearby_carriages : Array = []
@@ -522,6 +522,7 @@ func enter_vehicle(player) -> void:
 	map_hud.visible = true
 	carriage_hud.visible = true
 	couple_menu.visible = false
+	GameState.set_vehicle(GameState.VehicleType.TRAIN)
 	_update_switch_hud()
 	
 func exit_train() -> void:
@@ -537,6 +538,7 @@ func exit_train() -> void:
 	couple_menu.hide_menu()
 	player_ref.set_physics_process(true)
 	player_ref.notify_exit()
+	GameState.set_vehicle(GameState.VehicleType.NONE)
 	var ref = player_ref
 	player_ref = null
 	await get_tree().create_timer(0.3).timeout
