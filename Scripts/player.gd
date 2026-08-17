@@ -224,21 +224,18 @@ func _process(_delta):
 	if dist < 2.0:
 		camera_first_view.current = true
 		camera_third_view.current = false
-		#head_mesh.visible = false
 	else:
 		if camera_selected == 1:
 			camera_first_view.current = true
 			camera_third_view.current = false
-			#head_mesh.visible = false
 		elif camera_selected == 2:
 			camera_first_view.current = false
 			camera_third_view.current = true
-			#head_mesh.visible = true
 	
 	if global_position.y < respawn_depth_trigger:
 		respawn()
 	
-	cash_label.text = str(GameData.cash) + " Cash"
+	cash_label.text = NumberFormat.format(GameData.cash)
 
 func respawn():
 	get_tree().paused = false
@@ -400,7 +397,7 @@ func _spawn_cash_popup(difference: int):
 	
 	var popup = Label.new()
 	var sign_str = "+" if difference > 0 else ""
-	popup.text = sign_str + str(difference)
+	popup.text = sign_str + NumberFormat.format(abs(difference))
 	popup.modulate = Color(1, 0.3, 0.3) if difference < 0 else Color(0.3, 1, 0.3)
 	popup.add_theme_font_size_override("font_size", 20)
 	
@@ -422,7 +419,7 @@ func _animate_cash_count_to(target_cash: int):
 	
 func _update_cash_label(value: float):
 	displayed_cash = int(round(value))
-	cash_label.text = str(displayed_cash) + " Cash"
+	cash_label.text = NumberFormat.format(displayed_cash)
 	
 func _on_return_main_button_pressed() -> void:
 	SceneManager.change_scene("res://Scenes/HUDs/StartPage.tscn")

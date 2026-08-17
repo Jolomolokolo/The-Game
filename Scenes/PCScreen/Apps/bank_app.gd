@@ -37,12 +37,8 @@ func _on_tab_pressed(index: int) -> void:
 	for i in tab_buttons.size():
 		tab_buttons[i].button_pressed = (i == index)
 		tab_pages[i].visible = (i == index)
-		print(tab_pages)
 	
 func _on_gamedata_finances_updated() -> void:
-	# NETWORTH LABEL UND ALLE ANDEREN LABELS HIER DANN AKTUALISIEREN
-	cash_label.text = var_to_str(GameData.cash)
-	cash_label_dashboard.text = var_to_str(GameData.cash)
 	chart.set_data(GameData.net_worth_history, GameData.cash_history, GameData.debt_history)
 	
 func _on_transaction_added(transaction: Dictionary) -> void:
@@ -52,6 +48,10 @@ func _on_transaction_added(transaction: Dictionary) -> void:
 	entry.modulate = Color(0.3, 1, 0.3) if transaction["amount"] > 0 else Color(1, 0.3, 0.3)
 	#transaction_list_container.add_child(entry)
 	#transaction_list_container.move_child(entry, 0)
+	
+	# NETWORTH LABEL UND ALLE ANDEREN LABELS HIER DANN AKTUALISIEREN
+	cash_label.text = NumberFormat.format(GameData.cash)
+	cash_label_dashboard.text = NumberFormat.format(GameData.cash)
 
 func _on_tab_close_pressed() -> void:
 	_return_desktop.emit()
