@@ -46,16 +46,25 @@ func get_next_track_for(incoming: Path3D, direction: int) -> Path3D:
 			return _track_in
 	return null
 	
-func get_from_track():
+func get_from_track_name() -> String:
+	return _track_in.name if _track_in else ""
+	
+func get_from_track() -> Path3D:
 	return _track_in
 	
-func _on_switch_area_body_entered(body: RigidBody3D) -> void:
+func _on_switch_area_body_entered(body: Node3D) -> void:
 	if body.is_in_group("train"):
-		body.get_parent().notify_junction_enter(self)
+		if body.has_method("notify_junction_enter"):
+			body.notify_junction_enter(self)
+		elif body.get_parent().has_method("notify_junction_enter"):
+			body.get_parent().notify_junction_enter(self)
 	
-func _on_switch_area_body_exited(body: RigidBody3D) -> void:
+func _on_switch_area_body_exited(body: Node3D) -> void:
 	if body.is_in_group("train"):
-		body.get_parent().notify_junction_exit(self)
+		if body.has_method("notify_junction_exit"):
+			body.notify_junction_exit(self)
+		elif body.get_parent().has_method("notify_junction_exit"):
+			body.get_parent().notify_junction_exit(self)
 	
 func get_world_position() -> Vector3:
 	if has_node("SwitchPoint"):

@@ -36,6 +36,7 @@ var _nearby_carriage : Node = null
 var _anchor : Node3D = null
 @export var _derail_grace_time := 2.0
 @export var _time_alive := 0.0
+var _anchor_initialized := false
 
 @onready var train_camera = $DriveCamera
 @onready var train_camera_backward = $DriveCameraBackward
@@ -68,8 +69,10 @@ var mat_yellow : StandardMaterial3D
 func _ready() -> void:
 	add_to_group("train")
 	
-	gravity_scale = 0.3
+	gravity_scale = 0.0
 	mass = weight_tons
+	axis_lock_angular_x = true
+	axis_lock_angular_z = true
 	
 	train_camera.current = false
 	train_camera_backward.current = false
@@ -124,15 +127,25 @@ func _init_track_from_parent() -> void:
 	print("Train started on Track: %s" % current_track_name)
 	
 func _create_anchor() -> void:
-	# Maybe Progress ?
 	_anchor = Marker3D.new()
 	_anchor.name = "TrainAnchor"
 	if current_path_follow:
+		current_path_follow.progress = current_progress
 		current_path_follow.add_child(_anchor)
-	if _anchor:
-		global_position = _anchor.global_position
+	_anchor_initialized = false
 	
 func _physics_process(delta: float) -> void:
+	if not _anchor_initialized and _anchor and _anchor.is_inside_tree():
+		_anchor_initialized = true
+		freeze = true
+		global_transform = _anchor.global_transform
+		linear_velocity = Vector3.ZERO
+		angular_velocity = Vector3.ZERO
+		freeze = false
+		
+		print("Anchor initialisiert bei: ", _anchor.global_position)
+		return
+	
 	if is_derailed:
 		_update_derailed(delta)
 		return
@@ -219,11 +232,15 @@ func _apply_spring_force(delta: float) -> void:
 		return
 	
 	var target_pos = _anchor.global_position
-	var current_pos = global_position
-	var diff = target_pos - current_pos
+	var diff = target_pos - global_position
 	var dist = diff.length()
 	
-	var spring_force = diff.normalized() * dist * spring_strenght
+	var horizontal_diff = Vector3(diff.x, 0, diff.z)
+	var vertical_diff = Vector3(0, diff.y, 0)
+	
+	var spring_force = horizontal_diff.normalized() * horizontal_diff.length() * spring_strenght
+	spring_force += vertical_diff * spring_strenght * 3.0
+	
 	var damping_force = -linear_velocity * spring_damping
 	
 	apply_central_force(spring_force + damping_force)
@@ -237,30 +254,29 @@ func _apply_spring_force(delta: float) -> void:
 		global_basis = Basis(new_quat)
 		angular_velocity = Vector3.ZERO
 	
+var _derail_timer := 0.0
+@export var derail_grace_seconds := 1.0
+	
 func _check_derailment() -> void:
 	if not _anchor:
 		return
-	
 	var dist_to_track = global_position.distance_to(_anchor.global_position)
+	print("dist_to_track: %.2f | _time_alive: %.2f | derail_distance: %.2f" % [dist_to_track, _time_alive, derail_distance])
+	if dist_to_track > derail_distance:
+		_derail_timer += get_physics_process_delta_time()
+		if _derail_timer >= derail_grace_seconds:
+			_derail()
+	else:
+		_derail_timer = 0.0
+	
+	#var dist_to_track = global_position.distance_to(_anchor.global_position)
 	
 	if dist_to_track > derail_distance:
-		_derail()
-		return
-	
-	if current_track and current_path_follow:
-		var curve_speed = abs(speed)
-		var lenght = current_track.curve.get_baked_length()
-		if lenght > 0:
-			var ahead = clampf(current_progress + 2.0, 0.0, lenght)
-			var behind = clampf(current_progress - 2.0, 0.0, lenght)
-			var pos_ahead = current_track.to_global(current_track.curve.sample_baked(ahead))
-			var pos_behind = current_track.to_global(current_track.curve.sample_baked(behind))
-			var track_dir = (pos_ahead - pos_behind).normalized()
-			var train_dir = - global_transform.basis.z
-			var angle_diff = track_dir.angle_to(train_dir)
-			
-			if curve_speed > derail_speed_curve * (1.0 - angle_diff):
-				_derail()
+		_derail_timer += get_physics_process_delta_time()
+		if _derail_timer >= derail_grace_seconds:
+			_derail()
+	else:
+		_derail_timer = 0.0
 	
 func _derail():
 	if is_derailed:
@@ -269,6 +285,8 @@ func _derail():
 	is_derailed = true
 	speed = 0.0
 	gravity_scale = 1.0
+	axis_lock_angular_x = false
+	axis_lock_angular_z = false
 	_anchor = null
 	print("Train DERAILED")
 	

@@ -9,6 +9,8 @@ func _ready():
 	print("RailNetwork: %d Switches registered" % _switches.size())
 	
 func get_next_track(current: Path3D, direction: int) -> Path3D:
+	if current == null:
+		return null
 	for sw in _switches:
 		var result = sw.get_next_track_for(current, direction)
 		if result != null:
@@ -16,8 +18,10 @@ func get_next_track(current: Path3D, direction: int) -> Path3D:
 	return null
 	
 func get_next_switch_for(current_track: Path3D) -> Node:
+	if current_track == null:
+		return null
 	for sw in _switches:
-		if sw.get_from_track() == current_track:
+		if sw.get_from_track_name() == current_track.name:
 			return sw
 	return null
 	

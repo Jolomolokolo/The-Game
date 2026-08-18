@@ -96,6 +96,7 @@ func get_total_monthly_payments() -> float:
 	var total := 0.0
 	for loan in loans:
 		total += loan["monthly_payment"]
+	return total
 	
 func get_credit_score() -> int:
 	var net_worth = get_net_worth()
@@ -138,7 +139,7 @@ func apply_for_loan(amount: float, term_months: int) -> bool:
 	var loan := {
 		"id": "loan_%d" % Time.get_ticks_usec(),
 		"name": "Personal Loan",
-		"prinicpal": amount,
+		"principal": amount,
 		"remaining": amount,
 		"interest_rate": rate,
 		"monthly_payment": monthly_payment,

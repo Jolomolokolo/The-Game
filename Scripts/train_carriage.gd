@@ -30,19 +30,52 @@ var _derail_grace_time := 2.0
 
 func _ready():
 	add_to_group("train_carriage")
-	gravity_scale = 0.3
+	gravity_scale = 0.0
 	mass = weight
+	axis_lock_angular_x = true
+	axis_lock_angular_z = true
 	_init_from_parent()
 	call_deferred("_create_anchor")
 	
 func _init_from_parent():
-	var parent = get_parent()
-	if parent is PathFollow3D:
-		current_path_follow = parent
-		var grandparent = parent.get_parent()
-		if grandparent is Path3D:
-			current_track = grandparent
-			current_progress = current_path_follow.progress
+	var rn = _find_rail_network()
+	if not rn:
+		return
+	
+	var closest_track : Path3D = null
+	var closest_follow : PathFollow3D = null
+	var closest_dist := INF
+	
+	for child in rn.get_children():
+		if not child is Path3D:
+			continue
+		for sub in child.get_children():
+			if not sub is PathFollow3D:
+				continue
+			var length = child.curve.get_baked_length()
+			var steps = int(length / 2.0)
+			for i in range(steps):
+				var t = float(i) / float(steps) * length
+				var world_pos = child.to_global(child.curve.sample_baked(t))
+				var dist = global_position.distance_to(world_pos)
+				if dist < closest_dist:
+					closest_dist = dist
+					closest_track = child
+					closest_follow = sub
+					current_progress = t
+			break
+	if closest_track:
+		current_track = closest_track
+		current_path_follow = closest_follow
+		print("Carriage %s started on track %s at progress %.1f" % [name, current_track.name, current_progress])
+	
+func _find_rail_network() -> Node:
+	var node = get_parent()
+	while node:
+		if node.has_method("get_next_track"):
+			return node
+		node = node.get_parent()
+	return null
 	
 func _create_anchor() -> void:
 	_anchor = Marker3D.new()
@@ -87,18 +120,27 @@ func _apply_spring_force(delta: float) -> void:
 		global_basis = Basis(new_quat)
 		angular_velocity = Vector3.ZERO
 	
+var _derail_timer := 0.0
+@export var derail_grace_seconds := 1.0
+	
 func _check_derailment() -> void:
 	if not _anchor:
 		return
 	var dist_to_track = global_position.distance_to(_anchor.global_position)
 	if dist_to_track > derail_distance:
-		_derail()
+		_derail_timer += get_physics_process_delta_time()
+		if _derail_timer >= derail_grace_seconds:
+			_derail()
+	else:
+		_derail_timer = 0.0
 	
 func _derail() -> void:
 	if is_derailed:
 		return
 	is_derailed = true
 	gravity_scale = 1.0
+	axis_lock_angular_x = false
+	axis_lock_angular_z = false
 	_anchor = null
 	print("Carriage %s DERAILED" % name)
 	
@@ -135,13 +177,13 @@ func update_coupled_position(leader_progress: float, leader_track: Path3D, leade
 		var track_length = current_track.curve.get_baked_length()
 	
 		if going_forward and current_progress >= track_length - 0.1:
-			_move_to_track(_next_track, _next_follow)
+			_move_to_track(_next_track, _next_follow, 0.0)
 			current_progress = 0.0
 			_next_track = null
 			_next_follow = null
 		elif not going_forward and current_progress <= 0.1:
 			var next_length = _next_track.curve.get_baked_length()
-			_move_to_track(_next_track, _next_follow)
+			_move_to_track(_next_track, _next_follow, next_length)
 			current_progress = next_length
 			_next_track = null
 			_next_follow = null
@@ -182,33 +224,43 @@ func update_coupled_position(leader_progress: float, leader_track: Path3D, leade
 	
 		var track_length = current_track.curve.get_baked_length()
 		if going_forward and current_progress >= track_length - 0.1:
-			_move_to_track(leader_track, leader_follow)
+			_move_to_track(leader_track, leader_follow, 0.0)
 			current_progress = 0.0
-			if current_path_follow:
-				current_path_follow.progress = current_progress
 		elif not going_forward and current_progress <= 0.1:
-			_move_to_track(leader_track, leader_follow)
-			current_progress = leader_track.curve.get_baked_length()
-			if current_path_follow:
-				current_path_follow.progress = current_progress
+			var ll = leader_track.curve.get_baked_length()
+			_move_to_track(leader_track, leader_follow, ll)
+			current_progress = ll
 	
-func _move_to_track(new_track: Path3D, reference_follow: PathFollow3D) -> void:
+func _move_to_track(new_track: Path3D, reference_follow: PathFollow3D, start_progress: float = 0.0) -> void:
+	_derail_timer = 0.0
+	_time_alive = 0.0
+	
 	var new_follow = PathFollow3D.new()
 	new_follow.name = "CarriageFollow_" + name
 	new_follow.rotation_mode = reference_follow.rotation_mode
 	new_follow.loop = reference_follow.loop
 	new_track.add_child(new_follow)
 	
+	new_follow.progress = start_progress
+	
 	if _anchor and current_path_follow:
 		current_path_follow.remove_child(_anchor)
 		new_follow.add_child(_anchor)
+	elif _anchor:
+		new_follow.add_child(_anchor)
 	
-	if current_path_follow:
-		if current_path_follow.name.begins_with("CarriageFollow_"):
-			current_path_follow.queue_free()
+	if _anchor:
+		global_position = _anchor.global_position
+		var track_forward = -_anchor.global_transform.basis.z
+		if track_forward.length() > 0.01:
+			global_basis = Basis.looking_at(track_forward, Vector3.UP)
+	
+	if current_path_follow and current_path_follow.name.begins_with("CarriageFollow_"):
+		current_path_follow.queue_free()
 	
 	current_track = new_track
 	current_path_follow = new_follow
+	print("Carriage: %s switched to track: %s" % [name, new_track.name])
 	
 func couple():
 	is_coupled = true
