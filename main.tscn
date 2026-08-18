@@ -38,9 +38,7 @@
 [ext_resource type="PackedScene" uid="uid://b4k4dmedtvp51" path="res://Scenes/Tools/rail_placer.tscn" id="35_ok6jj"]
 [ext_resource type="PackedScene" uid="uid://b2vcqwuw24emk" path="res://models/trains/track-single.glb" id="36_facbu"]
 [ext_resource type="PackedScene" uid="uid://d033mk3wuqr8a" path="res://Scenes/Trains/rail_network.tscn" id="38_b1qrp"]
-[ext_resource type="PackedScene" uid="uid://6g7fuwbhqts4" path="res://Scenes/Trains/Train-Carriages/train_carriage_container_red_2.tscn" id="38_come4"]
 [ext_resource type="PackedScene" uid="uid://cmpnjjk50oevm" path="res://Scenes/Trains/rail_switch.tscn" id="39_come4"]
-[ext_resource type="PackedScene" uid="uid://b8oquho43w1px" path="res://Scenes/Trains/Train-Carriages/train_carriage_tank_large_2.tscn" id="41_0cp0l"]
 [ext_resource type="PackedScene" uid="uid://dqxe4qmkmja8k" path="res://Scenes/Trains/CargoAddons/train_carriage_load_changer.tscn" id="43_0n3wm"]
 [ext_resource type="PackedScene" uid="uid://y18u16sa26ny" path="res://Scenes/Cars/police_car_with_light.tscn" id="43_d2t1y"]
 [ext_resource type="PackedScene" uid="uid://cs8pybtss5ekx" path="res://Scenes/PCScreen/pc_screen_access.tscn" id="43_gngh3"]
@@ -183,7 +181,7 @@ shadow_enabled = true
 script = ExtResource("1_htxhm")
 
 [node name="Floor" type="CSGBox3D" parent="." unique_id=992992754]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2111435, 7.6293945e-06, -0.076431274)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.34832764, 7.6293945e-06, 0.0087509155)
 use_collision = true
 collision_layer = 5
 size = Vector3(500, 1, 500)
@@ -1510,7 +1508,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52246094, -82.828636)
 curve = SubResource("Curve3D_come4")
 
 [node name="TrainFollow" type="PathFollow3D" parent="RailNetwork/Track_A" unique_id=1926029712]
-transform = Transform3D(0.35189474, 0, 0.93600655, 0, 0.99995387, 0, -0.93599963, 0, 0.3518973, -0.24418905, 0, 0.016861856)
+transform = Transform3D(-0.6799315, 0, 0.73322994, 0, 0.99995387, 0, -0.7332246, 0, -0.6799365, -57.92981, 0, 3.6428547)
 progress = 60.0
 
 [node name="Track_B" type="Path3D" parent="RailNetwork" unique_id=410127138]
@@ -1524,29 +1522,8 @@ transform = Transform3D(-0.5650708, 1.905495e-05, -0.82500553, 9.0948706e-13, 0.
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.522, 0)
 curve = SubResource("Curve3D_4lmeg")
 
-[node name="PathFollow3D" type="PathFollow3D" parent="RailNetwork/Track_C" unique_id=2088997251]
-transform = Transform3D(-0.52176434, 0, -0.85308427, 0, 0.99998903, 0, 0.85308945, 0, -0.5217612, 67.90756, 0.00046092272, -32.26878)
-
-[node name="TrainCarriage_3" type="PathFollow3D" parent="RailNetwork/Track_C" unique_id=1999022795]
-transform = Transform3D(-0.90542924, -0.40254143, -0.13474314, -0.11341531, 0.53528214, -0.8370234, 0.40906215, -0.7425855, -0.53031456, 115.023026, 9.999999, 19.400997)
-progress = 165.12918
-
-[node name="Train-Carriage-Container-Red4" parent="RailNetwork/Track_C/TrainCarriage_3" unique_id=457828624 instance=ExtResource("38_come4")]
-transform = Transform3D(1.0000283, 0, 0, 0, 1.0000461, 0, 0, 0, 1.0000362, 0, 0, 0)
-
-[node name="TrainCarriage_4" type="PathFollow3D" parent="RailNetwork/Track_C" unique_id=2049678849]
-transform = Transform3D(-0.9054294, -0.40254143, -0.13474315, -0.11341533, 0.53528214, -0.8370234, 0.40906224, -0.7425855, -0.5303146, 115.023026, 9.999999, 19.400997)
-progress = 123.41161
-
-[node name="Train-Carriage-Container-Red5" parent="RailNetwork/Track_C/TrainCarriage_4" unique_id=1121435599 instance=ExtResource("38_come4")]
-transform = Transform3D(1.0000286, 0, 0, 0, 1.0000461, 0, 0, 0, 1.0000362, 0, 0, 0)
-
-[node name="TrainCarriage_5" type="PathFollow3D" parent="RailNetwork/Track_C" unique_id=342834401]
-transform = Transform3D(-0.9054301, -0.40254143, -0.13474326, -0.11341541, 0.53528214, -0.8370241, 0.40906253, -0.7425855, -0.53031504, 115.023026, 9.999999, 19.400997)
-progress = 142.0432
-
-[node name="train-carriage-tank-large2" parent="RailNetwork/Track_C/TrainCarriage_5" unique_id=644442277 instance=ExtResource("41_0cp0l")]
-transform = Transform3D(0.9999626, 0, 0, 0, 0.99995387, 0, 0, 0, 0.99996996, 0, 0, 0)
+[node name="PathFollow3D" type="PathFollow3D" parent="RailNetwork/Track_C" unique_id=484464747]
+transform = Transform3D(-0.52176255, 0, -0.85308534, 0, 0.9999942, 0, 0.8530865, 0, -0.52176183, 67.90756, 0.00046092272, -32.26878)
 
 [node name="Track_D" type="Path3D" parent="RailNetwork" unique_id=611694165]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.522, 0)
@@ -1566,17 +1543,11 @@ transform = Transform3D(0.99508995, 3.590138e-06, -0.09892003, 0, 0.9999931, 3.6
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0, 0.5439841, -36.292015)
 monitored_track = NodePath("../../RailNetwork/Track_A")
 
-[node name="Train" parent="RailNetwork" unique_id=1995327968 instance=ExtResource("33_jq2sk")]
-transform = Transform3D(0.30442074, 0, 0.95253766, 0, 1, 0, -0.95253766, 0, 0.30442074, -6.292022, 0.90381455, -84.741905)
-
 [node name="TrainCarriageLoadChanger" parent="RailNetwork" unique_id=807806039 instance=ExtResource("43_0n3wm")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.269089, 2.9999053, -87.53841)
 
-[node name="Train-Carriage-Container-Red3" parent="RailNetwork" unique_id=159485132 instance=ExtResource("38_come4")]
-transform = Transform3D(0.08715828, 0, 0.99623084, 0, 1.0000461, 0, -0.996223, 0, 0.08715896, -7.8406568, 0, -40.01927)
-
-[node name="Train-Carriage-Container-Red2" parent="RailNetwork" unique_id=1408598625 instance=ExtResource("38_come4")]
-transform = Transform3D(0.22127758, 0, 0.9752476, 0, 1.0000461, 0, -0.97523993, 0, 0.22127932, -34.75831, 0, -43.82625)
+[node name="Train" parent="RailNetwork" unique_id=1995327968 instance=ExtResource("33_jq2sk")]
+transform = Transform3D(0.30442077, 0, 0.95253766, 0, 1.0000001, 0, -0.9525377, 0, 0.30442074, -6.2920227, 0.9038146, -84.741905)
 
 [node name="Label3D" type="Label3D" parent="." unique_id=150371383]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1281567, 9.562088)

@@ -36,7 +36,6 @@ var _nearby_carriage : Node = null
 var _anchor : Node3D = null
 @export var _derail_grace_time := 2.0
 @export var _time_alive := 0.0
-var _anchor_initialized := false
 
 @onready var train_camera = $DriveCamera
 @onready var train_camera_backward = $DriveCameraBackward
@@ -69,10 +68,8 @@ var mat_yellow : StandardMaterial3D
 func _ready() -> void:
 	add_to_group("train")
 	
-	gravity_scale = 0.0
+	gravity_scale = 0.3
 	mass = weight_tons
-	axis_lock_angular_x = true
-	axis_lock_angular_z = true
 	
 	train_camera.current = false
 	train_camera_backward.current = false
@@ -127,25 +124,15 @@ func _init_track_from_parent() -> void:
 	print("Train started on Track: %s" % current_track_name)
 	
 func _create_anchor() -> void:
+	# Maybe Progress ?
 	_anchor = Marker3D.new()
 	_anchor.name = "TrainAnchor"
 	if current_path_follow:
-		current_path_follow.progress = current_progress
 		current_path_follow.add_child(_anchor)
-	_anchor_initialized = false
+	if _anchor:
+		global_position = _anchor.global_position
 	
 func _physics_process(delta: float) -> void:
-	if not _anchor_initialized and _anchor and _anchor.is_inside_tree():
-		_anchor_initialized = true
-		freeze = true
-		global_transform = _anchor.global_transform
-		linear_velocity = Vector3.ZERO
-		angular_velocity = Vector3.ZERO
-		freeze = false
-		
-		print("Anchor initialisiert bei: ", _anchor.global_position)
-		return
-	
 	if is_derailed:
 		_update_derailed(delta)
 		return
@@ -245,7 +232,7 @@ func _apply_spring_force(delta: float) -> void:
 	
 	apply_central_force(spring_force + damping_force)
 	
-	var track_forward = - _anchor.global_transform.basis.z
+	var track_forward = -_anchor.global_transform.basis.z
 	if track_forward.length() > 0.01:
 		var target_basis = Basis.looking_at(track_forward, Vector3.UP)
 		var current_quat = Quaternion(global_basis.orthonormalized())
@@ -260,16 +247,8 @@ var _derail_timer := 0.0
 func _check_derailment() -> void:
 	if not _anchor:
 		return
-	var dist_to_track = global_position.distance_to(_anchor.global_position)
-	print("dist_to_track: %.2f | _time_alive: %.2f | derail_distance: %.2f" % [dist_to_track, _time_alive, derail_distance])
-	if dist_to_track > derail_distance:
-		_derail_timer += get_physics_process_delta_time()
-		if _derail_timer >= derail_grace_seconds:
-			_derail()
-	else:
-		_derail_timer = 0.0
 	
-	#var dist_to_track = global_position.distance_to(_anchor.global_position)
+	var dist_to_track = global_position.distance_to(_anchor.global_position)
 	
 	if dist_to_track > derail_distance:
 		_derail_timer += get_physics_process_delta_time()
@@ -285,8 +264,6 @@ func _derail():
 	is_derailed = true
 	speed = 0.0
 	gravity_scale = 1.0
-	axis_lock_angular_x = false
-	axis_lock_angular_z = false
 	_anchor = null
 	print("Train DERAILED")
 	
@@ -612,7 +589,7 @@ func _on_save_loaded() -> void:
 		gravity_scale = 1.0
 		_anchor = null
 	else:
-		gravity_scale = 0.3
+		gravity_scale = 0.0
 		if current_path_follow:
 			current_path_follow.progress = current_progress
 		_create_anchor()
