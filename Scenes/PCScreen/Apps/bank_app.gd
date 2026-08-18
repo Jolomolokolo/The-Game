@@ -1,7 +1,5 @@
 extends Control
 
-# Abkürzungen für Millionen, Milliarden und eventuell tausend, damit nicht so clustered
-
 signal _return_desktop
 
 @onready var tab_buttons : Array[Button] = [
@@ -46,8 +44,6 @@ func _on_transaction_added(transaction: Dictionary) -> void:
 	var sign_str = "+" if transaction["amount"] > 0 else ""
 	entry.text = "%s%d € - %s" % [sign_str, transaction["amount"], transaction["reason"]]
 	entry.modulate = Color(0.3, 1, 0.3) if transaction["amount"] > 0 else Color(1, 0.3, 0.3)
-	#transaction_list_container.add_child(entry)
-	#transaction_list_container.move_child(entry, 0)
 	
 	# NETWORTH LABEL UND ALLE ANDEREN LABELS HIER DANN AKTUALISIEREN
 	cash_label.text = NumberFormat.format(GameData.cash)

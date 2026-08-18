@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://c48vpqvuutk58" path="res://Scenes/PCScreen/Apps/bank_app.gd" id="2_n48kc"]
 [ext_resource type="PackedScene" uid="uid://cwviglpbllmyo" path="res://Scenes/PCScreen/Apps/dashboard.tscn" id="5_n48kc"]
 [ext_resource type="PackedScene" uid="uid://eo8tfc76t6le" path="res://Scenes/PCScreen/Apps/transactions.tscn" id="6_034o3"]
+[ext_resource type="Script" uid="uid://cuf5fon76284a" path="res://Scenes/PCScreen/Apps/loans.gd" id="7_d0tov"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xvnu6"]
 font_size = 32
@@ -183,6 +184,7 @@ layout_mode = 2
 [node name="Loans" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=100256506]
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("7_d0tov")
 
 [node name="SummaryBar" type="HBoxContainer" parent="VBoxContainer/Content/Loans" unique_id=164582609]
 layout_mode = 2
