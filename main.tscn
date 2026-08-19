@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://b1fbvqw01lary" path="res://Scripts/directional_light_3d.gd" id="1_htxhm"]
 [ext_resource type="PackedScene" uid="uid://dml1tn7u8o5p2" path="res://models/city/driveway-long.glb" id="2_lquwl"]
 [ext_resource type="PackedScene" uid="uid://ddah3jwsaf3yf" path="res://Scenes/Trains/Signals/rail_signal_light.tscn" id="3_0cp0l"]
-[ext_resource type="PackedScene" uid="uid://dcvfn8ryypqmj" path="res://models/cars/cone.glb" id="3_1u8w0"]
 [ext_resource type="PackedScene" uid="uid://v4hvfhxnwbsu" path="res://models/cars/taxi.glb" id="4_0odxb"]
 [ext_resource type="PackedScene" uid="uid://l4hvytw4h8vq" path="res://Scenes/Cars/ambulance_with_light.tscn" id="4_4lmeg"]
 [ext_resource type="PackedScene" uid="uid://dryy0e3177gvj" path="res://models/cars/van.glb" id="5_lswn8"]
@@ -39,9 +38,11 @@
 [ext_resource type="PackedScene" uid="uid://b2vcqwuw24emk" path="res://models/trains/track-single.glb" id="36_facbu"]
 [ext_resource type="PackedScene" uid="uid://d033mk3wuqr8a" path="res://Scenes/Trains/rail_network.tscn" id="38_b1qrp"]
 [ext_resource type="PackedScene" uid="uid://cmpnjjk50oevm" path="res://Scenes/Trains/rail_switch.tscn" id="39_come4"]
+[ext_resource type="PackedScene" uid="uid://dg7kkllxl0ep" path="res://models/trains/track_single.tscn" id="39_gngh3"]
 [ext_resource type="PackedScene" uid="uid://dqxe4qmkmja8k" path="res://Scenes/Trains/CargoAddons/train_carriage_load_changer.tscn" id="43_0n3wm"]
 [ext_resource type="PackedScene" uid="uid://y18u16sa26ny" path="res://Scenes/Cars/police_car_with_light.tscn" id="43_d2t1y"]
 [ext_resource type="PackedScene" uid="uid://cs8pybtss5ekx" path="res://Scenes/PCScreen/pc_screen_access.tscn" id="43_gngh3"]
+[ext_resource type="PackedScene" uid="uid://buxby5sghgxr3" path="res://Scenes/Trains/depot.tscn" id="43_qnost"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7dm0k"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
@@ -208,15 +209,6 @@ transform = Transform3D(0.9999898, -0.0045129075, 0.004833708, 0.0045129056, 0.9
 
 [node name="Ambulance2" parent="Map" unique_id=1436148091 instance=ExtResource("4_4lmeg")]
 transform = Transform3D(-1, 0, 8.940697e-08, 0, 1, 0, -8.940697e-08, 0, -1, -19.035534, 0.6724606, 51.71942)
-
-[node name="cone2" parent="Map" unique_id=1613698218 instance=ExtResource("3_1u8w0")]
-transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, 2.0717344, 0.6724608, 5.600527)
-
-[node name="cone3" parent="Map" unique_id=1989849431 instance=ExtResource("3_1u8w0")]
-transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, 2.4014208, 0.6724608, 4.1784663)
-
-[node name="cone4" parent="Map" unique_id=1208340855 instance=ExtResource("3_1u8w0")]
-transform = Transform3D(0.9659258, 0, -0.25881904, 0, 1, 0, 0.25881904, 0, 0.9659258, 2.8021765, 0.67246085, 2.657197)
 
 [node name="taxi" parent="Map" unique_id=321306344 instance=ExtResource("4_0odxb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.779787, 0.68506813, 7.72659)
@@ -440,12 +432,33 @@ transform = Transform3D(1, 0, 0, 0, 0.999989, 0.0046986495, 0, -0.0046986495, 0.
 [node name="GarbageTruck2" parent="Map" unique_id=2146458327 instance=ExtResource("32_4lmeg")]
 transform = Transform3D(1, 0, 0, 0, 0.999989, 0.0046986495, 0, -0.0046986495, 0.999989, -23.136, 0.672, 46.793)
 
+[node name="Cone4" parent="Map" unique_id=1761311275 instance=ExtResource("30_seu75")]
+transform = Transform3D(0.34643835, 0, 0.93807274, 0, 1, 0, -0.93807274, 0, 0.34643835, -0.97528076, 0.69117844, 2.3064747)
+
+[node name="Cone5" parent="Map" unique_id=1554038806 instance=ExtResource("30_seu75")]
+transform = Transform3D(0.34643835, 0, 0.93807274, 0, 1, 0, -0.93807274, 0, 0.34643835, -2.611506, 0.6862656, 2.8204021)
+
+[node name="Cone6" parent="Map" unique_id=1017369500 instance=ExtResource("30_seu75")]
+transform = Transform3D(0.34643835, 0, 0.93807274, 0, 1, 0, -0.93807274, 0, 0.34643835, -4.279132, 0.6809069, 3.3416545)
+
+[node name="Cone7" parent="Map" unique_id=1445774002 instance=ExtResource("30_seu75")]
+transform = Transform3D(0.34643835, 0, 0.93807274, 0, 1, 0, -0.93807274, 0, 0.34643835, 0.83429563, 0.69117844, 1.9881777)
+
 [node name="Shop" parent="." unique_id=392201601 instance=ExtResource("32_come4")]
 transform = Transform3D(1.1924881e-08, 0, 1, 0, 1, 0, -1, 0, 1.1924881e-08, 23.966, 0.4999997, -6.33)
 
 [node name="VehicleBody3D" parent="." unique_id=1383445128 instance=ExtResource("30_kq58d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.856, 0.61, -8.535)
 center_of_mass = Vector3(0, -1, 0)
+
+[node name="Label3D" type="Label3D" parent="." unique_id=150371383]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1281567, 9.562088)
+billboard = 1
+text = "Hello"
+font_size = 128
+
+[node name="PCScreenAccess" parent="." unique_id=785069297 instance=ExtResource("43_gngh3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4668474, 0.4999997, 10.561045)
 
 [node name="RailNetwork" parent="." unique_id=1466125844 instance=ExtResource("38_b1qrp")]
 
@@ -463,7 +476,7 @@ track_branch = NodePath("../Track_E")
 
 [node name="RailPlacer" parent="RailNetwork" unique_id=951830831 node_paths=PackedStringArray("path") instance=ExtResource("35_ok6jj")]
 path = NodePath("../Track_E")
-rail_scene = ExtResource("36_facbu")
+rail_scene = ExtResource("39_gngh3")
 
 [node name="Track_A_0" parent="RailNetwork/RailPlacer" unique_id=240892392 instance=ExtResource("36_facbu")]
 transform = Transform3D(0.32831025, 0, 0.94456995, 0, 1, 0, -0.94456995, 0, 0.32831025, 0, 0.52246094, -82.828636)
@@ -1191,316 +1204,1042 @@ transform = Transform3D(0.29555017, 0, 0.9553272, 0, 1, 0, -0.9553272, 0, 0.2955
 [node name="Track_D_26" parent="RailNetwork/RailPlacer" unique_id=92366296 instance=ExtResource("36_facbu")]
 transform = Transform3D(0.24622136, 0, 0.96921366, 0, 1, 0, -0.96921366, 0, 0.24622136, 100.789536, 0.522, -110.738304)
 
-[node name="RailPlacer_0" parent="RailNetwork/RailPlacer" unique_id=843880671 instance=ExtResource("36_facbu")]
+[node name="@Node3D@62197" parent="RailNetwork/RailPlacer" unique_id=909760120 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.32831025, 0, 0.94456995, 0, 1, 0, -0.94456995, 0, 0.32831025, 0, 0.52246094, -82.828636)
+
+[node name="@Node3D@62198" parent="RailNetwork/RailPlacer" unique_id=43743034 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.2852983, 0, 0.9584388, 0, 1, 0, -0.9584388, 0, 0.2852983, -1.9068658, 0.52246094, -83.43023)
+
+[node name="@Node3D@62199" parent="RailNetwork/RailPlacer" unique_id=749497163 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.2625074, 0, 0.96493, 0, 1, 0, -0.96493, 0, 0.26250744, -3.830804, 0.52246094, -83.97741)
+
+[node name="@Node3D@62200" parent="RailNetwork/RailPlacer" unique_id=1559390539 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.24229795, 0, 0.97020197, 0, 1, 0, -0.97020197, 0, 0.24229795, -5.766082, 0.52246094, -84.48198)
+
+[node name="@Node3D@62201" parent="RailNetwork/RailPlacer" unique_id=1842018800 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.22299814, 0, 0.9748189, 0, 1, 0, -0.9748189, 0, 0.22299814, -7.711166, 0.52246094, -84.94719)
+
+[node name="@Node3D@62202" parent="RailNetwork/RailPlacer" unique_id=1059450535 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.20393503, 0, 0.9789845, 0, 1, 0, -0.9789845, 0, 0.20393503, -9.665022, 0.52246094, -85.374115)
+
+[node name="@Node3D@62203" parent="RailNetwork/RailPlacer" unique_id=245143316 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.18473549, 0, 0.9827883, 0, 1, 0, -0.9827883, 0, 0.18473549, -11.626938, 0.52246094, -85.762856)
+
+[node name="@Node3D@62204" parent="RailNetwork/RailPlacer" unique_id=1966214720 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.16514808, 0, 0.9862688, 0, 1, 0, -0.9862688, 0, 0.16514808, -13.596034, 0.52246094, -86.112816)
+
+[node name="@Node3D@62205" parent="RailNetwork/RailPlacer" unique_id=1820854640 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.14497913, 0, 0.9894347, 0, 1, 0, -0.9894347, 0, 0.14497915, -15.571748, 0.52246094, -86.42305)
+
+[node name="@Node3D@62206" parent="RailNetwork/RailPlacer" unique_id=802957597 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.12406487, 0, 0.99227417, 0, 1, 0, -0.99227417, 0, 0.12406487, -17.553576, 0.52246094, -86.692245)
+
+[node name="@Node3D@62207" parent="RailNetwork/RailPlacer" unique_id=1808888543 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.10225452, 0, 0.9947583, 0, 1, 0, -0.9947583, 0, 0.10225452, -19.540672, 0.52246094, -86.918724)
+
+[node name="@Node3D@62208" parent="RailNetwork/RailPlacer" unique_id=1350443874 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.07940466, 0, 0.9968425, 0, 1, 0, -0.9968425, 0, 0.07940466, -21.532343, 0.52246094, -87.10057)
+
+[node name="@Node3D@62209" parent="RailNetwork/RailPlacer" unique_id=782779267 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.055372536, 0, 0.9984658, 0, 1, 0, -0.9984658, 0, 0.055372536, -23.527735, 0.52246094, -87.23556)
+
+[node name="@Node3D@62210" parent="RailNetwork/RailPlacer" unique_id=1996051888 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.030014038, 0, 0.9995495, 0, 1, 0, -0.9995495, 0, 0.030014038, -25.52585, 0.52246094, -87.321175)
+
+[node name="@Node3D@62211" parent="RailNetwork/RailPlacer" unique_id=1149673405 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.0031824708, 0, 0.999995, 0, 1, 0, -0.999995, 0, 0.0031824708, -27.525518, 0.52246094, -87.35463)
+
+[node name="@Node3D@62212" parent="RailNetwork/RailPlacer" unique_id=1015111326 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.025272608, 0, 0.99968064, 0, 1, 0, -0.99968064, 0, -0.025272608, -29.525335, 0.52246094, -87.332825)
+
+[node name="@Node3D@62213" parent="RailNetwork/RailPlacer" unique_id=843081903 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.055501584, 0, 0.9984586, 0, 1, 0, -0.9984586, 0, -0.055501584, -31.52365, 0.52246094, -87.25236)
+
+[node name="@Node3D@62214" parent="RailNetwork/RailPlacer" unique_id=1686669570 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.087654956, 0, 0.9961509, 0, 1, 0, -0.9961509, 0, -0.087654956, -33.518448, 0.52246094, -87.109535)
+
+[node name="@Node3D@62215" parent="RailNetwork/RailPlacer" unique_id=592732188 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.12187421, 0, 0.9925456, 0, 1, 0, -0.9925456, 0, -0.12187421, -35.507378, 0.52246094, -86.90037)
+
+[node name="@Node3D@62216" parent="RailNetwork/RailPlacer" unique_id=198702650 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.15828694, 0, 0.9873932, 0, 1, 0, -0.9873932, 0, -0.15828694, -37.4876, 0.52246094, -86.62058)
+
+[node name="@Node3D@62217" parent="RailNetwork/RailPlacer" unique_id=1766247439 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.19699696, 0, 0.98040414, 0, 1, 0, -0.98040414, 0, -0.19699696, -39.45572, 0.52246094, -86.265686)
+
+[node name="@Node3D@62218" parent="RailNetwork/RailPlacer" unique_id=1164461133 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.22058749, 0, 0.97536725, 0, 1, 0, -0.97536725, 0, -0.22058749, -41.41016, 0.52246094, -85.84122)
+
+[node name="@Node3D@62219" parent="RailNetwork/RailPlacer" unique_id=1567474883 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.23474015, 0, 0.9720582, 0, 1, 0, -0.9720582, 0, -0.23474015, -43.357758, 0.52246094, -85.38649)
+
+[node name="@Node3D@62220" parent="RailNetwork/RailPlacer" unique_id=1032125441 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.2530638, 0, 0.96744967, 0, 1, 0, -0.96744967, 0, -0.2530638, -45.29762, 0.52246094, -84.89947)
+
+[node name="@Node3D@62221" parent="RailNetwork/RailPlacer" unique_id=1496209619 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.27700424, 0, 0.9608687, 0, 1, 0, -0.9608687, 0, -0.27700424, -47.226364, 0.52246094, -84.37049)
+
+[node name="@Node3D@62222" parent="RailNetwork/RailPlacer" unique_id=1624347828 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.30859855, 0, 0.9511924, 0, 1, 0, -0.9511924, 0, -0.30859855, -49.13905, 0.52246094, -83.78639)
+
+[node name="@Node3D@62223" parent="RailNetwork/RailPlacer" unique_id=1462982611 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.3506507, 0, 0.93650633, 0, 1, 0, -0.93650633, 0, -0.3506507, -51.02777, 0.52246094, -83.12919)
+
+[node name="@Node3D@62224" parent="RailNetwork/RailPlacer" unique_id=227089449 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.40677336, 0, 0.91352916, 0, 1, 0, -0.91352916, 0, -0.40677336, -52.879578, 0.52246094, -82.37445)
+
+[node name="@Node3D@62225" parent="RailNetwork/RailPlacer" unique_id=369714201 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.4807186, 0, 0.8768749, 0, 1, 0, -0.8768749, 0, -0.4807186, -54.67277, 0.52246094, -81.49022)
+
+[node name="@Node3D@62226" parent="RailNetwork/RailPlacer" unique_id=273350364 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.5738862, 0, 0.818935, 0, 1, 0, -0.818935, 0, -0.5738862, -56.372814, 0.52246094, -80.43863)
+
+[node name="@Node3D@62227" parent="RailNetwork/RailPlacer" unique_id=1771350452 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.6799569, 0, 0.73325205, 0, 1, 0, -0.73325205, 0, -0.6799569, -57.92981, 0.52246094, -79.18578)
+
+[node name="@Node3D@62228" parent="RailNetwork/RailPlacer" unique_id=1873052161 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.78171384, 0, 0.6236373, 0, 1, 0, -0.6236373, 0, -0.78171384, -59.289467, 0.52246094, -77.721634)
+
+[node name="@Node3D@62229" parent="RailNetwork/RailPlacer" unique_id=493818038 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.860685, 0, 0.509138, 0, 1, 0, -0.509138, 0, -0.860685, -60.42102, 0.52246094, -76.07451)
+
+[node name="@Node3D@62230" parent="RailNetwork/RailPlacer" unique_id=951231743 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.91161543, 0, 0.4110442, 0, 1, 0, -0.41104424, 0, -0.91161543, -61.33727, 0.52246094, -74.29785)
+
+[node name="@Node3D@62231" parent="RailNetwork/RailPlacer" unique_id=582428763 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.9409627, 0, 0.3385105, 0, 1, 0, -0.3385105, 0, -0.9409627, -62.082466, 0.52246094, -72.44248)
+
+[node name="@Node3D@62232" parent="RailNetwork/RailPlacer" unique_id=4513240 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.9570944, 0, 0.28977656, 0, 1, 0, -0.28977653, 0, -0.9570944, -62.707188, 0.52246094, -70.5428)
+
+[node name="@Node3D@62233" parent="RailNetwork/RailPlacer" unique_id=447376123 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.965778, 0, 0.25937012, 0, 1, 0, -0.25937012, 0, -0.965778, -63.253742, 0.52246094, -68.61901)
+
+[node name="@Node3D@62234" parent="RailNetwork/RailPlacer" unique_id=876018910 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.9702735, 0, 0.2420114, 0, 1, 0, -0.2420114, 0, -0.9702735, -63.75335, 0.52246094, -66.68238)
+
+[node name="@Node3D@62235" parent="RailNetwork/RailPlacer" unique_id=1964068164 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.9738858, 0, 0.22703852, 0, 1, 0, -0.22703852, 0, -0.9738858, -64.226906, 0.52246094, -64.739136)
+
+[node name="@Node3D@62236" parent="RailNetwork/RailPlacer" unique_id=1621926713 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.9863836, 0, 0.16446087, 0, 1, 0, -0.16446087, 0, -0.9863836, -64.62139, 0.52246094, -62.77887)
+
+[node name="@Node3D@62237" parent="RailNetwork/RailPlacer" unique_id=1668050872 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.99681854, 0, 0.079704754, 0, 1, 0, -0.07970475, 0, -0.99681854, -64.87004, 0.52246094, -60.794926)
+
+[node name="@Node3D@62238" parent="RailNetwork/RailPlacer" unique_id=1478488975 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.9992883, 0, -0.037721816, 0, 1, 0, 0.037721816, 0, -0.9992883, -64.91853, 0.52246094, -58.79664)
+
+[node name="@Node3D@62239" parent="RailNetwork/RailPlacer" unique_id=1547701265 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.97983503, 0, -0.19980828, 0, 1, 0, 0.19980828, 0, -0.97983503, -64.68922, 0.52246094, -56.812)
+
+[node name="@Node3D@62240" parent="RailNetwork/RailPlacer" unique_id=1121991406 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.913466, 0, -0.4069152, 0, 1, 0, 0.4069152, 0, -0.913466, -64.0884, 0.52246094, -54.908512)
+
+[node name="@Node3D@62241" parent="RailNetwork/RailPlacer" unique_id=530916630 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.7829516, 0, -0.6220826, 0, 1, 0, 0.6220826, 0, -0.7829516, -63.055477, 0.52246094, -53.2022)
+
+[node name="@Node3D@62242" parent="RailNetwork/RailPlacer" unique_id=1663452045 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.617895, 0, -0.7862606, 0, 1, 0, 0.7862606, 0, -0.617895, -61.63536, 0.52246094, -51.800484)
+
+[node name="@Node3D@62243" parent="RailNetwork/RailPlacer" unique_id=1186100728 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.47053304, 0, -0.8823824, 0, 1, 0, 0.8823824, 0, -0.47053304, -59.956722, 0.52246094, -50.718067)
+
+[node name="@Node3D@62244" parent="RailNetwork/RailPlacer" unique_id=1085210598 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.36277702, 0, -0.931876, 0, 1, 0, 0.931876, 0, -0.36277702, -58.136772, 0.52246094, -49.891575)
+
+[node name="@Node3D@62245" parent="RailNetwork/RailPlacer" unique_id=145945476 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.29165682, 0, -0.956523, 0, 1, 0, 0.956523, 0, -0.29165682, -56.245384, 0.52246094, -49.24255)
+
+[node name="@Node3D@62246" parent="RailNetwork/RailPlacer" unique_id=683648973 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.24875176, 0, -0.9685673, 0, 1, 0, 0.9685673, 0, -0.24875176, -54.318794, 0.52246094, -48.7062)
+
+[node name="@Node3D@62247" parent="RailNetwork/RailPlacer" unique_id=1394452910 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.2270787, 0, -0.9738764, 0, 1, 0, 0.9738764, 0, -0.2270787, -52.37551, 0.52246094, -48.23347)
+
+[node name="@Node3D@62248" parent="RailNetwork/RailPlacer" unique_id=1451539310 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.22254074, 0, -0.97492343, 0, 1, 0, 0.97492343, 0, -0.22254074, -50.42622, 0.52246094, -47.786835)
+
+[node name="@Node3D@62249" parent="RailNetwork/RailPlacer" unique_id=1210253386 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.22445847, 0, -0.97448367, 0, 1, 0, 0.97448367, 0, -0.22445847, -48.476818, 0.52246094, -47.3391)
+
+[node name="@Node3D@62250" parent="RailNetwork/RailPlacer" unique_id=1353967526 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.22371128, 0, -0.97465545, 0, 1, 0, 0.97465545, 0, -0.22371128, -46.52785, 0.52246094, -46.890682)
+
+[node name="@Node3D@62251" parent="RailNetwork/RailPlacer" unique_id=49151165 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.22178689, 0, -0.9750952, 0, 1, 0, 0.9750952, 0, -0.22178689, -44.57811, 0.52246094, -46.445034)
+
+[node name="@Node3D@62252" parent="RailNetwork/RailPlacer" unique_id=1619077775 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.21917549, 0, -0.9756855, 0, 1, 0, 0.9756855, 0, -0.21917549, -42.627342, 0.52246094, -46.00398)
+
+[node name="@Node3D@62253" parent="RailNetwork/RailPlacer" unique_id=577920091 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.21608102, 0, -0.97637546, 0, 1, 0, 0.97637546, 0, -0.21608102, -40.67528, 0.52246094, -45.56865)
+
+[node name="@Node3D@62254" parent="RailNetwork/RailPlacer" unique_id=883477339 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.21259582, 0, -0.97714025, 0, 1, 0, 0.97714025, 0, -0.21259582, -38.721687, 0.52246094, -45.139893)
+
+[node name="@Node3D@62255" parent="RailNetwork/RailPlacer" unique_id=1514392118 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.20875886, 0, -0.9779672, 0, 1, 0, 0.9779672, 0, -0.20875886, -36.76656, 0.52246094, -44.71847)
+
+[node name="@Node3D@62256" parent="RailNetwork/RailPlacer" unique_id=1966525053 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.20458247, 0, -0.97884935, 0, 1, 0, 0.97884935, 0, -0.20458248, -34.809765, 0.52246094, -44.30508)
+
+[node name="@Node3D@62257" parent="RailNetwork/RailPlacer" unique_id=320567733 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.20005979, 0, -0.9797837, 0, 1, 0, 0.9797837, 0, -0.20005979, -32.85114, 0.52246094, -43.900375)
+
+[node name="@Node3D@62258" parent="RailNetwork/RailPlacer" unique_id=556688344 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.19517173, 0, -0.9807691, 0, 1, 0, 0.9807691, 0, -0.19517174, -30.890602, 0.52246094, -43.50508)
+
+[node name="@Node3D@62259" parent="RailNetwork/RailPlacer" unique_id=1825478167 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.1898874, 0, -0.98180586, 0, 1, 0, 0.98180586, 0, -0.1898874, -28.928017, 0.52246094, -43.119953)
+
+[node name="@Node3D@62260" parent="RailNetwork/RailPlacer" unique_id=939742720 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.18416536, 0, -0.98289526, 0, 1, 0, 0.98289526, 0, -0.18416536, -26.963333, 0.52246094, -42.745827)
+
+[node name="@Node3D@62261" parent="RailNetwork/RailPlacer" unique_id=204456970 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.17795193, 0, -0.9840392, 0, 1, 0, 0.9840392, 0, -0.17795193, -24.996407, 0.52246094, -42.383614)
+
+[node name="@Node3D@62262" parent="RailNetwork/RailPlacer" unique_id=347340108 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.17118108, 0, -0.9852396, 0, 1, 0, 0.9852396, 0, -0.17118108, -23.027153, 0.52246094, -42.034386)
+
+[node name="@Node3D@62263" parent="RailNetwork/RailPlacer" unique_id=141231258 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.1637689, 0, -0.9864988, 0, 1, 0, 0.9864988, 0, -0.1637689, -21.05543, 0.52246094, -41.69932)
+
+[node name="@Node3D@62264" parent="RailNetwork/RailPlacer" unique_id=558131706 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.15561211, 0, -0.9878183, 0, 1, 0, 0.9878183, 0, -0.15561211, -19.081106, 0.52246094, -41.379803)
+
+[node name="@Node3D@62265" parent="RailNetwork/RailPlacer" unique_id=1166266396 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.14657928, 0, -0.9891989, 0, 1, 0, 0.9891989, 0, -0.1465793, -17.104076, 0.52246094, -41.077446)
+
+[node name="@Node3D@62266" parent="RailNetwork/RailPlacer" unique_id=1843393091 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.13650393, 0, -0.99063957, 0, 1, 0, 0.99063957, 0, -0.13650393, -15.124254, 0.52246094, -40.794178)
+
+[node name="@Node3D@62267" parent="RailNetwork/RailPlacer" unique_id=541976267 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.1251706, 0, -0.9921352, 0, 1, 0, 0.9921352, 0, -0.1251706, -13.141473, 0.52246094, -40.532272)
+
+[node name="@Node3D@62268" parent="RailNetwork/RailPlacer" unique_id=418943958 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.11229861, 0, -0.9936746, 0, 1, 0, 0.9936746, 0, -0.11229861, -11.155682, 0.52246094, -40.294518)
+
+[node name="@Node3D@62269" parent="RailNetwork/RailPlacer" unique_id=23953557 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.09750676, 0, -0.99523485, 0, 1, 0, 0.99523485, 0, -0.09750676, -9.166737, 0.52246094, -40.084343)
+
+[node name="@Node3D@62270" parent="RailNetwork/RailPlacer" unique_id=441478230 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.080275886, 0, -0.99677265, 0, 1, 0, 0.99677265, 0, -0.080275886, -7.174714, 0.52246094, -39.9061)
+
+[node name="@Node3D@62271" parent="RailNetwork/RailPlacer" unique_id=1400611326 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.05986715, 0, -0.9982064, 0, 1, 0, 0.9982064, 0, -0.05986715, -5.1797166, 0.52246094, -39.765354)
+
+[node name="@Node3D@62272" parent="RailNetwork/RailPlacer" unique_id=280053709 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.035191655, 0, -0.9993806, 0, 1, 0, 0.9993806, 0, -0.035191655, -3.181941, 0.52246094, -39.669456)
+
+[node name="@Node3D@62273" parent="RailNetwork/RailPlacer" unique_id=349673444 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.004604697, 0, -0.99998945, 0, 1, 0, 0.99998945, 0, -0.004604697, -1.1824493, 0.52246094, -39.628483)
+
+[node name="@Node3D@62274" parent="RailNetwork/RailPlacer" unique_id=926076112 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.034580234, 0, -0.9994019, 0, 1, 0, 0.9994019, 0, 0.03458024, 0.8172455, 0.52246094, -39.656708)
+
+[node name="@Node3D@62275" parent="RailNetwork/RailPlacer" unique_id=1968634288 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.081977844, 0, -0.9966342, 0, 1, 0, 0.9966342, 0, 0.081977844, 2.8137393, 0.52246094, -39.772278)
+
+[node name="@Node3D@62276" parent="RailNetwork/RailPlacer" unique_id=1949075418 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.13591087, 0, -0.9907211, 0, 1, 0, 0.9907211, 0, 0.13591087, 4.801678, 0.52246094, -39.989048)
+
+[node name="@Node3D@62277" parent="RailNetwork/RailPlacer" unique_id=259125390 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.1960898, 0, -0.980586, 0, 1, 0, 0.980586, 0, 0.1960898, 6.773721, 0.52246094, -40.3201)
+
+[node name="@Node3D@62278" parent="RailNetwork/RailPlacer" unique_id=1597844786 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.26055863, 0, -0.96545804, 0, 1, 0, 0.96545804, 0, 0.26055866, 8.7206135, 0.52246094, -40.77631)
+
+[node name="@Node3D@62279" parent="RailNetwork/RailPlacer" unique_id=421659688 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.32505113, 0, -0.9456965, 0, 1, 0, 0.9456965, 0, 0.32505113, 10.632412, 0.52246094, -41.362415)
+
+[node name="@Node3D@62280" parent="RailNetwork/RailPlacer" unique_id=1421284794 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.38280922, 0, -0.9238274, 0, 1, 0, 0.9238274, 0, 0.38280922, 12.5018835, 0.52246094, -42.072063)
+
+[node name="@Node3D@62281" parent="RailNetwork/RailPlacer" unique_id=1012780402 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.4255879, 0, -0.9049171, 0, 1, 0, 0.9049171, 0, 0.4255879, 14.3295965, 0.52246094, -42.88364)
+
+[node name="@Node3D@62282" parent="RailNetwork/RailPlacer" unique_id=1200127374 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.44579494, 0, -0.8951351, 0, 1, 0, 0.8951351, 0, 0.44579494, 16.12761, 0.52246094, -43.759296)
+
+[node name="@Node3D@62283" parent="RailNetwork/RailPlacer" unique_id=6868912 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.43856627, 0, -0.89869887, 0, 1, 0, 0.89869887, 0, 0.43856627, 17.919052, 0.52246094, -44.64843)
+
+[node name="@Node3D@62284" parent="RailNetwork/RailPlacer" unique_id=458427622 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.40326294, 0, -0.9150842, 0, 1, 0, 0.9150842, 0, 0.40326294, 19.731035, 0.52246094, -45.49474)
+
+[node name="@Node3D@62285" parent="RailNetwork/RailPlacer" unique_id=1432620394 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.34433347, 0, -0.9388475, 0, 1, 0, 0.9388475, 0, 0.34433347, 21.584349, 0.52246094, -46.24564)
+
+[node name="@Node3D@62286" parent="RailNetwork/RailPlacer" unique_id=12753487 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.27068102, 0, -0.96266913, 0, 1, 0, 0.96266913, 0, 0.27068102, 23.486353, 0.52246094, -46.862217)
+
+[node name="@Node3D@62287" parent="RailNetwork/RailPlacer" unique_id=671792167 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.19260252, 0, -0.98127687, 0, 1, 0, 0.98127687, 0, 0.19260252, 25.431396, 0.52246094, -47.325462)
+
+[node name="@Node3D@62288" parent="RailNetwork/RailPlacer" unique_id=944349754 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.11819184, 0, -0.99299085, 0, 1, 0, 0.99299085, 0, 0.11819184, 27.406775, 0.52246094, -47.635166)
+
+[node name="@Node3D@62289" parent="RailNetwork/RailPlacer" unique_id=314131823 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.05179125, 0, -0.998658, 0, 1, 0, 0.998658, 0, 0.05179125, 29.399313, 0.52246094, -47.80363)
+
+[node name="@Node3D@62290" parent="RailNetwork/RailPlacer" unique_id=970615785 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.012550354, 0, -0.99992126, 0, 1, 0, 0.99992126, 0, -0.012550354, 31.39852, 0.52246094, -47.84759)
+
+[node name="@Node3D@62291" parent="RailNetwork/RailPlacer" unique_id=1440496127 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.10544098, 0, -0.9944256, 0, 1, 0, 0.9944256, 0, -0.10544098, 33.394028, 0.52246094, -47.725163)
+
+[node name="@Node3D@62292" parent="RailNetwork/RailPlacer" unique_id=1349190981 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.1761484, 0, -0.9843636, 0, 1, 0, 0.9843636, 0, -0.17614841, 35.37332, 0.52246094, -47.44048)
+
+[node name="@Node3D@62293" parent="RailNetwork/RailPlacer" unique_id=1647409739 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.23136699, 0, -0.9728666, 0, 1, 0, 0.9728666, 0, -0.23136699, 37.330612, 0.52246094, -47.030815)
+
+[node name="@Node3D@62294" parent="RailNetwork/RailPlacer" unique_id=838953913 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.2756263, 0, -0.9612649, 0, 1, 0, 0.9612649, 0, -0.2756263, 39.26477, 0.52246094, -46.522247)
+
+[node name="@Node3D@62295" parent="RailNetwork/RailPlacer" unique_id=1224765970 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.3119129, 0, -0.95011073, 0, 1, 0, 0.95011073, 0, -0.3119129, 41.176094, 0.52246094, -45.933556)
+
+[node name="@Node3D@62296" parent="RailNetwork/RailPlacer" unique_id=666057465 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.34227002, 0, -0.93960166, 0, 1, 0, 0.93960166, 0, -0.34227002, 43.065685, 0.52246094, -45.27852)
+
+[node name="@Node3D@62297" parent="RailNetwork/RailPlacer" unique_id=2021540326 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.36811876, 0, -0.92977875, 0, 1, 0, 0.92977875, 0, -0.36811876, 44.93491, 0.52246094, -44.56749)
+
+[node name="@Node3D@62298" parent="RailNetwork/RailPlacer" unique_id=2097313646 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.39047515, 0, -0.92061347, 0, 1, 0, 0.92061347, 0, -0.39047515, 46.78519, 0.52246094, -43.808388)
+
+[node name="@Node3D@62299" parent="RailNetwork/RailPlacer" unique_id=692672999 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.41007954, 0, -0.9120498, 0, 1, 0, 0.9120498, 0, -0.41007954, 48.617752, 0.52246094, -43.007423)
+
+[node name="@Node3D@62300" parent="RailNetwork/RailPlacer" unique_id=1604214338 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.4274878, 0, -0.9040211, 0, 1, 0, 0.9040211, 0, -0.4274878, 50.433727, 0.52246094, -42.169533)
+
+[node name="@Node3D@62301" parent="RailNetwork/RailPlacer" unique_id=1736571249 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.44312978, 0, -0.89645755, 0, 1, 0, 0.89645755, 0, -0.44312978, 52.23414, 0.52246094, -41.298653)
+
+[node name="@Node3D@62302" parent="RailNetwork/RailPlacer" unique_id=355891609 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.4573405, 0, -0.8892917, 0, 1, 0, 0.8892917, 0, -0.4573405, 54.01326, 0.52246094, -40.40133)
+
+[node name="@Node3D@62303" parent="RailNetwork/RailPlacer" unique_id=923336803 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.47039914, 0, -0.88245386, 0, 1, 0, 0.88245386, 0, -0.47039914, 55.791607, 0.52246094, -39.470005)
+
+[node name="@Node3D@62304" parent="RailNetwork/RailPlacer" unique_id=39266256 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.48253885, 0, -0.8758746, 0, 1, 0, 0.8758746, 0, -0.48253885, 57.54985, 0.52246094, -38.516956)
+
+[node name="@Node3D@62305" parent="RailNetwork/RailPlacer" unique_id=1981706472 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.49397135, 0, -0.8694783, 0, 1, 0, 0.8694783, 0, -0.49397135, 59.2952, 0.52246094, -37.540337)
+
+[node name="@Node3D@62306" parent="RailNetwork/RailPlacer" unique_id=927979117 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.50491023, 0, -0.8631719, 0, 1, 0, 0.8631719, 0, -0.50491023, 61.027905, 0.52246094, -36.541348)
+
+[node name="@Node3D@62307" parent="RailNetwork/RailPlacer" unique_id=1897166416 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.5156049, 0, -0.8568264, 0, 1, 0, 0.8568264, 0, -0.5156049, 62.747955, 0.52246094, -35.5208)
+
+[node name="@Node3D@62308" parent="RailNetwork/RailPlacer" unique_id=1824355114 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.5264243, 0, -0.85022205, 0, 1, 0, 0.85022205, 0, -0.5264243, 64.4551, 0.52246094, -34.47882)
+
+[node name="@Node3D@62309" parent="RailNetwork/RailPlacer" unique_id=953850726 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.53817046, 0, -0.8428361, 0, 1, 0, 0.8428361, 0, -0.53817046, 66.1489, 0.52246094, -33.41416)
+
+[node name="@Node3D@68343" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=626065974 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.5650756, 1.9055053e-05, -0.82503915, 9.094947e-13, 1, 2.3095938e-05, 0.82503915, 1.3050949e-05, -0.5650756, 67.90974, 0.52246094, -32.266502)
+
+[node name="@Node3D@68344" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1266404143 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.49766958, 1.9083798e-05, -0.86736673, -2.2737371e-11, 1, 2.2002008e-05, 0.86736673, 1.094975e-05, -0.49766958, 69.61352, 0.5224161, -31.220835)
+
+[node name="@Node3D@68345" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2042548002 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.45725977, 1.8948134e-05, -0.8893332, -9.094947e-12, 1, 2.1306007e-05, 0.8893332, 9.742387e-06, -0.45725977, 71.37136, 0.5223728, -30.266354)
+
+[node name="@Node3D@68346" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1213194890 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.41836178, 1.8719731e-05, -0.90828055, -1.0913936e-11, 1, 2.0610083e-05, 0.90828055, 8.62248e-06, -0.41836178, 73.16932, 0.5223309, -29.39067)
+
+[node name="@Node3D@68347" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=741904776 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.3783127, 1.8391967e-05, -0.9256779, -1.8189894e-11, 1, 1.9868656e-05, 0.9256779, 7.5165813e-06, -0.3783127, 75.00349, 0.5222904, -28.593676)
+
+[node name="@Node3D@68348" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=266165508 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.335809, 1.7949122e-05, -0.9419302, -1.9099389e-11, 1, 1.9055691e-05, 0.9419302, 6.3990897e-06, -0.335809, 76.871315, 0.5222514, -27.879038)
+
+[node name="@Node3D@68349" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1419985658 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.28992307, 1.73699e-05, -0.95704997, -3.637979e-12, 1, 1.814942e-05, 0.95704997, 5.261939e-06, -0.28992307, 78.77053, 0.52221423, -27.252657)
+
+[node name="@Node3D@68350" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1863048076 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.23986663, 1.6628357e-05, -0.9708059, -3.0922827e-11, 1, 1.7128414e-05, 0.9708059, 4.108565e-06, -0.23986663, 80.69862, 0.52217895, -26.722116)
+
+[node name="@Node3D@68351" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1474369842 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.18495059, 1.5695632e-05, -0.9827479, -4.547474e-12, 1, 1.5971173e-05, 0.9827479, 2.9538814e-06, -0.18495059, 82.65256, 0.5221458, -26.296427)
+
+[node name="@Node3D@68352" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1856851534 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.124576345, 1.4541389e-05, -0.99221003, -7.503333e-11, 1, 1.4655565e-05, 0.99221003, 1.8258111e-06, -0.124576345, 84.627975, 0.5221152, -25.985949)
+
+[node name="@Node3D@68353" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1339217477 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.058345914, 1.3139293e-05, -0.99829644, -7.457857e-11, 1, 1.3161719e-05, 0.99829644, 7.68007e-07, -0.058345914, 86.61914, 0.5220873, -25.802015)
+
+[node name="@Node3D@68354" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=184959147 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.013856888, 1.1472726e-05, -0.99990404, -8.5037755e-11, 1, 1.1473827e-05, 0.99990404, -1.5890649e-07, 0.013856888, 88.61818, 0.5220626, -25.756535)
+
+[node name="@Node3D@68355" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1392348423 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.09169204, 9.544842e-06, -0.99578744, -1.3642422e-10, 1, 9.585209e-06, 0.99578744, -8.7875145e-07, 0.091692045, 90.61494, 0.52204156, -25.86119)
+
+[node name="@Node3D@68356" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1928389763 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.17421097, 7.388997e-06, -0.98470837, -1.4392754e-10, 1, 7.503716e-06, 0.98470837, -1.3070878e-06, 0.17421097, 92.596695, 0.5220244, -26.12642)
+
+[node name="@Node3D@68357" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1483420874 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.25978106, 5.075708e-06, -0.96566755, -1.4756552e-10, 1, 5.2561254e-06, 0.96566755, -1.3652993e-06, 0.25978106, 94.54847, 0.52201164, -26.560064)
+
+[node name="@Node3D@68358" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1672366591 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.34614033, 2.7115718e-06, -0.9381828, -1.8417268e-11, 1, 2.8902316e-06, 0.9381828, -1.0004085e-06, 0.34614033, 96.45375, 0.5220035, -27.166073)
+
+[node name="@Node3D@68359" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=119187922 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.43065923, 4.2533085e-07, -0.90251464, -7.9438685e-11, 1, 4.712352e-07, 0.90251464, -2.0287008e-07, 0.43065923, 98.29573, 0.52200013, -27.943401)
+
+[node name="@Node3D@68360" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1237268846 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.54133683, 0, -0.8408058, 0, 1, 0, 0.8408058, 0, 0.54133683, 100.04376, 0.522, -28.912165)
+
+[node name="@Node3D@68361" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1621294792 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.63579434, 0, -0.7718585, 0, 1, 0, 0.7718585, 0, 0.63579434, 101.65631, 0.522, -30.093422)
+
+[node name="@Node3D@68362" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2125619558 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.70811784, 0, -0.70609426, 0, 1, 0, 0.70609426, 0, 0.70811784, 103.13342, 0.522, -31.440634)
+
+[node name="@Node3D@68363" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1309426248 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.7631608, 0, -0.6462086, 0, 1, 0, 0.6462086, 0, 0.7631608, 104.48465, 0.522, -32.9144)
+
+[node name="@Node3D@68364" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1513348561 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.805307, 0, -0.5928581, 0, 1, 0, 0.5928581, 0, 0.805307, 105.722626, 0.522, -34.48471)
+
+[node name="@Node3D@68365" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1447698212 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.83796203, 0, -0.5457285, 0, 1, 0, 0.5457285, 0, 0.83796203, 106.86023, 0.522, -36.129333)
+
+[node name="@Node3D@68366" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=782208388 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.8636299, 0, -0.5041265, 0, 1, 0, 0.5041265, 0, 0.8636299, 107.909225, 0.522, -37.83193)
+
+[node name="@Node3D@68367" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1413051271 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.884108, 0, -0.4672826, 0, 1, 0, 0.4672826, 0, 0.884108, 108.87991, 0.522, -39.580425)
+
+[node name="@Node3D@68368" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=60164168 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9006841, 0, -0.43447453, 0, 1, 0, 0.43447453, 0, 0.9006841, 109.78107, 0.522, -41.36579)
+
+[node name="@Node3D@68369" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1504277688 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9142862, 0, -0.40506887, 0, 1, 0, 0.40506887, 0, 0.9142862, 110.62008, 0.522, -43.1812)
+
+[node name="@Node3D@68370" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=702484421 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.92558944, 0, -0.37852904, 0, 1, 0, 0.37852904, 0, 0.92558944, 111.40324, 0.522, -45.02141)
+
+[node name="@Node3D@68371" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=633507885 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9350945, 0, -0.35439858, 0, 1, 0, 0.35439858, 0, 0.9350945, 112.1358, 0.522, -46.88237)
+
+[node name="@Node3D@68372" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1084720029 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.94317555, 0, -0.33229485, 0, 1, 0, 0.33229485, 0, 0.94317555, 112.822174, 0.522, -48.76085)
+
+[node name="@Node3D@68373" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1469011917 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.950117, 0, -0.31189382, 0, 1, 0, 0.31189382, 0, 0.950117, 113.4661, 0.522, -50.654327)
+
+[node name="@Node3D@68374" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=912723095 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9561393, 0, -0.29291242, 0, 1, 0, 0.29291242, 0, 0.9561393, 114.0707, 0.522, -52.560726)
+
+[node name="@Node3D@68375" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=45758207 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.96141565, 0, -0.27510005, 0, 1, 0, 0.27510005, 0, 0.96141565, 114.63856, 0.522, -54.478394)
+
+[node name="@Node3D@68376" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1008197180 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9660854, 0, -0.25822288, 0, 1, 0, 0.25822288, 0, 0.9660854, 115.1717, 0.522, -56.40599)
+
+[node name="@Node3D@68377" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=538607470 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.97026426, 0, -0.24204811, 0, 1, 0, 0.24204811, 0, 0.97026426, 115.6719, 0.522, -58.34242)
+
+[node name="@Node3D@68378" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=327756256 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.97405374, 0, -0.22631696, 0, 1, 0, 0.22631696, 0, 0.97405374, 116.14024, 0.522, -60.286896)
+
+[node name="@Node3D@68379" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=491900823 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.977552, 0, -0.21069428, 0, 1, 0, 0.21069428, 0, 0.977552, 116.57728, 0.522, -62.23861)
+
+[node name="@Node3D@68380" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=776684817 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.98087513, 0, -0.19463824, 0, 1, 0, 0.19463824, 0, 0.98087513, 116.98271, 0.522, -64.19692)
+
+[node name="@Node3D@68381" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1138574842 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9842306, 0, -0.17689022, 0, 1, 0, 0.17689022, 0, 0.9842306, 117.35353, 0.522, -66.15517)
+
+[node name="@Node3D@73063" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1242603797 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9877894, 0, -0.15579511, 0, 1, 0, 0.15579511, 0, 0.9877894, 117.685, 0.522, -68.121)
+
+[node name="@Node3D@73064" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=889044234 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9927239, 0, -0.12041341, 0, 1, 0, 0.12041341, 0, 0.9927239, 117.951416, 0.522, -70.10267)
+
+[node name="@Node3D@73065" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=204005963 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9948374, 0, -0.10148202, 0, 1, 0, 0.10148202, 0, 0.9948374, 118.17276, 0.522, -72.09044)
+
+[node name="@Node3D@73066" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1289494002 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.99641865, 0, -0.084557235, 0, 1, 0, 0.084557235, 0, 0.99641865, 118.35866, 0.522, -74.08203)
+
+[node name="@Node3D@73067" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1840101751 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9976678, 0, -0.06825668, 0, 1, 0, 0.06825668, 0, 0.9976678, 118.51143, 0.522, -76.076164)
+
+[node name="@Node3D@73068" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=660241801 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.99864674, 0, -0.052006364, 0, 1, 0, 0.052006364, 0, 0.99864674, 118.631714, 0.522, -78.07253)
+
+[node name="@Node3D@73069" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1514763842 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9993707, 0, -0.035471965, 0, 1, 0, 0.035471965, 0, 0.9993707, 118.71926, 0.522, -80.070656)
+
+[node name="@Node3D@73070" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1136100647 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.99983054, 0, -0.018411413, 0, 1, 0, 0.018411413, 0, 0.99983054, 118.773254, 0.522, -82.06985)
+
+[node name="@Node3D@73071" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=810691735 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9999998, 0, -0.0006226153, 0, 1, 0, 0.0006226153, 0, 0.9999998, 118.792435, 0.522, -84.06975)
+
+[node name="@Node3D@73072" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=582729648 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9998365, 0, 0.018083926, 0, 1, 0, -0.018083926, 0, 0.9998365, 118.77513, 0.522, -86.06966)
+
+[node name="@Node3D@73073" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2122889024 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9992816, 0, 0.03789918, 0, 1, 0, -0.03789918, 0, 0.9992816, 118.71936, 0.522, -88.06887)
+
+[node name="@Node3D@73074" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1387220957 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.99825644, 0, 0.059025772, 0, 1, 0, -0.059025772, 0, 0.99825644, 118.62268, 0.522, -90.06647)
+
+[node name="@Node3D@73075" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=167121296 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9966583, 0, 0.08168399, 0, 1, 0, -0.08168399, 0, 0.9966583, 118.48224, 0.522, -92.06149)
+
+[node name="@Node3D@73076" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2024815586 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.99435335, 0, 0.106119834, 0, 1, 0, -0.106119834, 0, 0.99435335, 118.29477, 0.522, -94.05264)
+
+[node name="@Node3D@73077" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=919836043 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.98556477, 0, 0.16929892, 0, 1, 0, -0.16929892, 0, 0.98556477, 118.043564, 0.522, -96.03659)
+
+[node name="@Node3D@73078" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1326853343 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9524872, 0, 0.30457875, 0, 1, 0, -0.30457875, 0, 0.9524872, 117.57009, 0.522, -97.97806)
+
+[node name="@Node3D@73079" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=878405755 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.89945656, 0, 0.43701023, 0, 1, 0, -0.43701023, 0, 0.89945656, 116.82714, 0.522, -99.833084)
+
+[node name="@Node3D@73080" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1986209107 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.83056253, 0, 0.55692536, 0, 1, 0, -0.55692536, 0, 0.83056253, 115.83047, 0.522, -101.56521)
+
+[node name="@Node3D@73081" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1385491601 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.7528171, 0, 0.65822977, 0, 1, 0, -0.65822977, 0, 0.7528171, 114.61194, 0.522, -103.14944)
+
+[node name="@Node3D@73082" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=346112107 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.67315114, 0, 0.73950493, 0, 1, 0, -0.73950493, 0, 0.67315114, 113.21096, 0.522, -104.57523)
+
+[node name="@Node3D@73083" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1348790708 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.59642947, 0, 0.8026655, 0, 1, 0, -0.8026655, 0, 0.59642947, 111.66604, 0.522, -105.844055)
+
+[node name="@Node3D@73084" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=721483936 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.5251469, 0, 0.85101163, 0, 1, 0, -0.85101163, 0, 0.5251469, 110.01014, 0.522, -106.96461)
+
+[node name="@Node3D@73085" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=935340634 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.46002427, 0, 0.8879064, 0, 1, 0, -0.8879064, 0, 0.46002427, 108.26958, 0.522, -107.94874)
+
+[node name="@Node3D@73086" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=979893503 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.40073687, 0, 0.9161932, 0, 1, 0, -0.9161932, 0, 0.40073687, 106.46421, 0.522, -108.80861)
+
+[node name="@Node3D@73087" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1861647141 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.34636188, 0, 0.938101, 0, 1, 0, -0.938101, 0, 0.34636188, 104.609, 0.522, -109.554985)
+
+[node name="@Node3D@73088" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1393288489 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.29555017, 0, 0.9553272, 0, 1, 0, -0.9553272, 0, 0.29555017, 102.71487, 0.522, -110.19645)
+
+[node name="@Node3D@73089" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1597558359 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.24622136, 0, 0.96921366, 0, 1, 0, -0.96921366, 0, 0.24622136, 100.789536, 0.522, -110.738304)
+
+[node name="@Node3D@74172" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2145908541 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9877894, 0, -0.15579511, 0, 1, 0, 0.15579511, 0, 0.9877894, 117.685, 0.522, -68.121)
+
+[node name="@Node3D@74173" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=33299371 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9927239, 0, -0.12041341, 0, 1, 0, 0.12041341, 0, 0.9927239, 117.951416, 0.522, -70.10267)
+
+[node name="@Node3D@74174" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=196659385 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9948374, 0, -0.10148202, 0, 1, 0, 0.10148202, 0, 0.9948374, 118.17276, 0.522, -72.09044)
+
+[node name="@Node3D@74175" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=453010404 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.99641865, 0, -0.084557235, 0, 1, 0, 0.084557235, 0, 0.99641865, 118.35866, 0.522, -74.08203)
+
+[node name="@Node3D@74176" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=521585444 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9976678, 0, -0.06825668, 0, 1, 0, 0.06825668, 0, 0.9976678, 118.51143, 0.522, -76.076164)
+
+[node name="@Node3D@74177" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=40785680 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.99864674, 0, -0.052006364, 0, 1, 0, 0.052006364, 0, 0.99864674, 118.631714, 0.522, -78.07253)
+
+[node name="@Node3D@74178" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=978228527 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9993707, 0, -0.035471965, 0, 1, 0, 0.035471965, 0, 0.9993707, 118.71926, 0.522, -80.070656)
+
+[node name="@Node3D@74179" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1006892635 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.99983054, 0, -0.018411413, 0, 1, 0, 0.018411413, 0, 0.99983054, 118.773254, 0.522, -82.06985)
+
+[node name="@Node3D@74180" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=49157024 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9999998, 0, -0.0006226153, 0, 1, 0, 0.0006226153, 0, 0.9999998, 118.792435, 0.522, -84.06975)
+
+[node name="@Node3D@74181" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=801175279 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9998365, 0, 0.018083926, 0, 1, 0, -0.018083926, 0, 0.9998365, 118.77513, 0.522, -86.06966)
+
+[node name="@Node3D@74182" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1256679544 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9992816, 0, 0.03789918, 0, 1, 0, -0.03789918, 0, 0.9992816, 118.71936, 0.522, -88.06887)
+
+[node name="@Node3D@74183" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1330907072 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.99825644, 0, 0.059025772, 0, 1, 0, -0.059025772, 0, 0.99825644, 118.62268, 0.522, -90.06647)
+
+[node name="@Node3D@74184" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=863875744 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9966583, 0, 0.08168399, 0, 1, 0, -0.08168399, 0, 0.9966583, 118.48224, 0.522, -92.06149)
+
+[node name="@Node3D@74185" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1421003238 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.99435335, 0, 0.106119834, 0, 1, 0, -0.106119834, 0, 0.99435335, 118.29477, 0.522, -94.05264)
+
+[node name="@Node3D@74186" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1999507141 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.98556477, 0, 0.16929892, 0, 1, 0, -0.16929892, 0, 0.98556477, 118.043564, 0.522, -96.03659)
+
+[node name="@Node3D@74187" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1385825225 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.9524872, 0, 0.30457875, 0, 1, 0, -0.30457875, 0, 0.9524872, 117.57009, 0.522, -97.97806)
+
+[node name="@Node3D@74188" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=971858203 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.89945656, 0, 0.43701023, 0, 1, 0, -0.43701023, 0, 0.89945656, 116.82714, 0.522, -99.833084)
+
+[node name="@Node3D@74189" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=260530610 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.83056253, 0, 0.55692536, 0, 1, 0, -0.55692536, 0, 0.83056253, 115.83047, 0.522, -101.56521)
+
+[node name="@Node3D@74190" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=397751658 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.7528171, 0, 0.65822977, 0, 1, 0, -0.65822977, 0, 0.7528171, 114.61194, 0.522, -103.14944)
+
+[node name="@Node3D@74191" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=753318641 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.67315114, 0, 0.73950493, 0, 1, 0, -0.73950493, 0, 0.67315114, 113.21096, 0.522, -104.57523)
+
+[node name="@Node3D@74192" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=484707194 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.59642947, 0, 0.8026655, 0, 1, 0, -0.8026655, 0, 0.59642947, 111.66604, 0.522, -105.844055)
+
+[node name="@Node3D@74193" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1594690302 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.5251469, 0, 0.85101163, 0, 1, 0, -0.85101163, 0, 0.5251469, 110.01014, 0.522, -106.96461)
+
+[node name="@Node3D@74194" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1690671636 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.46002427, 0, 0.8879064, 0, 1, 0, -0.8879064, 0, 0.46002427, 108.26958, 0.522, -107.94874)
+
+[node name="@Node3D@74195" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=578911339 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.40073687, 0, 0.9161932, 0, 1, 0, -0.9161932, 0, 0.40073687, 106.46421, 0.522, -108.80861)
+
+[node name="@Node3D@74196" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=893932748 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.34636188, 0, 0.938101, 0, 1, 0, -0.938101, 0, 0.34636188, 104.609, 0.522, -109.554985)
+
+[node name="@Node3D@74197" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=186580925 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.29555017, 0, 0.9553272, 0, 1, 0, -0.9553272, 0, 0.29555017, 102.71487, 0.522, -110.19645)
+
+[node name="@Node3D@74198" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1154194058 instance=ExtResource("39_gngh3")]
+transform = Transform3D(0.24622136, 0, 0.96921366, 0, 1, 0, -0.96921366, 0, 0.24622136, 100.789536, 0.522, -110.738304)
+
+[node name="@Node3D@75389" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=607701738 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.52176446, 0, -0.85308963, 0, 1, 0, 0.85308963, 0, -0.52176446, 67.90756, 0.52246094, -32.26878)
+
+[node name="@Node3D@75390" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=81230494 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.5635642, 0, -0.8260723, 0, 1, 0, 0.8260723, 0, -0.5635642, 69.57924, 0.52246094, -31.17161)
+
+[node name="@Node3D@75391" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1219481933 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.5847216, 0, -0.811234, 0, 1, 0, 0.811234, 0, -0.5847216, 71.21634, 0.52246094, -30.022432)
+
+[node name="@Node3D@75392" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1314204373 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.60291785, 0, -0.7978032, 0, 1, 0, 0.7978032, 0, -0.60291785, 72.82526, 0.52246094, -28.83448)
+
+[node name="@Node3D@75393" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1735192666 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.619806, 0, -0.7847552, 0, 1, 0, 0.7847552, 0, -0.619806, 74.40782, 0.52246094, -27.611586)
+
+[node name="@Node3D@75394" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1135177977 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.6360231, 0, -0.77167004, 0, 1, 0, 0.77167004, 0, -0.6360231, 75.96429, 0.52246094, -26.35568)
+
+[node name="@Node3D@75395" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=247913058 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.65189725, 0, -0.7583073, 0, 1, 0, 0.7583073, 0, -0.65189725, 77.49429, 0.52246094, -25.067745)
+
+[node name="@Node3D@75396" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2129731471 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.66762364, 0, -0.74449897, 0, 1, 0, 0.74449897, 0, -0.66762364, 78.9972, 0.52246094, -23.748201)
+
+[node name="@Node3D@75397" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1910791361 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.6833304, 0, -0.73010933, 0, 1, 0, 0.73010933, 0, -0.6833304, 80.47193, 0.52246094, -22.397238)
+
+[node name="@Node3D@75398" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2091762186 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.6991055, 0, -0.7150186, 0, 1, 0, 0.7150186, 0, -0.6991055, 81.91718, 0.52246094, -21.014824)
+
+[node name="@Node3D@75399" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1954492749 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.71501034, 0, -0.69911385, 0, 1, 0, 0.69911385, 0, -0.71501034, 83.33145, 0.52246094, -19.60074)
+
+[node name="@Node3D@75400" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=753764362 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.649009, -0.0071810684, -0.7607469, 0.00025543873, 0.9999533, -0.009656978, 0.76078075, -0.006461789, -0.6489769, 84.73555, 0.52387244, -18.178272)
+
+[node name="@Node3D@75401" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1154491578 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.6524752, -0.05250538, -0.75598896, 6.447173e-05, 0.99759305, -0.06934104, 0.7578101, -0.045292053, -0.65090126, 86.25281, 0.60476816, -16.878218)
+
+[node name="@Node3D@75402" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1320068589 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.65679085, -0.08968388, -0.7487207, -0.00048338622, 0.9929522, -0.11851459, 0.7540727, -0.07747737, -0.6522052, 87.75785, 0.79424584, -15.575065)
+
+[node name="@Node3D@75403" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1845335107 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.66184807, -0.11994688, -0.7399797, -0.0014333874, 0.98731667, -0.15875688, 0.74963665, -0.10401226, -0.65362555, 89.24672, 1.0728848, -14.269312)
+
+[node name="@Node3D@75404" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=87274724 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.66757864, -0.1443877, -0.7304047, -0.0028056356, 0.9814965, -0.1914597, 0.7445341, -0.12576514, -0.6556311, 90.7172, 1.4242681, -12.960171)
+
+[node name="@Node3D@75405" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=373222024 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.6739526, -0.16388488, -0.7203678, -0.0046100914, 0.9759985, -0.21772827, 0.73876023, -0.14341755, -0.65853226, 92.168045, 1.8344531, -11.6461735)
+
+[node name="@Node3D@75406" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1143945219 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.68097, -0.17913231, -0.7100644, -0.0068541705, 0.9711376, -0.23842151, 0.7322793, -0.157491, -0.66254336, 93.59852, 2.2914746, -10.325297)
+
+[node name="@Node3D@75407" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=384967995 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.68865824, -0.19065756, -0.69957095, -0.0095468685, 0.96711147, -0.2541738, 0.7250232, -0.16836014, -0.6678295, 95.00818, 2.7848558, -8.9951515)
+
+[node name="@Node3D@75408" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2095909219 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.6970697, -0.19884361, -0.68887955, -0.012700537, 0.9640494, -0.2654193, 0.7168909, -0.17626663, -0.6745351, 96.396675, 3.3051796, -7.653037)
+
+[node name="@Node3D@75409" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=219792130 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.70628226, -0.20394942, -0.677916, -0.016331607, 0.9620418, -0.27241305, 0.70774204, -0.18132903, -0.68280387, 97.76353, 3.8437173, -6.2959676)
+
+[node name="@Node3D@75410" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=154507658 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.71640104, -0.206123, -0.6665455, -0.020459501, 0.96115804, -0.27523938, 0.6973887, -0.18354459, -0.6927918, 99.10808, 4.39207, -4.920674)
+
+[node name="@Node3D@75411" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1101438974 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.727562, -0.20541073, -0.65456855, -0.025104156, 0.96145564, -0.27381164, 0.6855825, -0.18278253, -0.70467526, 100.429306, 4.941847, -3.5235422)
+
+[node name="@Node3D@75412" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1751498414 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.73993623, -0.20176083, -0.6417063, -0.030281598, 0.9629826, -0.26785734, 0.6719951, -0.17876545, -0.71865535, 101.72576, 5.4843044, -2.1005805)
+
+[node name="@Node3D@75413" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=894974654 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.753736, -0.19502184, -0.62757355, -0.035993952, 0.96577054, -0.2568885, 0.65619093, -0.17103726, -0.73495567, 102.995316, 6.0099483, -0.6473598)
+
+[node name="@Node3D@75414" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1724124575 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.7692174, -0.18494087, -0.61163837, -0.042211637, 0.9698161, -0.24015616, 0.63759136, -0.15891404, -0.7538061, 104.23489, 6.508043, 0.84096223)
+
+[node name="@Node3D@75415" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=991066272 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.7866863, -0.17115366, -0.5931536, -0.04884325, 0.9750449, -0.21656822, 0.6154178, -0.14139968, -0.77541417, 105.440186, 6.9660316, 2.3697135)
+
+[node name="@Node3D@75416" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=515425776 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.806484, -0.15320177, -0.5710629, -0.055676233, 0.9812333, -0.18461138, 0.5886287, -0.11709147, -0.79987866, 106.605125, 7.3687687, 3.9445322)
+
+[node name="@Node3D@75417" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=248481569 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.82895005, -0.13057409, -0.54386795, -0.06227551, 0.9878693, -0.14225304, 0.555845, -0.084051, -0.8270259, 107.721054, 7.697573, 5.5710196)
+
+[node name="@Node3D@75418" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=682987192 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.85431826, -0.10283942, -0.50947464, -0.06781038, 0.9939052, -0.08691501, 0.5153077, -0.039705418, -0.85608494, 108.77581, 7.9291544, 7.2539263)
+
+[node name="@Node3D@75419" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2137763209 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.8755173, -0.08148791, -0.47626582, -0.07042682, 0.99667144, -0.0410627, 0.47802666, -0.0024092142, -0.87834203, 109.755066, 8.04091, 8.993669)
+
+[node name="@Node3D@75420" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2099159348 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.87675273, -0.094747104, -0.47151622, -0.07056996, 0.9951353, -0.06874369, 0.47573566, -0.026996339, -0.8791739, 110.7031, 8.149695, 10.751315)
+
+[node name="@Node3D@75421" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=836169795 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.8783138, -0.11150023, -0.46490076, -0.07085798, 0.9920437, -0.10406, 0.47280464, -0.0584554, -0.8792262, 111.64005, 8.320955, 12.510165)
+
+[node name="@Node3D@75422" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1518590936 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.8803876, -0.13375887, -0.45500138, -0.071434334, 0.9858576, -0.151598, 0.46884415, -0.10096229, -0.8774918, 112.56057, 8.573948, 14.2670765)
+
+[node name="@Node3D@75423" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=328823339 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.883378, -0.16585371, -0.43833312, -0.07268316, 0.9724543, -0.22147186, 0.4629909, -0.16378391, -0.8710995, 113.45564, 8.94191, 16.017076)
+
+[node name="@Node3D@75424" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1139117288 instance=ExtResource("39_gngh3")]
+transform = Transform3D(-0.8883943, -0.21969321, -0.40310112, -0.07604673, 0.9363542, -0.34272096, 0.4527389, -0.27381682, -0.84855866, 114.30265, 9.492711, 17.74228)
+
+[node name="RailPlacer_0" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=848446188 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9950954, 3.590163e-06, -0.09892046, 0, 1, 3.6293433e-05, 0.09892046, -3.6115427e-05, 0.9950954, 117.67779, 0.52246094, -68.065125)
 
-[node name="RailPlacer_1" parent="RailNetwork/RailPlacer" unique_id=875828689 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_1" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=890891533 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.97336584, 3.3373926e-06, -0.2292576, 4.6836353e-06, 1, 3.4442844e-05, 0.2292576, -3.4599245e-05, 0.97336584, 118.03602, 0.52239054, -70.03135)
 
-[node name="RailPlacer_2" parent="RailNetwork/RailPlacer" unique_id=2073323942 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_2" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1411403474 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.94950604, 3.0598346e-06, -0.31374875, 7.641758e-06, 1, 3.2878954e-05, 0.31374875, -3.3616358e-05, 0.94950604, 118.57966, 0.52232313, -71.95549)
 
-[node name="RailPlacer_3" parent="RailNetwork/RailPlacer" unique_id=1116354215 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_3" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1060091160 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.91702086, 2.681942e-06, -0.39883938, 1.05533445e-05, 1, 3.0988867e-05, 0.39883935, -3.262652e-05, 0.91702086, 119.29163, 0.52225924, -73.823814)
 
-[node name="RailPlacer_4" parent="RailNetwork/RailPlacer" unique_id=2142816462 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_4" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1961163698 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.8724634, 2.1636124e-06, -0.48867947, 1.354552e-05, 1, 2.861095e-05, 0.48867947, -3.1581425e-05, 0.8724634, 120.17826, 0.5221995, -75.61569)
 
-[node name="RailPlacer_5" parent="RailNetwork/RailPlacer" unique_id=1464991862 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_5" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=871936034 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.81205124, 1.4608457e-06, -0.5835861, 1.65999e-05, 1, 2.5601736e-05, 0.5835861, -3.0477395e-05, 0.81205124, 121.24982, 0.5221452, -77.30322)
 
-[node name="RailPlacer_6" parent="RailNetwork/RailPlacer" unique_id=917358294 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_6" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1074213186 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.7323526, 5.3372696e-07, -0.68092555, 1.9590925e-05, 1, 2.1854361e-05, 0.68092555, -2.9345061e-05, 0.7323526, 122.51433, 0.5220976, -78.85111)
 
-[node name="RailPlacer_7" parent="RailNetwork/RailPlacer" unique_id=861318309 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_7" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1585816152 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.6319469, -6.342714e-07, -0.77501166, 2.2295348e-05, 1, 1.7361293e-05, 0.77501166, -2.825057e-05, 0.6319469, 123.97141, 0.52205825, -80.218796)
 
-[node name="RailPlacer_8" parent="RailNetwork/RailPlacer" unique_id=1752122728 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_8" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1951972602 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.51349306, -2.0122234e-06, -0.8580938, 2.444557e-05, 1, 1.2283514e-05, 0.8580938, -2.7284088e-05, 0.51349306, 125.60701, 0.52202857, -81.366745)
 
-[node name="RailPlacer_9" parent="RailNetwork/RailPlacer" unique_id=1474994935 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_9" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=911373127 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.38439512, -3.513995e-06, -0.92316866, 2.583973e-05, 1, 6.9528687e-06, 0.92316866, -2.6527077e-05, 0.38439512, 127.391655, 0.5220093, -82.265594)
 
-[node name="RailPlacer_10" parent="RailNetwork/RailPlacer" unique_id=1732161862 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_10" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=994713054 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.2546339, -5.0234894e-06, -0.96703756, 2.6438329e-05, 1, 1.7668444e-06, 0.96703756, -2.6016753e-05, 0.2546339, 129.28539, 0.5220007, -82.9039)
 
-[node name="RailPlacer_11" parent="RailNetwork/RailPlacer" unique_id=1985563440 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_11" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1389979253 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.14841397, -3.929899e-06, -0.98892534, 2.6479318e-05, 1, 1.3642423e-12, 0.98892534, -2.6186068e-05, 0.14841397, 131.24535, 0.522, -83.29441)
 
-[node name="RailPlacer_12" parent="RailNetwork/RailPlacer" unique_id=1579586530 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_12" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1506168930 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.10620618, -2.8122704e-06, -0.9943441, 2.6479318e-05, 1, -2.9558578e-12, 0.9943441, -2.6329555e-05, 0.10620618, 133.2301, 0.522, -83.54352)
 
-[node name="RailPlacer_13" parent="RailNetwork/RailPlacer" unique_id=905344904 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_13" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1190272847 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.08427203, -2.231466e-06, -0.9964428, 2.647932e-05, 1, 0, 0.9964428, -2.6385127e-05, 0.08427203, 135.22115, 0.522, -83.732086)
 
-[node name="RailPlacer_14" parent="RailNetwork/RailPlacer" unique_id=2145629203 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_14" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=942104 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.07042885, -1.8649106e-06, -0.9975169, 2.647932e-05, 1, -2.842171e-12, 0.9975169, -2.6413565e-05, 0.07042885, 137.21524, 0.522, -83.885864)
 
-[node name="RailPlacer_15" parent="RailNetwork/RailPlacer" unique_id=1188393110 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_15" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1685962764 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.060768366, -1.609107e-06, -0.99815196, 2.6479325e-05, 1, -1.8189894e-12, 0.99815196, -2.6430387e-05, 0.060768366, 139.21095, 0.522, -84.01655)
 
-[node name="RailPlacer_16" parent="RailNetwork/RailPlacer" unique_id=809334500 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_16" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1949516796 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.053600132, -1.419294e-06, -0.99856246, 2.647933e-05, 1, 1.7053027e-12, 0.99856246, -2.6441267e-05, 0.053600132, 141.20766, 0.522, -84.13058)
 
-[node name="RailPlacer_17" parent="RailNetwork/RailPlacer" unique_id=504683212 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_17" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1817414843 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.048059527, -1.2725832e-06, -0.9988445, 2.6479323e-05, 1, 4.547474e-13, 0.9988445, -2.6448724e-05, 0.048059527, 143.2051, 0.522, -84.23201)
 
-[node name="RailPlacer_18" parent="RailNetwork/RailPlacer" unique_id=1608810261 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_18" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1659494644 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.043654323, -1.1559367e-06, -0.99904674, 2.6479322e-05, 1, -1.1368684e-13, 0.99904674, -2.6454076e-05, 0.043654323, 145.20305, 0.522, -84.323586)
 
-[node name="RailPlacer_19" parent="RailNetwork/RailPlacer" unique_id=1526889719 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_19" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1514577487 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.040080965, -1.0613184e-06, -0.99919647, 2.6479322e-05, 1, -1.7053026e-12, 0.99919647, -2.6458043e-05, 0.040080965, 147.2013, 0.522, -84.40718)
 
-[node name="RailPlacer_20" parent="RailNetwork/RailPlacer" unique_id=799346336 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_20" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1562502166 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.03714085, -9.834657e-07, -0.9993101, 2.6479327e-05, 1, -1.1368685e-12, 0.9993101, -2.6461055e-05, 0.03714085, 149.19978, 0.522, -84.484314)
 
-[node name="RailPlacer_21" parent="RailNetwork/RailPlacer" unique_id=679357980 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_21" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=322703621 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.034698248, -9.18787e-07, -0.9993979, 2.6479327e-05, 1, -8.526513e-13, 0.9993979, -2.6463382e-05, 0.034698248, 151.19849, 0.522, -84.55607)
 
-[node name="RailPlacer_22" parent="RailNetwork/RailPlacer" unique_id=1250549475 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_22" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=680386657 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.032657266, -8.6474137e-07, -0.9994666, 2.6479327e-05, 1, 1.0800252e-12, 0.9994666, -2.6465204e-05, 0.032657266, 153.19742, 0.522, -84.623375)
 
-[node name="RailPlacer_23" parent="RailNetwork/RailPlacer" unique_id=1463294273 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_23" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=811284975 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.030948997, -8.1950765e-07, -0.99952096, 2.6479327e-05, 1, 9.663382e-13, 0.99952096, -2.6466643e-05, 0.030948997, 155.1964, 0.522, -84.68693)
 
-[node name="RailPlacer_24" parent="RailNetwork/RailPlacer" unique_id=1735210350 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_24" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1993806429 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.029521585, -7.817134e-07, -0.99956423, 2.6479323e-05, 1, -1.9326762e-12, 0.99956423, -2.646778e-05, 0.029521585, 157.1955, 0.522, -84.74735)
 
-[node name="RailPlacer_25" parent="RailNetwork/RailPlacer" unique_id=283847995 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_25" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1940322395 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.028336586, -7.503332e-07, -0.99959844, 2.6479322e-05, 1, 3.4106054e-13, 0.99959844, -2.6468688e-05, 0.028336586, 159.19464, 0.522, -84.805176)
 
-[node name="RailPlacer_26" parent="RailNetwork/RailPlacer" unique_id=507054822 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_26" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=386021000 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.027364375, -7.245917e-07, -0.99962556, 2.6479325e-05, 1, -1.5916158e-12, 0.99962556, -2.6469408e-05, 0.027364375, 161.19386, 0.522, -84.86083)
 
-[node name="RailPlacer_27" parent="RailNetwork/RailPlacer" unique_id=343449492 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_27" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=13674310 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.026583076, -7.0390263e-07, -0.9996466, 2.6479327e-05, 1, -6.8212113e-13, 0.9996466, -2.646997e-05, 0.026583076, 163.19316, 0.522, -84.91475)
 
-[node name="RailPlacer_28" parent="RailNetwork/RailPlacer" unique_id=1468341816 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_28" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1921419915 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.025975704, -6.8781804e-07, -0.9996626, 2.6479322e-05, 1, 9.663381e-13, 0.9996626, -2.6470387e-05, 0.025975704, 165.19246, 0.522, -84.96729)
 
-[node name="RailPlacer_29" parent="RailNetwork/RailPlacer" unique_id=1096437126 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_29" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2056416739 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.025529563, -6.7600376e-07, -0.9996741, 2.6479325e-05, 1, 1.8189894e-12, 0.9996741, -2.6470694e-05, 0.025529563, 167.19177, 0.522, -85.01877)
 
-[node name="RailPlacer_30" parent="RailNetwork/RailPlacer" unique_id=1596290524 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_30" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2041877959 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.025236372, -6.682414e-07, -0.99968153, 2.6479327e-05, 1, 7.8828616e-13, 0.99968153, -2.6470894e-05, 0.025236374, 169.19116, 0.522, -85.06951)
 
-[node name="RailPlacer_31" parent="RailNetwork/RailPlacer" unique_id=514623919 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_31" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1551829433 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.025089921, -6.6436417e-07, -0.9996852, 2.6479329e-05, 1, 1.13686736e-13, 0.9996852, -2.6470992e-05, 0.025089921, 171.19055, 0.522, -85.11981)
 
-[node name="RailPlacer_32" parent="RailNetwork/RailPlacer" unique_id=254013825 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_32" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2002283931 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.025088131, -6.643142e-07, -0.9996852, 2.6479327e-05, 1, 2.7284845e-12, 0.9996852, -2.6470994e-05, 0.025088131, 173.1899, 0.522, -85.16996)
 
-[node name="RailPlacer_33" parent="RailNetwork/RailPlacer" unique_id=2100704991 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_33" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1710168454 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.025230289, -6.680811e-07, -0.99968165, 2.647932e-05, 1, -1.7053026e-13, 0.99968165, -2.647089e-05, 0.025230289, 175.18922, 0.522, -85.22027)
 
-[node name="RailPlacer_34" parent="RailNetwork/RailPlacer" unique_id=1470581880 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_34" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=403037124 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.025519252, -6.757302e-07, -0.9996744, 2.647933e-05, 1, 2.5011109e-12, 0.9996744, -2.6470707e-05, 0.025519252, 177.18855, 0.522, -85.27097)
 
-[node name="RailPlacer_35" parent="RailNetwork/RailPlacer" unique_id=563552736 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_35" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1369220826 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.025960207, -6.8740707e-07, -0.99966305, 2.647933e-05, 1, 1.705303e-12, 0.99966305, -2.6470403e-05, 0.025960207, 179.18787, 0.522, -85.32243)
 
-[node name="RailPlacer_36" parent="RailNetwork/RailPlacer" unique_id=1550323808 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_36" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1810739341 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.026561737, -7.033377e-07, -0.9996472, 2.6479325e-05, 1, -8.526513e-13, 0.9996472, -2.6469983e-05, 0.026561737, 181.18718, 0.522, -85.37492)
 
-[node name="RailPlacer_37" parent="RailNetwork/RailPlacer" unique_id=1614057329 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_37" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=489632920 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.02733612, -7.2384233e-07, -0.99962634, 2.647933e-05, 1, -2.2737346e-13, 0.99962634, -2.6469434e-05, 0.02733612, 183.18645, 0.522, -85.42879)
 
-[node name="RailPlacer_38" parent="RailNetwork/RailPlacer" unique_id=167873775 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_38" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2046785801 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.028299512, -7.493519e-07, -0.9995995, 2.6479325e-05, 1, 5.6843426e-14, 0.9995995, -2.646872e-05, 0.028299512, 185.18571, 0.522, -85.4844)
 
-[node name="RailPlacer_39" parent="RailNetwork/RailPlacer" unique_id=1750763990 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_39" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=4410532 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.029473484, -7.804411e-07, -0.9995656, 2.647933e-05, 1, -3.0695446e-12, 0.9995656, -2.6467826e-05, 0.029473484, 187.18484, 0.522, -85.54214)
 
-[node name="RailPlacer_40" parent="RailNetwork/RailPlacer" unique_id=1185986541 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_40" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=236970716 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.030887246, -8.17874e-07, -0.99952286, 2.6479327e-05, 1, -5.684342e-13, 0.99952286, -2.6466692e-05, 0.030887246, 189.18399, 0.522, -85.602455)
 
-[node name="RailPlacer_41" parent="RailNetwork/RailPlacer" unique_id=1572324794 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_41" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=486431087 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.032577753, -8.6263844e-07, -0.9994692, 2.6479327e-05, 1, -1.4779289e-12, 0.9994692, -2.6465272e-05, 0.032577753, 191.18294, 0.522, -85.66586)
 
-[node name="RailPlacer_42" parent="RailNetwork/RailPlacer" unique_id=1471523093 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_42" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=917405186 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.03459591, -9.1607603e-07, -0.9994014, 2.6479333e-05, 1, 5.6843424e-13, 0.9994014, -2.6463482e-05, 0.03459591, 193.18188, 0.522, -85.73299)
 
-[node name="RailPlacer_43" parent="RailNetwork/RailPlacer" unique_id=477321902 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_43" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1179957795 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.037008107, -9.799478e-07, -0.99931496, 2.6479329e-05, 1, 2.046363e-12, 0.99931496, -2.646119e-05, 0.037008107, 195.18062, 0.522, -85.80453)
 
-[node name="RailPlacer_44" parent="RailNetwork/RailPlacer" unique_id=156046458 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_44" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1568363135 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.0399068, -1.0567063e-06, -0.99920344, 2.6479327e-05, 1, -1.2505552e-12, 0.99920344, -2.6458232e-05, 0.0399068, 197.1791, 0.522, -85.88134)
 
-[node name="RailPlacer_45" parent="RailNetwork/RailPlacer" unique_id=1333747115 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_45" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=841171288 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.04342383, -1.1498342e-06, -0.99905676, 2.6479327e-05, 1, -4.5474735e-13, 0.99905676, -2.645435e-05, 0.04342383, 199.17737, 0.522, -85.96457)
 
-[node name="RailPlacer_46" parent="RailNetwork/RailPlacer" unique_id=1303024570 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_46" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=627651832 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.047749102, -1.2643658e-06, -0.9988594, 2.6479327e-05, 1, -1.8189894e-12, 0.9988594, -2.6449123e-05, 0.047749102, 201.17532, 0.522, -86.05557)
 
-[node name="RailPlacer_47" parent="RailNetwork/RailPlacer" unique_id=239791290 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_47" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1105463734 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.053171575, -1.4079504e-06, -0.9985854, 2.6479327e-05, 1, -2.9558578e-12, 0.9985854, -2.6441869e-05, 0.053171575, 203.17278, 0.522, -86.15628)
 
-[node name="RailPlacer_48" parent="RailNetwork/RailPlacer" unique_id=425267919 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_48" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=485441711 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.060159564, -1.5929902e-06, -0.9981888, 2.6479338e-05, 1, -4.888534e-12, 0.9981888, -2.6431377e-05, 0.060159564, 205.16965, 0.522, -86.26929)
 
-[node name="RailPlacer_49" parent="RailNetwork/RailPlacer" unique_id=1563732219 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_49" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=232522074 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.06952066, -1.8408601e-06, -0.9975805, 2.6479329e-05, 1, 1.9728637e-13, 0.9975805, -2.641526e-05, 0.06952067, 207.16542, 0.522, -86.398476)
 
-[node name="RailPlacer_50" parent="RailNetwork/RailPlacer" unique_id=1570103299 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_50" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1495437229 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.082811475, -2.1927895e-06, -0.9965652, 2.6479327e-05, 1, 2.7284845e-12, 0.9965652, -2.6388378e-05, 0.082811475, 209.1596, 0.522, -86.54995)
 
-[node name="RailPlacer_51" parent="RailNetwork/RailPlacer" unique_id=1339853645 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_51" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=74841684 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.10355706, -2.7421213e-06, -0.99462354, 2.6479323e-05, 1, -6.821211e-13, 0.99462354, -2.6336957e-05, 0.10355706, 211.15112, 0.522, -86.73459)
 
-[node name="RailPlacer_52" parent="RailNetwork/RailPlacer" unique_id=1558255721 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_52" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=887010461 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.14221364, -3.7657198e-06, -0.989836, 2.6479327e-05, 1, 1.8189894e-12, 0.989836, -2.6210191e-05, 0.14221364, 213.13683, 0.522, -86.97559)
 
-[node name="RailPlacer_53" parent="RailNetwork/RailPlacer" unique_id=1586210171 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_53" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1319554055 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.25661477, -6.7949863e-06, -0.96651375, 2.6479333e-05, 1, 1.758815e-12, 0.96651375, -2.5592639e-05, 0.25661477, 215.10059, 0.522, -87.3469)
 
-[node name="RailPlacer_54" parent="RailNetwork/RailPlacer" unique_id=58349240 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_54" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2065920802 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.4144601, 0.00031132766, -0.91006744, 5.829483e-06, 0.99999994, 0.0003447478, 0.9100675, -0.00014818943, 0.41446006, 216.97435, 0.52170706, -88.040436)
 
-[node name="RailPlacer_55" parent="RailNetwork/RailPlacer" unique_id=1805246328 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_55" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1751395597 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.53962517, 0.0006321929, -0.8419052, -6.99283e-05, 0.99999976, 0.0007060863, 0.8419054, -0.0003221489, 0.53962505, 218.72911, 0.52064395, -88.99642)
 
-[node name="RailPlacer_56" parent="RailNetwork/RailPlacer" unique_id=1715672096 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_56" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=352989277 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.6481914, 0.00086465455, -0.761477, -0.00018466896, 0.9999995, 0.0009783005, 0.7614775, -0.0004935048, 0.6481912, 220.33371, 0.5189425, -90.18773)
 
-[node name="RailPlacer_57" parent="RailNetwork/RailPlacer" unique_id=1232213028 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_57" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1193212122 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.7342644, 0.0010074154, -0.67886287, -0.000312245, 0.9999993, 0.0011462466, 0.6788636, -0.0006296764, 0.7342642, 221.77357, 0.5168007, -91.57402)
 
-[node name="RailPlacer_58" parent="RailNetwork/RailPlacer" unique_id=393707686 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_58" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=220442646 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.79843414, 0.0010781684, -0.6020813, -0.00043123148, 0.99999917, 0.001218868, 0.60208213, -0.00071354926, 0.7984339, 223.05312, 0.51442105, -93.11016)
 
-[node name="RailPlacer_59" parent="RailNetwork/RailPlacer" unique_id=289744026 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_59" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=713121260 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.8446537, 0.0010988549, -0.53531194, -0.0005305513, 0.99999917, 0.0012155934, 0.5353129, -0.000742745, 0.84465355, 224.18869, 0.51197565, -94.75585)
 
-[node name="RailPlacer_60" parent="RailNetwork/RailPlacer" unique_id=1175395744 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_60" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=450394954 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.8775333, 0.0010879529, -0.47951445, -0.0006077111, 0.99999917, 0.0011567227, 0.47951528, -0.0007236564, 0.87753326, 225.2017, 0.5095955, -96.47994)
 
-[node name="RailPlacer_61" parent="RailNetwork/RailPlacer" unique_id=47680637 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_61" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=477778511 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.90091324, 0.0010581155, -0.43399805, -0.0006646313, 0.9999992, 0.0010583911, 0.43399882, -0.00066506973, 0.90091324, 226.11359, 0.5073749, -98.2597)
 
-[node name="RailPlacer_62" parent="RailNetwork/RailPlacer" unique_id=154576734 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_62" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1348463294 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.917634, 0.0010172895, -0.39742523, -0.00070484093, 0.99999934, 0.000932258, 0.3974259, -0.00057535, 0.9176341, 226.9436, 0.5053804, -100.07917)
 
-[node name="RailPlacer_63" parent="RailNetwork/RailPlacer" unique_id=143507971 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_63" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1653080968 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9296709, 0.0009701722, -0.3683899, -0.0007319898, 0.9999994, 0.0007862921, 0.36839044, -0.00046133518, 0.92967105, 227.70833, 0.503659, -101.927155)
 
-[node name="RailPlacer_64" parent="RailNetwork/RailPlacer" unique_id=817555386 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_64" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=812622296 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.938368, 0.0009194332, -0.3456367, -0.00074929965, 0.9999995, 0.00062584213, 0.3456371, -0.0003282848, 0.9383682, 228.42139, 0.50224483, -103.79562)
 
-[node name="RailPlacer_65" parent="RailNetwork/RailPlacer" unique_id=1523321415 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_65" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1603264496 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.94464356, 0.00086653995, -0.32809722, -0.00075945107, 0.9999997, 0.00045452677, 0.3280975, -0.00018019199, 0.94464386, 229.0943, 0.5011628, -105.67897)
 
-[node name="RailPlacer_66" parent="RailNetwork/RailPlacer" unique_id=758171575 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_66" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1080269415 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9491206, 0.00081222673, -0.31491187, -0.00076460105, 0.9999997, 0.00027476856, 0.314912, -2.0006573e-05, 0.9491209, 229.73668, 0.5004323, -107.57298)
 
-[node name="RailPlacer_67" parent="RailNetwork/RailPlacer" unique_id=992025326 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_67" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=104183512 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9522288, 0.00075680995, -0.30538464, -0.0007664808, 0.9999997, 8.823191e-05, 0.3053846, 0.0001500545, 0.9522291, 230.35638, 0.50006825, -109.47451)
 
-[node name="RailPlacer_68" parent="RailNetwork/RailPlacer" unique_id=917314676 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_68" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1627061 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9575505, 0.00073395384, -0.28826466, -0.0007666495, 0.9999997, -5.2698937e-07, 0.28826454, 0.00022150255, 0.9575508, 230.95442, 0.50002766, -111.38295)
 
-[node name="RailPlacer_69" parent="RailNetwork/RailPlacer" unique_id=143728984 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_69" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=224223136 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9638765, 0.0007385868, -0.26634863, -0.0007666284, 0.9999997, -1.3083107e-06, 0.26634854, 0.00020545146, 0.9638768, 231.50835, 0.5000295, -113.304695)
 
-[node name="RailPlacer_70" parent="RailNetwork/RailPlacer" unique_id=758557660 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_70" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1537575492 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.96877384, 0.0007421888, -0.24794503, -0.0007665978, 0.9999997, -1.9008243e-06, 0.24794495, 0.00019191556, 0.96877414, 232.02213, 0.5000328, -115.23751)
 
-[node name="RailPlacer_71" parent="RailNetwork/RailPlacer" unique_id=1239062840 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_71" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1280220428 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9727153, 0.0007451004, -0.2320008, -0.00076656265, 0.9999997, -2.358038e-06, 0.23200072, 0.00018013683, 0.9727156, 232.50174, 0.500037, -117.17915)
 
-[node name="RailPlacer_72" parent="RailNetwork/RailPlacer" unique_id=2106991937 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_72" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=280280715 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.97598463, 0.00074752665, -0.21783811, -0.0007665259, 0.99999976, -2.713503e-06, 0.21783805, 0.00016962689, 0.97598493, 232.95132, 0.50004214, -119.12793)
 
-[node name="RailPlacer_73" parent="RailNetwork/RailPlacer" unique_id=1068913858 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_73" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1940441705 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.97876376, 0.00074959896, -0.2049903, -0.00076648884, 0.99999976, -2.9893117e-06, 0.20499025, 0.00016004861, 0.978764, 233.37396, 0.50004786, -121.08277)
 
-[node name="RailPlacer_74" parent="RailNetwork/RailPlacer" unique_id=1112305317 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_74" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1100666280 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.98117405, 0.0007514042, -0.19312419, -0.00076645124, 0.99999976, -3.2006792e-06, 0.19312413, 0.00015116071, 0.98117435, 233.77194, 0.50005406, -123.04279)
 
-[node name="RailPlacer_75" parent="RailNetwork/RailPlacer" unique_id=1585681083 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_75" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=216926408 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9833, 0.00075300393, -0.18199071, -0.00076641404, 0.9999997, -3.3581678e-06, 0.18199065, 0.00014278232, 0.98330027, 234.1469, 0.5000606, -125.00734)
 
-[node name="RailPlacer_76" parent="RailNetwork/RailPlacer" unique_id=311621289 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_76" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=562762221 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9852018, 0.0007544421, -0.17139697, -0.00076637755, 0.9999997, -3.469082e-06, 0.17139691, 0.00013477252, 0.9852021, 234.50024, 0.5000674, -126.97585)
 
-[node name="RailPlacer_77" parent="RailNetwork/RailPlacer" unique_id=2092099881 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_77" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=949503486 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.98692375, 0.00075575005, -0.16118617, -0.00076634117, 0.9999997, -3.538877e-06, 0.16118613, 0.0001270162, 0.986924, 234.8328, 0.50007445, -128.94801)
 
-[node name="RailPlacer_78" parent="RailNetwork/RailPlacer" unique_id=1051556953 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_78" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1945588210 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.98849875, 0.00075695215, -0.15122713, -0.0007663054, 0.9999997, -3.57104e-06, 0.15122707, 0.000119416145, 0.98849905, 235.14519, 0.5000816, -130.92346)
 
-[node name="RailPlacer_79" parent="RailNetwork/RailPlacer" unique_id=4228784 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_79" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=173092128 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.98995155, 0.0007580659, -0.14140488, -0.00076627004, 0.9999997, -3.568077e-06, 0.14140484, 0.00011188655, 0.98995185, 235.43776, 0.5000887, -132.90195)
 
-[node name="RailPlacer_80" parent="RailNetwork/RailPlacer" unique_id=1905110424 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_80" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=496521860 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9913007, 0.00075910473, -0.13161449, -0.000766235, 0.9999997, -3.5311577e-06, 0.13161445, 0.000104348066, 0.991301, 235.71082, 0.50009584, -134.88322)
 
-[node name="RailPlacer_81" parent="RailNetwork/RailPlacer" unique_id=951312528 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_81" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=312015177 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.99255985, 0.0007600786, -0.12175554, -0.0007662004, 0.9999997, -3.460709e-06, 0.1217555, 9.672411e-05, 0.99256015, 235.96419, 0.5001028, -136.86705)
 
-[node name="RailPlacer_82" parent="RailNetwork/RailPlacer" unique_id=884977448 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_82" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=997133638 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9937386, 0.00076099375, -0.11172727, -0.0007661658, 0.9999997, -3.3562367e-06, 0.11172723, 8.893683e-05, 0.9937389, 236.19771, 0.5001096, -138.85338)
 
-[node name="RailPlacer_83" parent="RailNetwork/RailPlacer" unique_id=1326847923 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_83" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=297214904 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9948429, 0.00076185475, -0.10142533, -0.00076613185, 0.9999997, -3.2164235e-06, 0.1014253, 8.0905e-05, 0.9948432, 236.41093, 0.5001162, -140.84196)
 
-[node name="RailPlacer_84" parent="RailNetwork/RailPlacer" unique_id=1330738621 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_84" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1298831066 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.99587476, 0.0007626625, -0.09073546, -0.0007660984, 0.9999997, -3.038846e-06, 0.09073543, 7.25386e-05, 0.99587506, 236.60316, 0.5001225, -142.83273)
 
-[node name="RailPlacer_85" parent="RailNetwork/RailPlacer" unique_id=1155485914 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_85" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1868812164 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9968322, 0.00076341437, -0.079529844, -0.0007660652, 0.9999997, -2.8202373e-06, 0.07952982, 6.373635e-05, 0.9968325, 236.77353, 0.5001283, -144.82545)
 
-[node name="RailPlacer_86" parent="RailNetwork/RailPlacer" unique_id=1342078053 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_86" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1444243018 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.99770826, 0.000764105, -0.06765846, -0.0007660333, 0.9999997, -2.555813e-06, 0.06765844, 5.4378586e-05, 0.99770856, 236.92084, 0.50013375, -146.82002)
 
-[node name="RailPlacer_87" parent="RailNetwork/RailPlacer" unique_id=1342625918 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_87" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1385889545 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9984893, 0.0007647229, -0.05494159, -0.0007660029, 0.9999997, -2.2392353e-06, 0.054941572, 4.432127e-05, 0.9984896, 237.04361, 0.5001385, -148.81625)
 
-[node name="RailPlacer_88" parent="RailNetwork/RailPlacer" unique_id=1124550676 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_88" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1453831903 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.99915254, 0.0007652488, -0.041153982, -0.0007659744, 0.9999997, -1.8618294e-06, 0.04115397, 3.3383145e-05, 0.99915284, 237.1399, 0.50014263, -150.81395)
 
-[node name="RailPlacer_89" parent="RailNetwork/RailPlacer" unique_id=675587641 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_89" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2114742727 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9996613, 0.0007656541, -0.026012555, -0.00076595, 0.9999997, -1.4121047e-06, 0.026012545, 2.1335942e-05, 0.9996616, 237.20732, 0.5001459, -152.81279)
 
-[node name="RailPlacer_90" parent="RailNetwork/RailPlacer" unique_id=1999160565 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_90" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2108505815 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9999579, 0.00076589076, -0.009140065, -0.00076593074, 0.9999997, -8.7410774e-07, 0.009140061, 7.874728e-06, 0.9999582, 237.2428, 0.50014824, -154.81245)
 
-[node name="RailPlacer_91" parent="RailNetwork/RailPlacer" unique_id=754306027 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_91" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=548492489 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.99995, 0.00076588435, 0.009972545, -0.0007659202, 0.9999997, -2.2570478e-07, -0.0099725425, -7.41248e-06, 0.9999503, 237.2424, 0.50014937, -156.81248)
 
-[node name="RailPlacer_92" parent="RailNetwork/RailPlacer" unique_id=1357709585 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_92" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=159403420 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.99960065, 0.00076560234, 0.028247615, -0.0007659226, 0.9999997, 5.1755876e-07, -0.028247608, -2.2152839e-05, 0.99960095, 237.20335, 0.5001491, -158.81201)
 
-[node name="RailPlacer_93" parent="RailNetwork/RailPlacer" unique_id=1434287257 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_93" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=996610743 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.99899656, 0.000765113, 0.044780895, -0.00076593686, 0.9999997, 1.2395059e-06, -0.044780884, -3.55376e-05, 0.99899685, 237.1302, 0.5001473, -160.81062)
 
-[node name="RailPlacer_94" parent="RailNetwork/RailPlacer" unique_id=617013931 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_94" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1683964589 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9981558, 0.0007644325, 0.06070023, -0.00076596235, 0.9999997, 1.934834e-06, -0.06070021, -4.842535e-05, 0.9981561, 237.02463, 0.5001441, -162.80783)
 
-[node name="RailPlacer_95" parent="RailNetwork/RailPlacer" unique_id=793404593 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_95" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=2077427924 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9971011, 0.0007635788, 0.076083794, -0.00076599745, 0.9999997, 2.606928e-06, -0.07608377, -6.0879363e-05, 0.9971014, 236.88777, 0.5001396, -164.80313)
 
-[node name="RailPlacer_96" parent="RailNetwork/RailPlacer" unique_id=2084711160 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_96" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=181885506 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9958496, 0.00076256576, 0.09101111, -0.0007660416, 0.9999997, 3.2592607e-06, -0.09101108, -7.2964016e-05, 0.9958499, 236.7206, 0.5001337, -166.79611)
 
-[node name="RailPlacer_97" parent="RailNetwork/RailPlacer" unique_id=745185033 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_97" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1003166803 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.99441195, 0.0007614017, 0.105566844, -0.0007660938, 0.9999997, 3.895516e-06, -0.10556681, -8.474784e-05, 0.99441224, 236.52399, 0.50012654, -168.78638)
 
-[node name="RailPlacer_98" parent="RailNetwork/RailPlacer" unique_id=1636094590 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_98" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1331908177 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9927923, 0.0007600906, 0.11984501, -0.0007661542, 0.9999997, 4.5197703e-06, -0.11984497, -9.630695e-05, 0.9927926, 236.29851, 0.50011814, -170.77365)
 
-[node name="RailPlacer_99" parent="RailNetwork/RailPlacer" unique_id=601462239 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_99" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=541430214 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9909868, 0.0007586289, 0.13395716, -0.0007662229, 0.9999997, 5.1368947e-06, -0.13395712, -0.000107731634, 0.9909871, 236.04471, 0.5001085, -172.75749)
 
-[node name="RailPlacer_100" parent="RailNetwork/RailPlacer" unique_id=637428948 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_100" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1079102648 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9889801, 0.000757004, 0.14804646, -0.0007663001, 0.9999997, 5.753222e-06, -0.14804642, -0.00011913784, 0.9889804, 235.7627, 0.5000976, -174.73746)
 
-[node name="RailPlacer_101" parent="RailNetwork/RailPlacer" unique_id=1537516827 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_101" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=285733136 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.98673844, 0.00075518934, 0.16231653, -0.0007663878, 0.9999997, 6.377537e-06, -0.16231647, -0.00013069037, 0.98673874, 235.4524, 0.5000855, -176.71321)
 
-[node name="RailPlacer_102" parent="RailNetwork/RailPlacer" unique_id=1578630671 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_102" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=709060892 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.9841929, 0.0007531285, 0.17709829, -0.0007664883, 0.9999997, 7.0244605e-06, -0.17709823, -0.00014265718, 0.9841932, 235.11406, 0.5000721, -178.67883)
 
-[node name="RailPlacer_103" parent="RailNetwork/RailPlacer" unique_id=248830169 instance=ExtResource("36_facbu")]
+[node name="RailPlacer_103" type="Node3D" parent="RailNetwork/RailPlacer" unique_id=1399360052 instance=ExtResource("39_gngh3")]
 transform = Transform3D(0.98119026, 0.00075069786, 0.19304188, -0.0007666081, 0.99999976, 7.722381e-06, -0.19304183, -0.00015556459, 0.9811905, 234.74316, 0.50005734, -180.65001)
 
 [node name="Track_A" type="Path3D" parent="RailNetwork" unique_id=983838640]
@@ -1547,13 +2286,8 @@ monitored_track = NodePath("../../RailNetwork/Track_A")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.269089, 2.9999053, -87.53841)
 
 [node name="Train" parent="RailNetwork" unique_id=1995327968 instance=ExtResource("33_jq2sk")]
-transform = Transform3D(0.30442077, 0, 0.95253766, 0, 1.0000001, 0, -0.9525377, 0, 0.30442074, -6.2920227, 0.9038146, -84.741905)
+transform = Transform3D(0.21939431, 0, 0.97563636, 0, 1.0000001, 0, -0.9756364, 0, 0.21939431, -11.049319, 0.9038146, -85.992546)
+collision_mask = 0
 
-[node name="Label3D" type="Label3D" parent="." unique_id=150371383]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.1281567, 9.562088)
-billboard = 1
-text = "Hello"
-font_size = 128
-
-[node name="PCScreenAccess" parent="." unique_id=785069297 instance=ExtResource("43_gngh3")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.4668474, 0.4999997, 10.561045)
+[node name="Depot" parent="RailNetwork" unique_id=843563333 instance=ExtResource("43_qnost")]
+transform = Transform3D(0.2475301, 0, 0.96888024, 0, 1, 0, -0.96888024, 0, 0.2475301, -7.875911, 0, -85.16917)

@@ -269,6 +269,8 @@ font_size = 32
 
 [node name="Player" type="CharacterBody3D" unique_id=1385081511]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+collision_layer = 9
+collision_mask = 9
 script = ExtResource("1_x8ecx")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=571578838]

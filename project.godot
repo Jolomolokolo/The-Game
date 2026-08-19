@@ -27,6 +27,7 @@ GameState="*uid://cko6fi4qxd5ft"
 GameData="*uid://ca0a7cmv3d8ka"
 SaveManager="*uid://cqnapymadjqu2"
 SaveNotification="*uid://dh0lq8r6nh58c"
+JobManager="*uid://lje8fktxu1d2"
 
 [editor_plugins]
 

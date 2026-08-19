@@ -20,10 +20,6 @@ func _place_rails(value: bool):
 	var curve_length = path.curve.get_baked_length()
 	var segment_count = int(curve_length / segment_length)
 	
-	if segment_count > 500:
-		place_rails = false
-		return
-	
 	for child in get_children():
 		if child.name.begins_with(track_id + "_"):
 			child.queue_free()

@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://buxby5sghgxr3"]
+
+[ext_resource type="Script" uid="uid://dp0jjy4edrucc" path="res://Scenes/Trains/depot.gd" id="1_r5iir"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_smhyf"]
+size = Vector3(5, 5, 10)
+
+[node name="Depot" type="Node3D" unique_id=843563333]
+script = ExtResource("1_r5iir")
+
+[node name="DepotArea" type="Area3D" parent="." unique_id=1997401923]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DepotArea" unique_id=1289270761]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, 0)
+shape = SubResource("BoxShape3D_smhyf")
+
+[connection signal="body_entered" from="DepotArea" to="." method="_on_depot_area_body_entered"]
+[connection signal="body_exited" from="DepotArea" to="." method="_on_depot_area_body_exited"]

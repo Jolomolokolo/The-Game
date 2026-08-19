@@ -20,6 +20,8 @@ var just_entered := false
 @export var gear := 0
 @export var current_camera := 1
 @export var is_derailed := false
+@export var spawn_track_name := "Track_A"
+@export var spawn_progress := 100.0
 
 var current_track : Path3D = null
 var current_path_follow : PathFollow3D = null
@@ -112,7 +114,7 @@ func _init_track_from_parent() -> void:
 			for sub in child.get_children():
 				if sub is PathFollow3D:
 					current_path_follow = sub
-					current_progress = 0.0
+					current_progress = spawn_progress
 					break
 			break
 	
