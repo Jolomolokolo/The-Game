@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://c48vpqvuutk58" path="res://Scenes/PCScreen/Apps/bank_app.gd" id="2_n48kc"]
 [ext_resource type="PackedScene" uid="uid://cwviglpbllmyo" path="res://Scenes/PCScreen/Apps/dashboard.tscn" id="5_n48kc"]
 [ext_resource type="PackedScene" uid="uid://eo8tfc76t6le" path="res://Scenes/PCScreen/Apps/transactions.tscn" id="6_034o3"]
-[ext_resource type="Script" uid="uid://cuf5fon76284a" path="res://Scenes/PCScreen/Apps/loans.gd" id="7_d0tov"]
+[ext_resource type="PackedScene" uid="uid://cepb30774o8hu" path="res://Scenes/PCScreen/Apps/loans.tscn" id="7_d0tov"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xvnu6"]
 font_size = 32
@@ -14,14 +14,6 @@ font_color = Color(0.91764706, 0.93333334, 0.95686275, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_smhyf"]
 font_size = 32
-font_color = Color(0.2901961, 0.87058824, 0.5019608, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_034o3"]
-font_size = 24
-font_color = Color(0.5411765, 0.58431375, 0.64705884, 1)
-
-[sub_resource type="LabelSettings" id="LabelSettings_1tco4"]
-font_size = 48
 font_color = Color(0.2901961, 0.87058824, 0.5019608, 1)
 
 [node name="BankApp" type="Control" unique_id=2067482276]
@@ -181,266 +173,16 @@ layout_mode = 2
 visible = false
 layout_mode = 2
 
-[node name="Loans" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=100256506]
+[node name="Loans" parent="VBoxContainer/Content" unique_id=356571338 instance=ExtResource("7_d0tov")]
+visible = false
 layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("7_d0tov")
-
-[node name="SummaryBar" type="HBoxContainer" parent="VBoxContainer/Content/Loans" unique_id=164582609]
-layout_mode = 2
-size_flags_horizontal = 6
-theme_override_constants/separation = 64
-
-[node name="TotalDebt" type="Control" parent="VBoxContainer/Content/Loans/SummaryBar" unique_id=549308416]
-custom_minimum_size = Vector2(300, 130)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Content/Loans/SummaryBar/TotalDebt" unique_id=1981542407]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="TotalDebt" type="Label" parent="VBoxContainer/Content/Loans/SummaryBar/TotalDebt" unique_id=85231120]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 20.0
-offset_bottom = 54.0
-grow_horizontal = 2
-text = "Total Debt"
-label_settings = SubResource("LabelSettings_034o3")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="TotalDebtLabel" type="Label" parent="VBoxContainer/Content/Loans/SummaryBar/TotalDebt" unique_id=1054181571]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -68.5
-offset_top = -13.5
-offset_right = 68.5
-offset_bottom = 53.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "+50065 €"
-label_settings = SubResource("LabelSettings_1tco4")
-
-[node name="MonthlyPayments" type="Control" parent="VBoxContainer/Content/Loans/SummaryBar" unique_id=1857638556]
-custom_minimum_size = Vector2(300, 130)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Content/Loans/SummaryBar/MonthlyPayments" unique_id=775967393]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="MonthlyPayments" type="Label" parent="VBoxContainer/Content/Loans/SummaryBar/MonthlyPayments" unique_id=1194883759]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 20.0
-offset_bottom = 54.0
-grow_horizontal = 2
-text = "Monthly Payments"
-label_settings = SubResource("LabelSettings_034o3")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="MonthlyPaymentsLabel" type="Label" parent="VBoxContainer/Content/Loans/SummaryBar/MonthlyPayments" unique_id=1750094622]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -68.5
-offset_top = -13.5
-offset_right = 68.5
-offset_bottom = 53.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "50065 €"
-label_settings = SubResource("LabelSettings_1tco4")
-
-[node name="CreditScore" type="Control" parent="VBoxContainer/Content/Loans/SummaryBar" unique_id=364058496]
-custom_minimum_size = Vector2(300, 130)
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/Content/Loans/SummaryBar/CreditScore" unique_id=1052824680]
-custom_minimum_size = Vector2(250, 0)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="CreditScore" type="Label" parent="VBoxContainer/Content/Loans/SummaryBar/CreditScore" unique_id=785565422]
-layout_mode = 1
-anchors_preset = 10
-anchor_right = 1.0
-offset_top = 20.0
-offset_bottom = 54.0
-grow_horizontal = 2
-text = "Credit Score"
-label_settings = SubResource("LabelSettings_034o3")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CreditScoreLabel" type="Label" parent="VBoxContainer/Content/Loans/SummaryBar/CreditScore" unique_id=789329839]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -68.5
-offset_top = -13.5
-offset_right = 68.5
-offset_bottom = 53.5
-grow_horizontal = 2
-grow_vertical = 2
-text = "+50065 €"
-label_settings = SubResource("LabelSettings_1tco4")
-
-[node name="SpacerMiddle" type="Control" parent="VBoxContainer/Content/Loans" unique_id=464392241]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Content/Loans" unique_id=190295687]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Spacer" type="Control" parent="VBoxContainer/Content/Loans/HBoxContainer" unique_id=992405153]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.05
-
-[node name="ScrollContainer" type="ScrollContainer" parent="VBoxContainer/Content/Loans/HBoxContainer" unique_id=888927563]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content/Loans/HBoxContainer/ScrollContainer" unique_id=1369469067]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="SpacerMiddle" type="Control" parent="VBoxContainer/Content/Loans/HBoxContainer" unique_id=1346300765]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.05
-
-[node name="NewLoanPanel" type="PanelContainer" parent="VBoxContainer/Content/Loans/HBoxContainer" unique_id=1745512235]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Content/Loans/HBoxContainer/NewLoanPanel" unique_id=829860907]
-layout_mode = 2
-
-[node name="Spacer" type="Control" parent="VBoxContainer/Content/Loans/HBoxContainer/NewLoanPanel/HBoxContainer" unique_id=1524151589]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.05
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content/Loans/HBoxContainer/NewLoanPanel/HBoxContainer" unique_id=463704238]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Spacer" type="Control" parent="VBoxContainer/Content/Loans/HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=1589984354]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.05
-
-[node name="AmountSlider" type="HSlider" parent="VBoxContainer/Content/Loans/HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=502747306]
-layout_mode = 2
-size_flags_vertical = 2
-value = 30.0
-
-[node name="Spacer2" type="Control" parent="VBoxContainer/Content/Loans/HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=1082745240]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.05
-
-[node name="AmountLabel" type="Label" parent="VBoxContainer/Content/Loans/HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=946712781]
-layout_mode = 2
-size_flags_vertical = 6
-horizontal_alignment = 1
-
-[node name="Spacer3" type="Control" parent="VBoxContainer/Content/Loans/HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=1645683704]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.05
-
-[node name="RateLabel" type="Label" parent="VBoxContainer/Content/Loans/HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=728019662]
-layout_mode = 2
-size_flags_vertical = 6
-horizontal_alignment = 1
-
-[node name="Spacer4" type="Control" parent="VBoxContainer/Content/Loans/HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=1747037345]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.05
-
-[node name="MonthlyPreviewLabel" type="Label" parent="VBoxContainer/Content/Loans/HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=1479005271]
-layout_mode = 2
-size_flags_vertical = 6
-horizontal_alignment = 1
-
-[node name="Spacer5" type="Control" parent="VBoxContainer/Content/Loans/HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=1017310229]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.05
-
-[node name="ApplyButton" type="Button" parent="VBoxContainer/Content/Loans/HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=141870238]
-layout_mode = 2
-size_flags_vertical = 3
-text = "Take Loan"
-
-[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Loans/HBoxContainer/NewLoanPanel/HBoxContainer" unique_id=165460371]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.05
-
-[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Loans/HBoxContainer" unique_id=1049272993]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 0.05
-
-[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Loans" unique_id=1065127367]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
 
 [node name="RealEstates" type="HBoxContainer" parent="VBoxContainer/Content" unique_id=2140171858]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content/RealEstates" unique_id=667354142]
 layout_mode = 2
 size_flags_horizontal = 3
-
-[node name="Label" type="Label" parent="VBoxContainer/Content/RealEstates/VBoxContainer" unique_id=1394039130]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 6
-text = "REALLLLL ESTATESSSS"
 
 [connection signal="pressed" from="VBoxContainer/TabBar/TabClose" to="." method="_on_tab_close_pressed"]

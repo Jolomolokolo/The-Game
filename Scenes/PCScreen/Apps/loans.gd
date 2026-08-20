@@ -35,8 +35,16 @@ func _refresh_all() -> void:
 	monthly_payments_value.text = NumberFormat.format(GameData.get_total_monthly_payments()) + " /mo"
 	credit_score_value.text = str(GameData.get_credit_score())
 	
-	amount_slider.max_value = GameData.get_max_loan_amount()
-	_update_new_loan_preview(amount_slider.value)
+	if GameData.loans.size() >= GameData.MAX_LOANS:
+		amount_slider.editable = false
+		apply_button.disabled = true
+		amount_label.text = "Maximum of %d loans reached" % GameData.MAX_LOANS
+		rate_label.text = ""
+		monthly_preview_label.text = "Pay off any existing loans to borrow more"
+	else:
+		amount_slider.editable = true
+		amount_slider.max_value = GameData.get_max_loan_amount()
+		_update_new_loan_preview(amount_slider.value)
 	
 	_rebuild_loan_list()
 	
@@ -124,5 +132,4 @@ func _on_apply_pressed() -> void:
 	var success = GameData.apply_for_loan(amount_slider.value, TERM_MONTHS)
 	if success:
 		amount_slider.value = 0
-	
 	

@@ -31,6 +31,9 @@ func _ready() -> void:
 		tab_buttons[i].pressed.connect(_on_tab_pressed.bind(i))
 	_on_tab_pressed(0)
 	
+	cash_label.text = NumberFormat.format(GameData.cash)
+	cash_label_dashboard.text = NumberFormat.format(GameData.cash)
+	
 func _on_tab_pressed(index: int) -> void:
 	for i in tab_buttons.size():
 		tab_buttons[i].button_pressed = (i == index)

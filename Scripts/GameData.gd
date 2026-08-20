@@ -36,10 +36,14 @@ var net_worth_history : Array[float] = []
 var cash_history : Array[float] = []
 var debt_history : Array[float] = []
 var debt : float = 0.0
+var credit_score_bonus := 0
 
 var transactions : Array[Dictionary] = []
 var loans : Array[Dictionary] = []
 const MAX_TRANSACTIONS := 500
+const MAX_LOANS := 5
+const CREDIT_SCORE_BONUS_PER_PAYOFF := 15
+const CREDIT_SCORE_BONUS_CAP := 120
 
 func apply_preset(preset: Preset) -> void:
 	if preset == Preset.CUSTOM:
@@ -47,12 +51,12 @@ func apply_preset(preset: Preset) -> void:
 	var data: Dictionary = PRESETS[preset]
 	start_cash = data["start_cash"]
 	
-func apply_custom_preset(cash: int, health: int) -> void:
-	start_cash = cash
+func apply_custom_preset(custom_cash: int, health: int) -> void:
+	start_cash = custom_cash
 	start_health = health
 	
 func _ready() -> void:
-	cash = start_cash
+	add_cash(start_cash, "Starting capital")
 	
 func add_cash(amount: int, reason: String = "") -> void:
 	if amount == 0:
@@ -84,7 +88,7 @@ func get_transactions_for_month(month: int, year: int) -> Array:
 	return transactions.filter(func(t): return t["month"] == month and t["year"] == year)
 	
 func get_net_worth() -> float:
-	return cash + stocks_value + real_estate_value + company_value - debt
+	return cash + stocks_value + real_estate_value + company_value - get_total_debt()
 	
 func get_total_debt() -> float:
 	var total := 0.0
@@ -100,35 +104,50 @@ func get_total_monthly_payments() -> float:
 	
 func get_credit_score() -> int:
 	var net_worth = get_net_worth()
-	var debt = get_total_debt()
+	debt = get_total_debt()
 	
 	var base_score = 580
-	base_score += int(clamp(net_worth / 1000.0, 0, 200))
+	base_score += int(clamp(net_worth / 800.0, 0, 220))
 	
 	if net_worth > 0:
 		var debt_ratio = debt / max(net_worth, 1.0)
-		base_score -= int(clamp(debt_ratio * 150.0, 0, 150))
+		base_score -= int(clamp(debt_ratio * 180.0, 0, 180))
+	elif debt > 0:
+		base_score -= 100
+	
+	base_score += credit_score_bonus
 	
 	return clampi(base_score, 300, 850)
 	
 func get_max_loan_amount() -> float:
+	if loans.size() >= MAX_LOANS:
+		return 0.0
+	
 	var score = get_credit_score()
 	var score_factor = float(score - 300) / (850.0 - 300.0)
-	return max(cash, get_net_worth() * 0.5) * (0.5 + score_factor * 2.0)
+	
+	var collateral = stocks_value + real_estate_value + company_value
+	var base_capacity = 2000.0 + collateral * 0.8 + max(get_net_worth(), 0.0) * 1.5
+	
+	return base_capacity * (0.4 * score_factor * 2.2)
 	
 func get_interest_rate_for_amount(amount: float) -> float:
 	var score = get_credit_score()
-	var base_rate := 0.15
 	var score_factor = float(score - 300) / (850.0 - 300.0)
-	var rate = lerp(base_rate, 0.03, score_factor)
+	
+	var rate = lerp(0.35, 0.08, score_factor)
 	
 	var max_amount = get_max_loan_amount()
 	if max_amount > 0:
-		rate += (amount / max_amount)
+		rate += (amount / max_amount) * 0.1
+	
+	rate += loans.size() * 0.2
 	
 	return rate
 	
 func apply_for_loan(amount: float, term_months: int) -> bool:
+	if loans.size() >= MAX_LOANS:
+		return false
 	if amount <= 0 or amount > get_max_loan_amount():
 		return false
 	
@@ -161,12 +180,12 @@ func _process_loan_payments() -> void:
 		loan["remaining"] -= payment
 		loan["months_paid"] += 1
 		add_cash(-int(payment), "Loan Payment: %s" % loan["name"])
-		
 		if loan["remaining"] <= 0.01:
 			paid_off.append(loan)
 	
 	for loan in paid_off:
 		loan.erase(loan)
+		credit_score_bonus = min(credit_score_bonus + CREDIT_SCORE_BONUS_PER_PAYOFF, CREDIT_SCORE_BONUS_CAP)
 		loan_paid_off.emit(loan)
 	
 func advance_month() -> void:

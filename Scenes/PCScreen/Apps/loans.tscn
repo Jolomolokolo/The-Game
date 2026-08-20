@@ -1,0 +1,257 @@
+[gd_scene format=3 uid="uid://cepb30774o8hu"]
+
+[ext_resource type="Script" uid="uid://cuf5fon76284a" path="res://Scenes/PCScreen/Apps/loans.gd" id="1_8xjyi"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_034o3"]
+font_size = 24
+font_color = Color(0.5411765, 0.58431375, 0.64705884, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_1tco4"]
+font_size = 48
+font_color = Color(0.2901961, 0.87058824, 0.5019608, 1)
+
+[node name="Loans" type="VBoxContainer" unique_id=356571338]
+size_flags_horizontal = 3
+script = ExtResource("1_8xjyi")
+
+[node name="SummaryBar" type="HBoxContainer" parent="." unique_id=973244208]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/separation = 64
+
+[node name="TotalDebt" type="Control" parent="SummaryBar" unique_id=1068445830]
+custom_minimum_size = Vector2(300, 130)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="SummaryBar/TotalDebt" unique_id=404223439]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TotalDebt" type="Label" parent="SummaryBar/TotalDebt" unique_id=268918916]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 54.0
+grow_horizontal = 2
+text = "Total Debt"
+label_settings = SubResource("LabelSettings_034o3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TotalDebtLabel" type="Label" parent="SummaryBar/TotalDebt" unique_id=353997454]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.5
+offset_top = -13.5
+offset_right = 68.5
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "+50065 €"
+label_settings = SubResource("LabelSettings_1tco4")
+
+[node name="MonthlyPayments" type="Control" parent="SummaryBar" unique_id=1872415816]
+custom_minimum_size = Vector2(300, 130)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="SummaryBar/MonthlyPayments" unique_id=928148942]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MonthlyPayments" type="Label" parent="SummaryBar/MonthlyPayments" unique_id=321699103]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 54.0
+grow_horizontal = 2
+text = "Monthly Payments"
+label_settings = SubResource("LabelSettings_034o3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MonthlyPaymentsLabel" type="Label" parent="SummaryBar/MonthlyPayments" unique_id=1504726234]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.5
+offset_top = -13.5
+offset_right = 68.5
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "50065 €"
+label_settings = SubResource("LabelSettings_1tco4")
+
+[node name="CreditScore" type="Control" parent="SummaryBar" unique_id=1745817955]
+custom_minimum_size = Vector2(300, 130)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="SummaryBar/CreditScore" unique_id=2093508138]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CreditScore" type="Label" parent="SummaryBar/CreditScore" unique_id=16800905]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 20.0
+offset_bottom = 54.0
+grow_horizontal = 2
+text = "Credit Score"
+label_settings = SubResource("LabelSettings_034o3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CreditScoreLabel" type="Label" parent="SummaryBar/CreditScore" unique_id=1142078632]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -68.5
+offset_top = -13.5
+offset_right = 68.5
+offset_bottom = 53.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "+50065 €"
+label_settings = SubResource("LabelSettings_1tco4")
+
+[node name="SpacerMiddle" type="Control" parent="." unique_id=336056452]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=122500919]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer" type="Control" parent="HBoxContainer" unique_id=2024042958]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer" unique_id=216979637]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/ScrollContainer" unique_id=204842939]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SpacerMiddle" type="Control" parent="HBoxContainer" unique_id=749429729]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="NewLoanPanel" type="PanelContainer" parent="HBoxContainer" unique_id=2137979510]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/NewLoanPanel" unique_id=1012595675]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="HBoxContainer/NewLoanPanel/HBoxContainer" unique_id=594601527]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/NewLoanPanel/HBoxContainer" unique_id=1278704696]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Spacer" type="Control" parent="HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=680224102]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="AmountSlider" type="HSlider" parent="HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=45597299]
+layout_mode = 2
+size_flags_vertical = 2
+value = 30.0
+
+[node name="Spacer2" type="Control" parent="HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=91193167]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="AmountLabel" type="Label" parent="HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=35941085]
+layout_mode = 2
+size_flags_vertical = 6
+horizontal_alignment = 1
+
+[node name="Spacer3" type="Control" parent="HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=1173865511]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="RateLabel" type="Label" parent="HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=772157415]
+layout_mode = 2
+size_flags_vertical = 6
+horizontal_alignment = 1
+
+[node name="Spacer4" type="Control" parent="HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=1129032908]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="MonthlyPreviewLabel" type="Label" parent="HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=1306874366]
+layout_mode = 2
+size_flags_vertical = 6
+horizontal_alignment = 1
+
+[node name="Spacer5" type="Control" parent="HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=119036241]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="ApplyButton" type="Button" parent="HBoxContainer/NewLoanPanel/HBoxContainer/VBoxContainer" unique_id=1426650658]
+layout_mode = 2
+size_flags_vertical = 3
+text = "Take Loan"
+
+[node name="SpacerEnd" type="Control" parent="HBoxContainer/NewLoanPanel/HBoxContainer" unique_id=1347636117]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="SpacerEnd" type="Control" parent="HBoxContainer" unique_id=421391783]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="SpacerEnd" type="Control" parent="." unique_id=710306027]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
