@@ -1,0 +1,358 @@
+[gd_scene format=3 uid="uid://b0ywmyljh0smw"]
+
+[ext_resource type="Theme" uid="uid://d0fdma2upnxkw" path="res://Scenes/PCScreen/main_theme.tres" id="1_v2oey"]
+[ext_resource type="Texture2D" uid="uid://btxktcwgg0rcx" path="res://icons/game_icons_white/home.png" id="2_3wnya"]
+[ext_resource type="Script" uid="uid://clhro8afr4gg6" path="res://Scenes/PCScreen/Apps/job_app.gd" id="2_lkqhq"]
+[ext_resource type="Texture2D" uid="uid://diw4xyhhwlv36" path="res://icons/game_icons_white/cross.png" id="3_lkqhq"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_xvnu6"]
+font_size = 32
+font_color = Color(0.91764706, 0.93333334, 0.95686275, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_v2oey"]
+font_size = 18
+font_color = Color(0.5411765, 0.58431375, 0.64705884, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_3wnya"]
+font_size = 32
+font_color = Color(0.2901961, 0.87058824, 0.5019608, 1)
+
+[node name="JobApp" type="Control" unique_id=2067482276]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_v2oey")
+script = ExtResource("2_lkqhq")
+
+[node name="BG" type="ColorRect" parent="." unique_id=1877027765]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.043137256, 0.05882353, 0.09019608, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=759665436]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 16
+
+[node name="Spacer" type="Control" parent="VBoxContainer" unique_id=2065332666]
+layout_mode = 2
+
+[node name="TopBar" type="PanelContainer" parent="VBoxContainer" unique_id=1521986195]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/TopBar" unique_id=439917726]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 300
+
+[node name="HomeButton" type="TextureButton" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=28911461]
+custom_minimum_size = Vector2(100, 100)
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = ExtResource("2_3wnya")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="CompanyName" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=725916849]
+layout_mode = 2
+text = "The Jolomolokolo Company"
+label_settings = SubResource("LabelSettings_xvnu6")
+
+[node name="CloseButton" type="TextureButton" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1416587370]
+custom_minimum_size = Vector2(100, 100)
+custom_maximum_size = Vector2(50, 50)
+layout_mode = 2
+size_flags_horizontal = 8
+texture_normal = ExtResource("3_lkqhq")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="StatusBar" type="PanelContainer" parent="VBoxContainer" unique_id=723366787]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/StatusBar" unique_id=258050417]
+layout_mode = 2
+
+[node name="Stats" type="HBoxContainer" parent="VBoxContainer/StatusBar/HBoxContainer" unique_id=1122445208]
+custom_minimum_size = Vector2(300, 60)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 32
+
+[node name="ActiveJobs" type="Control" parent="VBoxContainer/StatusBar/HBoxContainer/Stats" unique_id=139661107]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/StatusBar/HBoxContainer/Stats/ActiveJobs" unique_id=882292926]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ActiveJobs" type="Label" parent="VBoxContainer/StatusBar/HBoxContainer/Stats/ActiveJobs" unique_id=1617827222]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 34.0
+grow_horizontal = 2
+size_flags_vertical = 1
+text = "Active Jobs"
+label_settings = SubResource("LabelSettings_v2oey")
+horizontal_alignment = 1
+
+[node name="ActiveJobsLabel" type="Label" parent="VBoxContainer/StatusBar/HBoxContainer/Stats/ActiveJobs" unique_id=626278498]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "7/12"
+label_settings = SubResource("LabelSettings_3wnya")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="OpenOrders" type="Control" parent="VBoxContainer/StatusBar/HBoxContainer/Stats" unique_id=799744091]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/StatusBar/HBoxContainer/Stats/OpenOrders" unique_id=527317491]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OpenOrders" type="Label" parent="VBoxContainer/StatusBar/HBoxContainer/Stats/OpenOrders" unique_id=660402847]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 34.0
+grow_horizontal = 2
+size_flags_vertical = 1
+text = "Open orders"
+label_settings = SubResource("LabelSettings_v2oey")
+horizontal_alignment = 1
+
+[node name="OpenOrdersLabel" type="Label" parent="VBoxContainer/StatusBar/HBoxContainer/Stats/OpenOrders" unique_id=1467185234]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "5"
+label_settings = SubResource("LabelSettings_3wnya")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EmployeesCount" type="Control" parent="VBoxContainer/StatusBar/HBoxContainer/Stats" unique_id=82647797]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/StatusBar/HBoxContainer/Stats/EmployeesCount" unique_id=678721853]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EmployeesCount" type="Label" parent="VBoxContainer/StatusBar/HBoxContainer/Stats/EmployeesCount" unique_id=707217256]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 34.0
+grow_horizontal = 2
+size_flags_vertical = 1
+text = "Employees"
+label_settings = SubResource("LabelSettings_v2oey")
+horizontal_alignment = 1
+
+[node name="EmployeesCountLabel" type="Label" parent="VBoxContainer/StatusBar/HBoxContainer/Stats/EmployeesCount" unique_id=439851752]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "18"
+label_settings = SubResource("LabelSettings_3wnya")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LaborCost" type="Control" parent="VBoxContainer/StatusBar/HBoxContainer/Stats" unique_id=1095911153]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="VBoxContainer/StatusBar/HBoxContainer/Stats/LaborCost" unique_id=1646518906]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LaborCost" type="Label" parent="VBoxContainer/StatusBar/HBoxContainer/Stats/LaborCost" unique_id=1354739634]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 34.0
+grow_horizontal = 2
+size_flags_vertical = 1
+text = "Employees"
+label_settings = SubResource("LabelSettings_v2oey")
+horizontal_alignment = 1
+
+[node name="LaborCostLabel" type="Label" parent="VBoxContainer/StatusBar/HBoxContainer/Stats/LaborCost" unique_id=1544307225]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -45.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 4
+text = "24k €/Mon"
+label_settings = SubResource("LabelSettings_3wnya")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TabBar" type="HBoxContainer" parent="VBoxContainer" unique_id=210746233]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme_override_constants/separation = 32
+
+[node name="Spacer" type="Control" parent="VBoxContainer/TabBar" unique_id=1638942195]
+custom_minimum_size = Vector2(32, 0)
+layout_mode = 2
+
+[node name="TabJobs" type="Button" parent="VBoxContainer/TabBar" unique_id=1036542453]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+text = "Jobs"
+
+[node name="TabEmployees" type="Button" parent="VBoxContainer/TabBar" unique_id=769393928]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+text = "Employees"
+
+[node name="TabCalender" type="Button" parent="VBoxContainer/TabBar" unique_id=1705030177]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+text = "Calender"
+
+[node name="TabSalaries" type="Button" parent="VBoxContainer/TabBar" unique_id=849728019]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+text = "Salaries"
+
+[node name="TabKPI" type="Button" parent="VBoxContainer/TabBar" unique_id=440117370]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+text = "KPI"
+
+[node name="SpacerMiddle" type="Control" parent="VBoxContainer/TabBar" unique_id=1301512313]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TabClose" type="Button" parent="VBoxContainer/TabBar" unique_id=1342666942]
+layout_mode = 2
+size_flags_horizontal = 0
+offset_transform_enabled = true
+text = "Close"
+
+[node name="Content" type="HBoxContainer" parent="VBoxContainer" unique_id=1717560882]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Jobs" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=681063937]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Content/Jobs" unique_id=1221999709]
+layout_mode = 2
+text = "JOBSSSSSS"
+
+[node name="Employees" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=1608536925]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Content/Employees" unique_id=769843942]
+layout_mode = 2
+text = "Employeeees
+"
+
+[node name="Calender" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=2123043493]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Content/Calender" unique_id=279037837]
+layout_mode = 2
+text = "CALENDERRRRR"
+
+[node name="Salaries" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=431735424]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Content/Salaries" unique_id=471465949]
+layout_mode = 2
+text = "SALARIESSSS
+"
+
+[node name="KPI" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=1430622541]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Content/KPI" unique_id=1728328209]
+layout_mode = 2
+text = "KPIIIIII"
+
+[connection signal="pressed" from="VBoxContainer/TopBar/HBoxContainer/HomeButton" to="." method="_on_home_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TopBar/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TabBar/TabClose" to="." method="_on_tab_close_pressed"]

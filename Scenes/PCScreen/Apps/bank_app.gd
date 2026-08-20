@@ -21,7 +21,6 @@ signal _return_desktop
 @onready var cash_label_dashboard = $VBoxContainer/Content/Dashboard/LeftColumn/SummaryRow/Cash/CashLabel
 @onready var monthlyflow_label_dashboard = $VBoxContainer/Content/Dashboard/LeftColumn/SummaryRow/MonthlyFlow/MonthlyFlowLabel
 @onready var chart = $VBoxContainer/Content/Dashboard/LeftColumn/HBoxContainer/ChartPanel/FinancialChart/VBoxContainer/GraphArea
-#@onready var transaction_list_container = $VBoxContainer/Content/Transactions/VBoxContainer
 
 func _ready() -> void:
 	GameData.finances_updated.connect(_on_gamedata_finances_updated)
@@ -51,6 +50,13 @@ func _on_transaction_added(transaction: Dictionary) -> void:
 	# NETWORTH LABEL UND ALLE ANDEREN LABELS HIER DANN AKTUALISIEREN
 	cash_label.text = NumberFormat.format(GameData.cash)
 	cash_label_dashboard.text = NumberFormat.format(GameData.cash)
-
+	
 func _on_tab_close_pressed() -> void:
 	_return_desktop.emit()
+	
+func _on_close_button_pressed() -> void:
+	_return_desktop.emit()
+	
+func _on_home_button_pressed() -> void:
+	_return_desktop.emit()
+	

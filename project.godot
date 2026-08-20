@@ -31,7 +31,7 @@ JobManager="*uid://lje8fktxu1d2"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot_super-wakatime/plugin.cfg", "res://addons/lowpolyterrain/plugin.cfg", "res://addons/phantom_camera/plugin.cfg")
 
 [global_group]
 

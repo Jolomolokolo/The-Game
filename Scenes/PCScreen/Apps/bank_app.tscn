@@ -58,10 +58,14 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 300
 
-[node name="HomeButton" type="TextureRect" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1412433889]
+[node name="HomeButton" type="TextureButton" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=1896808847]
+custom_minimum_size = Vector2(100, 100)
 custom_maximum_size = Vector2(50, 50)
 layout_mode = 2
-texture = ExtResource("2_2hs35")
+size_flags_horizontal = 8
+texture_normal = ExtResource("2_2hs35")
+ignore_texture_size = true
+stretch_mode = 0
 
 [node name="CompanyName" type="Label" parent="VBoxContainer/TopBar/HBoxContainer" unique_id=725916849]
 layout_mode = 2
@@ -166,7 +170,6 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Dashboard" parent="VBoxContainer/Content" unique_id=2115363927 instance=ExtResource("5_n48kc")]
-visible = false
 layout_mode = 2
 
 [node name="Transactions" parent="VBoxContainer/Content" unique_id=1867948936 instance=ExtResource("6_034o3")]
@@ -178,6 +181,7 @@ visible = false
 layout_mode = 2
 
 [node name="RealEstates" type="HBoxContainer" parent="VBoxContainer/Content" unique_id=2140171858]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 
@@ -185,4 +189,6 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 3
 
+[connection signal="pressed" from="VBoxContainer/TopBar/HBoxContainer/HomeButton" to="." method="_on_home_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/TopBar/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabBar/TabClose" to="." method="_on_tab_close_pressed"]

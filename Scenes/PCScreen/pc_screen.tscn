@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cib5so1p1205k" path="res://Scenes/PCScreen/pc_screen.gd" id="1_btyii"]
 [ext_resource type="PackedScene" uid="uid://q10niop0b130" path="res://Scenes/PCScreen/Apps/bank_app.tscn" id="2_gev3q"]
+[ext_resource type="PackedScene" uid="uid://b0ywmyljh0smw" path="res://Scenes/PCScreen/Apps/job_app.tscn" id="3_n0mqw"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_btjug"]
 font_size = 24
@@ -28,11 +29,6 @@ grow_vertical = 2
 [node name="Desktop" type="VBoxContainer" parent="PanelContainer" unique_id=262965594]
 layout_mode = 2
 
-[node name="Spacer" type="Control" parent="PanelContainer/Desktop" unique_id=780815399]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
-
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Desktop" unique_id=991263977]
 layout_mode = 2
 size_flags_vertical = 3
@@ -45,8 +41,24 @@ size_flags_stretch_ratio = 0.05
 [node name="BankApp" type="Button" parent="PanelContainer/Desktop/HBoxContainer" unique_id=711978678]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 0
+size_flags_vertical = 4
 text = "BANK"
+
+[node name="SpacerMiddle" type="Control" parent="PanelContainer/Desktop/HBoxContainer" unique_id=182095860]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="JobApp" type="Button" parent="PanelContainer/Desktop/HBoxContainer" unique_id=1116428387]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 4
+text = "JOBS"
+
+[node name="SpacerMiddle2" type="Control" parent="PanelContainer/Desktop/HBoxContainer" unique_id=1301260401]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
 
 [node name="ReturnButton" type="Button" parent="PanelContainer/Desktop/HBoxContainer" unique_id=449131706]
 layout_mode = 2
@@ -74,6 +86,12 @@ size_flags_horizontal = 3
 visible = false
 layout_mode = 2
 
+[node name="JobApp" parent="PanelContainer" unique_id=1009000729 instance=ExtResource("3_n0mqw")]
+visible = false
+layout_mode = 2
+
 [connection signal="pressed" from="PanelContainer/Desktop/HBoxContainer/BankApp" to="." method="_on_bank_app_pressed"]
+[connection signal="pressed" from="PanelContainer/Desktop/HBoxContainer/JobApp" to="." method="_on_job_app_pressed"]
 [connection signal="pressed" from="PanelContainer/Desktop/HBoxContainer/ReturnButton" to="." method="_on_return_button_pressed"]
 [connection signal="_return_desktop" from="PanelContainer/BankApp" to="." method="_on_bank_app_return_desktop"]
+[connection signal="_return_desktop" from="PanelContainer/JobApp" to="." method="_on_job_app__return_desktop"]
