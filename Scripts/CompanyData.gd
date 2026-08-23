@@ -2,14 +2,10 @@ extends Node
 
 signal employee_hired(employee: Dictionary)
 signal employee_fired(employee: Dictionary)
-signal job_created(job: Dictionary)
-signal job_completed(job: Dictionary)
-signal job_failed(job: Dictionary)
 signal assignment_changed
 signal company_data_updated
 
 var employees : Array[Dictionary] = []
-var jobs: Array[Dictionary] = []
 
 var max_employees := 12 # LATER UPGRADEBEL and start only with 2 or even 0 employees
 
@@ -37,8 +33,7 @@ func fire_employee(employee_id: String) -> void:
 	if employee == null:
 		return
 	if employee["assigned_job_id"] != "":
-		unassign_job(employee["assigned_job_id"])
-	
+		JobManager.release_job_for_employee(employee_id)
 	employees.erase(employee)
 	employee_fired.emit(employee)
 	company_data_updated.emit()
@@ -68,53 +63,8 @@ func is_employee_off(employee_id: String, month: int, year: int, day: int) -> bo
 			return true
 	return false
 	
-	
-	
-# EVTL.: HIER AUFTRAGE ERSTELLUNG
-	
-	
-	
-func assign_employee_to_job(employee_id: String, job_id: String) -> bool:
-	var employee = get_employee(employee_id)
-	var job = get_job(job_id)
-	if employee.is_empty() or job.is_empty():
-		return false
-	if employee["assigned_job_id"] != "" or job["assigned_employee_id"] != "":
-		return false
-	
-	employee["assigned_job_id"] = job_id
-	job["assigned_employee_id"] = employee_id
-	job["status"] = "in_progress"
-	assignment_changed.emit()
-	company_data_updated.emit()
-	return true
-	
-func unassign_job(job_id: String) -> void:
-	var job = get_job(job_id)
-	if job.is_empty():
-		return
-	if job["assigned_employee_id"] != "":
-		var employee = get_employee(job["assigned_employee_id"])
-		if not employee.is_empty():
-			employee["assigned_job_id"] = ""
-	job["assigned_employee_id"] = ""
-	job["status"] = "open"
-	job["progress"] = 0.0
-	assignment_changed.emit()
-	company_data_updated.emit()
-	
-func get_job(job_id: String) -> Dictionary:
-	for j in jobs:
-		if j["id"] == job_id:
-			return j
-	return {}
-	
-func get_jobs_by_status(status: String) -> Array:
-	return jobs.filter(func(j): return j["status"] == status)
-	
 func process_month(month: int, year: int) -> void:
 	_pay_salaries()
-	_progress_jobs(month, year)
 	_update_kpis()
 	
 func _pay_salaries() -> void:
@@ -124,29 +74,7 @@ func _pay_salaries() -> void:
 	if total > 0:
 		GameData.add_cash(-int(total), "Employee Salaries")
 	
-func _progress_jobs(month: int, year: int) -> void:
-	var to_complete : Array[Dictionary] = []
-	var to_fail : Array[Dictionary] = []
-	
-	for job  in jobs:
-		if job["status"] != "in_progress":
-			continue
-		var employee = get_employee(job["assigned_job_id"])
-		if employee.is_empty():
-			continue
-		
-		var effectiveness= clampf(employee["performance"] / max(job["required_performance"], 1.0), 0.2, 2.0)
-		job["progress"] = clampf(job["progress"] + 0.25 * effectiveness, 0.0, 1.0)
-		
-		var deadline_passed = (year > job["deadline_year"] or year == job["deadline_year"] and month > job["deadline_month"])
-		
-		if job["progress"] >= 1.0:
-			to_complete.append(job)
-		elif deadline_passed:
-			to_fail.append(job)
-			
-	for job in to_complete:
-		job["status"] = "completed"
-		GameData.add_cash(int(job["reward"]), "Job Completed %s" % job["title"])
-		
-	
+func _update_kpis() -> void:
+	for e in employees:
+		e["performance"] = clampf(e["performance"] + randf_range(-2.0, 3.0), 0, 100)
+		e["kpi_history"].append(e["performance"])
