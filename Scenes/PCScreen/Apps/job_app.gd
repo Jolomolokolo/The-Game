@@ -36,3 +36,4 @@ func _on_home_button_pressed() -> void:
 
 func _on_close_button_pressed() -> void:
 	_return_desktop.emit()
+	

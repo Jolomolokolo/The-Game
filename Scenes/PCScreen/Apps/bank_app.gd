@@ -60,3 +60,5 @@ func _on_close_button_pressed() -> void:
 func _on_home_button_pressed() -> void:
 	_return_desktop.emit()
 	
+func _on_button_pressed() -> void:
+	GameData.advance_month()

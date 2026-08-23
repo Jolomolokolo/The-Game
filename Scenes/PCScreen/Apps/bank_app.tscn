@@ -191,4 +191,5 @@ size_flags_horizontal = 3
 
 [connection signal="pressed" from="VBoxContainer/TopBar/HBoxContainer/HomeButton" to="." method="_on_home_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TopBar/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/StatusBar/HBoxContainer/NextMonthButton/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TabBar/TabClose" to="." method="_on_tab_close_pressed"]
