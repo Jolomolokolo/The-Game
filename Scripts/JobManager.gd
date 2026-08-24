@@ -185,6 +185,14 @@ func get_available_trains() -> Array:
 		if tid != "":
 			used_ids.append(tid)
 	
+
+	var all_trains_in_group = get_tree().get_nodes_in_group("train")
+	print("DEBUG - Trains in Gruppe 'train': ", all_trains_in_group.size())
+	for t in all_trains_in_group:
+		print("  - Name: ", t.name, " | entity_id: '", t.get("entity_id"), "'")
+
+
+
 	var result := []
 	for train in get_tree().get_nodes_in_group("train"):
 		var tid = train.get("entity_id") if train.get("entity_id") != null else ""
