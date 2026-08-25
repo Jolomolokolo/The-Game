@@ -2,8 +2,8 @@ extends Node
 
 signal employee_hired(employee: Dictionary)
 signal employee_fired(employee: Dictionary)
-signal assignment_changed
 signal company_data_updated
+signal assignment_changed
 
 var employees : Array[Dictionary] = []
 
@@ -63,7 +63,7 @@ func is_employee_off(employee_id: String, month: int, year: int, day: int) -> bo
 			return true
 	return false
 	
-func process_month(month: int, year: int) -> void:
+func process_month(_month: int, _year: int) -> void:
 	_pay_salaries()
 	_update_kpis()
 	

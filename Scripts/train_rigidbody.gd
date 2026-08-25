@@ -101,38 +101,65 @@ func _ready() -> void:
 func _init_track_from_parent() -> void:
 	_rail_network = _find_rail_network()
 	print("_rail_network gefunden: ", _rail_network)
-	if _rail_network:
-		print("_rail_network Pfad: ", _rail_network.get_path())
-		print("_rail_network Kinder: ", _rail_network.get_children())
+	#if _rail_network:
+	#	print("_rail_network Pfad: ", _rail_network.get_path())
+	#	print("_rail_network Kinder: ", _rail_network.get_children())
 	if not _rail_network:
 		return
 	
-	for child in _rail_network.get_children():
-		if child is Path3D:
-			current_track = child
-			current_track_name = child.name
-			for sub in child.get_children():
-				if sub is PathFollow3D:
-					current_path_follow = sub
-					current_progress = spawn_progress
-					break
-			break
+	current_track = _rail_network.get_node_or_null(spawn_track_name)
 	
-	#
-	print("current_track: ", current_track)
-	print("current_path_follow: ", current_path_follow)
-	#
+	if current_track == null:
+		for child in _rail_network.get_children():
+			if child is Path3D and child.name == spawn_track_name:
+				current_track = child
+				break
 	
-	print("Train started on Track: %s" % current_track_name)
+	if current_track == null:
+		push_error("Train: Spawn-Track not found: %s" % spawn_track_name)
+		return
+	
+	current_track_name = current_track.name
+	
+	current_path_follow = PathFollow3D.new()
+	current_path_follow.name = "Pathfollow_Train_%s" % entity_id
+	
+	current_path_follow.loop = false
+	
+	current_track.add_child(current_path_follow)
+	
+	current_progress = clampf(spawn_progress, 0.0, current_track.curve.get_baked_length())
+	
+	current_path_follow.progress = current_progress
+	
+	print("Train started on Track: %s | Progress: %f | Own Pathfollow: %s" % [current_track_name, current_progress, current_path_follow.name])
 	
 func _create_anchor() -> void:
-	# Maybe Progress ?
+	if is_instance_valid(_anchor):
+		_anchor.queue_free()
+		_anchor = null
+	
+	if current_path_follow == null:
+		return
+	current_path_follow.progress = current_progress
+	
 	_anchor = Marker3D.new()
-	_anchor.name = "TrainAnchor"
-	if current_path_follow:
-		current_path_follow.add_child(_anchor)
-	if _anchor:
-		global_position = _anchor.global_position
+	_anchor.name = "TrainAnchor_%s" % entity_id
+	
+	current_path_follow.add_child(_anchor)
+	
+	global_position = _anchor.global_position
+	
+	var track_forward = -_anchor.global_transform.basis.z
+	
+	if track_forward.length() > 0.01:
+		global_basis = Basis.looking_at(
+			track_forward.normalized(),
+			Vector3.UP
+		)
+	
+	linear_velocity = Vector3.ZERO
+	angular_velocity = Vector3.ZERO
 	
 func _physics_process(delta: float) -> void:
 	if is_derailed:

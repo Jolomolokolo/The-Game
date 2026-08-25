@@ -2289,5 +2289,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -29.269089, 2.9999053, -87.53
 transform = Transform3D(0.21939431, 0, 0.97563636, 0, 1.0000001, 0, -0.9756364, 0, 0.21939431, -11.049319, 0.9038146, -85.992546)
 collision_mask = 0
 
-[node name="Depot" parent="RailNetwork" unique_id=843563333 instance=ExtResource("43_qnost")]
+[node name="DepotA" parent="RailNetwork" unique_id=843563333 instance=ExtResource("43_qnost")]
 transform = Transform3D(0.2475301, 0, 0.96888024, 0, 1, 0, -0.96888024, 0, 0.2475301, -7.875911, 0, -85.16917)
+
+[node name="TrainMy" parent="RailNetwork" unique_id=935327627 instance=ExtResource("33_jq2sk")]
+transform = Transform3D(0.21939431, 0, 0.97563636, 0, 1.0000001, 0, -0.9756364, 0, 0.21939431, -11.049319, 0.9038146, -85.992546)
+collision_mask = 0
+spawn_progress = 50.0
+
+[node name="DepotB" parent="RailNetwork" unique_id=2089211152 instance=ExtResource("43_qnost")]
+transform = Transform3D(-0.67940336, 0, 0.7337651, 0, 1, 0, -0.7337651, 0, -0.67940336, -59.120647, 0, -79.81779)
+depot_name = "Depot B"
+depot_id = "depot_b"
+required_progress_min = 50.0
+required_progress_max = 70.0

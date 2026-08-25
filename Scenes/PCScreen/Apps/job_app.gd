@@ -5,7 +5,7 @@ signal _return_desktop
 @onready var tab_buttons : Array[Button] = [
 	$VBoxContainer/TabBar/TabJobs,
 	$VBoxContainer/TabBar/TabEmployees,
-	$VBoxContainer/TabBar/TabCalender,
+	$VBoxContainer/TabBar/TabCalendar,
 	$VBoxContainer/TabBar/TabSalaries,
 	$VBoxContainer/TabBar/TabKPI
 ]
@@ -13,7 +13,7 @@ signal _return_desktop
 @onready var tab_pages : Array = [
 	$VBoxContainer/Content/Jobs,
 	$VBoxContainer/Content/Employees,
-	$VBoxContainer/Content/Calender,
+	$VBoxContainer/Content/Calendar,
 	$VBoxContainer/Content/Salaries,
 	$VBoxContainer/Content/KPI
 ]

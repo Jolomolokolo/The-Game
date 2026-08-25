@@ -2,7 +2,7 @@ extends Node
 
 signal job_completed(job)
 signal job_accepted(job)
-signal job_failed(job)
+signal job_failed(job) # Adden -> also wenn Deadline abgelaufen ist
 signal jobs_updated
 
 enum JobStatus { AVAILABLE, ACTIVE, COMPLETED, FAILED}

@@ -311,15 +311,12 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Jobs" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=681063937]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("5_lkqhq")
 
 [node name="StatusBar" type="HBoxContainer" parent="VBoxContainer/Content/Jobs" unique_id=83910848]
-layout_mode = 2
-
-[node name="Spacer" type="Control" parent="VBoxContainer/Content/Jobs/StatusBar" unique_id=1865409365]
-custom_minimum_size = Vector2(40, 0)
 layout_mode = 2
 
 [node name="MoneyLabel" type="Label" parent="VBoxContainer/Content/Jobs/StatusBar" unique_id=678790409]
@@ -331,18 +328,9 @@ layout_mode = 2
 [node name="CompletedLabel" type="Label" parent="VBoxContainer/Content/Jobs/StatusBar" unique_id=1605979578]
 layout_mode = 2
 
-[node name="SpacerMiddle" type="Control" parent="VBoxContainer/Content/Jobs" unique_id=144104057]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
-
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Content/Jobs" unique_id=203976778]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="Spacer" type="Control" parent="VBoxContainer/Content/Jobs/HBoxContainer" unique_id=1237804080]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
 
 [node name="AvailableScroll" type="ScrollContainer" parent="VBoxContainer/Content/Jobs/HBoxContainer" unique_id=1363957420]
 layout_mode = 2
@@ -354,10 +342,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SpacerMiddle" type="Control" parent="VBoxContainer/Content/Jobs/HBoxContainer" unique_id=799195363]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-
 [node name="ActiveScroll" type="ScrollContainer" parent="VBoxContainer/Content/Jobs/HBoxContainer" unique_id=825020454]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -368,15 +352,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Jobs/HBoxContainer" unique_id=1891256035]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-
-[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Jobs" unique_id=1473004864]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
-
 [node name="Employees" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=1608536925]
 visible = false
 layout_mode = 2
@@ -386,28 +361,15 @@ script = ExtResource("6_6ynjw")
 [node name="StatusBar" type="HBoxContainer" parent="VBoxContainer/Content/Employees" unique_id=546197646]
 layout_mode = 2
 
-[node name="Spacer" type="Control" parent="VBoxContainer/Content/Employees/StatusBar" unique_id=319592488]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-
 [node name="EmployeeCountLabel" type="Label" parent="VBoxContainer/Content/Employees/StatusBar" unique_id=1839192304]
 layout_mode = 2
 
 [node name="PayrollLabel" type="Label" parent="VBoxContainer/Content/Employees/StatusBar" unique_id=93577347]
 layout_mode = 2
 
-[node name="SpacerMiddle" type="Control" parent="VBoxContainer/Content/Employees" unique_id=1185221420]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
-
 [node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Content/Employees" unique_id=1047821662]
 layout_mode = 2
 size_flags_vertical = 3
-
-[node name="Spacer" type="Control" parent="VBoxContainer/Content/Employees/HBoxContainer" unique_id=605697543]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
 
 [node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content/Employees/HBoxContainer" unique_id=1677157445]
 layout_mode = 2
@@ -429,10 +391,6 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SpacerMiddle" type="Control" parent="VBoxContainer/Content/Employees/HBoxContainer" unique_id=1544328071]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-
 [node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Content/Employees/HBoxContainer" unique_id=1669700876]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -452,28 +410,13 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Employees/HBoxContainer" unique_id=349507753]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-
-[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Employees" unique_id=1746962432]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
-
 [node name="Calendar" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=2123043493]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
 script = ExtResource("7_gfdoh")
 
 [node name="Header" type="HBoxContainer" parent="VBoxContainer/Content/Calendar" unique_id=1836779017]
 layout_mode = 2
-
-[node name="Spacer" type="Control" parent="VBoxContainer/Content/Calendar/Header" unique_id=1599932429]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.05
 
 [node name="MonthLabel" type="Label" parent="VBoxContainer/Content/Calendar/Header" unique_id=1148713164]
 layout_mode = 2
@@ -483,21 +426,11 @@ text = "August 2026"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Spacer" type="Control" parent="VBoxContainer/Content/Calendar/ContentRow" unique_id=406580289]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.05
-
 [node name="CalendarGrid" type="GridContainer" parent="VBoxContainer/Content/Calendar/ContentRow" unique_id=602318939]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_stretch_ratio = 2.0
-columns = 5
-
-[node name="SpacerMiddle" type="Control" parent="VBoxContainer/Content/Calendar/ContentRow" unique_id=280831454]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.05
+columns = 7
 
 [node name="SidePanel" type="VBoxContainer" parent="VBoxContainer/Content/Calendar/ContentRow" unique_id=1986043201]
 layout_mode = 2
@@ -527,16 +460,6 @@ size_flags_vertical = 3
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Calendar/ContentRow" unique_id=1831238549]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.05
-
-[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Calendar" unique_id=2017073250]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
 
 [node name="Salaries" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=431735424]
 visible = false

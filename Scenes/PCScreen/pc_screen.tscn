@@ -4,9 +4,6 @@
 [ext_resource type="PackedScene" uid="uid://q10niop0b130" path="res://Scenes/PCScreen/Apps/bank_app.tscn" id="2_gev3q"]
 [ext_resource type="PackedScene" uid="uid://b0ywmyljh0smw" path="res://Scenes/PCScreen/Apps/job_app.tscn" id="3_n0mqw"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_btjug"]
-font_size = 24
-
 [node name="PCScreen" type="Control" unique_id=837278903]
 layout_mode = 3
 anchors_preset = 15
@@ -29,9 +26,12 @@ grow_vertical = 2
 [node name="Desktop" type="VBoxContainer" parent="PanelContainer" unique_id=262965594]
 layout_mode = 2
 
+[node name="Spacer" type="Control" parent="PanelContainer/Desktop" unique_id=491726055]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
 [node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/Desktop" unique_id=991263977]
 layout_mode = 2
-size_flags_vertical = 3
 
 [node name="Spacer" type="Control" parent="PanelContainer/Desktop/HBoxContainer" unique_id=2023053858]
 layout_mode = 2
@@ -62,21 +62,8 @@ size_flags_stretch_ratio = 0.05
 
 [node name="ReturnButton" type="Button" parent="PanelContainer/Desktop/HBoxContainer" unique_id=449131706]
 layout_mode = 2
-size_flags_horizontal = 3
 size_flags_vertical = 3
-
-[node name="ReturnButtonDescription" type="Label" parent="PanelContainer/Desktop/HBoxContainer/ReturnButton" unique_id=931699562]
-z_index = 1
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
 text = "Return"
-label_settings = SubResource("LabelSettings_btjug")
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="SpacerEnd" type="Control" parent="PanelContainer/Desktop/HBoxContainer" unique_id=667311034]
 layout_mode = 2

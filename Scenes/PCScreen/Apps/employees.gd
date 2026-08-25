@@ -11,7 +11,7 @@ const COLOR_NEGATIVE := Color(0.973, 0.443, 0.443, 1.0)
 const COLOR_ROW_BG := Color(0.078, 0.098, 0.145, 0.6)
 const COLOR_BUSY_BG := Color(0.13, 0.11, 0.08, 0.6)
 
-const ROLES := ["Engineer", "Logistics", "Dispatcher", "Mechanic", "Driver"]
+const ROLES := ["Mechanic", "Driver"]
 const FIRST_NAMES := ["Alex", "Jordan", "Sam", "Casey", "Morgan", "Riley", "Taylor", "Jamie", "Tintje"]
 const LAST_NAMES := ["Smith", "Johnson", "Williams", "Brown", "Garcia", "Miller", "Davis"]
 
@@ -53,7 +53,154 @@ func _refresh_all() -> void:
 	_rebuild_candidates_list()
 	_rebuild_employees_list()
 	
-func 
+func _rebuild_candidates_list() -> void:
+	for child in candidates_list.get_children():
+		child.queue_free()
+	
+	if CompanyData.employees.size() >= CompanyData.max_employees:
+		_add_empty_label(candidates_list, "Maximum number of employees reached")
+		return
+	
+	for candidate in candidates:
+		_add_candidate_card(candidate)
+	
+func _rebuild_employees_list() -> void:
+	for child in employees_list.get_children():
+		child.queue_free()
+	
+	if CompanyData.employees.is_empty():
+		_add_empty_label(employees_list, "No employees hired yet")
+		return
+	
+	for employee in CompanyData.employees:
+		_add_employee_card(employee)
+	
+func _add_empty_label(parent: VBoxContainer, text: String) -> void:
+	var label := Label.new()
+	label.text = text
+	label.add_theme_color_override("font_color", COLOR_MUTED)
+	parent.add_child(label)
+	
+func _add_candidate_card(candidate: Dictionary) -> void:
+	var card := PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	style.bg_color = COLOR_ROW_BG
+	style.set_corner_radius_all(10)
+	style.set_content_margin_all(14)
+	card.add_theme_stylebox_override("panel", style)
+	candidates_list.add_child(card)
+	
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 4)
+	card.add_child(vbox)
+	
+	var header := HBoxContainer.new()
+	vbox.add_child(header)
+	
+	var name_label := Label.new()
+	name_label.text = "%s - %s" % [candidate["name"], candidate["role"]]
+	name_label.add_theme_font_size_override("font_size", 15)
+	name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_child(name_label)
+	
+	var salary_label := Label.new()
+	salary_label.text = "%s/mo" % NumberFormat.format(candidate["salary"])
+	salary_label.add_theme_color_override("font_color", COLOR_NEGATIVE)
+	header.add_child(salary_label)
+	
+	var perf_row := HBoxContainer.new()
+	perf_row.add_theme_constant_override("separation", 8)
+	vbox.add_child(perf_row)
+	
+	var perf_bar := ProgressBar.new()
+	perf_bar.min_value = 0
+	perf_bar.max_value = 100
+	perf_bar.value = candidate["performance"]
+	perf_bar.show_percentage = false
+	perf_bar.custom_minimum_size = Vector2(0, 6)
+	perf_bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	perf_row.add_child(perf_bar)
+	
+	var perf_label := Label.new()
+	perf_label.text = "%.0f" % candidate["performance"]
+	perf_label.add_theme_color_override("font_color", COLOR_MUTED)
+	perf_row.add_child(perf_label)
+	
+	var hire_button := Button.new()
+	hire_button.text = "Hire"
+	hire_button.pressed.connect(func():
+		CompanyData.hire_employee(candidate["name"], candidate["role"], candidate["salary"], candidate["performance"])
+		candidates.erase(candidate)
+		candidates.append(_generate_candidate())
+		_refresh_all()
+	)
+	vbox.add_child(hire_button)
+	
+func _add_employee_card(employee: Dictionary) -> void:
+	var is_busy = employee["assigned_job_id"] != ""
+	
+	var card := PanelContainer.new()
+	var style := StyleBoxFlat.new()
+	style.bg_color = COLOR_BUSY_BG if is_busy else COLOR_ROW_BG
+	style.set_corner_radius_all(10)
+	style.set_content_margin_all(14)
+	card.add_theme_stylebox_override("panel", style)
+	employees_list.add_child(card)
+	
+	var vbox := VBoxContainer.new()
+	vbox.add_theme_constant_override("separation", 4)
+	card.add_child(vbox)
+	
+	var header := HBoxContainer.new()
+	vbox.add_child(header)
+	
+	var name_label := Label.new()
+	name_label.text = "%s - %s" % [employee["name"], employee["role"]]
+	name_label.add_theme_font_size_override("font_size", 15)
+	name_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	header.add_child(name_label)
+	
+	var salary_label := Label.new()
+	salary_label.text = "%s/mo" % NumberFormat.format(employee["salary_monthly"])
+	salary_label.add_theme_color_override("font_color", COLOR_NEGATIVE)
+	header.add_child(salary_label)
+	
+	var perf_row := HBoxContainer.new()
+	perf_row.add_theme_constant_override("separation", 8)
+	vbox.add_child(perf_row)
+	
+	var perf_bar := ProgressBar.new()
+	perf_bar.min_value = 0
+	perf_bar.max_value = 100
+	perf_bar.value = employee["performance"]
+	perf_bar.show_percentage = false
+	perf_bar.custom_minimum_size = Vector2(0, 6)
+	perf_bar.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	perf_row.add_child(perf_bar)
+	
+	var perf_label := Label.new()
+	perf_label.text = "%.0f" % employee["performance"]
+	perf_label.add_theme_color_override("font_color", COLOR_MUTED)
+	perf_row.add_child(perf_label)
+	
+	var status_row := HBoxContainer.new()
+	status_row.add_theme_constant_override("separation", 8)
+	vbox.add_child(status_row)
+	
+	var status_label := Label.new()
+	status_label.text = "On assignment" if is_busy else "Available"
+	status_label.add_theme_color_override("font_color", COLOR_MUTED if is_busy else COLOR_POSITIVE)
+	status_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	status_row.add_child(status_label)
+	
+	var fire_button := Button.new()
+	fire_button.text = "Fire"
+	fire_button.pressed.connect(func():
+		CompanyData.fire_employee(employee["id"])
+	)
+	status_row.add_child(fire_button)
+	
+	
 	
 	
 	
