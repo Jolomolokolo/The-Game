@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://btxktcwgg0rcx" path="res://icons/game_icons_white/home.png" id="2_3wnya"]
 [ext_resource type="Script" uid="uid://clhro8afr4gg6" path="res://Scenes/PCScreen/Apps/job_app.gd" id="2_lkqhq"]
 [ext_resource type="Texture2D" uid="uid://diw4xyhhwlv36" path="res://icons/game_icons_white/cross.png" id="3_lkqhq"]
-[ext_resource type="Script" uid="uid://bc5o708uclw5a" path="res://Scenes/PCScreen/Apps/jobs.gd" id="5_lkqhq"]
-[ext_resource type="Script" uid="uid://qr5xk27luqgh" path="res://Scenes/PCScreen/Apps/employees.gd" id="6_6ynjw"]
+[ext_resource type="PackedScene" uid="uid://d1exmvubmjjpg" path="res://Scenes/PCScreen/Apps/jobs.tscn" id="5_gfdoh"]
+[ext_resource type="PackedScene" uid="uid://dyvxolcqeu6hy" path="res://Scenes/PCScreen/Apps/employees.tscn" id="6_bab5u"]
 [ext_resource type="Script" uid="uid://cc8nfg1805qri" path="res://Scenes/PCScreen/Apps/calendar.gd" id="7_gfdoh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xvnu6"]
@@ -310,156 +310,11 @@ text = "Close"
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Jobs" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=681063937]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("5_lkqhq")
-
-[node name="StatusBar" type="HBoxContainer" parent="VBoxContainer/Content/Jobs" unique_id=83910848]
+[node name="Jobs" parent="VBoxContainer/Content" unique_id=851086774 instance=ExtResource("5_gfdoh")]
 layout_mode = 2
 
-[node name="Spacer" type="Control" parent="VBoxContainer/Content/Jobs/StatusBar" unique_id=1865409365]
-custom_minimum_size = Vector2(40, 0)
+[node name="Employees" parent="VBoxContainer/Content" unique_id=1475875577 instance=ExtResource("6_bab5u")]
 layout_mode = 2
-
-[node name="MoneyLabel" type="Label" parent="VBoxContainer/Content/Jobs/StatusBar" unique_id=678790409]
-layout_mode = 2
-
-[node name="ReputationLabel" type="Label" parent="VBoxContainer/Content/Jobs/StatusBar" unique_id=1770678953]
-layout_mode = 2
-
-[node name="CompletedLabel" type="Label" parent="VBoxContainer/Content/Jobs/StatusBar" unique_id=1605979578]
-layout_mode = 2
-
-[node name="SpacerMiddle" type="Control" parent="VBoxContainer/Content/Jobs" unique_id=144104057]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Content/Jobs" unique_id=203976778]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Spacer" type="Control" parent="VBoxContainer/Content/Jobs/HBoxContainer" unique_id=1237804080]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-
-[node name="AvailableScroll" type="ScrollContainer" parent="VBoxContainer/Content/Jobs/HBoxContainer" unique_id=1363957420]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="AvailableJobsList" type="VBoxContainer" parent="VBoxContainer/Content/Jobs/HBoxContainer/AvailableScroll" unique_id=1977219411]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="SpacerMiddle" type="Control" parent="VBoxContainer/Content/Jobs/HBoxContainer" unique_id=799195363]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-
-[node name="ActiveScroll" type="ScrollContainer" parent="VBoxContainer/Content/Jobs/HBoxContainer" unique_id=825020454]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ActiveJobsList" type="VBoxContainer" parent="VBoxContainer/Content/Jobs/HBoxContainer/ActiveScroll" unique_id=1806517359]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Jobs/HBoxContainer" unique_id=1891256035]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-
-[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Jobs" unique_id=1473004864]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
-
-[node name="Employees" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=1608536925]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("6_6ynjw")
-
-[node name="StatusBar" type="HBoxContainer" parent="VBoxContainer/Content/Employees" unique_id=546197646]
-layout_mode = 2
-
-[node name="Spacer" type="Control" parent="VBoxContainer/Content/Employees/StatusBar" unique_id=319592488]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-
-[node name="EmployeeCountLabel" type="Label" parent="VBoxContainer/Content/Employees/StatusBar" unique_id=1839192304]
-layout_mode = 2
-
-[node name="PayrollLabel" type="Label" parent="VBoxContainer/Content/Employees/StatusBar" unique_id=93577347]
-layout_mode = 2
-
-[node name="SpacerMiddle" type="Control" parent="VBoxContainer/Content/Employees" unique_id=1185221420]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
-
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Content/Employees" unique_id=1047821662]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Spacer" type="Control" parent="VBoxContainer/Content/Employees/HBoxContainer" unique_id=605697543]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Content/Employees/HBoxContainer" unique_id=1677157445]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="SectionLabel" type="Label" parent="VBoxContainer/Content/Employees/HBoxContainer/VBoxContainer" unique_id=394019937]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "Candidates"
-
-[node name="CandidatesScroll" type="ScrollContainer" parent="VBoxContainer/Content/Employees/HBoxContainer/VBoxContainer" unique_id=262767784]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="CandidatesList" type="VBoxContainer" parent="VBoxContainer/Content/Employees/HBoxContainer/VBoxContainer/CandidatesScroll" unique_id=1220833713]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="SpacerMiddle" type="Control" parent="VBoxContainer/Content/Employees/HBoxContainer" unique_id=1544328071]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="VBoxContainer/Content/Employees/HBoxContainer" unique_id=1669700876]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="SectionLabel2" type="Label" parent="VBoxContainer/Content/Employees/HBoxContainer/VBoxContainer2" unique_id=1866668546]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 1
-text = "Your Employees"
-
-[node name="EmployeesScroll" type="ScrollContainer" parent="VBoxContainer/Content/Employees/HBoxContainer/VBoxContainer2" unique_id=347137674]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="EmployeesList" type="VBoxContainer" parent="VBoxContainer/Content/Employees/HBoxContainer/VBoxContainer2/EmployeesScroll" unique_id=1884808087]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Employees/HBoxContainer" unique_id=349507753]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-
-[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Employees" unique_id=1746962432]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
 
 [node name="Calendar" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=2123043493]
 visible = false

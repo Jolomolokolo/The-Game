@@ -183,3 +183,4 @@ func _add_active_job_card(job: Dictionary) -> void:
 func _get_employee_name(employee_id: String) -> String:
 	var employee = CompanyData.get_employee(employee_id)
 	return employee["name"] if not employee.is_empty() else "?"
+	

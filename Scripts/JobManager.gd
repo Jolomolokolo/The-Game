@@ -24,6 +24,8 @@ var fixed_job_templates : Array[Dictionary] = [
 		"reward_rep": 10,
 		"time_limit": 0,
 		"is_fixed": true,
+		"requires_own_train": false,
+		"required_role": "Driver",
 		"assigned_employee_id": "",
 		"assigned_train_id": ""
 	},
@@ -37,6 +39,8 @@ var fixed_job_templates : Array[Dictionary] = [
 		"reward_rep": 8,
 		"time_limit": 0,
 		"is_fixed": true,
+		"requires_own_train": false,
+		"required_role": "Driver",
 		"assigned_employee_id": "",
 		"assigned_train_id": ""
 	}
@@ -56,7 +60,7 @@ func _ready() -> void:
 	for i in range(3):
 		availab_jobs.append(_generate_random_job())
 	
-	print("JobManger: %d Jobs available" % availab_jobs.size())
+	#print("JobManger: %d Jobs available" % availab_jobs.size())
 	
 func _generate_random_job() -> Dictionary:
 	var from_idx = randi() % depot_ids.size()
@@ -67,6 +71,7 @@ func _generate_random_job() -> Dictionary:
 	
 	var reward = randf_range(200.0, 800.0)
 	var rep = randi_range(5, 20)
+	#var role = CompanyData.ROLES[randi() % CompanyData.ROLES.size()]
 	
 	return {
 		"id": "job_rand_%d" % Time.get_ticks_msec(),
@@ -81,23 +86,28 @@ func _generate_random_job() -> Dictionary:
 		"reward_rep": rep,
 		"time_limit": 0,
 		"is_fixed": false,
+		"requires_own_train": true,
+		"required_role": "Driver",
 		"assigned_employee_id": "",
 		"assigned_train_id": ""
-
 	}
 	
 func accept_job(job: Dictionary, employee_id: String = "", train_id: String = "") -> bool:
 	if not availab_jobs.has(job):
 		return false
 	
-	if train_id == "":
-		push_warning("JobManager: No train selected!")
-		return false
+	var requires_train : bool = job.get("requires_own_train", true)
 	
-	for active in active_jobs:
-		if active.get("assigned_train_id", "") == train_id:
-			push_warning("JobManager: Train is already selected to another job")
+	if requires_train:
+		if train_id == "":
+			push_warning("JobManager: No train selected!")
 			return false
+		for active in active_jobs:
+			if active.get("assigned_train_id", "") == train_id:
+				push_warning("JobManager: Train is already dedicated to another job")
+				return false
+	else:
+		train_id = ""
 	
 	if employee_id != "":
 		var employee = CompanyData.get_employee(employee_id)
@@ -107,6 +117,9 @@ func accept_job(job: Dictionary, employee_id: String = "", train_id: String = ""
 		if employee["assigned_job_id"] != "":
 			push_warning("JobManager: Employee '%s' is already selected to another job" % employee["name"])
 			return false
+		var required_role = job.get("required_role")
+		if required_role != "" and employee["role"] != required_role:
+			push_warning("JobManager: Employee-Role")
 	
 	availab_jobs.erase(job)
 	var active_job = job.duplicate()
