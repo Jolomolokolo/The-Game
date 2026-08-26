@@ -10,14 +10,25 @@ extends VBoxContainer
 const COLOR_MUTED := Color(0.541, 0.584, 0.647, 1.0)
 const COLOR_REWARD := Color(0.30, 0.85, 0.45)
 const COLOR_REP := Color(0.65, 0.50, 0.95)
+const COLOR_WARNING := Color(0.95, 0.75, 0.25)
 const COLOR_ROW_BG := Color(0.078, 0.098, 0.145, 0.6)
 const COLOR_ACTIVE_BG := Color(0.1, 0.13, 0.1, 0.6)
+
+const MONTH_NAMES := [
+	"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
+]
 
 func _ready() -> void:
 	JobManager.jobs_updated.connect(_refresh_all)
 	CompanyData.assignment_changed.connect(_refresh_all)
 	CompanyData.employee_hired.connect(func(_e): _refresh_all())
 	CompanyData.employee_fired.connect(func(_e): _refresh_all())
+	
+	visibility_changed.connect(func():
+		if visible:
+			_refresh_all()
+	)
+	
 	_refresh_all()
 	
 func _refresh_all() -> void:
@@ -105,13 +116,28 @@ func _build_card_base(parent: VBoxContainer, job: Dictionary, bg_color: Color) -
 	reward_label.add_theme_color_override("font_color", COLOR_REWARD)
 	vbox.add_child(reward_label)
 	
+	if job.get("time_limit", 0) > 0:
+		var deadline_label := Label.new()
+		if job.has("deadline_month") and job["deadline_month"] > 0:
+			deadline_label.text = "Deadline: %s %d" % [MONTH_NAMES[job["deadline_month"]], job["deadline_year"]]
+		else:
+			deadline_label.text = "Time limit: %d months" % job["time_limit"]
+		deadline_label.add_theme_color_override("font_color", COLOR_WARNING)
+		vbox.add_child(deadline_label)
+	
 	return vbox
 	
 func _add_available_job_card(job: Dictionary) -> void:
 	var vbox = _build_card_base(available_jobs_list, job, COLOR_ROW_BG)
+	var required_role = job.get("required_role", "")
+	var requires_own_train : bool = job.get("requires_own_train", true)
+	
+	var available_trains = JobManager.get_available_trains() if requires_own_train else []
+	
+	
+	
 	
 	var available_employees = CompanyData.get_available_employees()
-	var available_trains = JobManager.get_available_trains()
 	
 	var train_row := HBoxContainer.new()
 	train_row.add_theme_constant_override("separation", 8)

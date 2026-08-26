@@ -11,7 +11,6 @@ const COLOR_NEGATIVE := Color(0.973, 0.443, 0.443, 1.0)
 const COLOR_ROW_BG := Color(0.078, 0.098, 0.145, 0.6)
 const COLOR_BUSY_BG := Color(0.13, 0.11, 0.08, 0.6)
 
-const ROLES := ["Mechanic", "Driver"]
 const FIRST_NAMES := ["Alex", "Jordan", "Sam", "Casey", "Morgan", "Riley", "Taylor", "Jamie", "Tintje"]
 const LAST_NAMES := ["Smith", "Johnson", "Williams", "Brown", "Garcia", "Miller", "Davis"]
 
@@ -30,7 +29,7 @@ func _generate_candidates() -> void:
 		candidates.append(_generate_candidate())
 	
 func _generate_candidate() -> Dictionary:
-	var role = ROLES[randi() % ROLES.size()]
+	var role = CompanyData.ROLES[randi() % CompanyData.ROLES.size()]
 	var performance = randf_range(30.0, 85.0)
 	var base_salary = lerp(800.0, 3000.0, performance / 100.0)
 	var salary = snappedf(base_salary * randf_range(0.9, 1.1), 50.0)
@@ -199,8 +198,4 @@ func _add_employee_card(employee: Dictionary) -> void:
 		CompanyData.fire_employee(employee["id"])
 	)
 	status_row.add_child(fire_button)
-	
-	
-	
-	
 	

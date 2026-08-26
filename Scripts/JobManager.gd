@@ -119,26 +119,71 @@ func accept_job(job: Dictionary, employee_id: String = "", train_id: String = ""
 			return false
 		var required_role = job.get("required_role")
 		if required_role != "" and employee["role"] != required_role:
-			push_warning("JobManager: Employee-Role")
+			push_warning("JobManager: Employee-Role not correct (%s needs %s)" % [employee["name"], required_role])
+			return false
 	
 	availab_jobs.erase(job)
 	var active_job = job.duplicate()
 	active_job["status"] = JobStatus.ACTIVE
 	active_job["assigned_employee_id"] = employee_id
 	active_job["assigned_train_id"] = train_id
+	_apply_deadline(active_job)
 	active_jobs.append(active_job)
 	
 	if employee_id != "":
 		var employee = CompanyData.get_employee(employee_id)
 		employee["assigned_job_id"] = active_job["id"]
-		print("JobManager: Job accepted: %s (Train: %s, Employee: %s)" % [job.title, train_id, employee["name"]])
-	else:
-		print("JobManager: Job accepted: %s (Train: %s, self-driven)" % [job.title, train_id])
 	
 	job_accepted.emit(active_job)
 	jobs_updated.emit()
 	CompanyData.assignment_changed.emit()
 	return true
+	
+func _apply_deadline(job: Dictionary) -> void:
+	var months : int = job.get("time_limit", 0)
+	if months <= 0:
+		job["deadline_month"] = 0
+		job["deadline_year"] = 0
+		return
+	
+	var total_months = GameData.current_year * 12 + (GameData.current_month - 1) + months
+	job["deadline_year"] = total_months / 12
+	job["deadline_month"] = (total_months % 12) + 1
+	
+func reassign_employee(job_id: String, new_employee_id: String) -> bool:
+	var job = _find_active_job(job_id)
+	if job.is_empty():
+		return false
+	
+	var required_role = job.get("required_role", "")
+	
+	if new_employee_id != "":
+		var new_employee = CompanyData.get_employee(new_employee_id)
+		if new_employee.is_empty() or new_employee["assigned_job_id"] != "":
+			return false
+		if required_role != "" and new_employee["role"] != required_role:
+			push_warning("JobManager: Role is not suitable for this job")
+			return false
+	
+	var old_id = job.get("assigned_employee_id", "")
+	if old_id != "":
+		var old_employee = CompanyData.get_employee(old_id)
+		if not old_employee.is_empty():
+			old_employee["assigned_job_id"] = ""
+	
+	job["assigned_employee_id"] = new_employee_id
+	if new_employee_id != "":
+		CompanyData.get_employee(new_employee_id)["assigned_job_id"] = job_id
+	
+	jobs_updated.emit()
+	CompanyData.assignment_changed.emit()
+	return true
+	
+func _find_active_job(job_id: String) -> Dictionary:
+	for job in active_jobs:
+		if job["id"] == job_id:
+			return job
+	return {}
 	
 func notify_depot_arrived(depot_id: String, train: Node) -> void:
 	var arrived_train_id = train.get("entity_id") if train.get("entity_id") != null else ""
@@ -148,8 +193,11 @@ func notify_depot_arrived(depot_id: String, train: Node) -> void:
 			continue
 		if job.get("to_depot") != depot_id:
 			continue
-		if job.get("assigned_train_id", "") != arrived_train_id:
+		
+		var requires_train : bool = job.get("requires_own_train", true)
+		if requires_train and job.get("assigned_train_id", "") != arrived_train_id:
 			continue
+		
 		_complete_job(job, train)
 	
 func _complete_job(job: Dictionary, train: Node) -> void:
@@ -177,6 +225,38 @@ func _complete_job(job: Dictionary, train: Node) -> void:
 		availab_jobs.append(_generate_random_job())
 		emit_signal("jobs_updated")
 	
+func check_deadlines(month: int, year: int) -> void:
+	var to_fail : Array[Dictionary] = []
+	
+	for job in active_jobs:
+		var deadline_month : int = job.get("deadline_month", 0)
+		var deadline_year : int = job.get("deadline_year", 0)
+		if deadline_month == 0:
+			continue
+		
+		var deadline_passed = (year > deadline_year) or (year == deadline_year and month > deadline_month)
+		if deadline_passed:
+			to_fail.append(job)
+	
+	for job in to_fail:
+		job["status"] = JobStatus.FAILED
+		active_jobs.erase(job)
+		
+		var employee_id = job.get("assigned_employee_id", "")
+		if employee_id != "":
+			var employee = CompanyData.get_employee(employee_id)
+			if not employee.is_empty():
+				employee["assigned_job_id"] = ""
+				employee["performance"] = clampf(employee["performance"] - 8.0, 0, 100)
+		
+		reputation = max(0, reputation - job.get("reward_rep", 0) / 2)
+		
+		job_failed.emit(job)
+	
+	if to_fail.size() > 0:
+		jobs_updated.emit()
+		CompanyData.assignment_changed.emit()
+	
 func release_job_for_employee(employee_id: String) -> void:
 	for job in active_jobs:
 		if job.get("assigned_job_id", "") == employee_id:
@@ -198,14 +278,11 @@ func get_available_trains() -> Array:
 		if tid != "":
 			used_ids.append(tid)
 	
-
 	var all_trains_in_group = get_tree().get_nodes_in_group("train")
 	print("DEBUG - Trains in Gruppe 'train': ", all_trains_in_group.size())
 	for t in all_trains_in_group:
 		print("  - Name: ", t.name, " | entity_id: '", t.get("entity_id"), "'")
-
-
-
+	
 	var result := []
 	for train in get_tree().get_nodes_in_group("train"):
 		var tid = train.get("entity_id") if train.get("entity_id") != null else ""

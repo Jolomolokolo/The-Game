@@ -6,8 +6,9 @@ signal company_data_updated
 signal assignment_changed
 
 var employees : Array[Dictionary] = []
-
 var max_employees := 12 # LATER UPGRADEBEL and start only with 2 or even 0 employees
+
+const ROLES := ["Mechanic", "Driver"]
 
 func hire_employee(name: String, role: String, salary: float, base_performance : float = 50.0) -> Dictionary:
 	var employee := {

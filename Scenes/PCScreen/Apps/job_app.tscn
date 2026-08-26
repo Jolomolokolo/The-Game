@@ -311,9 +311,11 @@ layout_mode = 2
 size_flags_vertical = 3
 
 [node name="Jobs" parent="VBoxContainer/Content" unique_id=851086774 instance=ExtResource("5_gfdoh")]
+visible = false
 layout_mode = 2
 
 [node name="Employees" parent="VBoxContainer/Content" unique_id=1475875577 instance=ExtResource("6_bab5u")]
+visible = true
 layout_mode = 2
 
 [node name="Calendar" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=2123043493]
