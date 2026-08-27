@@ -134,8 +134,25 @@ func _add_available_job_card(job: Dictionary) -> void:
 	
 	var available_trains = JobManager.get_available_trains() if requires_own_train else []
 	
-	
-	
+	var train_dropdown : OptionButton = null
+	if requires_own_train:
+		var train_row := HBoxContainer.new()
+		train_row.add_theme_constant_override("separation", 8)
+		vbox.add_child(train_row)
+		
+		var train_label := Label.new()
+		train_label.text = "Train:"
+		train_label.add_theme_color_override("font_color", COLOR_MUTED)
+		train_row.add_child(train_label)
+		
+		train_dropdown = OptionButton.new()
+		train_dropdown.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		if available_trains.is_empty():
+			train_dropdown.add_item("No trains available")
+			train_dropdown.disabled = true
+		else:
+			for train in available_trains:
+				train_dropdown.add_item(train.name)
 	
 	var available_employees = CompanyData.get_available_employees()
 	
@@ -148,8 +165,6 @@ func _add_available_job_card(job: Dictionary) -> void:
 	train_label.add_theme_color_override("font_color", COLOR_MUTED)
 	train_row.add_child(train_label)
 	
-	var train_dropdown := OptionButton.new()
-	train_dropdown.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	if available_trains.is_empty():
 		train_dropdown.add_item("No trains available")
 		train_dropdown.disabled = true

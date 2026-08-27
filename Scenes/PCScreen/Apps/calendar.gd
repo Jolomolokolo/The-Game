@@ -15,7 +15,7 @@ const COLOR_DAY_BG_SELECTED := Color(0.10, 0.16, 0.18, 0.9)
 const MONTH_NAMES := [
 	"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
 ]
-const  DAYS_IN_MONTH := 15
+@onready var DAYS_IN_MONTH = JobManager.DAYS_PER_MONTH
 
 var selected_day : int = 1
 var _day_buttons : Dictionary = {}

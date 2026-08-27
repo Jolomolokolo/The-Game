@@ -121,7 +121,7 @@ offset_top = 20.0
 offset_right = 385.0
 offset_bottom = 195.0
 grow_horizontal = 2
-text = "tHE gAAAmE"
+text = "Trackenomics"
 label_settings = SubResource("LabelSettings_hklf8")
 
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
