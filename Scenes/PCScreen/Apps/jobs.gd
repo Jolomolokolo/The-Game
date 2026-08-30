@@ -11,8 +11,10 @@ const COLOR_MUTED := Color(0.541, 0.584, 0.647, 1.0)
 const COLOR_REWARD := Color(0.30, 0.85, 0.45)
 const COLOR_REP := Color(0.65, 0.50, 0.95)
 const COLOR_WARNING := Color(0.95, 0.75, 0.25)
+const COLOR_URGENT := Color(0.92, 0.35, 0.35)
 const COLOR_ROW_BG := Color(0.078, 0.098, 0.145, 0.6)
 const COLOR_ACTIVE_BG := Color(0.1, 0.13, 0.1, 0.6)
+const COLOR_RENTAL_BG := Color(0.10, 0.10, 0.14, 0.6)
 
 const MONTH_NAMES := [
 	"", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"
@@ -76,6 +78,9 @@ func _build_card_base(parent: VBoxContainer, job: Dictionary, bg_color: Color) -
 	style.bg_color = bg_color
 	style.set_corner_radius_all(10)
 	style.set_content_margin_all(14)
+	if job.get("is_emergency", false):
+		style.border_width_bottom = 3
+		style.border_color = COLOR_URGENT
 	card.add_theme_stylebox_override("panel", style)
 	parent.add_child(card)
 	
@@ -92,7 +97,19 @@ func _build_card_base(parent: VBoxContainer, job: Dictionary, bg_color: Color) -
 	title_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 	header.add_child(title_label)
 	
-	if job.get("is_fixed", false):
+	if job.get("is_emergency", false):
+		var badge := Label.new()
+		badge.text = "URGENT"
+		badge.add_theme_font_size_override("font_size", 11)
+		badge.add_theme_color_override("font_color", COLOR_URGENT)
+		header.add_child(badge)
+	elif job.get("is_rental", false):
+		var badge := Label.new()
+		badge.text = "RENTAL"
+		badge.add_theme_font_size_override("font_size", 11)
+		badge.add_theme_color_override("font_color", COLOR_MUTED)
+		header.add_child(badge)
+	elif job.get("is_fixed"):
 		var badge := Label.new()
 		badge.text = "FIXED"
 		badge.add_theme_font_size_override("font_size", 11)
@@ -108,24 +125,33 @@ func _build_card_base(parent: VBoxContainer, job: Dictionary, bg_color: Color) -
 	var route_label := Label.new()
 	var from_name = JobManager.depot_names.get(job.get("from_depot", ""), "?")
 	var to_name = JobManager.depot_names.get(job.get("to_depot", ""), "?")
-	route_label.text = "%s -> %s" % [from_name, to_name]
+	var role_text = " | Role: %s" % job.get("required_role", "") if job.get("required_role", "") != "" else ""	
+	route_label.text = "%s -> %s%s" % [from_name, to_name, role_text]
 	vbox.add_child(route_label)
 	
-	var reward_label := Label.new()
-	reward_label.text = "%s +%d Rep" % [NumberFormat.format(job.get("reward_money", 0.0)), job.get("reward_rep", 0)]
-	reward_label.add_theme_color_override("font_color", COLOR_REWARD)
-	vbox.add_child(reward_label)
+	if job.get("is_rental", false):
+		var income_label := Label.new()
+		income_label.text = "No upfront payment - %s/month once delivered" % NumberFormat.format(job.get("rental_monthly_income", 0.0))
+		income_label.add_theme_color_override("font_color", COLOR_REWARD)
+		vbox.add_child(income_label)
+	else:
+		var reward_label := Label.new()
+		reward_label.text = "%s  +%d Rep" % [NumberFormat.format(job.get("reward_money", 0.0)), job.get("reward_rep", 0)]
+		reward_label.add_theme_color_override("font_color", COLOR_REWARD)
+		vbox.add_child(reward_label)
 	
-	if job.get("time_limit", 0) > 0:
+	if job.get("time_limit_days", 0) > 0:
 		var deadline_label := Label.new()
 		if job.has("deadline_month") and job["deadline_month"] > 0:
-			deadline_label.text = "Deadline: %s %d" % [MONTH_NAMES[job["deadline_month"]], job["deadline_year"]]
+			deadline_label.text = "Deadline: %s %d, %d" % [MONTH_NAMES[job["deadline_month"]], job["deadline_day"], job["deadline_year"]]
 		else:
-			deadline_label.text = "Time limit: %d months" % job["time_limit"]
-		deadline_label.add_theme_color_override("font_color", COLOR_WARNING)
+			deadline_label.text = "Time limit: %d days" % job["time_limit_days"]
+		deadline_label.add_theme_color_override("font_color", COLOR_URGENT if job.get("is_emergency", false) else COLOR_WARNING)
 		vbox.add_child(deadline_label)
 	
 	return vbox
+	
+	# HIER WEITER MACHEN
 	
 func _add_available_job_card(job: Dictionary) -> void:
 	var vbox = _build_card_base(available_jobs_list, job, COLOR_ROW_BG)

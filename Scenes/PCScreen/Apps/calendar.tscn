@@ -1,0 +1,79 @@
+[gd_scene format=3 uid="uid://dwywjjs1ucu80"]
+
+[ext_resource type="Script" uid="uid://cc8nfg1805qri" path="res://Scenes/PCScreen/Apps/calendar.gd" id="1_hc3hx"]
+
+[node name="Calendar" type="VBoxContainer" unique_id=483482935]
+visible = false
+size_flags_horizontal = 3
+script = ExtResource("1_hc3hx")
+
+[node name="Header" type="HBoxContainer" parent="." unique_id=1641089077]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="Header" unique_id=1885178081]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.05
+
+[node name="MonthLabel" type="Label" parent="Header" unique_id=2059460537]
+layout_mode = 2
+text = "August 2026"
+
+[node name="ContentRow" type="HBoxContainer" parent="." unique_id=2004317632]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer" type="Control" parent="ContentRow" unique_id=173719205]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.05
+
+[node name="CalendarGrid" type="GridContainer" parent="ContentRow" unique_id=1902603841]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+columns = 5
+
+[node name="SpacerMiddle" type="Control" parent="ContentRow" unique_id=2018189823]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.05
+
+[node name="SidePanel" type="VBoxContainer" parent="ContentRow" unique_id=1225589077]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SelectedDayLabel" type="Label" parent="ContentRow/SidePanel" unique_id=726102799]
+layout_mode = 2
+
+[node name="DayEventsScroll" type="ScrollContainer" parent="ContentRow/SidePanel" unique_id=1263327528]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="DayEventsList" type="VBoxContainer" parent="ContentRow/SidePanel/DayEventsScroll" unique_id=1982265654]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="UpcomingHeaderLabel" type="Label" parent="ContentRow/SidePanel" unique_id=1488497600]
+layout_mode = 2
+text = "Active Jobs"
+
+[node name="UpcomingScroll" type="ScrollContainer" parent="ContentRow/SidePanel" unique_id=1767424287]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="UpcomingList" type="VBoxContainer" parent="ContentRow/SidePanel/UpcomingScroll" unique_id=459633767]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SpacerEnd" type="Control" parent="ContentRow" unique_id=1481037186]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+size_flags_stretch_ratio = 0.05
+
+[node name="SpacerEnd" type="Control" parent="." unique_id=234986192]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05

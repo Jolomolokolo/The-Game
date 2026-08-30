@@ -6,7 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://diw4xyhhwlv36" path="res://icons/game_icons_white/cross.png" id="3_lkqhq"]
 [ext_resource type="PackedScene" uid="uid://d1exmvubmjjpg" path="res://Scenes/PCScreen/Apps/jobs.tscn" id="5_gfdoh"]
 [ext_resource type="PackedScene" uid="uid://dyvxolcqeu6hy" path="res://Scenes/PCScreen/Apps/employees.tscn" id="6_bab5u"]
-[ext_resource type="Script" uid="uid://cc8nfg1805qri" path="res://Scenes/PCScreen/Apps/calendar.gd" id="7_gfdoh"]
+[ext_resource type="PackedScene" uid="uid://dwywjjs1ucu80" path="res://Scenes/PCScreen/Apps/calendar.tscn" id="7_bab5u"]
+[ext_resource type="Script" uid="uid://bub7i567gauwp" path="res://Scenes/PCScreen/Apps/salaries.gd" id="8_nfgt2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xvnu6"]
 font_size = 32
@@ -315,95 +316,28 @@ visible = false
 layout_mode = 2
 
 [node name="Employees" parent="VBoxContainer/Content" unique_id=1475875577 instance=ExtResource("6_bab5u")]
-visible = true
 layout_mode = 2
 
-[node name="Calendar" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=2123043493]
-visible = false
+[node name="Calendar" parent="VBoxContainer/Content" unique_id=483482935 instance=ExtResource("7_bab5u")]
 layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("7_gfdoh")
-
-[node name="Header" type="HBoxContainer" parent="VBoxContainer/Content/Calendar" unique_id=1836779017]
-layout_mode = 2
-
-[node name="Spacer" type="Control" parent="VBoxContainer/Content/Calendar/Header" unique_id=1599932429]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.05
-
-[node name="MonthLabel" type="Label" parent="VBoxContainer/Content/Calendar/Header" unique_id=1148713164]
-layout_mode = 2
-text = "August 2026"
-
-[node name="ContentRow" type="HBoxContainer" parent="VBoxContainer/Content/Calendar" unique_id=181756526]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="Spacer" type="Control" parent="VBoxContainer/Content/Calendar/ContentRow" unique_id=406580289]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.05
-
-[node name="CalendarGrid" type="GridContainer" parent="VBoxContainer/Content/Calendar/ContentRow" unique_id=602318939]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_stretch_ratio = 2.0
-columns = 5
-
-[node name="SpacerMiddle" type="Control" parent="VBoxContainer/Content/Calendar/ContentRow" unique_id=280831454]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.05
-
-[node name="SidePanel" type="VBoxContainer" parent="VBoxContainer/Content/Calendar/ContentRow" unique_id=1986043201]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="SelectedDayLabel" type="Label" parent="VBoxContainer/Content/Calendar/ContentRow/SidePanel" unique_id=783297050]
-layout_mode = 2
-
-[node name="DayOffScroll" type="ScrollContainer" parent="VBoxContainer/Content/Calendar/ContentRow/SidePanel" unique_id=1599720915]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="DayOffList" type="VBoxContainer" parent="VBoxContainer/Content/Calendar/ContentRow/SidePanel/DayOffScroll" unique_id=1519869801]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="ActiveJobsHeaderLabel" type="Label" parent="VBoxContainer/Content/Calendar/ContentRow/SidePanel" unique_id=635708023]
-layout_mode = 2
-text = "Active Jobs"
-
-[node name="ActiveJobsScroll" type="ScrollContainer" parent="VBoxContainer/Content/Calendar/ContentRow/SidePanel" unique_id=1126621210]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="ActiveJobsList" type="VBoxContainer" parent="VBoxContainer/Content/Calendar/ContentRow/SidePanel/ActiveJobsScroll" unique_id=414195061]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-
-[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Calendar/ContentRow" unique_id=1831238549]
-custom_minimum_size = Vector2(40, 0)
-layout_mode = 2
-size_flags_stretch_ratio = 0.05
-
-[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/Calendar" unique_id=2017073250]
-layout_mode = 2
-size_flags_vertical = 3
-size_flags_stretch_ratio = 0.05
 
 [node name="Salaries" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=431735424]
-visible = false
 layout_mode = 2
 size_flags_horizontal = 3
+script = ExtResource("8_nfgt2")
 
-[node name="Label" type="Label" parent="VBoxContainer/Content/Salaries" unique_id=471465949]
+[node name="StatusBar" type="HBoxContainer" parent="VBoxContainer/Content/Salaries" unique_id=418529979]
 layout_mode = 2
-text = "SALARIESSSS
-"
+
+[node name="PayrollLabel" type="Label" parent="VBoxContainer/Content/Salaries/StatusBar" unique_id=1696443549]
+layout_mode = 2
+
+[node name="EmployeesScroll" type="ScrollContainer" parent="VBoxContainer/Content/Salaries" unique_id=1206079878]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="EmployeesList" type="VBoxContainer" parent="VBoxContainer/Content/Salaries/EmployeesScroll" unique_id=1305053055]
+layout_mode = 2
 
 [node name="KPI" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=1430622541]
 visible = false

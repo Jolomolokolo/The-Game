@@ -29,6 +29,7 @@ var real_estate_value : float = 0.0
 var company_value : float = 0.0
 var company_monthly_profit : float = 0.0
 
+var current_day : int = 1
 var current_month : int = 1
 var current_year : int = 1
 
@@ -188,16 +189,31 @@ func _process_loan_payments() -> void:
 		credit_score_bonus = min(credit_score_bonus + CREDIT_SCORE_BONUS_PER_PAYOFF, CREDIT_SCORE_BONUS_CAP)
 		loan_paid_off.emit(loan)
 	
-func advance_month() -> void:
+func advance_day() -> void:
+	current_day += 1
+	if current_day > JobManager.DAYS_PER_MONTH:
+		current_day = 1
+		current_month += 1
+		if current_month > 12:
+			current_month = 1
+			current_year += 1
+		_process_end_of_month()
+	
+	JobManager.check_daily_deadlines(current_day, current_month, current_year)
+	
+func _process_end_of_month() -> void:
 	_process_loan_payments()
-	current_month += 1
-	if current_month > 12:
-		current_month = 1
-		current_year += 1
+	CompanyData.process_month(current_month, current_year)
+	JobManager.process_rental_contracts()
 	
 	net_worth_history.append(get_net_worth())
 	cash_history.append(float(cash))
-	debt_history.append(debt)
+	debt_history.append(get_total_debt())
 	
 	finances_updated.emit()
+	
+func advance_month() -> void:
+	var days_remaining = JobManager.DAYS_PER_MONTH - current_day + 1
+	for i in days_remaining:
+		advance_day()
 	

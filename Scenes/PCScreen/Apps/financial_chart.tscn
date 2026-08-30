@@ -37,6 +37,12 @@ text = "Financial History"
 layout_mode = 2
 size_flags_horizontal = 3
 
+[node name="Label" type="Label" parent="VBoxContainer/HBoxContainer/Spacer" unique_id=982656505]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 23.0
+text = "FUNKTION VON 6, 12 und MAX ADDEN"
+
 [node name="6MonthsButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=566807097]
 layout_mode = 2
 text = "6M"

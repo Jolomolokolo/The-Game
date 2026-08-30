@@ -14,6 +14,7 @@ func _process(delta):
 	time += (24.0 / day_duration) * delta
 	if time >= 24.0:
 		time = 0.0
+		GameData.advance_day()
 	
 	var sun_progress = time / 24.0
 	rotation_degrees.x = lerp(-180.0, 180.0, sun_progress) - 90.0
