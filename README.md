@@ -159,7 +159,7 @@ More screenshots will be added as development continues.
 
 You can find the current version and development updates here:
 
-**itch.io:** ADDDDD MYYYY LINKKKK; AHHHHHHH
+**itch.io:** [Trackenomics on ITCH.IO](https://jolomolokolo.itch.io/trackenomics)
 
 **Steam:** Coming later
 
