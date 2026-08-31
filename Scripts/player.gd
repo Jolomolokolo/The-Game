@@ -422,5 +422,7 @@ func _update_cash_label(value: float):
 	cash_label.text = NumberFormat.format(displayed_cash)
 	
 func _on_return_main_button_pressed() -> void:
+	game_pause_return()
+	GameState.set_state(GameState.State.PAUSED)
 	SceneManager.change_scene("res://Scenes/HUDs/StartPage.tscn")
 	

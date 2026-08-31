@@ -7,7 +7,8 @@
 [ext_resource type="PackedScene" uid="uid://d1exmvubmjjpg" path="res://Scenes/PCScreen/Apps/jobs.tscn" id="5_gfdoh"]
 [ext_resource type="PackedScene" uid="uid://dyvxolcqeu6hy" path="res://Scenes/PCScreen/Apps/employees.tscn" id="6_bab5u"]
 [ext_resource type="PackedScene" uid="uid://dwywjjs1ucu80" path="res://Scenes/PCScreen/Apps/calendar.tscn" id="7_bab5u"]
-[ext_resource type="Script" uid="uid://bub7i567gauwp" path="res://Scenes/PCScreen/Apps/salaries.gd" id="8_nfgt2"]
+[ext_resource type="PackedScene" uid="uid://c745mvg1wghvv" path="res://Scenes/PCScreen/Apps/salaries.tscn" id="8_bab5u"]
+[ext_resource type="Script" uid="uid://cksha4oskyqxe" path="res://Scenes/PCScreen/Apps/kpi.gd" id="9_nfgt2"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_xvnu6"]
 font_size = 32
@@ -265,34 +266,36 @@ theme_override_constants/separation = 32
 [node name="Spacer" type="Control" parent="VBoxContainer/TabBar" unique_id=1638942195]
 custom_minimum_size = Vector2(32, 0)
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
 
 [node name="TabJobs" type="Button" parent="VBoxContainer/TabBar" unique_id=1036542453]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 2
 offset_transform_enabled = true
 text = "Jobs"
 
 [node name="TabEmployees" type="Button" parent="VBoxContainer/TabBar" unique_id=769393928]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 2
 offset_transform_enabled = true
 text = "Employees"
 
 [node name="TabCalendar" type="Button" parent="VBoxContainer/TabBar" unique_id=1705030177]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 2
 offset_transform_enabled = true
 text = "Calender"
 
 [node name="TabSalaries" type="Button" parent="VBoxContainer/TabBar" unique_id=849728019]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 2
 offset_transform_enabled = true
 text = "Salaries"
 
 [node name="TabKPI" type="Button" parent="VBoxContainer/TabBar" unique_id=440117370]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 2
 offset_transform_enabled = true
 text = "KPI"
 
@@ -300,10 +303,11 @@ text = "KPI"
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
 
 [node name="TabClose" type="Button" parent="VBoxContainer/TabBar" unique_id=1342666942]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 10
 offset_transform_enabled = true
 text = "Close"
 
@@ -319,34 +323,63 @@ layout_mode = 2
 layout_mode = 2
 
 [node name="Calendar" parent="VBoxContainer/Content" unique_id=483482935 instance=ExtResource("7_bab5u")]
+visible = false
 layout_mode = 2
 
-[node name="Salaries" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=431735424]
-layout_mode = 2
-size_flags_horizontal = 3
-script = ExtResource("8_nfgt2")
-
-[node name="StatusBar" type="HBoxContainer" parent="VBoxContainer/Content/Salaries" unique_id=418529979]
-layout_mode = 2
-
-[node name="PayrollLabel" type="Label" parent="VBoxContainer/Content/Salaries/StatusBar" unique_id=1696443549]
-layout_mode = 2
-
-[node name="EmployeesScroll" type="ScrollContainer" parent="VBoxContainer/Content/Salaries" unique_id=1206079878]
-layout_mode = 2
-size_flags_vertical = 3
-
-[node name="EmployeesList" type="VBoxContainer" parent="VBoxContainer/Content/Salaries/EmployeesScroll" unique_id=1305053055]
+[node name="Salaries" parent="VBoxContainer/Content" unique_id=1868867631 instance=ExtResource("8_bab5u")]
+visible = false
 layout_mode = 2
 
 [node name="KPI" type="VBoxContainer" parent="VBoxContainer/Content" unique_id=1430622541]
-visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("9_nfgt2")
+
+[node name="StatusBar" type="HBoxContainer" parent="VBoxContainer/Content/KPI" unique_id=1424671865]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="VBoxContainer/Content/KPI/StatusBar" unique_id=637577592]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="AveragePerformanceLabel" type="Label" parent="VBoxContainer/Content/KPI/StatusBar" unique_id=508298118]
+layout_mode = 2
+
+[node name="TopPerformanceLabel" type="Label" parent="VBoxContainer/Content/KPI/StatusBar" unique_id=675920704]
+layout_mode = 2
+
+[node name="SpacerMiddle" type="Control" parent="VBoxContainer/Content/KPI" unique_id=600901555]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Content/KPI" unique_id=1872346909]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer" type="Control" parent="VBoxContainer/Content/KPI/HBoxContainer" unique_id=969630081]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="EmployeeScroll" type="ScrollContainer" parent="VBoxContainer/Content/KPI/HBoxContainer" unique_id=564512998]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/Content/KPI" unique_id=1728328209]
+[node name="EmployeesList" type="VBoxContainer" parent="VBoxContainer/Content/KPI/HBoxContainer/EmployeeScroll" unique_id=1079251889]
 layout_mode = 2
-text = "KPIIIIII"
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/KPI/HBoxContainer" unique_id=789244674]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="SpacerEnd" type="Control" parent="VBoxContainer/Content/KPI" unique_id=121254225]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
 
 [connection signal="pressed" from="VBoxContainer/TopBar/HBoxContainer/HomeButton" to="." method="_on_home_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/TopBar/HBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]

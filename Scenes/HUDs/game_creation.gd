@@ -13,6 +13,7 @@ func _process(_delta: float) -> void:
 	if start:
 		start = false
 		GameData.apply_preset(selected_preset)
+		#GameState.set_state(GameState.State.PLAYING) BRINGT NIX
 		SceneManager.change_scene("res://main.tscn")
 	
 func _on_preset_1_pressed() -> void:

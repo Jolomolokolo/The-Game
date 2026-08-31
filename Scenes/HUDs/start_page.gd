@@ -21,6 +21,7 @@ func _on_start_button_pressed() -> void:
 	if SaveManager.has_any_save():
 		var latest_slot = SaveManager.get_most_recent_slot()
 		SaveManager.request_load_on_scene_ready(latest_slot, true)
+		GameState.set_state(GameState.State.PLAYING)
 		SceneManager.change_scene("res://main.tscn")
 	else:
 		SceneManager.change_scene("res://Scenes/HUDs/GameCreation.tscn")

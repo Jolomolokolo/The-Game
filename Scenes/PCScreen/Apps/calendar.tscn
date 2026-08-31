@@ -3,7 +3,6 @@
 [ext_resource type="Script" uid="uid://cc8nfg1805qri" path="res://Scenes/PCScreen/Apps/calendar.gd" id="1_hc3hx"]
 
 [node name="Calendar" type="VBoxContainer" unique_id=483482935]
-visible = false
 size_flags_horizontal = 3
 script = ExtResource("1_hc3hx")
 

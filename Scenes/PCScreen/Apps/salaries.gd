@@ -1,7 +1,7 @@
 extends VBoxContainer
 
 @onready var payroll_label : Label = $StatusBar/PayrollLabel
-@onready var employees_list : VBoxContainer = $EmployeesScroll/EmployeesList
+@onready var employees_list : VBoxContainer = $HBoxContainer/EmployeesScroll/EmployeesList
 
 const COLOR_MUTED := Color(0.55, 0.6, 0.68)
 const COLOR_NEGATIVE := Color(0.973, 0.443, 0.443, 1.0)

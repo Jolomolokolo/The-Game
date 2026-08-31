@@ -998,15 +998,11 @@ color = Color(0.20392157, 0.20392157, 0.20392157, 0.6431373)
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1185879066]
 
 [node name="HealthBar" type="ProgressBar" parent="CanvasLayer" unique_id=2070594674]
-anchors_preset = 7
-anchor_left = 0.5
+anchors_preset = 2
 anchor_top = 1.0
-anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -576.0
 offset_top = -48.0
-offset_right = -248.0
-grow_horizontal = 2
+offset_right = 328.0
 grow_vertical = 0
 step = 0.1
 show_percentage = false
@@ -1029,14 +1025,17 @@ offset_bottom = 72.0
 
 [node name="PauseScreen" type="CanvasLayer" parent="." unique_id=2133964406]
 layer = 10
-visible = false
 
 [node name="PauseScreen" type="Control" parent="PauseScreen" unique_id=1311857860]
 z_index = 10
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="BG" type="ColorRect" parent="PauseScreen/PauseScreen" unique_id=1050901257]
 layout_mode = 1
@@ -1054,32 +1053,46 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = 384.0
-offset_top = 128.0
-offset_right = 728.0
-offset_bottom = 303.0
+offset_left = -247.0
+offset_top = 127.0
+offset_right = 247.0
+offset_bottom = 302.0
 grow_horizontal = 2
 text = "PAUSED"
 label_settings = SubResource("LabelSettings_m1hyp")
 
 [node name="ReturnButton" type="Button" parent="PauseScreen/PauseScreen" unique_id=1635381764]
 process_mode = 3
-layout_mode = 0
-offset_left = 480.0
-offset_top = 462.0
-offset_right = 680.0
-offset_bottom = 518.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -100.0
+offset_top = -229.0
+offset_right = 100.0
+offset_bottom = -173.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_font_sizes/font_size = 32
 shortcut = SubResource("Shortcut_8erm5")
 text = "Return"
 
 [node name="ReturnMainButton" type="Button" parent="PauseScreen/PauseScreen" unique_id=702031356]
 process_mode = 3
-layout_mode = 0
-offset_left = 380.0
-offset_top = 542.0
-offset_right = 780.0
-offset_bottom = 598.0
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -134.0
+offset_right = 200.0
+offset_bottom = -78.0
+grow_horizontal = 2
+grow_vertical = 0
 theme_override_font_sizes/font_size = 32
 text = "Return to Main Menu"
 

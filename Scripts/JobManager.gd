@@ -120,7 +120,7 @@ func _generate_rental_job() -> Dictionary:
 	return {
 		"id": "job_rental_%d" % Time.get_ticks_msec(),
 		"title": "Rent out train to %s" % depot_names.get(to_id, to_id),
-		"description": "A client wants to rent one of your trains at %s. Deliver it yourself - no payment for the trip, but you'll earb %s every month while it's rented out." % [depot_names.get(to_id, to_id), NumberFormat.format(monthly_income)],
+		"description": "A client wants to rent one of your trains at %s. Deliver it yourself - no payment for the trip, but you'll earn %s every month while it's rented out." % [depot_names.get(to_id, to_id), NumberFormat.format(monthly_income)],
 		"from_depot": from_id,
 		"to_id": to_id,
 		"reward_money": 0.0,

@@ -46,6 +46,8 @@ func _rebuild_grid() -> void:
 		var btn := Button.new()
 		btn.text  = str(day)
 		btn.custom_minimum_size = Vector2(0, 40)
+		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+		btn.size_flags_vertical = Control.SIZE_EXPAND_FILL
 		btn.toggle_mode = true
 		btn.button_pressed = (day == selected_day)
 		

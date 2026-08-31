@@ -48,6 +48,9 @@ func get_employee(employee_id: String) -> Dictionary:
 func get_available_employees() -> Array:
 	return employees.filter(func(e): return e["status"] == "active" and e["assigned_job_id"] == "")
 	
+func get_available_employees_for_role(role: String) -> Array:
+	return get_available_employees().filter(func(e): return role == "" or e["role"] == role)
+	
 func request_day_off(employee_id: String, month: int, year: int, day: int) -> void:
 	var employee = get_employee(employee_id)
 	if employee.is_empty():

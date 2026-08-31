@@ -1,0 +1,54 @@
+[gd_scene format=3 uid="uid://c745mvg1wghvv"]
+
+[ext_resource type="Script" uid="uid://bub7i567gauwp" path="res://Scenes/PCScreen/Apps/salaries.gd" id="1_hywf2"]
+
+[node name="Salaries" type="VBoxContainer" unique_id=1868867631]
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_hywf2")
+
+[node name="StatusBar" type="HBoxContainer" parent="." unique_id=617507346]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="StatusBar" unique_id=1205200290]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="PayrollLabel" type="Label" parent="StatusBar" unique_id=535733870]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpacerMiddle" type="Control" parent="." unique_id=409278604]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=260354104]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Spacer" type="Control" parent="HBoxContainer" unique_id=1508873251]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="EmployeesScroll" type="ScrollContainer" parent="HBoxContainer" unique_id=2021850768]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="EmployeesList" type="VBoxContainer" parent="HBoxContainer/EmployeesScroll" unique_id=703118780]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="SpacerEnd" type="Control" parent="HBoxContainer" unique_id=1497166461]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+
+[node name="SpacerEnd" type="Control" parent="." unique_id=593544683]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 0.05

@@ -36,11 +36,18 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="StartButton" type="Button" parent="." unique_id=1501063419]
-layout_mode = 0
-offset_left = 426.0
-offset_top = 508.0
-offset_right = 726.0
-offset_bottom = 608.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = 166.0
+offset_right = 150.0
+offset_bottom = 266.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Label" type="Label" parent="StartButton" unique_id=1031946966]
 layout_mode = 1
@@ -55,11 +62,18 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SaveButton" type="Button" parent="." unique_id=1213080667]
-layout_mode = 0
-offset_left = 451.0
-offset_top = 358.0
-offset_right = 701.0
-offset_bottom = 458.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = 36.0
+offset_right = 125.0
+offset_bottom = 136.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Label" type="Label" parent="SaveButton" unique_id=1590509020]
 layout_mode = 1

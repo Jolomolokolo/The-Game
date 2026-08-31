@@ -243,10 +243,33 @@ func _add_active_job_card(job: Dictionary) -> void:
 	
 	# ADDEN 
 	
-	var reassign_row := 
+	var reassign_row := HBoxContainer.new()
+	reassign_row.add_theme_constant_override("separation", 8)
+	vbox.add_child(reassign_row)
 	
 	var reassign_label := Label.new()
-	reassign_label.text = 
+	reassign_label.text = "Change driver:"
+	reassign_label.add_theme_color_override("font_color", COLOR_MUTED)
+	reassign_row.add_child(reassign_label)
+	
+	var candidates = CompanyData.get_available_employees_for_role(required_role)
+	var reassign_dropdown := OptionButton.new()
+	reassign_dropdown.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	reassign_dropdown.add_item("Drive it yourself")
+	for employee in candidates:
+		reassign_dropdown.add_item("%s (%s)" % [employee["name"], employee["role"]])
+	reassign_row.add_child(reassign_dropdown)
+	
+	var reassign_button := Button.new()
+	reassign_button.text = "Assign"
+	reassign_button.pressed.connect(func():
+		var index = reassign_dropdown.selected
+		if index == 0:
+			JobManager.reassign_employee(job["id"], "")
+		else:
+			JobManager.reassign_employee(job["id"], candidates[index - 1]["id"])
+	)
+	reassign_row.add_child(reassign_button)
 	
 func _get_employee_name(employee_id: String) -> String:
 	var employee = CompanyData.get_employee(employee_id)
