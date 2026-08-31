@@ -154,11 +154,12 @@ func _build_card_base(parent: VBoxContainer, job: Dictionary, bg_color: Color) -
 	# HIER WEITER MACHEN
 	
 func _add_available_job_card(job: Dictionary) -> void:
-	var vbox = _build_card_base(available_jobs_list, job, COLOR_ROW_BG)
-	var required_role = job.get("required_role", "")
-	var requires_own_train : bool = job.get("requires_own_train", true)
+	var bg_color = COLOR_RENTAL_BG if job.get("is_rental", false) else COLOR_ROW_BG
+	var vbox = _build_card_base(available_jobs_list, job, bg_color)
 	
-	var available_trains = JobManager.get_available_trains() if requires_own_train else []
+	var required_role : String = job.get("required_role", "")
+	var requires_own_train : bool = job.get("requires_own_train", false)
+	var available_trains : Array = JobManager.get_available_trains() if requires_own_train else []
 	
 	var train_dropdown : OptionButton = null
 	if requires_own_train:
@@ -179,25 +180,15 @@ func _add_available_job_card(job: Dictionary) -> void:
 		else:
 			for train in available_trains:
 				train_dropdown.add_item(train.name)
-	
-	var available_employees = CompanyData.get_available_employees()
-	
-	var train_row := HBoxContainer.new()
-	train_row.add_theme_constant_override("separation", 8)
-	vbox.add_child(train_row)
-	
-	var train_label := Label.new()
-	train_label.text = "Train:"
-	train_label.add_theme_color_override("font_color", COLOR_MUTED)
-	train_row.add_child(train_label)
-	
-	if available_trains.is_empty():
-		train_dropdown.add_item("No trains available")
-		train_dropdown.disabled = true
+		train_row.add_child(train_dropdown)
 	else:
-		for train in available_trains:
-			train_dropdown.add_item(train.name)
-	train_row.add_child(train_dropdown)
+		var info_label := Label.new()
+		info_label.text = "Any train reaching the depot completes the job"
+		info_label.add_theme_color_override("font_color", COLOR_MUTED)
+		info_label.add_theme_font_size_override("font_size", 12)
+		vbox.add_child(info_label)
+	
+	var available_employees = CompanyData.get_available_employees_for_role(required_role)
 	
 	var assign_row := HBoxContainer.new()
 	assign_row.add_theme_constant_override("separation", 8)
@@ -205,21 +196,22 @@ func _add_available_job_card(job: Dictionary) -> void:
 	
 	var employee_dropdown := OptionButton.new()
 	employee_dropdown.size_flags_horizontal = Control.SIZE_EXPAND_FILL
-	employee_dropdown.add_item("Drive it yourself")
+	employee_dropdown.add_item("Drive it your self")
 	for employee in available_employees:
 		employee_dropdown.add_item("%s (%s)" % [employee["name"], employee["role"]])
 	assign_row.add_child(employee_dropdown)
 	
 	var accept_button := Button.new()
 	accept_button.text = "Accept"
-	accept_button.disabled = available_trains.is_empty()
+	accept_button.disabled = requires_own_train and available_trains.is_empty()
 	accept_button.pressed.connect(func():
-		if available_trains.is_empty():
-			return
-		var selected_train = available_trains[train_dropdown.selected]
-		var train_entity_id : String = selected_train.entity_id
+		var train_entity_id := ""
+		if requires_own_train:
+			if available_trains.is_empty() or train_dropdown == null:
+				return
+			train_entity_id = available_trains[train_dropdown.selected].entity_id
 		
-		var selected_employee_index = employee_dropdown.selected
+		var selected_employee_index := employee_dropdown.selected
 		if selected_employee_index == 0:
 			JobManager.accept_job(job, "", train_entity_id)
 		else:
@@ -229,23 +221,32 @@ func _add_available_job_card(job: Dictionary) -> void:
 	assign_row.add_child(accept_button)
 	
 func _add_active_job_card(job: Dictionary) -> void:
-	var vbox = _build_card_base(active_jobs_list, job, COLOR_ACTIVE_BG)
+	var bg_color = COLOR_RENTAL_BG if job.get("is_rental", false) else COLOR_ACTIVE_BG
+	var vbox = _build_card_base(active_jobs_list, job, bg_color)
 	
-	var employee_id = job.get("assigned_employee_id", "")
-	var train_id = job.get("assigned_train_id", "")
+	var employee_id: String = job.get("assigned_employee_id", "")
+	var train_id : String = job.get("assigned_train_id", "")
+	var required_role : String = job.get("required_role", "")
 	
-	var driver_text := "Driven by you" if employee_id == "" else _get_employee_name(employee_id)
-	
-	var train_name := "?"
-	for train in get_tree().get_nodes_in_group("train"):
-		if train.get("entity_id") == train_id:
+	var train_name := "Any Train"
+	if train_id != "":
+		train_name = "?"
+		for train in get_tree().get_nodes_in_group("train"):
 			train_name = train.name
 			break
 	
 	var status_label := Label.new()
+	var driver_text = "Driven by you" if employee_id == "" else _get_employee_name(employee_id)
 	status_label.text = "In Progress -> %s | Train: %s" % [driver_text, train_name]
 	status_label.add_theme_color_override("font_color", COLOR_REP)
 	vbox.add_child(status_label)
+	
+	# ADDEN 
+	
+	var reassign_row := 
+	
+	var reassign_label := Label.new()
+	reassign_label.text = 
 	
 func _get_employee_name(employee_id: String) -> String:
 	var employee = CompanyData.get_employee(employee_id)
