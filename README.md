@@ -2,7 +2,7 @@
 
 ### The Name is the Programm!
 
-![Trackenomics Screenshot 1]()
+![Trackenomics Screenshot 1](Publish/Trackenomics-1.png)
 
 **Trackenomics** is a train management game where you start with a small railway company and slowly build it into something bigger.
 
@@ -147,11 +147,11 @@ It is far from finished, but seeing the game slowly grow after every few hours o
 
 More screenshots will be added as development continues.
 
-![Gameplay Screenshot]()
+![Gameplay Screenshot](Publish/Trackenomics-1.png)
 
-![Train Screenshot]()
+![Train Screenshot](Publish/Trackenomics-2.png)
 
-![Company Screenshot]()
+![Company Screenshot](Publish/Trackenomics-3.png)
 
 ---
 
@@ -159,7 +159,7 @@ More screenshots will be added as development continues.
 
 You can find the current version and development updates here:
 
-**itch.io:** [YOUR ITCH.IO LINK]
+**itch.io:** ADDDDD MYYYY LINKKKK; AHHHHHHH
 
 **Steam:** Coming later
 
